@@ -1,1 +1,1 @@
-# Repositury structure
+# Repository structure
