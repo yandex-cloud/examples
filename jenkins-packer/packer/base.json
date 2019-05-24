@@ -1,0 +1,40 @@
+{
+  "variables": {
+     "service_account_key_file": "{{env `YC_ACCOUNT_KEY_FILE`}}",
+     "folder_id": "{{env `YC_FOLDER_ID`}}",
+     "subnet_id": "{{env `YC_SUBNET_ID`}}"
+  },
+  "builders": [
+    {
+      "type":      "yandex",
+      "service_account_key_file" :  "{{user `service_account_key_file`}}",
+      "folder_id": "{{user `folder_id`}}",
+      "subnet_id": "{{user `subnet_id`}}",
+      "zone":      "ru-central1-b",
+
+      "image_name":   "debian-9-base-{{isotime | clean_image_name}}",
+      "image_family": "debian-9-base",
+      "image_description": "Yet another debian build",
+
+      "source_image_family": "debian-9",
+      "disk_type":           "network-nvme",
+      "ssh_username":        "debian",
+
+      "use_ipv4_nat": true
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "echo 'kernel update'",
+        "until ping -c1 mirror.yandex.ru &>/dev/null; do :; done",
+        "sudo apt-get update -y",
+        "sleep 10",
+        "echo changed",
+	"export DEBIAN_FRONTEND=noninteractive",
+	"sudo apt-get install -y linux-image-amd64=4.9+80+deb9u6 linux-image-4.9.0-8-amd64=4.9.130-2"
+      ]
+    }
+  ]
+}

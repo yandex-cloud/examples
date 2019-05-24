@@ -1,0 +1,41 @@
+{
+  "variables": {
+     "service_account_key_file": "{{env `YC_ACCOUNT_KEY_FILE`}}",
+     "folder_id": "{{env `YC_FOLDER_ID`}}",
+     "subnet_id": "{{env `YC_SUBNET_ID`}}"
+  },
+  "builders": [
+    {
+      "type":      "yandex",
+      "service_account_key_file" :  "{{user `service_account_key_file`}}",
+      "folder_id": "{{user `folder_id`}}",
+      "subnet_id": "{{user `subnet_id`}}",
+      "zone":      "ru-central1-b",
+
+      "image_name":        "debian-9-django-{{isotime | clean_image_name}}",
+      "image_family":      "debian-9-django",
+      "image_description": "My very custom Django build",
+
+      "source_image_family":    "debian-9-base",
+      "source_image_folder_id": "{{user `folder_id`}}",
+      "disk_type":              "network-nvme",
+      "ssh_username":           "debian",
+
+      "use_ipv4_nat": true
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "echo 'installing django'",
+        "until ping -c1 mirror.yandex.ru &>/dev/null; do :; done",
+        "sudo apt-get update -y",
+        "sleep 10",
+	"export DEBIAN_FRONTEND=noninteractive",
+        "sudo apt-get install -y python3-pip",
+	"sudo pip3 install Django"
+      ]
+    }
+  ]
+}
