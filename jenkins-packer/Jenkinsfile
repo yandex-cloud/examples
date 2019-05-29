@@ -5,22 +5,21 @@ pipeline {
         YC_FOLDER_ID = credentials('YC_FOLDER_ID')
         YC_SUBNET_ID = credentials('YC_SUBNET_ID')
 
-        PACKER_SH = '/opt/yandex-packer/packer build -color=false'
     }
     stages {
         stage('Core') {
             steps {
-                sh label: '', script: "${env.PACKER_SH} ./packer/base.json"
+                sh label: '', script: "packer ./packer/base.json"
             }
         }
         stage('Role-Based') {
             steps {
                 parallel(
                     nginx: {
-                        sh label: '', script: "${env.PACKER_SH} ./packer/nginx.json"
+                        sh label: '', script: "packer ./packer/nginx.json"
                     },
                     django: {
-                        sh label: '', script: "${env.PACKER_SH} ./packer/django.json" 
+                        sh label: '', script: "packer ./packer/django.json" 
                     }
                 )
             }
