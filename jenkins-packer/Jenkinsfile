@@ -5,7 +5,7 @@ pipeline {
         YC_FOLDER_ID = credentials('YC_FOLDER_ID')
         YC_SUBNET_ID = credentials('YC_SUBNET_ID')
 
-        PACKER_SH = '/opt/yandex-packer/packer build -color=false'
+        PACKER_SH = 'packer build -color=false'
     }
     stages {
         stage('Core') {
