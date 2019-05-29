@@ -14,7 +14,7 @@
 
       "image_name":   "debian-9-base-{{isotime | clean_image_name}}",
       "image_family": "debian-9-base",
-      "image_description": "Yet another debian build",
+      "image_description": "Yet another debian build 2",
 
       "source_image_family": "debian-9",
       "disk_type":           "network-nvme",
