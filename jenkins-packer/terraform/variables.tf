@@ -1,6 +1,6 @@
 variable "public_key_path" {
   description = "Path to public key file"
-  default = "~/.ssh/id_rsa.pub"
+  default     = "~/.ssh/id_rsa.pub"
 }
 
 variable "service_account_key_file" {
@@ -18,13 +18,13 @@ variable "cloud_id" {
 
 variable "zone" {
   description = "Yandex Cloud default Zone for provisioned resources"
-  default = "ru-central1-b"
+  default     = "ru-central1-b"
 }
 
 
 variable "zones" {
   description = "Yandex Cloud default Zone for provisioned resources"
-  default = ["ru-central1-a","ru-central1-b","ru-central1-c"]
+  default     = ["ru-central1-a", "ru-central1-b", "ru-central1-c"]
 }
 
 variable "yc_image_family" {

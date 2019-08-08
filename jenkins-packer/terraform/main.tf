@@ -1,7 +1,7 @@
 provider "yandex" {
-  service_account_key_file     = "${var.service_account_key_file}"
-  cloud_id  = "${var.cloud_id}"
-  folder_id = "${var.folder_id}"
+  service_account_key_file = "${var.service_account_key_file}"
+  cloud_id                 = "${var.cloud_id}"
+  folder_id                = "${var.folder_id}"
 }
 
 data "yandex_compute_image" "nginx_image" {
@@ -40,13 +40,13 @@ resource "yandex_compute_instance" "nginx" {
     nat       = true
   }
 
-  metadata {
+  metadata = {
     ssh-keys  = "ubuntu:${file("${var.public_key_path}")}"
     user-data = "${file("boostrap/metadata.yaml")}"
   }
 
-  labels {
-    node_id      = "${count.index}"
+  labels = {
+    node_id = "${count.index}"
   }
 }
 
@@ -76,13 +76,13 @@ resource "yandex_compute_instance" "django" {
     nat       = false
   }
 
-  metadata {
+  metadata = {
     ssh-keys  = "ubuntu:${file("${var.public_key_path}")}"
     user-data = "${file("boostrap/metadata.yaml")}"
   }
 
-  labels {
-    node_id      = "${count.index}"
+  labels = {
+    node_id = "${count.index}"
   }
 }
 
