@@ -1,5 +1,5 @@
 resource "yandex_vpc_network" "network" {
-  name = "yc-auto-subnet"
+  name = "yc-auto-network"
 }
 
 resource "yandex_vpc_subnet" "subnet" {
