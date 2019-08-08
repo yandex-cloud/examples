@@ -29,9 +29,9 @@ variable "yc_image_family" {
   type = "map"
 
   default = {
-    nginx  = "debian-9-nginx"
-    django = "debian-9-django"
-    base   = "debian-9-base"
+    nginx  = "debian-10-nginx"
+    django = "debian-10-django"
+    base   = "debian-10-base"
   }
 }
 
