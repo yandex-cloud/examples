@@ -4,7 +4,7 @@ variable "public_key_path" {
 }
 
 variable "service_account_key_file" {
-  description = "Yandex Cloud security OAuth token"
+  description = "Yandex Cloud service account key file in json format"
 }
 
 variable "folder_id" {
