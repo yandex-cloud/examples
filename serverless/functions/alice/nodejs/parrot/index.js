@@ -1,6 +1,5 @@
 /**
- * Entry-point for serverless function.
- * Since we export only handler itself use `index` as function entrypoint parameter.
+ * Entry-point for Serverless Function.
  *
  * @param event {Object} request payload.
  * @param context {Object} information about current execution context.
