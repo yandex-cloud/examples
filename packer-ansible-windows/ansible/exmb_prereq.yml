@@ -1,0 +1,108 @@
+---
+- hosts: all
+
+  vars:
+    uri_exch2016cu12: "https://storage.yandexcloud.net/msft-exchange/ExchangeServer2016-x64-cu12.iso"
+    uri_ndp471: "https://storage.yandexcloud.net/msft-exchange/NDP471-KB4033342-x86-x64-AllOS-ENU.exe"
+    uri_vcr12: "https://storage.yandexcloud.net/msft-exchange/vcredist_x64_2012.exe"
+    uri_vcr13: "https://storage.yandexcloud.net/msft-exchange/vcredist_x64_2013.exe"
+    uri_ucmar: "https://storage.yandexcloud.net/msft-exchange/UcmaRuntimeSetup.exe"
+
+  tasks:
+    - name: download required modules
+      win_psmodule:
+        state: present
+        name: "{{ item }}"
+        version: latest
+      with_items:
+        - xActiveDirectory
+        - xExchange
+        - xPSDesiredStateConfiguration
+        - NetworkingDsc
+        - ComputerManagementDsc
+        - StorageDsc
+
+    - name: Download Exchange Server binaries
+      win_dsc:
+        resource_name: xRemoteFile
+        DestinationPath: 'C:\ExchangeAnsible\ExchangeServer2016-x64-cu12.iso'
+        Uri: "{{ uri_exch2016cu12 }}"
+
+    - name: Download NDP471 binaries
+      win_dsc:
+        resource_name: xRemoteFile
+        DestinationPath: 'C:\ExchangeAnsible\NDP471-KB4033342-x86-x64-AllOS-ENU.exe'
+        Uri: "{{ uri_ndp471 }}"
+
+    - name: Download vcredist 2012 binaries
+      win_dsc:
+        resource_name: xRemoteFile
+        DestinationPath: 'C:\ExchangeAnsible\vcredist_x64_2012.exe'
+        Uri: "{{ uri_vcr12 }}"
+
+    - name: Download vcredist 2013 binaries
+      win_dsc:
+        resource_name: xRemoteFile
+        DestinationPath: 'C:\ExchangeAnsible\vcredist_x64_2013.exe'
+        Uri: "{{ uri_vcr13 }}"
+
+    - name: Download Ucma Runtime binaries
+      win_dsc:
+        resource_name: xRemoteFile
+        DestinationPath: 'C:\ExchangeAnsible\UcmaRuntimeSetup.exe'
+        Uri: "{{ uri_ucmar }}"
+
+    # xPackage wont check registry if 'CreateCheckRegValue' not set
+    # if 'CreateCheckRegValue' set, will fail to create it
+    # version number will change after server reboot
+    - name: Check for current Microsoft .NET Framework version
+      win_reg_stat:
+        path: HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full
+        name: Version
+      register: dotnet_version
+
+    - name: Install Exchange prerequisites:NDP
+      win_dsc:
+        resource_name: xPackage
+        Name: 'NDP471'
+        Path: 'C:\ExchangeAnsible\NDP471-KB4033342-x86-x64-AllOS-ENU.exe'
+        Arguments: '/quiet /norestart'
+        ProductId: ''
+        InstalledCheckRegHive: LocalMachine
+        InstalledCheckRegKey: 'SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full'
+        InstalledCheckRegValueName: Version
+        InstalledCheckRegValueData: '4.7.02558'
+        LogPath: 'C:\ExchangeAnsible\NDP_x64.log'
+        IgnoreReboot: true
+        Ensure: Present
+      when: dotnet_version.value is version_compare('4.7.02558', '<', strict=True)
+
+    - name: Install Exchange prerequisites:VCR 2012
+      win_dsc:
+        resource_name: xPackage
+        Name: 'VCR'
+        Path: 'C:\ExchangeAnsible\vcredist_x64_2012.exe'
+        Arguments: '/quiet /norestart'
+        ProductId: 'CF2BEA3C-26EA-32F8-AA9B-331F7E34BA97'
+        IgnoreReboot: true
+        Ensure: Present
+
+    - name: Install Exchange prerequisites:VCR 2013
+      win_dsc:
+        resource_name: xPackage
+        Name: 'VCR'
+        Path: 'C:\ExchangeAnsible\vcredist_x64_2013.exe'
+        Arguments: '/quiet /norestart'
+        ProductId: 'A749D8E6-B613-3BE3-8F5F-045C84EBA29B'
+        IgnoreReboot: true
+        Ensure: Present
+
+    - name: Install Exchange prerequisites:UCMAR
+      win_dsc:
+        resource_name: xPackage
+        Name: 'UCMAR'
+        Path: 'C:\ExchangeAnsible\UcmaRuntimeSetup.exe'
+        Arguments: '/quiet'
+        ProductId: 'ED98ABF5-B6BF-47ED-92AB-1CDCAB964447'
+        IgnoreReboot: true
+        Ensure: Present
