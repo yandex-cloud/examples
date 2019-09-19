@@ -3,8 +3,6 @@
 ##########
 
 terraform {
-  required_version = "= 0.11.13"
-
   backend "s3" {}
 }
 
@@ -46,8 +44,8 @@ data "yandex_compute_image" "win16" {
 resource "yandex_compute_instance" "ad" {
   count = "${var.number}"
 
-  name     = "${element(var.zone_short_names, count.index)}-${var.name}${(count.index) / length(var.zone_names) + 1}"
-  hostname = "${element(var.zone_short_names, count.index)}-${var.name}${(count.index) / length(var.zone_names) + 1}"
+  name     = "${element(var.zone_short_names, count.index)}-${var.name}${floor((count.index) / length(var.zone_names)) + 1}"
+  hostname = "${element(var.zone_short_names, count.index)}-${var.name}${floor((count.index) / length(var.zone_names)) + 1}"
   zone     = "${element(var.zone_names, count.index)}"
 
   resources {
