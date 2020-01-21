@@ -1,0 +1,7 @@
+terraform.tfvars
+terraform.tfplan
+terraform.tfstate
+.idea
+*.iml
+*.test
+*.iml

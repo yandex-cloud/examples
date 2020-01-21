@@ -1,0 +1,7 @@
+spec:
+  containers:
+  - image: cr.yandex/yc/demo/coi:v1
+    securityContext:
+      privileged: false
+    stdin: false
+    tty: false
