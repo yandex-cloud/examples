@@ -50,7 +50,7 @@ Substitute local variables values in ```main.tf```:
 * Substitute your user instead of "yc-user".
 * Substitute your token instead of "your YC_TOKEN" in main.tf.
 * Substitute your folder_id instead of "your folder id".
-* Substitute your service_account_id instead of "your service account id" in main.tf with you service account authorized for this instance group.
+* Substitute your service_account_id instead of "your service account id" in main.tf with you service account authorized for this instance group".
 * Substitute your zone instead of "your zone".
 * Substitute your network_id instead of "your network id".
 * Substitute your subnet_ids instead of "your subnet ids".
