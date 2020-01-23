@@ -8,7 +8,7 @@ This is a test project with Container Optimized Image configuration.
 
 Look in ```compute_instance``` directory
 
-Substitute local variables values in main.tf:
+Substitute local variables values in ```main.tf```:
 
 * Substitute your user instead of "yc-user".
 * Substitute your token instead of "your YC_TOKEN".
@@ -43,12 +43,16 @@ Substitute local variables values in main.tf:
 ## Creating Instance Group with Container Optimized Image
 
 Look in ```instance_group``` directory:
-* Substitute your public ssh key instead of "your public ssh key" in cloud_config.yaml.
+
+
+Substitute local variables values in ```main.tf```:
+
+* Substitute your user instead of "yc-user".
 * Substitute your token instead of "your YC_TOKEN" in main.tf.
 * Substitute your folder_id instead of "your folder id".
+* Substitute your service_account_id instead of "your service account id" in main.tf with you service account authorized for this instance group.
 * Substitute your zone instead of "your zone".
 * Substitute your network_id instead of "your network id".
-* Substitute your subnet_id instead of "your subnet id".
-* Substitute your service_account_id instead of "your service account id" in main.tf with you service account authorized for this instance group.
-* Substitute your instance_template.service_account_id instead of "The ID of the service account authorized for this instance".
+* Substitute your subnet_ids instead of "your subnet ids".
+* Substitute your instance_template_service_account_id instead of "The ID of the service account authorized for this instance".
 * Substitute your zones instead of "all your availability zones".
