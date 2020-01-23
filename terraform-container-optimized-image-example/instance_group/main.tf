@@ -2,11 +2,12 @@ locals {
   user = "yc-user"
   token = "your YC_TOKEN"
   folder_id = "your folder id"
-  service_account_id = "your service account id"
+  service_account_id = "your service account id for this instance group"
   zone = "your zone"
   network_id = "your network id"
   subnet_ids = ["your subnet ids"]
   zones = ["your zones"]
+  instance_template_service_account_id = "the ID of the service account authorized for this instance"
 }
 
 provider "yandex" {
@@ -40,7 +41,7 @@ resource "yandex_compute_instance_group" "ig-with-coi" {
       docker-container-declaration = file("${path.module}/declaration.yaml")
       user-data = data.template_file.cloud-config.rendered
     }
-    service_account_id = local.service_account_id
+    service_account_id = local.instance_template_service_account_id
   }
 
   scale_policy {
