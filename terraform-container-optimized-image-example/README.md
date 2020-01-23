@@ -6,15 +6,18 @@ This is a test project with Container Optimized Image configuration.
 
 ## Compute Instance with Container Optimized Image 
 
-Look in ```compute_instance``` directory:
-* Substitute your public ssh key instead of "your public ssh key" in cloud_config.yaml
-* Substitute your token instead of "your YC_TOKEN" in main.tf
-* Substitute your folder_id instead of "your folder id" in main.tf
-* Substitute your zone instead of "your zone" in main.tf
-* Substitute your subnet_id instead of "your subnet id" in main.tf
+Look in ```compute_instance``` directory
+
+Substitute local variables values in main.tf:
+
+* Substitute your user instead of "yc-user".
+* Substitute your token instead of "your YC_TOKEN".
+* Substitute your folder_id instead of "your folder id".
+* Substitute your availability  zone instead of "your zone".
+* Substitute your subnet_id instead of "your subnet id".
 
 ## Launching Container Optimized Image
-* Run fterraform plan```, then ```terraform apply```.
+* Run ```terraform plan```, then ```terraform apply```.
 * After ```terraform apply``` you will have public IPv4 address in the outputs:
    ```
    Outputs:
