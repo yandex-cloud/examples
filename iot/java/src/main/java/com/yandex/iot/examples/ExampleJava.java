@@ -24,6 +24,17 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 
 public class ExampleJava {
+    private final String brokerURL = "ssl://mqtt.cloud.yandex.net:8883";
+    private final String deviceID = "<insert device id>";
+
+    // Needed only for login with password:
+    private final String devicePassword = "<insert device password>";
+    private final String registryID = "<insert registry id>";
+    private final String regPassword = "<insert registry password>";
+
+    private final String deviceEvents = "$devices/" + deviceID + "/events";
+    private final String deviceCommands = "$devices/" + deviceID + "/commands";
+
     // See https://www.eclipse.org/paho/files/mqttdoc/MQTTClient/html/qos.html
     public enum QoS {
         AT_MOST_ONCE(0),
@@ -104,7 +115,7 @@ public class ExampleJava {
         }
 
         public void Subscribe(String topic) throws MqttException {
-            client.subscribe(topic);
+            client.subscribe(topic, messageQos.getValue());
         }
 
         public void Stop() throws MqttException {
@@ -115,16 +126,52 @@ public class ExampleJava {
         public void Start(String broker, String id, String certsDir)
                 throws Exception {
             clientId = id;
-            SSLSocketFactory factory = getSocketFactory(certsDir);
             client = new MqttClient(broker, clientId);
             client.setCallback(this);
             MqttConnectOptions connOpts = new MqttConnectOptions();
-            connOpts.setSocketFactory(factory);
+            connOpts.setSocketFactory(getSocketFactoryWithCerts(certsDir));
             connOpts.setCleanSession(true);
+            connOpts.setKeepAliveInterval(60); // Seconds.
+            connOpts.setConnectionTimeout(60); // Seconds.
             client.connect(connOpts);
         }
 
-        private SSLSocketFactory getSocketFactory(String certsDir)
+        public void StartWithLogin(String broker, String id, String login, String password)
+                throws Exception {
+            clientId = id;
+            client = new MqttClient(broker, clientId);
+
+            client.setCallback(this);
+            MqttConnectOptions connOpts = new MqttConnectOptions();
+            connOpts.setSocketFactory(getSocketFactory());
+            connOpts.setCleanSession(true);
+            connOpts.setKeepAliveInterval(60); // Seconds.
+            connOpts.setConnectionTimeout(60); // Seconds.
+            connOpts.setUserName(login.trim());
+            connOpts.setPassword(password.trim().toCharArray());
+            client.connect(connOpts);
+        }
+
+        private SSLSocketFactory getSocketFactory()
+                throws Exception {
+            InputStream is = new ByteArrayInputStream(TRUSTED_ROOT.getBytes(StandardCharsets.UTF_8));
+            CertificateFactory cFactory = CertificateFactory.getInstance("X.509");
+            X509Certificate caCert = (X509Certificate) cFactory.generateCertificate(
+                    is);
+
+            TrustManagerFactory tmf = TrustManagerFactory
+                    .getInstance(TrustManagerFactory.getDefaultAlgorithm());
+            KeyStore tks = KeyStore.getInstance(KeyStore.getDefaultType());
+            tks.load(null); // You don't need the KeyStore instance to come from a file.
+            tks.setCertificateEntry("caCert", caCert);
+            tmf.init(tks);
+
+            SSLContext ctx = SSLContext.getInstance("TLS");
+            ctx.init(null, tmf.getTrustManagers(), null);
+            return ctx.getSocketFactory();
+        }
+
+        private SSLSocketFactory getSocketFactoryWithCerts(String certsDir)
                 throws Exception {
             // Client key/cert:
             final char[] empty = "".toCharArray();
@@ -163,7 +210,7 @@ public class ExampleJava {
         }
     }
 
-    private void Run(String[] args) {
+    private void Run(boolean withLogin) {
         try {
             // certs structure:
             //   /my_registry        Registry directory |currentDir|.
@@ -178,26 +225,33 @@ public class ExampleJava {
 
             CountDownLatch cdl = new CountDownLatch(2);
 
-            registry = new MqttSession();
-            registry.Start("ssl://mqtt-preprod.cloud.yandex.net:8883",
-                    "registyJavaSmple", currentDir);
-            registry.SetOnDoneHandler(cdl::countDown);
-
             device = new MqttSession();
-            device.Start("ssl://mqtt-preprod.cloud.yandex.net:8883",
-                    "deviceJavaSmple",
-                    Paths.get(currentDir, "device").toString());
+            if (withLogin) {
+                device.StartWithLogin(brokerURL, "deviceJavaSmpleLogin", deviceID,
+                        devicePassword);
+            } else {
+                device.Start(brokerURL, "deviceJavaSmple",
+                        Paths.get(currentDir, "device").toString());
+            }
+
             device.SetOnDoneHandler(cdl::countDown);
 
-            final String deviceTopicBase = "$devices/b9170i9m9cbn21sdapbi";
+            registry = new MqttSession();
+            if (withLogin) {
+                registry.StartWithLogin(brokerURL, "registyJavaSmpleLogin",
+                        registryID, regPassword);
+            } else {
+                registry.Start(brokerURL, "registyJavaSmple", currentDir.toString());
+            }
+            registry.SetOnDoneHandler(cdl::countDown);
 
-            device.Subscribe(deviceTopicBase + "/commands");
-            registry.Subscribe(deviceTopicBase + "/events");
+            registry.Subscribe(deviceEvents);
+            device.Subscribe(deviceCommands);
 
-            device.Publish(deviceTopicBase + "/events", "someevent");
-            registry.Publish(deviceTopicBase + "/commands", "somecommand");
+            registry.Publish(deviceCommands, "somecommand");
+            device.Publish(deviceEvents, "someevent");
+
             cdl.await();
-
             registry.Stop();
             device.Stop();
             return;
@@ -212,7 +266,9 @@ public class ExampleJava {
     public static void main(String[] args) {
         // $ cd <certs dir>
         // $ mvn exec:java -f <.pom path>
-        new ExampleJava().Run(args);
+        System.out.println("\n\nWith certificate:");
+        new ExampleJava().Run(false);
+        System.out.println("\n\nWith login:");
+        new ExampleJava().Run(true);
     }
-
 }

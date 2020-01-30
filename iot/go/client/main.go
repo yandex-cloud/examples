@@ -10,6 +10,18 @@ import (
 	"path/filepath"
 )
 
+const brokerURL = "tls://mqtt.cloud.yandex.net:8883"
+// Set you individual data:
+const deviceID = "<insert device id>"
+
+// Needed only for login with password:
+const devicePassword = "<insert device password>"
+const registryID = "<insert registry id>"
+const registryPassword = "<insert registy password>"
+
+const deviceEvents = "$devices/" + deviceID + "/events"
+const deviceCommands = "$devices/" + deviceID + "/commands"
+
 const rootCA = `-----BEGIN CERTIFICATE-----
 MIIFGTCCAwGgAwIBAgIQJMM7ZIy2SYxCBgK7WcFwnjANBgkqhkiG9w0BAQ0FADAf
 MR0wGwYDVQQDExRZYW5kZXhJbnRlcm5hbFJvb3RDQTAeFw0xMzAyMTExMzQxNDNa
@@ -42,7 +54,7 @@ LpuQKbSbIERsmR+QqQ==
 -----END CERTIFICATE-----
 `
 
-func NewTLSConfig(certsDir string) (*tls.Config, error) {
+func MakeClientSessionWithCerts(clientID string, certsDir string) (*ClientSession, error) {
 	// Certs part.
 	certpool := x509.NewCertPool()
 	certpool.AppendCertsFromPEM([]byte(rootCA))
@@ -53,7 +65,7 @@ func NewTLSConfig(certsDir string) (*tls.Config, error) {
 	}
 
 	// Create tls.Config with desired tls properties
-	return &tls.Config{
+	config := &tls.Config{
 		MinVersion: tls.VersionTLS12,
 		// RootCAs = certs used to verify server cert.
 		RootCAs: certpool,
@@ -62,18 +74,37 @@ func NewTLSConfig(certsDir string) (*tls.Config, error) {
 		InsecureSkipVerify: false,
 		// Certificates = list of certs client sends to server.
 		Certificates: []tls.Certificate{cert},
-	}, nil
+	}
+
+	session, err := NewClentSession(brokerURL, config, "Test_Client_device")
+	if err != nil {
+		return nil, err
+	}
+
+	return session, nil
+
 }
 
-func main() {
-	var serverURL = fmt.Sprint("tls://mqtt-preprod.cloud.yandex.net", ":8883")
+func MakeClientSessionWithPassword(clientID string, login string, password string) (*ClientSession, error) {
+	certpool := x509.NewCertPool()
+	certpool.AppendCertsFromPEM([]byte(rootCA))
 
-	const topicBaseName = "$devices/b9170i9m9cbn21sdapbi"
-
-	currentDir, err := filepath.Abs("")
-	if err != nil {
-		panic(err)
+	// Create tls.Config with desired tls properties
+	config := &tls.Config{
+		MinVersion: tls.VersionTLS12,
+		// RootCAs = certs used to verify server cert.
+		RootCAs: certpool,
 	}
+
+	session, err := NewClentSessionWithPassword(
+		brokerURL, config, "Test_Client_device", login, password)
+	if err != nil {
+		return nil, err
+	}
+	return session, nil
+}
+
+func Exchange(withPassword bool) {
 	// certs directory structure:
 	//   /my_registry     Registry directory |currentDir|.
 	//   `- /device       Concrete device cert directory |device|.
@@ -81,46 +112,59 @@ func main() {
 	//   |  `- key.pem
 	//   `- cert.pem
 	//   `- key.pem
-
+	currentDir, err := filepath.Abs("")
+	if err != nil {
+		panic(err)
+	}
 	// Device:
-	deviceTLS, err := NewTLSConfig(path.Join(currentDir, "device"))
-	if err != nil {
-		panic(err)
+	var device *ClientSession
+	if withPassword {
+		device, err = MakeClientSessionWithPassword(
+			"Test_Client_device", deviceID, devicePassword)
+		if err != nil {
+			panic(err)
+		}
+	} else {
+		device, err = MakeClientSessionWithCerts(
+			"Test_Client_device", path.Join(currentDir, "device"))
+		if err != nil {
+			panic(err)
+		}
 	}
 
-	device, err := NewClentSession(
-		serverURL, deviceTLS, "Test_Client_device")
-	if err != nil {
-		panic(err)
-	}
 	defer device.Disconnect()
 
-	if err := device.Subscribe(topicBaseName + "/commands"); err != nil {
+	if err := device.Subscribe(deviceCommands); err != nil {
 		panic(err)
 	}
 
 	// Registry:
-	registryTLS, err := NewTLSConfig(currentDir)
-	if err != nil {
-		panic(err)
+	var registry *ClientSession
+	if withPassword {
+		registry, err = MakeClientSessionWithPassword(
+			"Test_Client_registry", registryID, registryPassword)
+		if err != nil {
+			panic(err)
+		}
+	} else {
+		registry, err = MakeClientSessionWithCerts(
+			"Test_Client_registry", currentDir)
+		if err != nil {
+			panic(err)
+		}
 	}
 
-	registry, err := NewClentSession(
-		serverURL, registryTLS, "Test_Client_registry")
-	if err != nil {
-		panic(err)
-	}
 	defer registry.Disconnect()
 
-	if err := registry.Subscribe(topicBaseName + "/events"); err != nil {
+	if err := registry.Subscribe(deviceEvents); err != nil {
 		panic(err)
 	}
 	// Device publish event and listen command:
-	if err := device.Publish(topicBaseName+"/events", "Some event"); err != nil {
+	if err := device.Publish(deviceEvents, "Some event"); err != nil {
 		panic(err)
 	}
 	// Registry publish command and listen event:
-	if err := registry.Publish(topicBaseName+"/commands", "Some command"); err != nil {
+	if err := registry.Publish(deviceCommands, "Some command"); err != nil {
 		panic(err)
 	}
 
@@ -128,4 +172,11 @@ func main() {
 	receivedCommand := <-device.GetMessages()
 	fmt.Println("Received command: ", receivedCommand)
 	fmt.Println("Received event: ", receivedEvent)
+}
+
+func main() {
+	fmt.Println("With login/password:")
+	Exchange(false)
+	fmt.Println("With certificates:")
+	Exchange(true)
 }

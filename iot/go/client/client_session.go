@@ -4,6 +4,7 @@ package main
 
 import (
 	"crypto/tls"
+	"time"
 
 	MQTT "github.com/eclipse/paho.mqtt.golang"
 )
@@ -29,8 +30,35 @@ func NewClentSession(address string, tlsConfig *tls.Config, clientID string) (se
 	}
 
 	opts := MQTT.NewClientOptions().AddBroker(address)
-	opts.SetClientID(clientID).SetTLSConfig(tlsConfig)
+	opts.SetConnectTimeout(60 * time.Second)
+	opts.SetKeepAlive(60 * time.Second)
+	opts.SetClientID(clientID)
 	opts.SetDefaultPublishHandler(session.OnMessage)
+
+	opts.SetTLSConfig(tlsConfig)
+	session.client = MQTT.NewClient(opts)
+
+	if token := session.client.Connect(); token.Wait() && token.Error() != nil {
+		return nil, err
+	}
+
+	return session, nil
+}
+
+func NewClentSessionWithPassword(address string, tlsConfig *tls.Config, clientID string, login string, password string) (session *ClientSession, err error) {
+	session = &ClientSession{
+		clientID: clientID,
+		messages: make(chan string),
+	}
+
+	opts := MQTT.NewClientOptions().AddBroker(address)
+	opts.SetConnectTimeout(60 * time.Second)
+	opts.SetKeepAlive(60 * time.Second)
+	opts.SetDefaultPublishHandler(session.OnMessage)
+	opts.SetClientID(clientID).SetTLSConfig(tlsConfig)
+
+	opts.SetUsername(login)
+	opts.SetPassword(password)
 	session.client = MQTT.NewClient(opts)
 
 	if token := session.client.Connect(); token.Wait() && token.Error() != nil {
