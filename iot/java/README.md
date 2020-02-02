@@ -9,8 +9,8 @@
 [устройство](https://cloud.yandex.ru/docs/iot-core/quickstart#create-device).
 
 Пример фактически делают эхо, то есть посланное в `$devices/<ID
-устройства>/events` приходит в `$registries/<ID устройства>/events` и выводится
-на консоль.
+устройства>/events` возвращается клиенту посредством подписки на этот топик
+от имени реестра и выводится на консоль.
 
 Поддерживаются два спосба
 [авторизации](https://cloud.yandex.ru/docs/iot-core/concepts/authorization),
