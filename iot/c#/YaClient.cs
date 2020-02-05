@@ -26,8 +26,11 @@ namespace YandexIoTCoreExample
     Commands = 1
   }
 
-  class YaClient
+  class YaClient : IDisposable
   {
+    public const string MqttServer = "mqtt.cloud.yandex.net";
+    public const int MqttPort = 8883;
+
     private static X509Certificate2 rootCrt = new X509Certificate2("rootCA.crt");
 
     public static string TopicName(string entityId, EntityType entity, TopicType topic)
@@ -63,9 +66,10 @@ namespace YandexIoTCoreExample
       // Create TCP based options using the builder.
       var options = new MqttClientOptionsBuilder()
           .WithClientId($"Test_C#_Client_{Guid.NewGuid()}")
-          .WithTcpServer("mqtt.cloud.yandex.net", 8883)
+          .WithTcpServer(MqttServer, MqttPort)
           .WithTls(tlsOptions)
           .WithCleanSession()
+          .WithKeepAlivePeriod(TimeSpan.FromSeconds(60))
           .Build();
 
       var factory = new MqttFactory();
@@ -91,10 +95,11 @@ namespace YandexIoTCoreExample
       // Create TCP based options using the builder.
       var options = new MqttClientOptionsBuilder()
           .WithClientId($"Test_C#_Client_{Guid.NewGuid()}")
-          .WithTcpServer("mqtt.cloud.yandex.net", 8883)
+          .WithTcpServer(MqttServer, MqttPort)
           .WithTls(tlsOptions)
           .WithCleanSession()
           .WithCredentials(id, password)
+          .WithKeepAlivePeriod(TimeSpan.FromSeconds(60))
           .Build();
 
       var factory = new MqttFactory();
@@ -113,23 +118,26 @@ namespace YandexIoTCoreExample
       mqttClient.DisconnectAsync();
     }
 
+    public void Dispose()
+    {
+      Stop();
+    }
+
     public bool WaitConnected()
     {
       WaitHandle[] waites = { oCloseEvent, oConnectedEvent };
       return WaitHandle.WaitAny(waites) == 1;
     }
 
-    public Task Subscribe(string topic)
+    public Task Subscribe(string topic, MQTTnet.Protocol.MqttQualityOfServiceLevel qos)
     {
-      return mqttClient.SubscribeAsync(topic);
+      return mqttClient.SubscribeAsync(topic, qos);
     }
 
-    public Task Publish(string topic, string payload)
+    public Task Publish(string topic, string payload, MQTTnet.Protocol.MqttQualityOfServiceLevel qos)
     {
-      return mqttClient.PublishAsync(topic, payload, MQTTnet.Protocol.MqttQualityOfServiceLevel.AtLeastOnce);
+      return mqttClient.PublishAsync(topic, payload, qos);
     }
-
-
     private Task ConnectedHandler(MqttClientConnectedEventArgs arg)
     {
       oConnectedEvent.Set();
@@ -148,23 +156,23 @@ namespace YandexIoTCoreExample
       return Task.CompletedTask;
     }
 
-    private static bool CertificateValidationCallback(X509Certificate arg1, X509Chain arg2, SslPolicyErrors arg3, IMqttClientOptions arg4)
+    private static bool CertificateValidationCallback(X509Certificate cert, X509Chain chain, SslPolicyErrors errors, IMqttClientOptions opts)
     {
       try
       {
-        if (arg3 == SslPolicyErrors.None)
+        if (errors == SslPolicyErrors.None)
         {
           return true;
         }
 
-        if (arg3 == SslPolicyErrors.RemoteCertificateChainErrors)
+        if (errors == SslPolicyErrors.RemoteCertificateChainErrors)
         {
-          arg2.ChainPolicy.RevocationMode = X509RevocationMode.NoCheck;
-          arg2.ChainPolicy.VerificationFlags = X509VerificationFlags.NoFlag;
-          arg2.ChainPolicy.ExtraStore.Add(rootCrt);
+          chain.ChainPolicy.RevocationMode = X509RevocationMode.NoCheck;
+          chain.ChainPolicy.VerificationFlags = X509VerificationFlags.NoFlag;
+          chain.ChainPolicy.ExtraStore.Add(rootCrt);
 
-          arg2.Build((X509Certificate2)rootCrt);
-          var res = arg2.ChainElements.Cast<X509ChainElement>().Any(a => a.Certificate.Thumbprint == rootCrt.Thumbprint);
+          chain.Build((X509Certificate2)rootCrt);
+          var res = chain.ChainElements.Cast<X509ChainElement>().Any(a => a.Certificate.Thumbprint == rootCrt.Thumbprint);
           return res;
         }
       }
