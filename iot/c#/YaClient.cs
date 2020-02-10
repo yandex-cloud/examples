@@ -69,7 +69,8 @@ namespace YandexIoTCoreExample
           .WithTcpServer(MqttServer, MqttPort)
           .WithTls(tlsOptions)
           .WithCleanSession()
-          .WithKeepAlivePeriod(TimeSpan.FromSeconds(60))
+          .WithKeepAlivePeriod(TimeSpan.FromSeconds(90))
+          .WithKeepAliveSendInterval(60)
           .Build();
 
       var factory = new MqttFactory();
