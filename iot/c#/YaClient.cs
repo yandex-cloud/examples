@@ -70,7 +70,7 @@ namespace YandexIoTCoreExample
           .WithTls(tlsOptions)
           .WithCleanSession()
           .WithKeepAlivePeriod(TimeSpan.FromSeconds(90))
-          .WithKeepAliveSendInterval(60)
+          .WithKeepAliveSendInterval(TimeSpan.FromSeconds(60))
           .Build();
 
       var factory = new MqttFactory();
@@ -101,7 +101,7 @@ namespace YandexIoTCoreExample
           .WithCleanSession()
           .WithCredentials(id, password)
           .WithKeepAlivePeriod(TimeSpan.FromSeconds(90))
-          .WithKeepAliveSendInterval(60)
+          .WithKeepAliveSendInterval(TimeSpan.FromSeconds(60))
           .Build();
 
       var factory = new MqttFactory();
