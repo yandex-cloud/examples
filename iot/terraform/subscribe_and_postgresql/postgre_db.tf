@@ -35,7 +35,7 @@ module "managed_pgsql_iot_testing" {
   users = [
     {
       name     = "iot_db_user"
-      password = random_password.password.result
+      password = random_password.db.result
     }
   ]
   databases = [

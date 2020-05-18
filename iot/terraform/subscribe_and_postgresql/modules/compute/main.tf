@@ -50,7 +50,7 @@ resource "yandex_compute_instance" "tvm_master" {
 
 resource "yandex_compute_instance" "tvm" {
   name        = "tvm"
-  description = "Just a slave"
+  description = "Just a replica"
 
   resources {
     cores  = 4

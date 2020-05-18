@@ -5,7 +5,7 @@ resource "yandex_iot_core_registry" "iot_registry_name" {
     my-label = "yandex-iot-example"
   }
   passwords = [
-    random_password.password.result
+    random_password.registry.result
   ]
 }
 
@@ -14,6 +14,6 @@ resource "yandex_iot_core_device" "iot_device_01_name" {
   name        = "iot_device_01_name"
   description = "yandex iot example device"
    passwords = [
-    random_password.password.result
+    random_password.device.result
   ]
 }

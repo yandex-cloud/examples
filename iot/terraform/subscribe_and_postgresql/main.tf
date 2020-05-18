@@ -7,7 +7,32 @@ provider "yandex" {
 }
 
 
-resource "random_password" "password" {
+resource "random_password" "device" {
+  length = 16
+  special = true
+  upper = true
+  min_upper = 1
+  lower = true
+  min_lower = 1
+  number = true
+  min_numeric = 1
+  override_special = "_%@"
+}
+
+resource "random_password" "registry" {
+  length = 16
+  special = true
+  min_special = 1
+  upper = true
+  min_upper = 1
+  lower = true
+  min_lower = 1
+  number = true
+  min_numeric = 1
+  override_special = "_%@"
+}
+
+resource "random_password" "db" {
   length = 16
   special = true
   min_special = 1
