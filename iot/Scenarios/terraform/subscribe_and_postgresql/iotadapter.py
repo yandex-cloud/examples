@@ -28,33 +28,40 @@ def getConnString():
     db_connection_string = f"host='{db_hostname}' port='{db_port}'  dbname='{db_name}' user='{db_user}' password='{db_password}'  sslmode='require'"
     return db_connection_string
 
-def num(s):  
-    try:
-        s = s.replace(",",".")
-        return  "{:10.4f}".format(float(s))
-    except (AttributeError, ValueError):
-        return "NULL"
+"""
+Imput Json format is:
+{
+    "DeviceId":"7d972e16-2cc7-49aa-a3fb-153be9b2e04f",
+    "TimeStamp":"2020-05-19T18:41:37.145+03:00",
+    "Values":[
+        {"Type":"Float","Name":"Humidity","Value":"90.22961"},
+        {"Type":"Float","Name":"CarbonDioxide","Value":"125.06672"},
+        {"Type":"Float","Name":"Pressure","Value":"32.808365"},
+        {"Type":"Float","Name":"Temperature","Value":"31.049744"}
+        ]
+}
+"""
+def makeInsertStatement(event_id, payload_json, table_name):
 
-def makeInsertStatement(event, table_name):
-    event_id = event["event_metadata"]["event_id"]
-    device_id = event["details"]["device_id"]
-    created_at = event["event_metadata"]["created_at"]
-    topic = event["details"]["mqtt_topic"]
-    payload = event["details"]["payload"]
-
-    insert=  f"""INSERT INTO {table_name} (event_id, device_id, created_at, topic, payload) 
-                 VALUES('{event_id}','{device_id}', '{created_at}', '{topic}', '{payload}')"""
+    event = json.loads(payload_json)
+    if  verboseLogging:
+        logger.info(event)
+    insert=  f"""INSERT INTO {table_name} (event_id, device_id, event_datetime,
+                 humidity, carbon_dioxide, pressure, temperature) 
+                 VALUES('{event_id}','{event['DeviceId']}', '{event['TimeStamp']}',
+                 {event['Values'][0]['Value']}, {event['Values'][1]['Value']}, {event['Values'][2]['Value']}, {event['Values'][3]['Value']})"""
 
     return insert
 
 def makeCreateTableStatement(table_name):
-
     statement = f"""CREATE TABLE public.{table_name} (
     event_id varchar(24) not null,
-	device_id varchar(50) not null,
-    created_at timestamptz not null,
-    topic varchar(255) not null,
-    payload bytea
+    device_id varchar(50) not null,
+    event_datetime timestamptz not null,
+    humidity float8 null,
+    carbon_dioxide float8 null,
+    pressure float8 null,
+    temperature float8 null
     );"""
     return statement
 
@@ -116,25 +123,26 @@ def msgHandler(event, context):
         },
         'isBase64Encoded': False
     }
+    
 ''''
 #### PAYLOAD EXAMPLE FOR LOCAL DEBUGGING ### 
 msgHandler("""{
 	"messages": [
-		{
-			"event_metadata": {
-				"event_id": "160d239876d9714800",
-				"event_type": "yandex.cloud.events.iot.IoTMessage",
-				"created_at": "2020-05-08T19:16:21.267616072Z",
-				"folder_id": "b1gvp43cei68d5sfhsu7"
-			},
-			"details": {
-				"registry_id": "areba24s6jn8lrc0d5pa",
-				"device_id": "areb120kpg2j1kqiq23d",
-				"mqtt_topic": "$devices/areb120kpg2j1kqiq23d/events",
-				"payload": "eyJkZXZpY2VfaWQiOiJhcmViMTIwa3BnMmoxa3FpcTIzZCIsImRhdGV0aW1lIjoiMDUvMDgvMjAyMCAyMjoxNjoyMSIsImxhdGl0dWRlIjoiNTUuNzAzMjkwMzIiLCJsb25naXR1ZGUiOiIzNy42NTQ3MjE5NiIsImFsdGl0dWRlIjoiNDI5LjEzIiwic3BlZWQiOiIwIiwiYmF0dGVyeV92b2x0YWdlIjoiMjMsNSIsImNhYmluX3RlbXBlcmF0dXJlIjoiMTciLCJmdWVsX2xldmVsIjpudWxsfQ=="
-			}
-		}
-	]
+        {
+            "event_metadata": {
+                "event_id": "160d239876d9714800",
+                "event_type": "yandex.cloud.events.iot.IoTMessage",
+                "created_at": "2020-05-08T19:16:21.267616072Z",
+                "folder_id": "is1sample2idfolder"
+            },
+            "details": {
+                "registry_id": "is1sample2id3registry",
+                "device_id": "is1sample2id3device",
+                "mqtt_topic": "$devices/is1sample2id3device/events",
+                "payload": "eyJWYWx1ZXMiOiBbeyJWYWx1ZSI6ICI5MC4yMjk2MSIsICJUeXBlIjogIkZsb2F0IiwgIk5hbWUiOiAiSHVtaWRpdHkifSwgeyJWYWx1ZSI6ICIxMjUuMDY2NzIiLCAiVHlwZSI6ICJGbG9hdCIsICJOYW1lIjogIkNhcmJvbkRpb3hpZGUifSwgeyJWYWx1ZSI6ICIzMi44MDgzNjUiLCAiVHlwZSI6ICJGbG9hdCIsICJOYW1lIjogIlByZXNzdXJlIn0sIHsiVmFsdWUiOiAiMzEuMDQ5NzQ0IiwgIlR5cGUiOiAiRmxvYXQiLCAiTmFtZSI6ICJUZW1wZXJhdHVyZSJ9XSwgIkRldmljZUlkIjogIjdkOTcyZTE2LTJjYzctNDlhYS1hM2ZiLTE1M2JlOWIyZTA0ZiIsICJUaW1lU3RhbXAiOiAiMjAyMC0wNS0xOVQxODo0MTozNy4xNDUrMDM6MDAifQ=="
+            }
+        }
+    ]
 }""", None)
 '''
     
