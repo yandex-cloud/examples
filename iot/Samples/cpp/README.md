@@ -45,7 +45,7 @@
 [устройства](https://cloud.yandex.ru/docs/iot-core/operations/password/device-password).
 Логины реестра и устройства это их `ID`.
 
-###Особенности C++
+### Особенности C++
 
 [Установка библиотеки paho для C++](https://github.com/eclipse/paho.mqtt.cpp)
 
