@@ -8,7 +8,8 @@
 
  Датчик выдает результат в формате JSON. Например:
 
-   `{
+   ```
+   {
     "DeviceId":"0e3ce1d0-1504-4325-972f-55c961319814",
     "TimeStamp":"2020-05-21T22:53:16Z",
     "Values":[
@@ -17,7 +18,8 @@
         {"Type":"Float","Name":"Pressure","Value":"110.7021"},
         {"Type":"Float","Name":"Temperature","Value":"127.708824"}
         ]
-   `}
+   }
+   ```
 
 [Функция]() использует точку входа myfunction.msgHandler.
 
