@@ -8,7 +8,8 @@
 
  Датчик выдает результат в формате JSON. Например:
 
-   `{
+   ```
+   {
     "DeviceId":"0e3ce1d0-1504-4325-972f-55c961319814",
     "TimeStamp":"2020-05-21T22:53:16Z",
     "Values":[
@@ -17,13 +18,14 @@
         {"Type":"Float","Name":"Pressure","Value":"110.7021"},
         {"Type":"Float","Name":"Temperature","Value":"127.708824"}
         ]
-   `}
+   }
+   ```
 
-[Функция]() использует точку входа myfunction.msgHandler.
+[Функция](myfunction.py) использует точку входа myfunction.msgHandler.
 
 Таблица в базе данных автоматически создается при первом вызове функции (метод `makeCreateTableStatement`).
 
-Подробнее данный сценарий описан в [документации]()
+Подробнее данный сценарий описан в [документации](https://cloud.yandex.ru/docs/iot-core/solutions/data-recording)
 
 В функции используются следующие переменные окружения:
 
