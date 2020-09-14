@@ -1,0 +1,28 @@
+service_account_key_file = "service-sccount.json"
+cloud_id                 = "" # from yc config list
+folder_id                = "" # from yc config list
+
+##########
+# vpc
+##########
+
+vpc_name         = "" Name for VPC. Example: ad-demo
+subnet_cidr      = "10.0.0.0/16"
+zone_names       = ["ru-central1-a", "ru-central1-b", "ru-central1-с"]
+zone_short_names = ["rc1a", "rc1b", "rc1c"]
+
+##########
+# instance
+##########
+
+name      = "" # name domain controller. Example: 'ad'
+number    = 6  # ?
+user      = "" # login for admin AD?
+pass      = "" # password admin AD
+user_data = "powershell/bootstrap.ps1"
+
+ad_smadminpass = "" # password
+ad_domainname  = "" # fqdn domain. Example: mydomain.local
+ad_deploy_root = "powershell/deploy-forestroot.ps1"
+ad_deploy_dc   = "powershell/deploy-domaincontroller.ps1"
+
