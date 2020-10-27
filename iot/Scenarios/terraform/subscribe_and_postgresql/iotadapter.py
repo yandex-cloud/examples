@@ -85,16 +85,22 @@ def msgHandler(event, context):
     conn = psycopg2.connect(connection_string)
 
     cursor = conn.cursor()
-    msg_payload = json.dumps(event["messages"][0])
+    first_msg = event["messages"][0]
+    msg_payload = json.dumps(first_msg)
     json_msg = json.loads(msg_payload)
 
     if  verboseLogging:     
         logger.info(f'Event: {json_msg["details"]}')
 
     table_name = 'iot_events'
-    sql = makeInsertStatement(json_msg, table_name)
 
-    if  verboseLogging:     
+    evid = first_msg.get('event_metadata', {})['event_id']
+    payload = first_msg.get('details', {})['payload']
+    payload_str=base64.decodestring(payload.encode())
+
+    sql = makeInsertStatement(evid, payload_str, table_name)
+
+    if  verboseLogging:
         logger.info(f'Exec: {sql}')
 
     try:
