@@ -15,6 +15,7 @@ locals {
 #}
 
 variable "token" {
+  type        = "string"
   description = "Yandex Cloud security OAuth token"
 }
 
