@@ -9,7 +9,7 @@ folder_id                = "" # from yc config list
 
 vpc_name         = "" # Name for VPC. Example: ad-demo
 subnet_cidr      = "10.0.0.0/16"
-zone_names       = ["ru-central1-a", "ru-central1-b", "ru-central1-с"]
+zone_names       = ["ru-central1-a", "ru-central1-b", "ru-central1-c"]
 zone_short_names = ["rc1a", "rc1b", "rc1c"]
 
 ##########
