@@ -28,7 +28,7 @@
       "disk_type": "{{user `disk_type`}}",
       "use_ipv4_nat": "{{user `use_ipv4_nat`}}",
       "subnet_id": "{{user `subnet_id`}}",
-      "image_name": "win-{{user `image_name`}}-{{isotime | clean_image_name}}",
+      "image_name": "win-{{user `image_name`}}-{{isotime | clean_resource_name}}",
       "metadata": {
         "user-data": "#ps1\nnet user Administrator {{user `password`}}\nls \"C:\\Program Files\\Cloudbase Solutions\\Cloudbase-Init\\LocalScripts\" | rm\nRemove-Item -Path WSMan:\\Localhost\\listener\\listener* -Recurse\nRemove-Item -Path Cert:\\LocalMachine\\My\\*\n$DnsName = Invoke-RestMethod -Headers @{\"Metadata-Flavor\"=\"Google\"} \"http://169.254.169.254/computeMetadata/v1/instance/hostname\"\n$HostName = Invoke-RestMethod -Headers @{\"Metadata-Flavor\"=\"Google\"} \"http://169.254.169.254/computeMetadata/v1/instance/name\"\n$Certificate = New-SelfSignedCertificate -CertStoreLocation Cert:\\LocalMachine\\My -DnsName $DnsName -Subject $HostName\nNew-Item -Path WSMan:\\LocalHost\\Listener -Transport HTTP -Address * -Force\nNew-Item -Path WSMan:\\LocalHost\\Listener -Transport HTTPS -Address * -Force -HostName $HostName -CertificateThumbPrint $Certificate.Thumbprint\n& netsh advfirewall firewall add rule name=\"WINRM-HTTPS-In-TCP\" protocol=TCP dir=in localport=5986 action=allow profile=any"
       },
