@@ -8,10 +8,17 @@ locals {
 # provider
 ##########
 
-variable "service_account_key_file" {
+# Use service_account_key_file or token
+#variable "service_account_key_file" {
+#  type        = "string"
+#  description = "your service account key file path"
+#}
+
+variable "token" {
   type        = "string"
-  description = "your service account key file path"
+  description = "Yandex Cloud security OAuth token"
 }
+
 
 variable "cloud_id" {
   type        = "string"
