@@ -42,6 +42,9 @@ Imput Json format is:
 }
 """
 def makeInsertStatement(event_id, payload_json, table_name):
+    if  verboseLogging:
+        logger.info(f'payload_jsn: {payload_json}')
+
 
     event = json.loads(payload_json)
     if  verboseLogging:
