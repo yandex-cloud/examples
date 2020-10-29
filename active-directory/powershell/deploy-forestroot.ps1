@@ -62,6 +62,8 @@ $User       = "$DomainName\$(Get-InstanceMetadata -SubPath "/attributes/user")"
 $PlainPass  = Get-InstanceMetadata -SubPath "/attributes/pass"
 $Password   = ConvertTo-SecureString $PlainPass -AsPlainText -Force
 $Credential = New-Object PSCredential($User, $Password)
+$domainComponent0 = $DomainName.Split(".")[0]
+$domainComponent1 = $DomainName.Split(".")[1]
 
 $isADDSRoleInstalled = (Get-WindowsFeature -Name AD-Domain-Services).Installed
 if (-not $isADDSRoleInstalled) {  
@@ -133,6 +135,16 @@ else {
 
     Remove-ADReplicationSiteLink DEFAULTIPSITELINK -Confirm:$false
     Remove-ADReplicationSite "Default-First-Site-Name" -Confirm:$false
+
+    Write-Host "DomainName: $DomainName"
+    Write-Host "domainComponent0: $domainComponent0"
+    Write-Host "domainComponent1: $domainComponent1"
+
+    New-ADOrganizationalUnit -Name "OrganizationalUnit1" -Path "DC=$domainComponent0,DC=$domainComponent1"
+    New-ADOrganizationalUnit -Name "OrganizationalUnit2" -Path "DC=$domainComponent0,DC=$domainComponent1"
+
+    New-ADUser -DisplayName:"user1" -GivenName:"user1" -Name:"user1" -Path:"OU=OrganizationalUnit1,DC=$domainComponent0,DC=$domainComponent1" -SamAccountName:"user1" -Surname:"user1" -Type:"user" -AccountPassword (ConvertTo-SecureString P@$$w0rd -AsPlainText -Force) -Enabled $true
+    New-ADUser -DisplayName:"user2" -GivenName:"user2" -Name:"user2" -Path:"OU=OrganizationalUnit2,DC=$domainComponent0,DC=$domainComponent1" -SamAccountName:"user2" -Surname:"user2" -Type:"user" -AccountPassword (ConvertTo-SecureString P@$$w0rd -AsPlainText -Force) -Enabled $true
 
     "Deployment Complete" | Out-Serial
     Unregister-ScheduledTask -TaskName 'deploy' -Confirm:$false
