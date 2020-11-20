@@ -15,7 +15,7 @@ function ISODateString(d){
       + pad(d.getSeconds())+'Z'}
 
 function publishToDevice(deviceDataService) {
-    
+
     const deviceId = process.env.DEVICE_ID;
     const timeStamp = ISODateString(new Date());
     const humiditySensorValue = (parseFloat(process.env.TEMPERATURE_SENSOR_VALUE) + Math.random()).toFixed(2);
@@ -31,7 +31,7 @@ function publishToDevice(deviceDataService) {
 
     return deviceDataService.publish({
         deviceId: iotCoreDeviceId,
-        topic: `$devices/${iotCoreDeviceId}/events/`,
+        topic: `$devices/${iotCoreDeviceId}/events`,
         data: Buffer.from(
             `{
             "DeviceId":"${deviceId}",
