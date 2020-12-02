@@ -18,8 +18,8 @@ function publishToDevice(deviceDataService) {
 
     const deviceId = process.env.DEVICE_ID;
     const timeStamp = ISODateString(new Date());
-    const humiditySensorValue = (parseFloat(process.env.TEMPERATURE_SENSOR_VALUE) + Math.random()).toFixed(2);
-    const temperatureSensorValue = (parseFloat(process.env.HUMIDITY_SENSOR_VALUE) + Math.random()).toFixed(2);
+    const humiditySensorValue = (parseFloat(process.env.HUMIDITY_SENSOR_VALUE) + Math.random()).toFixed(2);
+    const temperatureSensorValue = (parseFloat(process.env.TEMPERATURE_SENSOR_VALUE) + Math.random()).toFixed(2);
     const waterSensorValue = process.env.WATER_SENSOR_VALUE;
     const smokeSensorValue = process.env.SMOKE_SENSOR_VALUE;
     const roomDoorSensorValue = process.env.ROOM_DOOR_SENSOR_VALUE;
