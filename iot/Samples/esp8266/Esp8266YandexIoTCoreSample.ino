@@ -97,9 +97,8 @@ void messageReceived(char* topic, byte* payload, unsigned int length) {
   DEBUG_SERIAL.println(topicString.c_str());
   String payloadStr = "";
   for (int i=0;i<length;i++) {
-    payloadStr += (char*)payload;
+    payloadStr += (char)payload[i];
   }
-  DEBUG_SERIAL.println(payloadStr);
   DEBUG_SERIAL.print("Payload: ");
   DEBUG_SERIAL.println(payloadStr);
 }
