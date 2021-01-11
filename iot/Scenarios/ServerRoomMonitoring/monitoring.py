@@ -32,7 +32,7 @@ def pushMetrics(iamToken, msg):
         logger.info(f'Metrics response.content: {resp.content}')
 
 """
-Imput Json format is:
+Input Json format is:
 {
     "DeviceId":"0e3ce1d0-1504-4325-972f-55c961319814",
     "TimeStamp":"2020-05-21T22:57:15Z",
