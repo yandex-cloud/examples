@@ -1,0 +1,165 @@
+openapi: 3.0.0
+info:
+  title: Voximplant demo gateway
+  version: 1.0.0
+paths:
+  /specs:
+    get:
+      x-yc-apigateway-integration:
+        type: cloud_functions
+        function_id: <function-id>
+        tag: $latest
+        service_account: <service-account-id>
+      operationId: list-specs
+      summary: List specializations
+  /places:
+    get:
+      x-yc-apigateway-integration:
+        type: cloud_functions
+        function_id: <function-id>
+        tag: $latest
+        service_account: <service-account-id>
+      operationId: list-places
+      summary: List places
+  /dates:
+    get:
+      x-yc-apigateway-integration:
+        type: cloud_functions
+        function_id: <function-id>
+        tag: $latest
+        service_account: <service-account-id>
+      operationId: list-dates
+      parameters:
+        - description: Spec id
+          in: query
+          name: specId
+          required: true
+          schema:
+            type: string
+        - description: Place id
+          in: query
+          name: placeId
+          required: false
+          schema:
+            type: string
+      summary: List dates
+  /doctors:
+    get:
+      x-yc-apigateway-integration:
+        type: cloud_functions
+        function_id: <function-id>
+        tag: $latest
+        service_account: <service-account-id>
+      operationId: list-doctors
+      parameters:
+        - description: Spec id
+          in: query
+          name: specId
+          required: true
+          schema:
+            type: string
+        - description: Place id
+          in: query
+          name: placeId
+          required: false
+          schema:
+            type: string
+        - description: Date
+          in: query
+          name: date
+          required: true
+          schema:
+            type: string
+      summary: List doctors
+  /slots:
+    post:
+      x-yc-apigateway-integration:
+        type: cloud_functions
+        function_id: <function-id>
+        tag: $latest
+        service_account: <service-account-id>
+      operationId: search-slots
+      parameters:
+        - description: Client id
+          in: query
+          name: clientId
+          required: true
+          schema:
+            type: string
+        - description: Spec id
+          in: query
+          name: specId
+          required: true
+          schema:
+            type: string
+        - description: Place id
+          in: query
+          name: placeId
+          required: false
+          schema:
+            type: string
+        - description: Date
+          in: query
+          name: date
+          required: true
+          schema:
+            type: string
+        - description: Doctors
+          in: query
+          name: doctor
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        - description: Slots to be excluded
+          in: query
+          name: excludeSlot
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        - description: Slots to be canceled
+          in: query
+          name: cancelSlot
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+      summary: Search for slots and prebook them
+  /slots/{slotId}/ack:
+    post:
+      x-yc-apigateway-integration:
+        type: cloud_functions
+        function_id: <function-id>
+        tag: $latest
+        service_account: <service-account-id>
+      operationId: ack-slot
+      parameters:
+        - description: Slot id
+          in: path
+          name: slotId
+          required: true
+          schema:
+            type: string
+        - description: Client id
+          in: query
+          name: clientId
+          required: true
+          schema:
+            type: string
+        - description: Slots to be canceled
+          in: query
+          name: cancelSlot
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+      summary: Reserve slot
