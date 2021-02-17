@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.buraindo</groupId>
+    <artifactId>todo</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.yandex.ydb</groupId>
+            <artifactId>ydb-sdk-core</artifactId>
+            <version>1.7.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.yandex.ydb</groupId>
+            <artifactId>ydb-sdk-table</artifactId>
+            <version>1.7.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.yandex.ydb</groupId>
+            <artifactId>ydb-sdk-auth-iam</artifactId>
+            <version>1.7.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jsoniter</groupId>
+            <artifactId>jsoniter</artifactId>
+            <version>0.9.23</version>
+        </dependency>
+    </dependencies>
+
+</project>
