@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>ToDo List</title>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+</head>
+
+<body>
+    <h1 class="title">Simple ToDo List</h1>
+    <main class="main">
+        <div class="cards" id="cards"></div>
+        <div class="addTask">
+            <form class="form" action="javascript:addTask()">
+                <input id="name" type="text" name="name" placeholder="Name..." /><br>
+                <textarea rows="2" cols="25" id="description" name="description"
+                    placeholder="Description..."></textarea><br>
+                <input id="submit" type="submit" value="Add">
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>
+
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+    .title {
+        text-align: center;
+        font-family: Montserrat, serif;
+    }
+
+    .main {
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+    }
+
+    .cards {
+        display: flex;
+        flex-wrap: wrap;
+
+        justify-content: space-around;
+
+        margin-bottom: 4.5rem;
+
+        text-align: center;
+    }
+
+
+    .card {
+        align-items: center;
+
+        min-width: 250px;
+        max-width: 250px;
+        min-height: 300px;
+        max-height: none;
+        margin: 2rem;
+        padding: 0.5rem;
+
+        border-radius: 5px;
+
+        transition: 0.3s;
+
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+
+        font-family: Montserrat, serif;
+
+        text-align: left;
+    }
+
+    .card:hover {
+        box-shadow: 0 12px 20px 0 rgba(0, 0, 0, 0.4);
+    }
+
+    .card__name {
+        padding: 5px 0 5px 0;
+
+        font-size: 1.4em;
+        font-weight: bold;
+        margin-block-end: 0;
+
+        margin-block-start: 0;
+        overflow-wrap: break-word;
+
+        text-align: center;
+    }
+
+    .card__description {
+        margin-top: 0.5rem;
+
+        padding: 0.5rem 0.5rem 0.5rem 0;
+
+        border-top: 1px solid #aaa;
+    }
+
+    #name {
+        width: 213px;
+        margin-bottom: 5px;
+    }
+
+    #description {
+        height: 75px;
+    }
+
+    #submit {
+        width: 222px;
+    }
+</style>
+
+<script>
+    function listTasks() {
+        fetch(`/list`)
+            .then(response => response.json())
+            .then(data => {
+                const cards = document.getElementById("cards")
+                for (let task of data) {
+                    cards.innerHTML += `
+                        <div class="card">
+                            <div class="card__id" style="display: none;">${task.taskId}</div>
+                            <div class="card__name">${task.name}</div>
+                            <div class="card__description">${task.description}</div>
+                            <button onclick="deleteTask(this)">Delete</button>
+                        </div>
+                    `
+                }
+            })
+            .catch(error => alert(error))
+    }
+
+    listTasks()
+
+    function addTask() {
+        const name = document.getElementById("name").value
+        const description = document.getElementById("description").value
+
+        fetch(`/add?name=${name}&description=${description}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(() => location.reload())
+            .catch(error => alert(error))
+    }
+
+    function deleteTask(el) {
+        const id = el.parentElement.querySelector(".card__id").innerHTML
+
+        fetch(`/delete?taskId=${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(() => location.reload())
+            .catch(error => alert(error))
+    }
+</script>
