@@ -1,0 +1,9 @@
+root:
+    %lemma
+    удали список $ListName?
+
+slots:
+    listName:
+        source: $ListName
+$ListName:
+    .+

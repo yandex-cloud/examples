@@ -1,0 +1,13 @@
+root:
+    %lemma
+    (удали|убери|вычеркни) пункт? $Item? (из $ListName)?
+
+slots:
+    item:
+        source: $Item
+    listName:
+        source: $ListName
+$Item:
+    .+
+$ListName:
+    .+

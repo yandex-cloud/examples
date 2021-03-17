@@ -1,0 +1,13 @@
+root:
+    %lemma
+    (добавь|запиши|внеси) (пункт)? $Item? (в $ListName)?
+
+slots:
+    item:
+        source: $Item
+    listName:
+        source: $ListName
+$Item:
+    .+
+$ListName:
+    .+

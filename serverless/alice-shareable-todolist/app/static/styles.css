@@ -1,0 +1,188 @@
+@charset "UTF-8";
+
+.user-badge {
+    float: right;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.user-badge_avatar {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+    border-radius: 50%;
+}
+
+.user-badge_name {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 10px;
+}
+
+.top-bar {
+    height: 50px;
+    position: fixed;
+    width: 100%;
+    padding: 0 50px;
+    display: table;
+    box-sizing: border-box;
+}
+
+.page {
+    padding-top: 50px;
+    max-width: 800px;
+    margin: 0 50px;
+}
+
+.form-button {
+    margin: 5px 5px;
+    padding: 5px 15px;
+    background: #ffcc00;
+    border: 0 none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.access-selector {
+    margin: 5px 5px;
+    padding: 5px 15px;
+    border: 0 none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.text-input {
+    margin: 5px 5px;
+    padding: 5px 15px;
+    border-radius: 5px;
+}
+
+.list-button {
+    font-size: small;
+    cursor: pointer;
+    margin: 5px 15px;
+    padding: 5px 15px;
+    font-style: italic;
+    border-radius: 5px;
+    border: 1px solid;
+}
+
+.list-button__red {
+    color: #f7a2a2;
+}
+
+.list-button__red:hover {
+    color: #ff4545;
+}
+
+.list-button__green {
+    color: #00c184;
+}
+
+.list-button__green:hover {
+    color: #0c7d5a;
+}
+
+.todo-list-users_user-drop:after {
+    content: 'удалить';
+}
+
+.todo-list-invitations_user-drop:after {
+    content: 'отозвать';
+}
+
+.todo-lists_item-drop:after {
+    content: 'удалить';
+}
+
+.todo-list-main_items:empty:after {
+    content: "Здесь пока ничего нет"
+}
+
+.todo-lists_items:empty:after {
+    content: "У вас пока нет списков"
+}
+
+.incoming-invitations_item-accept:after {
+    content: 'принять';
+}
+
+.incoming-invitations_items:empty:after {
+    content: "Нет новых приглашений"
+}
+
+.accept-invitation-form_reject:after {
+    content: "отклонить"
+}
+
+.accept-invitation-form_inviter {
+    margin: 0 15px;
+}
+
+.accept-invitation-form_access {
+    margin: 0 15px;
+}
+
+.accept-invitation-form_access__RW:after {
+    content: "RW"
+}
+
+.accept-invitation-form_access__R:after {
+    content: "R"
+}
+
+ul:empty {
+    font-style: italic;
+    color: #868686;
+}
+
+.hidden {
+    display: none;
+}
+
+.section {
+    border-bottom: 1px solid;
+    border-color: #ecd1d1;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    padding: 10px 15px;
+    background-color: #fafaff;
+}
+
+li:nth-child(even) {
+    background-color: #f7f8fb;
+}
+
+.menu {
+    margin-left: 40px;
+    height: 100%;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.menu_item {
+}
+
+.page-title {
+    color: #505556
+}
+
+.section-title {
+    color: #505556
+}
+
+h1 {
+    font-size: 20pt;
+}
+
+h2 {
+    font-size: 18pt;
+}

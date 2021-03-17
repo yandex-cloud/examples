@@ -1,0 +1,11 @@
+{
+  "folder-id": "<folder id>",
+  "domain": "<API Gateway technical domain>",
+  "oauth-client-id": "<OAuth application ID>",
+  "database": "<Yandex Database name>",
+  "database-endpoint": "<Yandex Database endpoint - host:port>",
+  "yc-profile": "<yc command line tool profile name>",
+  "secure-config-path": "<Path to config holding project secrets>",
+  "storage-bucket": "<Yandex Object Storage bucket name>",
+  "gateway-id": "<Your API Gateway's id>"
+}
