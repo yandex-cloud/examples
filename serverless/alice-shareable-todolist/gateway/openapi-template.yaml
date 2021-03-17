@@ -1,0 +1,334 @@
+openapi: 3.0.0
+info:
+  title:   Todo list
+  version: 1.0.0
+paths:
+  # Backend-driven redirect pages
+  /login:
+    get:
+      operationId: page_login
+      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account: "${GATEWAY_SA_ID}" }
+      responses:
+        302:
+          description: 'Login redirect page'
+          headers:
+            Location:
+              schema: { type: string }
+              description: "Redirect location"
+  /receive-token:
+    get:
+      operationId: page_receive_token
+      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account: "${GATEWAY_SA_ID}" }
+      responses:
+        302:
+          description: 'Login redirect page'
+          headers:
+            Location:
+              schema: { type: string }
+              description: "Redirect location"
+      parameters:
+        - name: state
+          in:   query
+          schema: { type: string }
+        - name:     code
+          in:       query
+          required: true
+          schema: { type: string }
+  # JSON API
+  /api/todo-lists:
+    get:
+      operationId: list_lists
+      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account: "${GATEWAY_SA_ID}" }
+      responses:
+        default: { $ref: '#/components/responses/Error' }
+        200:
+          description: 'User todo lists'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListShort'
+    post:
+      operationId: create_list
+      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account: "${GATEWAY_SA_ID}" }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [ "name" ]
+              properties:
+                name: { type: string }
+      responses:
+        default: { $ref: '#/components/responses/Error' }
+        200:
+          description: 'Create new list'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id: { type: string }
+                required: [ id ]
+  /api/todo-lists/{list_id}/wa:
+    delete:
+      operationId: delete_list
+      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account: "${GATEWAY_SA_ID}" }
+      parameters:
+        - name:     list_id
+          in:       path
+          required: true
+          schema:
+            type: string
+      responses:
+        default: { $ref: '#/components/responses/Error' }
+        204:
+          description: 'OK'
+    get:
+      operationId: get_list
+      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account: "${GATEWAY_SA_ID}" }
+      parameters:
+        - name:     list_id
+          in:       path
+          required: true
+          schema:
+            type: string
+      responses:
+        default: { $ref: '#/components/responses/Error' }
+        200:
+          description: 'List information'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List'
+  /api/todo-lists/{list_id}/users:
+    get:
+      operationId: get_list_users
+      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account: "${GATEWAY_SA_ID}" }
+      parameters:
+        - name:     list_id
+          in:       path
+          required: true
+          schema:
+            type: string
+      responses:
+        default: { $ref: '#/components/responses/Error' }
+        200:
+          description: 'Users of list'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListUser'
+  /api/todo-lists/{list_id}/users/{user_id}/wa:
+    delete:
+      operationId: revoke_invitation
+      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account: "${GATEWAY_SA_ID}" }
+      parameters:
+        - name:     list_id
+          in:       path
+          required: true
+          schema:
+            type: string
+        - name:     user_id
+          in:       path
+          required: true
+          schema:
+            type: string
+      responses:
+        default: { $ref: '#/components/responses/Error' }
+        204:
+          description: 'OK'
+  /api/todo-lists/{list_id}/inviteUser:
+    post:
+      operationId: invite_user
+      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account: "${GATEWAY_SA_ID}" }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                invitee: { type: string }
+                access_mode: { $ref: '#/components/schemas/AccessMode' }
+              required: [ invitee, access_mode ]
+      parameters:
+        - name:     list_id
+          in:       path
+          required: true
+          schema:
+            type: string
+      responses:
+        default: { $ref: '#/components/responses/Error' }
+        204:
+          description: 'OK'
+  /api/todo-lists/{list_id}/accept_invitation:
+    post:
+      operationId: accept_invitation
+      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account: "${GATEWAY_SA_ID}" }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                alias: { type: string }
+              required: [ alias ]
+      parameters:
+        - name:     list_id
+          in:       path
+          required: true
+          schema:
+            type: string
+      responses:
+        default: { $ref: '#/components/responses/Error' }
+        204:
+          description: 'OK'
+  /api/todo-lists/{list_id}/items:
+    post:
+      operationId: add_item
+      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account: "${GATEWAY_SA_ID}" }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text: { type: string }
+              required: [ text ]
+      parameters:
+        - name:     list_id
+          in:       path
+          required: true
+          schema:
+            type: string
+      responses:
+        default: { $ref: '#/components/responses/Error' }
+        204:
+          description: 'OK'
+  /api/todo-lists/{list_id}/items/{item_id}/wa:
+    delete:
+      operationId: delete_item
+      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account: "${GATEWAY_SA_ID}" }
+      parameters:
+        - name:     list_id
+          in:       path
+          required: true
+          schema:
+            type: string
+        - name:     item_id
+          in:       path
+          required: true
+          schema:
+            type: string
+      responses:
+        default: { $ref: '#/components/responses/Error' }
+        204:
+          description: 'OK'
+  /api/me:
+    get:
+      operationId: user_info
+      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account: "${GATEWAY_SA_ID}" }
+      responses:
+        default: { $ref: '#/components/responses/Error' }
+        200:
+          description: 'User information'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  # static
+  /:
+    get:
+      operationId: file-index
+      x-yc-apigateway-integration:
+        type:               object_storage
+        bucket:             "${STORAGE_BUCKET}"
+        object:             'index.html'
+        presigned_redirect: false
+        service_account_id: "${GATEWAY_SA_ID}"
+      responses:
+        200:
+          description: 'HTML page static content'
+  /{file+}:
+    get:
+      operationId: file-static
+      x-yc-apigateway-integration:
+        type:               object_storage
+        bucket:             "${STORAGE_BUCKET}"
+        object:             '{file}'
+        presigned_redirect: false
+        service_account_id: "${GATEWAY_SA_ID}"
+      parameters:
+        - explode:  false
+          in:       path
+          name:     file
+          required: true
+          schema:
+            type: string
+          style:    simple
+      responses:
+        200:
+          description: 'static file'
+
+components:
+  responses:
+    Error:
+      description: 'error'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+  schemas:
+    ListShort:
+      properties:
+        id: { type: string }
+        name: { type: string }
+        access: { $ref: '#/components/schemas/AccessMode' }
+        inviter: { type: string }
+        accepted: { type: boolean }
+    List:
+      allOf:
+        - $ref: '#/components/schemas/ListShort'
+        - properties:
+            items:
+              type: array
+              items:
+                $ref: '#/components/schemas/ListItem'
+    ListUser:
+      properties:
+        user_name: { type: string }
+        access_mode: { $ref: '#/components/schemas/AccessMode' }
+        accepted: { type: boolean }
+        me: { type: boolean }
+    ListItem:
+      properties:
+        id: { type: string }
+        text: { type: string }
+    AccessMode:
+      type: string
+      enum: [ RW, R, O ]
+    # Login
+    User:
+      properties:
+        name: { type: string }
+        avatar_id: { type: string }
+    # Errors
+    Error:
+      properties:
+        code: { type: string }
+        message: { type: string }
+    ErrorCode:
+      type: string
+      enum:
+        - UNAUTHENTICATED
+        - UNAUTHORIZED
+        - INTERNAL
+        - UNAVAILABLE

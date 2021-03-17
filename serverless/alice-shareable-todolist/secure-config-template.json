@@ -1,0 +1,9 @@
+{
+  "oauth_secret": "<OAuth application secret>",
+  "session_keys": [
+    {
+      "hash": "<64-bytes base64-encoded random value>",
+      "block": "<32-bytes base64-encoded random value>"
+    }
+  ]
+}

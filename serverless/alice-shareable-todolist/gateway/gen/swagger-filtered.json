@@ -1,0 +1,642 @@
+{
+  "definitions": {
+    "AccessMode": {
+      "enum": [
+        "RW",
+        "R",
+        "O"
+      ],
+      "type": "string"
+    },
+    "Error": {
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "ErrorCode": {
+      "enum": [
+        "UNAUTHENTICATED",
+        "UNAUTHORIZED",
+        "INTERNAL",
+        "UNAVAILABLE"
+      ],
+      "type": "string"
+    },
+    "List": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ListShort"
+        },
+        {
+          "properties": {
+            "items": {
+              "items": {
+                "$ref": "#/definitions/ListItem"
+              },
+              "type": "array"
+            }
+          }
+        }
+      ]
+    },
+    "ListItem": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        }
+      }
+    },
+    "ListShort": {
+      "properties": {
+        "accepted": {
+          "type": "boolean"
+        },
+        "access": {
+          "$ref": "#/definitions/AccessMode"
+        },
+        "id": {
+          "type": "string"
+        },
+        "inviter": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "ListUser": {
+      "properties": {
+        "accepted": {
+          "type": "boolean"
+        },
+        "access_mode": {
+          "$ref": "#/definitions/AccessMode"
+        },
+        "me": {
+          "type": "boolean"
+        },
+        "user_name": {
+          "type": "string"
+        }
+      }
+    },
+    "User": {
+      "properties": {
+        "avatar_id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "info": {
+    "title": "Todo list",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/me": {
+      "get": {
+        "operationId": "user_info",
+        "parameters": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "User information",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-yc-apigateway-integration": {
+          "function_id": "${WEB_FUNCTION_ID}",
+          "service_account": "${GATEWAY_SA_ID}",
+          "tag": "$latest",
+          "type": "cloud_functions"
+        }
+      }
+    },
+    "/api/todo-lists": {
+      "get": {
+        "operationId": "list_lists",
+        "parameters": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "User todo lists",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/ListShort"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-yc-apigateway-integration": {
+          "function_id": "${WEB_FUNCTION_ID}",
+          "service_account": "${GATEWAY_SA_ID}",
+          "tag": "$latest",
+          "type": "cloud_functions"
+        }
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "create_list",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "properties": {
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name"
+              ],
+              "type": "object"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Create new list",
+            "schema": {
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ],
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-yc-apigateway-integration": {
+          "function_id": "${WEB_FUNCTION_ID}",
+          "service_account": "${GATEWAY_SA_ID}",
+          "tag": "$latest",
+          "type": "cloud_functions"
+        }
+      }
+    },
+    "/api/todo-lists/{list_id}/accept_invitation": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "accept_invitation",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "list_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "properties": {
+                "alias": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "alias"
+              ],
+              "type": "object"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-yc-apigateway-integration": {
+          "function_id": "${WEB_FUNCTION_ID}",
+          "service_account": "${GATEWAY_SA_ID}",
+          "tag": "$latest",
+          "type": "cloud_functions"
+        }
+      }
+    },
+    "/api/todo-lists/{list_id}/inviteUser": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "invite_user",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "list_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "properties": {
+                "access_mode": {
+                  "$ref": "#/definitions/AccessMode"
+                },
+                "invitee": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "invitee",
+                "access_mode"
+              ],
+              "type": "object"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-yc-apigateway-integration": {
+          "function_id": "${WEB_FUNCTION_ID}",
+          "service_account": "${GATEWAY_SA_ID}",
+          "tag": "$latest",
+          "type": "cloud_functions"
+        }
+      }
+    },
+    "/api/todo-lists/{list_id}/items": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "add_item",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "list_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "properties": {
+                "text": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "text"
+              ],
+              "type": "object"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-yc-apigateway-integration": {
+          "function_id": "${WEB_FUNCTION_ID}",
+          "service_account": "${GATEWAY_SA_ID}",
+          "tag": "$latest",
+          "type": "cloud_functions"
+        }
+      }
+    },
+    "/api/todo-lists/{list_id}/items/{item_id}/wa": {
+      "delete": {
+        "operationId": "delete_item",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "list_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-yc-apigateway-integration": {
+          "function_id": "${WEB_FUNCTION_ID}",
+          "service_account": "${GATEWAY_SA_ID}",
+          "tag": "$latest",
+          "type": "cloud_functions"
+        }
+      }
+    },
+    "/api/todo-lists/{list_id}/users": {
+      "get": {
+        "operationId": "get_list_users",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "list_id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Users of list",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/ListUser"
+              },
+              "type": "array"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-yc-apigateway-integration": {
+          "function_id": "${WEB_FUNCTION_ID}",
+          "service_account": "${GATEWAY_SA_ID}",
+          "tag": "$latest",
+          "type": "cloud_functions"
+        }
+      }
+    },
+    "/api/todo-lists/{list_id}/users/{user_id}/wa": {
+      "delete": {
+        "operationId": "revoke_invitation",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "list_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-yc-apigateway-integration": {
+          "function_id": "${WEB_FUNCTION_ID}",
+          "service_account": "${GATEWAY_SA_ID}",
+          "tag": "$latest",
+          "type": "cloud_functions"
+        }
+      }
+    },
+    "/api/todo-lists/{list_id}/wa": {
+      "delete": {
+        "operationId": "delete_list",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "list_id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-yc-apigateway-integration": {
+          "function_id": "${WEB_FUNCTION_ID}",
+          "service_account": "${GATEWAY_SA_ID}",
+          "tag": "$latest",
+          "type": "cloud_functions"
+        }
+      },
+      "get": {
+        "operationId": "get_list",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "list_id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "List information",
+            "schema": {
+              "$ref": "#/definitions/List"
+            }
+          },
+          "default": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-yc-apigateway-integration": {
+          "function_id": "${WEB_FUNCTION_ID}",
+          "service_account": "${GATEWAY_SA_ID}",
+          "tag": "$latest",
+          "type": "cloud_functions"
+        }
+      }
+    },
+    "/login": {
+      "get": {
+        "operationId": "page_login",
+        "parameters": [],
+        "responses": {
+          "302": {
+            "description": "Login redirect page",
+            "headers": {
+              "Location": {
+                "description": "Redirect location",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-yc-apigateway-integration": {
+          "function_id": "${WEB_FUNCTION_ID}",
+          "service_account": "${GATEWAY_SA_ID}",
+          "tag": "$latest",
+          "type": "cloud_functions"
+        }
+      }
+    },
+    "/receive-token": {
+      "get": {
+        "operationId": "page_receive_token",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "state",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "code",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "302": {
+            "description": "Login redirect page",
+            "headers": {
+              "Location": {
+                "description": "Redirect location",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-yc-apigateway-integration": {
+          "function_id": "${WEB_FUNCTION_ID}",
+          "service_account": "${GATEWAY_SA_ID}",
+          "tag": "$latest",
+          "type": "cloud_functions"
+        }
+      }
+    }
+  },
+  "swagger": "2.0",
+  "x-components": {
+    "responses": {
+      "Error": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "description": "error"
+      }
+    }
+  }
+}

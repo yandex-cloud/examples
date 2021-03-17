@@ -1,0 +1,13 @@
+.user-badge_avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.user-badge_name {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 10px;
+}

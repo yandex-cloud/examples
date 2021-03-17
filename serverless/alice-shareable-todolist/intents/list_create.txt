@@ -1,0 +1,10 @@
+root:
+    %lemma
+    создай список
+    создай $Name
+
+slots:
+    listName:
+        source: $Name
+$Name:
+    .+
