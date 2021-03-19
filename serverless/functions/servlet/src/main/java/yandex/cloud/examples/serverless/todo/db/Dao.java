@@ -1,4 +1,4 @@
-package org.buraindo.todo.db;
+package yandex.cloud.examples.serverless.todo.db;
 
 import java.util.List;
 

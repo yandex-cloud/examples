@@ -1,9 +1,9 @@
-package org.buraindo.todo;
+package yandex.cloud.examples.serverless.todo;
 
 import com.jsoniter.output.JsonStream;
-import org.buraindo.todo.db.Dao;
-import org.buraindo.todo.db.TaskDao;
-import org.buraindo.todo.model.Task;
+import yandex.cloud.examples.serverless.todo.db.Dao;
+import yandex.cloud.examples.serverless.todo.db.TaskDao;
+import yandex.cloud.examples.serverless.todo.model.Task;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

@@ -23,9 +23,9 @@
     * `ENDPOINT` - значение поля `Эндпоинт` вашей базы данных (например, ydb.serverless.yandexcloud.net:2135)
 
     Должны получиться функции с такими точками входа:
-    * org.buraindo.todo.AddTaskServlet
-    * org.buraindo.todo.ListTasksServlet
-    * org.buraindo.todo.DeleteTaskServlet
+    * yandex.cloud.examples.serverless.todo.AddTaskServlet
+    * yandex.cloud.examples.serverless.todo.ListTasksServlet
+    * yandex.cloud.examples.serverless.todo.DeleteTaskServlet
 
     Чтобы задеплоить функцию, нужно:
     * Заархивировать содержимое проекта (например, `zip target.zip -r src pom.xml`)
@@ -47,7 +47,7 @@
     * ИЛИ создать версию через UI, для этого нужно зайти в функцию, 
     открыть вкладку Редактор, во вкладке Способ выбрать `ZIP`, залить туда архив с проектом.
     Затем проставить параметры:
-      * Точка входа: текущая точка входа (например, `org.buraindo.todo.AddTaskServlet` для функции, которая отвечает за этот сервлет)
+      * Точка входа: текущая точка входа (например, `yandex.cloud.examples.serverless.todo.AddTaskServlet` для функции, которая отвечает за этот сервлет)
       * Таймаут, c: 3
       * Память: 128 МБ
       * Сервисный аккаунт: выбрать сервисный аккаунт, созданный в пункте 2
