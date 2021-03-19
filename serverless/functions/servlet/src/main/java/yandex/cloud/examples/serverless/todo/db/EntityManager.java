@@ -1,4 +1,4 @@
-package org.buraindo.todo.db;
+package yandex.cloud.examples.serverless.todo.db;
 
 import com.yandex.ydb.auth.iam.CloudAuthProvider;
 import com.yandex.ydb.core.grpc.GrpcTransport;

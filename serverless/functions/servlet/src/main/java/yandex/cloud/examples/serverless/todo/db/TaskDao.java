@@ -1,9 +1,9 @@
-package org.buraindo.todo.db;
+package yandex.cloud.examples.serverless.todo.db;
 
 import com.yandex.ydb.table.query.Params;
 import com.yandex.ydb.table.values.PrimitiveValue;
-import org.buraindo.todo.model.Task;
-import org.buraindo.todo.utils.ThrowingConsumer;
+import yandex.cloud.examples.serverless.todo.model.Task;
+import yandex.cloud.examples.serverless.todo.utils.ThrowingConsumer;
 
 import java.util.ArrayList;
 import java.util.List;

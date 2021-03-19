@@ -1,10 +1,6 @@
-package org.buraindo.todo.model;
+package yandex.cloud.examples.serverless.todo.model;
 
 import com.yandex.ydb.table.result.ResultSetReader;
-
-import java.nio.charset.StandardCharsets;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class Task {
 

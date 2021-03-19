@@ -1,4 +1,4 @@
-package org.buraindo.todo.utils;
+package yandex.cloud.examples.serverless.todo.utils;
 
 import java.util.function.Consumer;
 
