@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 40 physical / 40 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/ben-20090326-hxc/mfc/b0152.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence OW A WILD DOG HE GROWLED silence  ==  [426 frames] -46.8311 [Ac=-19950.0 LM=0.0] (Act=9.4)
+Aligning File: /data/UserSubmissions/Quarantine/ben-20090326-hxc/mfc/b0153.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence HE WAS A PARIAH A WANDERER WITHOUT A FRIEND OR A HOME silence  ==  [460 frames] -52.7407 [Ac=-24260.7 LM=0.0] (Act=10.4)
+Aligning File: /data/UserSubmissions/Quarantine/ben-20090326-hxc/mfc/b0154.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence THAT IS THE STRANGE PART OF IT silence  ==  [255 frames] -48.6853 [Ac=-12414.8 LM=0.0] (Act=8.3)
+Aligning File: /data/UserSubmissions/Quarantine/ben-20090326-hxc/mfc/b0155.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence HIS FRESHLY CAUGHT FURS HE FLUNG TO THE FLOOR silence  ==  [366 frames] -52.3682 [Ac=-19166.8 LM=0.0] (Act=9.8)
+Aligning File: /data/UserSubmissions/Quarantine/ben-20090326-hxc/mfc/b0156.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence FOR THAT REASON LE BEAU HAD CHOSEN HIM TO FIGHT THE BIG FIGHT silence  ==  [614 frames] -46.5200 [Ac=-28563.3 LM=0.0] (Act=9.1)
+Aligning File: /data/UserSubmissions/Quarantine/ben-20090326-hxc/mfc/b0157.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence IN THE CRIB THE BABY SAT UP AND BEGAN TO PRATTLE silence  ==  [605 frames] -42.9284 [Ac=-25971.7 LM=0.0] (Act=8.9)
+Aligning File: /data/UserSubmissions/Quarantine/ben-20090326-hxc/mfc/b0158.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence SHE OBEYED SHRINKING BACK WITH THE BABY IN HER ARMS silence  ==  [554 frames] -46.9907 [Ac=-26032.8 LM=0.0] (Act=8.7)
+Aligning File: /data/UserSubmissions/Quarantine/ben-20090326-hxc/mfc/b0159.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence HIS TEETH SHUT WITH A LAST CLICK silence  ==  [451 frames] -45.6161 [Ac=-20572.8 LM=0.0] (Act=8.8)
+Aligning File: /data/UserSubmissions/Quarantine/ben-20090326-hxc/mfc/b0160.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence IT WAS OVER WHEN HE MADE HIS WAY THROUGH THE RING OF SPECTATORS silence  ==  [614 frames] -46.7258 [Ac=-28689.6 LM=0.0] (Act=10.8)
+Aligning File: /data/UserSubmissions/Quarantine/ben-20090326-hxc/mfc/b0161.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence IN A FLASH HE WAS ON HIS FEET FACING HIM silence  ==  [494 frames] -47.4786 [Ac=-23454.4 LM=0.0] (Act=10.2)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 44 physical / 44 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bendauphinee-20100423-dtj/mfc/b0270.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence WE COULD THROW STONES WITH OUR FEET silence  ==  [411 frames] -49.2208 [Ac=-20229.7 LM=0.0] (Act=10.1)
+Aligning File: /data/UserSubmissions/Quarantine/bendauphinee-20100423-dtj/mfc/b0271.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence IT WAS PUT TOGETHER IN A CASUAL HELTER-SKELTER SORT OF WAY silence  ==  [511 frames] -54.3170 [Ac=-27756.0 LM=0.0] (Act=11.2)
+Aligning File: /data/UserSubmissions/Quarantine/bendauphinee-20100423-dtj/mfc/b0272.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence THESE WERE MERELY STOUT STICKS AN INCH OR SO IN DIAMETER silence  ==  [461 frames] -51.7250 [Ac=-23845.2 LM=0.0] (Act=10.9)
+Aligning File: /data/UserSubmissions/Quarantine/bendauphinee-20100423-dtj/mfc/b0273.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence THEN IT WAS THAT A STRANGE THING HAPPENED silence  ==  [423 frames] -49.7607 [Ac=-21048.8 LM=0.0] (Act=8.2)
+Aligning File: /data/UserSubmissions/Quarantine/bendauphinee-20100423-dtj/mfc/b0274.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence FROM THE SOURCE OF LIGHT A HARSH VOICE SAID silence  ==  [448 frames] -52.8507 [Ac=-23677.1 LM=0.0] (Act=12.5)
+Aligning File: /data/UserSubmissions/Quarantine/bendauphinee-20100423-dtj/mfc/b0275.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence BUT I DID NOT ENJOY IT LONG silence  ==  [311 frames] -48.5167 [Ac=-15088.7 LM=0.0] (Act=8.0)
+Aligning File: /data/UserSubmissions/Quarantine/bendauphinee-20100423-dtj/mfc/b0276.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence WE WERE NOW GOOD FRIENDS silence  ==  [311 frames] -47.8884 [Ac=-14893.3 LM=0.0] (Act=7.0)
+Aligning File: /data/UserSubmissions/Quarantine/bendauphinee-20100423-dtj/mfc/b0277.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence TWO OF THE FOLK WERE ALREADY UP silence  ==  [336 frames] -49.7021 [Ac=-16699.9 LM=0.0] (Act=9.4)
+Aligning File: /data/UserSubmissions/Quarantine/bendauphinee-20100423-dtj/mfc/b0278.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence NOW ANIMALS DO NOT LIKE MOCKERY silence  ==  [361 frames] -51.9864 [Ac=-18767.1 LM=0.0] (Act=10.0)
+Aligning File: /data/UserSubmissions/Quarantine/bendauphinee-20100423-dtj/mfc/b0279.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence HE GAVE ONE LAST SNARL AND SLID FROM VIEW AMONG THE TREES silence  ==  [511 frames] -52.3153 [Ac=-26733.1 LM=0.0] (Act=9.1)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

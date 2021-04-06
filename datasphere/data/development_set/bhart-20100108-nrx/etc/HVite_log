@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 42 physical / 42 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100108-nrx/mfc/rp-08.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence WHEN A MAN LOOKS FOR SOMETHING BEYOND HIS REACH silence  ==  [411 frames] -53.8819 [Ac=-22145.5 LM=0.0] (Act=10.8)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100108-nrx/mfc/rp-09.mfc
+Created lattice with 19 nodes / 18 arcs from label file
+silence HIS FRIENDS SAY HE IS LOOKING FOR THE POT OF GOLD AT THE END OF THE RAINBOW silence  ==  [511 frames] -52.7878 [Ac=-26974.6 LM=0.0] (Act=11.6)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100108-nrx/mfc/rp-10.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence THROUGHOUT THE CENTURIES PEOPLE HAVE EXPLAINED THE RAINBOW IN VARIOUS WAYS silence  ==  [523 frames] -55.6838 [Ac=-29122.7 LM=0.0] (Act=10.5)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100108-nrx/mfc/rp-11.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence SOME HAVE ACCEPTED IT AS A MIRACLE WITHOUT PHYSICAL EXPLANATION silence  ==  [548 frames] -56.2563 [Ac=-30828.5 LM=0.0] (Act=12.3)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100108-nrx/mfc/rp-12.mfc
+Created lattice with 17 nodes / 16 arcs from label file
+silence TO THE HEBREWS IT WAS A TOKEN THAT THERE WOULD BE NO MORE UNIVERSAL FLOODS silence  ==  [636 frames] -52.0364 [Ac=-33095.2 LM=0.0] (Act=13.2)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100108-nrx/mfc/rp-13.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence THE GREEKS USED TO IMAGINE THAT IT WAS A SIGN silence  ==  [473 frames] -51.0585 [Ac=-24150.7 LM=0.0] (Act=11.1)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100108-nrx/mfc/rp-14.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence FROM THE GODS TO FORETELL WAR OR HEAVY RAIN silence  ==  [473 frames] -52.5158 [Ac=-24840.0 LM=0.0] (Act=10.5)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100108-nrx/mfc/rp-15.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence THE NORSEMEN CONSIDERED THE RAINBOW AS A BRIDGE silence  ==  [411 frames] -53.2757 [Ac=-21896.3 LM=0.0] (Act=11.2)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100108-nrx/mfc/rp-16.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence OVER WHICH THE GODS PASSED FROM EARTH TO THEIR HOME IN THE SKY silence  ==  [511 frames] -54.2330 [Ac=-27713.0 LM=0.0] (Act=10.3)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100108-nrx/mfc/rp-17.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence OTHERS HAVE TRIED TO EXPLAIN THE PHENOMENON PHYSICALLY silence  ==  [486 frames] -53.7466 [Ac=-26120.8 LM=0.0] (Act=9.1)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

@@ -1,0 +1,10 @@
+rb-08 the amount of available "screen real-estate". 
+rb-09 On top of that thumbing or thumb typing puts a lot of strain on the thumb, 
+rb-10 which is not as dexterous as the fingers are. 
+rb-11 A good solution would be to use speech recognition, 
+rb-12 especially since most of these devices often already have a built-in microphone. 
+rb-13 Many phones already offer the possibility of so-called voice dialing. 
+rb-14 A major stumbling block is the still limited computing power of these phones. 
+rb-15 One way to deal with this is to use only a limited number of available commands. 
+rb-16 That way the software only needs to compare 
+rb-17 the voice input with a small number of possible options. 

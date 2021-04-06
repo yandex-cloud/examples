@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 42 physical / 42 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bendauphinee-20100423-rlg/mfc/a0520.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence HE WAS FOND OF QUOTING A FRAGMENT FROM A CERTAIN POEM silence  ==  [473 frames] -48.9707 [Ac=-23163.1 LM=0.0] (Act=8.6)
+Aligning File: /data/UserSubmissions/Quarantine/bendauphinee-20100423-rlg/mfc/a0521.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence WITHOUT THEM HE COULD NOT RUN HIS EMPIRE silence  ==  [411 frames] -48.3518 [Ac=-19872.6 LM=0.0] (Act=9.0)
+Aligning File: /data/UserSubmissions/Quarantine/bendauphinee-20100423-rlg/mfc/a0522.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence FOR SUCH COUNTRIES NOTHING REMAINED BUT REORGANIZATION silence  ==  [511 frames] -50.0925 [Ac=-25597.2 LM=0.0] (Act=7.6)
+Aligning File: /data/UserSubmissions/Quarantine/bendauphinee-20100423-rlg/mfc/a0523.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence THEY COULD NOT CONTINUE THEIR METHOD OF PRODUCING SURPLUSES silence  ==  [523 frames] -48.5608 [Ac=-25397.3 LM=0.0] (Act=7.5)
+Aligning File: /data/UserSubmissions/Quarantine/bendauphinee-20100423-rlg/mfc/a0524.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence AT ONCE WOULD BE INSTITUTED A DOZEN COOPERATIVE COMMONWEALTH STATES silence  ==  [586 frames] -50.7151 [Ac=-29719.1 LM=0.0] (Act=9.7)
+Aligning File: /data/UserSubmissions/Quarantine/bendauphinee-20100423-rlg/mfc/a0525.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence THE OLIGARCHY WANTED VIOLENCE AND IT SET ITS AGENTS PROVOCATEURS TO WORK silence  ==  [548 frames] -52.8543 [Ac=-28964.1 LM=0.0] (Act=15.2)
+Aligning File: /data/UserSubmissions/Quarantine/bendauphinee-20100423-rlg/mfc/a0526.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence NOWHERE DID THE RAW EARTH APPEAR silence  ==  [336 frames] -49.4606 [Ac=-16618.8 LM=0.0] (Act=8.6)
+Aligning File: /data/UserSubmissions/Quarantine/bendauphinee-20100423-rlg/mfc/a0527.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence THE LUSH VEGETATION OF THAT SHELTERED SPOT MAKE A NATURAL SHIELD silence  ==  [436 frames] -54.9161 [Ac=-23943.4 LM=0.0] (Act=10.4)
+Aligning File: /data/UserSubmissions/Quarantine/bendauphinee-20100423-rlg/mfc/a0528.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence MEN WHO ENDURE IT CALL IT LIVING DEATH silence  ==  [323 frames] -50.5700 [Ac=-16334.1 LM=0.0] (Act=10.2)
+Aligning File: /data/UserSubmissions/Quarantine/bendauphinee-20100423-rlg/mfc/a0529.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence AS I SAY HE HAD TAPPED THE MESSAGE VERY RAPIDLY silence  ==  [511 frames] -48.4187 [Ac=-24741.9 LM=0.0] (Act=8.6)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

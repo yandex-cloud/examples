@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 41 physical / 41 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-yty/mfc/a0491.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence AND AS IN DENIAL OF GUILT THE ONE-LEGGED BOY REPLIED silence  ==  [473 frames] -53.4845 [Ac=-25298.2 LM=0.0] (Act=10.1)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-yty/mfc/a0492.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence BURNT OUT LIKE THE CRATER OF A VOLCANO silence  ==  [398 frames] -47.7281 [Ac=-18995.8 LM=0.0] (Act=9.9)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-yty/mfc/a0493.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence THE BOY O'BRIEN WAS SPECIALLY MALTREATED silence  ==  [461 frames] -49.5104 [Ac=-22824.3 LM=0.0] (Act=8.5)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-yty/mfc/a0494.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence O'BRIEN TOOK OFF HIS COAT AND BARED HIS RIGHT ARM silence  ==  [511 frames] -47.5457 [Ac=-24295.9 LM=0.0] (Act=10.6)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-yty/mfc/a0495.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence HE BORE NO GRUDGES AND HAD FEW ENEMIES silence  ==  [436 frames] -49.3432 [Ac=-21513.6 LM=0.0] (Act=9.5)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-yty/mfc/a0496.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence AND TOM KING PATIENTLY ENDURED silence  ==  [373 frames] -49.7531 [Ac=-18557.9 LM=0.0] (Act=7.8)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-yty/mfc/a0497.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence KING TOOK EVERY ADVANTAGE HE KNEW silence  ==  [398 frames] -49.2304 [Ac=-19593.7 LM=0.0] (Act=8.8)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-yty/mfc/a0498.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence THE LINES WERE NOW VERY TAUT silence  ==  [323 frames] -49.1139 [Ac=-15863.8 LM=0.0] (Act=9.5)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-yty/mfc/a0499.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence AND RIGHT THERE I SAW AND KNEW IT ALL silence  ==  [373 frames] -48.5982 [Ac=-18127.1 LM=0.0] (Act=10.5)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-yty/mfc/a0500.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence WHO THE DEVIL GAVE IT TO YOU TO BE JUDGE AND JURY silence  ==  [411 frames] -50.7499 [Ac=-20858.2 LM=0.0] (Act=10.2)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

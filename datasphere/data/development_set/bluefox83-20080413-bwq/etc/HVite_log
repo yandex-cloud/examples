@@ -1,0 +1,106 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 44 physical / 44 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bluefox83-20080413-bwq/mfc/rai0001.mfc
+Created lattice with 19 nodes / 18 arcs from label file
+silence WHEN THE SUNLIGHT STRIKES RAINDROPS IN THE AIR THEY ACT AS A PRISM AND FORM A RAINBOW silence  ==  [752 frames] -53.7199 [Ac=-40397.3 LM=0.0] (Act=12.1)
+Aligning File: /data/UserSubmissions/Quarantine/bluefox83-20080413-bwq/mfc/rai0002.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence THE RAINBOW IS A DIVISION OF LIGHT WHITE LIGHT INTO MANY BEAUTIFUL COLORS silence  ==  [634 frames] -53.8206 [Ac=-34122.2 LM=0.0] (Act=10.4)
+Aligning File: /data/UserSubmissions/Quarantine/bluefox83-20080413-bwq/mfc/rai0003.mfc
+Created lattice with 16 nodes / 15 arcs from label file
+silence THESE TAKE THE SHAPE OF A LONG ROUND ARCH WITH ITS PATH HIGH ABOVE silence  ==  [558 frames] -54.4297 [Ac=-30371.8 LM=0.0] (Act=9.4)
+Aligning File: /data/UserSubmissions/Quarantine/bluefox83-20080413-bwq/mfc/rai0004.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence AND ITS TWO ENDS APPARENTLY BEYOND THE HORIZON silence  ==  [413 frames] -53.5432 [Ac=-22113.4 LM=0.0] (Act=8.5)
+Aligning File: /data/UserSubmissions/Quarantine/bluefox83-20080413-bwq/mfc/rai0005.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence THERE IS ACCORDING TO LEGEND A BOILING POT OF GOLD AT ONE END silence  ==  [560 frames] -53.3192 [Ac=-29858.8 LM=0.0] (Act=10.1)
+Aligning File: /data/UserSubmissions/Quarantine/bluefox83-20080413-bwq/mfc/rai0006.mfc
+Created lattice with 19 nodes / 18 arcs from label file
+silence PEOPLE LOOK BUT NO ONE EVER FINDS IT WHEN A MAN LOOKS FOR SOMETHING BEYOND HIS REACH silence  ==  [623 frames] -54.3929 [Ac=-33886.8 LM=0.0] (Act=10.8)
+Aligning File: /data/UserSubmissions/Quarantine/bluefox83-20080413-bwq/mfc/rai0007.mfc
+Created lattice with 19 nodes / 18 arcs from label file
+silence HIS FRIENDS SAY HE IS LOOKING FOR THE POT OF GOLD AT THE END OF THE RAINBOW silence  ==  [472 frames] -54.5347 [Ac=-25740.4 LM=0.0] (Act=11.2)
+Aligning File: /data/UserSubmissions/Quarantine/bluefox83-20080413-bwq/mfc/rai0008.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence THROUGHOUT THE CENTURIES PEOPLE HAVE EXPLAINED THE RAINBOW IN VARIOUS WAYS silence  ==  [514 frames] -54.9621 [Ac=-28250.5 LM=0.0] (Act=8.8)
+Aligning File: /data/UserSubmissions/Quarantine/bluefox83-20080413-bwq/mfc/rai0009.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence SOME HAVE ACCEPTED IT AS A MIRACLE WITHOUT PHYSICAL EXPLANATIONS TO THE HEBREWS silence  ==  [552 frames] -55.9570 [Ac=-30888.3 LM=0.0] (Act=11.0)
+Aligning File: /data/UserSubmissions/Quarantine/bluefox83-20080413-bwq/mfc/rai0010.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence IT WAS A TOKEN THAT THERE WOULD BE NO MORE UNIVERSAL FLOODS silence  ==  [457 frames] -55.3080 [Ac=-25275.7 LM=0.0] (Act=10.7)
+Aligning File: /data/UserSubmissions/Quarantine/bluefox83-20080413-bwq/mfc/rai0011.mfc
+Created lattice with 21 nodes / 20 arcs from label file
+silence THE GREEKS USED TO IMAGINE THAT IT WAS A SIGN FROM THE GODS TO FORETELL WAR OR HEAVY RAIN silence  ==  [711 frames] -54.1800 [Ac=-38522.0 LM=0.0] (Act=10.5)
+Aligning File: /data/UserSubmissions/Quarantine/bluefox83-20080413-bwq/mfc/rai0012.mfc
+Created lattice with 23 nodes / 22 arcs from label file
+silence THE NORSEMEN CONSIDERED THE RAINBOW AS A BRIDGE OVER WHICH THE GODS PASSED FROM EARTH TO THEIR HOME IN THE SKY silence  ==  [770 frames] -54.7916 [Ac=-42189.6 LM=0.0] (Act=9.6)
+Aligning File: /data/UserSubmissions/Quarantine/bluefox83-20080413-bwq/mfc/rai0013.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence OTHERS HAVE TRIED TO EXPLAIN THE PHENOMENON PHYSICALLY silence  ==  [435 frames] -54.8394 [Ac=-23855.1 LM=0.0] (Act=9.6)
+Aligning File: /data/UserSubmissions/Quarantine/bluefox83-20080413-bwq/mfc/rai0014.mfc
+Created lattice with 18 nodes / 17 arcs from label file
+silence ARISTOTLE THOUGHT THAT THE RAINBOW WAS CAUSED BY REFLECTION OF THE SUN'S RAYS BY THE RAIN silence  ==  [685 frames] -55.6707 [Ac=-38134.4 LM=0.0] (Act=9.3)
+Aligning File: /data/UserSubmissions/Quarantine/bluefox83-20080413-bwq/mfc/rai0015.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence SINCE THEN PHYSICISTS HAVE FOUND THAT IT IS NOT REFLECTION BUT REFRACTION silence  ==  [627 frames] -55.6147 [Ac=-34870.4 LM=0.0] (Act=9.8)
+Aligning File: /data/UserSubmissions/Quarantine/bluefox83-20080413-bwq/mfc/rai0016.mfc
+Created lattice with 18 nodes / 17 arcs from label file
+silence BY THE RAINDROPS WHICH CAUSES THE RAINBOWS MANY COMPLICATED IDEAS ABOUT THE RAINBOW HAVE BEEN FORMED silence  ==  [844 frames] -53.8134 [Ac=-45418.5 LM=0.0] (Act=8.6)
+Aligning File: /data/UserSubmissions/Quarantine/bluefox83-20080413-bwq/mfc/rai0017.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence THE DIFFERENCE IN THE RAINBOW DEPENDS CONSIDERABLY UPON THE SIZE OF THE DROPS silence  ==  [547 frames] -55.5144 [Ac=-30366.4 LM=0.0] (Act=9.3)
+Aligning File: /data/UserSubmissions/Quarantine/bluefox83-20080413-bwq/mfc/rai0018.mfc
+Created lattice with 17 nodes / 16 arcs from label file
+silence AND THE WIDTH OF THE COLORED BAND INCREASES AS THE SIZE OF THE DROPS INCREASES silence  ==  [592 frames] -56.7706 [Ac=-33608.2 LM=0.0] (Act=11.0)
+Aligning File: /data/UserSubmissions/Quarantine/bluefox83-20080413-bwq/mfc/rai0019.mfc
+Created lattice with 16 nodes / 15 arcs from label file
+silence THE ACTUAL PRIMARY RAINBOW OBSERVED IS SAID TO BE THE EFFECT OF SUPER IMPOSITION silence  ==  [737 frames] -55.3041 [Ac=-40759.1 LM=0.0] (Act=9.3)
+Aligning File: /data/UserSubmissions/Quarantine/bluefox83-20080413-bwq/mfc/rai0020.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence OF A NUMBER OF BOWS IF THE RED silence  ==  [373 frames] -53.6878 [Ac=-20025.6 LM=0.0] (Act=10.4)
+Aligning File: /data/UserSubmissions/Quarantine/bluefox83-20080413-bwq/mfc/rai0021.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence OF THE SECOND BOW FALLS UPON THE GREEN OF THE FIRST THE silence  ==  [390 frames] -55.8445 [Ac=-21779.3 LM=0.0] (Act=9.1)
+Aligning File: /data/UserSubmissions/Quarantine/bluefox83-20080413-bwq/mfc/rai0022.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence RESULT IS TO GIVE A BOW WITH A ABNORMALLY WIDE YELLOW BAND silence  ==  [640 frames] -53.8483 [Ac=-34462.9 LM=0.0] (Act=10.6)
+Aligning File: /data/UserSubmissions/Quarantine/bluefox83-20080413-bwq/mfc/rai0023.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence SINCE RED AND GREEN LIGHT WHEN MIXED FORM YELLOW silence  ==  [515 frames] -52.5638 [Ac=-27070.3 LM=0.0] (Act=7.9)
+Aligning File: /data/UserSubmissions/Quarantine/bluefox83-20080413-bwq/mfc/rai0024.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence THIS IS NOT THIS IS A VERY COMMON TYPE OF BOW silence  ==  [415 frames] -53.0827 [Ac=-22029.3 LM=0.0] (Act=9.2)
+Aligning File: /data/UserSubmissions/Quarantine/bluefox83-20080413-bwq/mfc/rai0025.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence ONE SHOWING MAINLY RED AND YELLOW WITH LITTLE OR NO GREEN OR BLUE silence  ==  [575 frames] -54.4508 [Ac=-31309.2 LM=0.0] (Act=10.4)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

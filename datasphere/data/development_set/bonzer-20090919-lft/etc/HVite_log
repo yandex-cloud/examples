@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 43 physical / 43 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-lft/mfc/a0429.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence QUICK WAS THE DISAPPOINTMENT IN HIS FACE YET SMILING WAS THE ACQUIESCENCE silence  ==  [512 frames] -56.4774 [Ac=-28916.4 LM=0.0] (Act=10.2)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-lft/mfc/a0430.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence NEVERTHELESS WE FOUND OURSELVES ONCE MORE IN THE HIGH SEAT OF ABUNDANCE silence  ==  [537 frames] -54.9127 [Ac=-29488.1 LM=0.0] (Act=7.9)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-lft/mfc/a0431.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence WADA AND NAKATA WERE IN A BIT OF A FUNK silence  ==  [399 frames] -51.5427 [Ac=-20565.6 LM=0.0] (Act=11.3)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-lft/mfc/a0432.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence THE BOY AT THE WHEEL LOST HIS HEAD silence  ==  [336 frames] -48.9009 [Ac=-16430.7 LM=0.0] (Act=9.3)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-lft/mfc/a0433.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence TO HER THE BRIDGE WAS TAMBO WHICH IS THE NATIVE FOR TABOO silence  ==  [461 frames] -52.7206 [Ac=-24304.2 LM=0.0] (Act=11.5)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-lft/mfc/a0434.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence A HALF A CASE OF TOBACCO WAS WORTH THREE POUNDS silence  ==  [411 frames] -52.7941 [Ac=-21698.4 LM=0.0] (Act=8.7)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-lft/mfc/a0435.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence WHAT DO YOU MEAN BY THIS OUTRAGEOUS CONDUCT silence  ==  [349 frames] -53.0356 [Ac=-18509.4 LM=0.0] (Act=9.7)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-lft/mfc/a0436.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence BUT MARTIN SMILED A SUPERIOR SMILE silence  ==  [349 frames] -52.8996 [Ac=-18461.9 LM=0.0] (Act=8.1)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-lft/mfc/a0437.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence BY THAT ANSWER MY PROFESSIONAL MEDICAL PRESTIGE STOOD OR FELL silence  ==  [474 frames] -56.5219 [Ac=-26791.4 LM=0.0] (Act=9.7)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-lft/mfc/a0438.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence AT SEA MONDAY MARCH SIXTEENTH NINETEEN OH EIGHT silence  ==  [524 frames] -53.1582 [Ac=-27854.9 LM=0.0] (Act=8.2)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

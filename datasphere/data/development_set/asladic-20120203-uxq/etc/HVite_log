@@ -1,0 +1,63 @@
+/usr/local/bin/HVite -A -D -T 1 -l * -a -b SENT-END -m -C /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/wav_config -H /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2010-04-16_16kHz_16bit_MFCC_O_D/macros -H /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2010-04-16_16kHz_16bit_MFCC_O_D/hmmdefs -m -t 250.0 150.0 1000.0 -I /tmp/jPlDynfB_7/words.mlf -i /tmp/jPlDynfB_7/aligned.out -S /tmp/jPlDynfB_7/fileList /data/svn-mirror/SpeechCorpus/Trunk/Lexicon/VoxForge/VoxForgeDict /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2010-04-16_16kHz_16bit_MFCC_O_D/tiedlist 
+
+HTK Configuration Parameters[11]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_D_N_Z_0
+#                 SOURCEFORMAT                 WAV
+
+Read 8073 physical / 9417 logical HMMs
+Label file will be used to align each file
+Aligning File: /tmp/jPlDynfB_7/asladic-20120203-uxq/ar-23.wav
+Created lattice with 20 nodes / 19 arcs from label file
+SENT-END IN THE FOGGY MORNING SOME MEN WITH SOME BOYS AND GIRLS RODE UP AND LOOKED AT THE BARN SENT-END  ==  [636 frames] -57.8600 [Ac=-36799.0 LM=0.0] (Act=10.8)
+Aligning File: /tmp/jPlDynfB_7/asladic-20120203-uxq/ar-24.wav
+Created lattice with 22 nodes / 21 arcs from label file
+SENT-END ONE OF THEM MOVED A BOARD AND SAW A RAT QUITE DEAD HALF IN AND HALF OUT OF HIS HOLE SENT-END  ==  [649 frames] -57.7173 [Ac=-37458.5 LM=0.0] (Act=13.2)
+Aligning File: /tmp/jPlDynfB_7/asladic-20120203-uxq/rb-01.wav
+Created lattice with 14 nodes / 13 arcs from label file
+SENT-END HAND-HELD DEVICES SUCH AS PERSONAL DIGITAL ASSISTANTS AND SMARTPHONES ARE QUITE SMALL SENT-END  ==  [623 frames] -59.6075 [Ac=-37135.5 LM=0.0] (Act=11.3)
+Aligning File: /tmp/jPlDynfB_7/asladic-20120203-uxq/rb-02.wav
+Created lattice with 18 nodes / 17 arcs from label file
+SENT-END MOST OF THEM USE EITHER A TOUCH SCREEN INTERFACE OR A MINIATURIZED KEYBOARD FOR USER INPUT SENT-END  ==  [675 frames] -59.1783 [Ac=-39945.4 LM=0.0] (Act=10.5)
+Aligning File: /tmp/jPlDynfB_7/asladic-20120203-uxq/rb-03.wav
+Created lattice with 14 nodes / 13 arcs from label file
+SENT-END BUILT-IN KEYBOARDS ARE USUALLY OPERATED WITH THE THUMBS SINCE TOUCH TYPING AND SENT-END  ==  [558 frames] -60.0661 [Ac=-33516.9 LM=0.0] (Act=11.7)
+Aligning File: /tmp/jPlDynfB_7/asladic-20120203-uxq/rb-04.wav
+Created lattice with 16 nodes / 15 arcs from label file
+SENT-END HUNT AND PECK TYPING USING THE FINGERS ARE PRETTY MUCH OUT OF THE QUESTION SENT-END  ==  [506 frames] -58.2131 [Ac=-29455.8 LM=0.0] (Act=11.4)
+Aligning File: /tmp/jPlDynfB_7/asladic-20120203-uxq/rb-05.wav
+Created lattice with 15 nodes / 14 arcs from label file
+SENT-END DEVICES WITH A TOUCH SCREEN INTERFACE OFTEN USE AN ON-SCREEN KEYBOARD OR HANDWRITING SENT-END  ==  [623 frames] -60.2611 [Ac=-37542.6 LM=0.0] (Act=10.2)
+Aligning File: /tmp/jPlDynfB_7/asladic-20120203-uxq/rb-06.wav
+Created lattice with 12 nodes / 11 arcs from label file
+SENT-END RECOGNITION FOR INPUTTING TEXT THIS HAS A COUPLE OF DRAWBACKS SENT-END  ==  [545 frames] -57.6368 [Ac=-31412.1 LM=0.0] (Act=11.3)
+Aligning File: /tmp/jPlDynfB_7/asladic-20120203-uxq/rb-07.wav
+Created lattice with 13 nodes / 12 arcs from label file
+SENT-END THE KEYBOARD WHETHER IT'S AN ON-SCREEN VERSION OR NOT STRONGLY REDUCES SENT-END  ==  [558 frames] -59.5712 [Ac=-33240.8 LM=0.0] (Act=11.1)
+Aligning File: /tmp/jPlDynfB_7/asladic-20120203-uxq/rb-08.wav
+Created lattice with 8 nodes / 7 arcs from label file
+SENT-END THE AMOUNT OF AVAILABLE SCREEN REAL-ESTATE SENT-END  ==  [441 frames] -55.8935 [Ac=-24649.0 LM=0.0] (Act=9.5)
+
+HTK Configuration Parameters[11]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_D_N_Z_0
+                  SOURCEFORMAT                 WAV
+

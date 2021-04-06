@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 42 physical / 42 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/BlueB-20090727-poc/mfc/a0096.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence PERHAPS SHE HAD ALREADY MET HER FATE A LITTLE DEEPER IN THE FOREST silence  ==  [323 frames] -60.9669 [Ac=-19692.3 LM=0.0] (Act=12.4)
+Aligning File: /data/UserSubmissions/Quarantine/BlueB-20090727-poc/mfc/a0097.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence THEN YOU CAN ARRANGE YOURSELF COMFORTABLY AMONG THESE ROBES IN THE BOW silence  ==  [357 frames] -57.8771 [Ac=-20662.1 LM=0.0] (Act=10.9)
+Aligning File: /data/UserSubmissions/Quarantine/BlueB-20090727-poc/mfc/a0098.mfc
+Created lattice with 6 nodes / 5 arcs from label file
+silence SHALL I CARRY YOU silence  ==  [169 frames] -55.7996 [Ac=-9430.1 LM=0.0] (Act=9.0)
+Aligning File: /data/UserSubmissions/Quarantine/BlueB-20090727-poc/mfc/a0099.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence A MADDENING JOY POUNDED IN HIS BRAIN silence  ==  [272 frames] -56.6385 [Ac=-15405.7 LM=0.0] (Act=9.4)
+Aligning File: /data/UserSubmissions/Quarantine/BlueB-20090727-poc/mfc/a0100.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence YOU MUST SLEEP HE URGED silence  ==  [203 frames] -57.1389 [Ac=-11599.2 LM=0.0] (Act=9.7)
+Aligning File: /data/UserSubmissions/Quarantine/BlueB-20090727-poc/mfc/a0101.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence YOU YOU WOULD NOT KEEP THE TRUTH FROM ME silence  ==  [263 frames] -57.0785 [Ac=-15011.6 LM=0.0] (Act=12.0)
+Aligning File: /data/UserSubmissions/Quarantine/BlueB-20090727-poc/mfc/a0102.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence HE WILL FOLLOW US SOON silence  ==  [195 frames] -54.4885 [Ac=-10625.3 LM=0.0] (Act=8.7)
+Aligning File: /data/UserSubmissions/Quarantine/BlueB-20090727-poc/mfc/a0103.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence BUT THERE CAME NO PROMISE FROM THE BOW OF THE CANOE silence  ==  [306 frames] -55.5034 [Ac=-16984.1 LM=0.0] (Act=9.5)
+Aligning File: /data/UserSubmissions/Quarantine/BlueB-20090727-poc/mfc/a0104.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence SHE WAS SLEEPING UNDER HIS PROTECTION AS SWEETLY AS A CHILD silence  ==  [366 frames] -59.6679 [Ac=-21838.4 LM=0.0] (Act=12.0)
+Aligning File: /data/UserSubmissions/Quarantine/BlueB-20090727-poc/mfc/a0105.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence ONLY IT IS SO WONDERFUL SO ALMOST IMPOSSIBLE TO BELIEVE silence  ==  [460 frames] -56.2890 [Ac=-25892.9 LM=0.0] (Act=11.0)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

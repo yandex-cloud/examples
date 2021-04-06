@@ -1,0 +1,124 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C ../../HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 44 physical / 44 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-01.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence WHEN THE SUNLIGHT STRIKES RAINDROPS IN THE AIR silence  ==  [507 frames] -50.3986 [Ac=-25552.1 LM=0.0] (Act=6.4)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-02.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence THEY ACT AS A PRISM AND FORM A RAINBOW silence  ==  [488 frames] -49.0723 [Ac=-23947.3 LM=0.0] (Act=6.5)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-03.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence THE RAINBOW IS A DIVISION OF WHITE LIGHT INTO MANY BEAUTIFUL COLORS silence  ==  [631 frames] -54.2894 [Ac=-34256.6 LM=0.0] (Act=7.7)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-04.mfc
+Created lattice with 16 nodes / 15 arcs from label file
+silence THESE TAKE THE SHAPE OF A LONG ROUND ARCH WITH ITS PATH HIGH ABOVE silence  ==  [554 frames] -55.7822 [Ac=-30903.3 LM=0.0] (Act=7.9)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-05.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence AND ITS TWO ENDS APPARENTLY BEYOND THE HORIZON silence  ==  [550 frames] -50.9529 [Ac=-28024.1 LM=0.0] (Act=6.8)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-06.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence THERE IS ACCORDING TO LEGEND A BOILING POT OF GOLD AT ONE END silence  ==  [678 frames] -49.5253 [Ac=-33578.1 LM=0.0] (Act=6.9)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-07.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence PEOPLE LOOK BUT NO ONE EVER FINDS IT silence  ==  [522 frames] -47.1689 [Ac=-24622.2 LM=0.0] (Act=7.1)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-08.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence WHEN A MAN LOOKS FOR SOMETHING BEYOND HIS REACH silence  ==  [524 frames] -48.3710 [Ac=-25346.4 LM=0.0] (Act=5.9)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-09.mfc
+Created lattice with 19 nodes / 18 arcs from label file
+silence HIS FRIENDS SAY HE IS LOOKING FOR THE POT OF GOLD AT THE END OF THE RAINBOW silence  ==  [644 frames] -50.9906 [Ac=-32838.0 LM=0.0] (Act=7.1)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-10.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence THROUGHOUT THE CENTURIES PEOPLE HAVE EXPLAINED THE RAINBOW IN VARIOUS WAYS silence  ==  [685 frames] -50.0554 [Ac=-34288.0 LM=0.0] (Act=5.8)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-11.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence SOME HAVE ACCEPTED IT AS A MIRACLE WITHOUT PHYSICAL EXPLANATION silence  ==  [670 frames] -50.3225 [Ac=-33716.0 LM=0.0] (Act=6.2)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-12.mfc
+Created lattice with 17 nodes / 16 arcs from label file
+silence TO THE HEBREWS IT WAS A TOKEN THAT THERE WOULD BE NO MORE UNIVERSAL FLOODS silence  ==  [710 frames] -50.0123 [Ac=-35508.7 LM=0.0] (Act=7.6)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-13.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence THE GREEKS USED TO IMAGINE THAT IT WAS A SIGN silence  ==  [480 frames] -48.2367 [Ac=-23153.6 LM=0.0] (Act=7.3)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-14.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence FROM THE GODS TO FORETELL WAR OR HEAVY RAIN silence  ==  [520 frames] -49.3719 [Ac=-25673.4 LM=0.0] (Act=6.5)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-15.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence THE NORSEMEN CONSIDERED THE RAINBOW AS A BRIDGE silence  ==  [542 frames] -47.3591 [Ac=-25668.6 LM=0.0] (Act=6.6)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-16.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence OVER WHICH THE GODS PASSED FROM EARTH TO THEIR HOME IN THE SKY silence  ==  [646 frames] -50.3086 [Ac=-32499.3 LM=0.0] (Act=8.1)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-17.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence OTHERS HAVE TRIED TO EXPLAIN THE PHENOMENON PHYSICALLY silence  ==  [547 frames] -49.7856 [Ac=-27232.7 LM=0.0] (Act=6.4)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-18.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence ARISTOTLE THOUGHT THAT THE RAINBOW WAS CAUSED BY silence  ==  [492 frames] -50.3443 [Ac=-24769.4 LM=0.0] (Act=6.9)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-19.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence REFLECTION OF THE SUN'S RAYS BY THE RAIN silence  ==  [544 frames] -46.7211 [Ac=-25416.3 LM=0.0] (Act=6.1)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-20.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence SINCE THEN PHYSICISTS HAVE FOUND THAT IT IS NOT REFLECTION silence  ==  [520 frames] -54.2318 [Ac=-28200.5 LM=0.0] (Act=6.8)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-21.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence BUT REFRACTION BY THE RAINDROPS WHICH CAUSES THE RAINBOWS silence  ==  [565 frames] -51.2921 [Ac=-28980.0 LM=0.0] (Act=6.2)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-22.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence MANY COMPLICATED IDEAS ABOUT THE RAINBOW HAVE BEEN FORMED silence  ==  [591 frames] -49.8470 [Ac=-29459.6 LM=0.0] (Act=6.1)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-23.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence THE DIFFERENCE IN THE RAINBOW DEPENDS CONSIDERABLY UPON THE SIZE OF THE DROPS silence  ==  [618 frames] -52.9184 [Ac=-32703.6 LM=0.0] (Act=7.3)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-24.mfc
+Created lattice with 17 nodes / 16 arcs from label file
+silence AND THE WIDTH OF THE COLORED BAND INCREASES AS THE SIZE OF THE DROPS INCREASES silence  ==  [674 frames] -53.7884 [Ac=-36253.4 LM=0.0] (Act=7.3)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-25.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence THE ACTUAL PRIMARY RAINBOW OBSERVED IS SAID TO BE THE EFFECT OF silence  ==  [663 frames] -51.3299 [Ac=-34031.7 LM=0.0] (Act=7.7)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-26.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence SUPER-IMPOSITION OF A NUMBER OF BOWS silence  ==  [452 frames] -48.1251 [Ac=-21752.5 LM=0.0] (Act=6.3)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-27.mfc
+Created lattice with 16 nodes / 15 arcs from label file
+silence IF THE RED OF THE SECOND BOW FALLS UPON THE GREEN OF THE FIRST silence  ==  [604 frames] -50.3578 [Ac=-30416.1 LM=0.0] (Act=6.6)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-28.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence THE RESULT IS TO GIVE A BOW WITH AN ABNORMALLY WIDE YELLOW BAND silence  ==  [659 frames] -50.6556 [Ac=-33382.1 LM=0.0] (Act=7.5)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-29.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence SINCE RED AND GREEN LIGHT WHEN MIXED FORM YELLOW silence  ==  [536 frames] -49.1397 [Ac=-26338.9 LM=0.0] (Act=5.9)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-30.mfc
+Created lattice with 16 nodes / 15 arcs from label file
+silence THIS IS A VERY COMMON TYPE OF BOW ONE SHOWING MAINLY RED AND YELLOW silence  ==  [597 frames] -52.7084 [Ac=-31466.9 LM=0.0] (Act=7.2)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-a/mfc/rp-31.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence WITH LITTLE OR NO GREEN OR BLUE silence  ==  [437 frames] -49.2317 [Ac=-21514.3 LM=0.0] (Act=7.1)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

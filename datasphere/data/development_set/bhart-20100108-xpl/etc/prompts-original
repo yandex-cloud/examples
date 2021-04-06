@@ -1,0 +1,10 @@
+rb-19 That means that when a programmer wants to write speech recognition software, 
+rb-20 it is necessary to keep in mind on which hardware the software will run. 
+rb-21 A full-blown computer offers a programmer the freedom to develop software 
+rb-22 that allows the end user to issue a wider array of commands. 
+rb-23 In practice this will allow end users to issue commands such as "go to previous paragraph" 
+rb-24 "go up one paragraph" or even "I want to edit the previous paragraph". 
+rb-25 Where all these commands might lead to the same result on that powerful PC, 
+rb-26 the software on a hand-held device might only respond to one specific command. 
+rb-27 The same would be the case for other tasks such as browsing the Web, 
+rb-28 searching for documents in the file browser, and starting or closing programs. 

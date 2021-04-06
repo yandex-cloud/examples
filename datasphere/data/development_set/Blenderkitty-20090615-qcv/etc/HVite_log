@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 43 physical / 43 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/Blenderkitty-20090615-qcv/mfc/b0419.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence YOUR FATHER'S FIFTH COMMAND HE NODDED silence  ==  [361 frames] -45.9314 [Ac=-16581.2 LM=0.0] (Act=10.2)
+Aligning File: /data/UserSubmissions/Quarantine/Blenderkitty-20090615-qcv/mfc/b0420.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence ON OCCASION ON THIS TRAVERSE THE CAPE VERDE ISLANDS ARE RAISED silence  ==  [549 frames] -49.6785 [Ac=-27273.5 LM=0.0] (Act=12.1)
+Aligning File: /data/UserSubmissions/Quarantine/Blenderkitty-20090615-qcv/mfc/b0421.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence SHE IS ESSENTIALLY THE LIFE-GIVING LIFE-CONSERVING FEMALE OF THE SPECIES silence  ==  [512 frames] -50.6498 [Ac=-25932.7 LM=0.0] (Act=9.0)
+Aligning File: /data/UserSubmissions/Quarantine/Blenderkitty-20090615-qcv/mfc/b0422.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence THIS WAS WHEN THE EXPLOSION OCCURRED silence  ==  [374 frames] -46.0065 [Ac=-17206.4 LM=0.0] (Act=10.2)
+Aligning File: /data/UserSubmissions/Quarantine/Blenderkitty-20090615-qcv/mfc/b0423.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence ALSO AT REGULAR INTERVALS HE WOULD MUTTER silence  ==  [411 frames] -48.9420 [Ac=-20115.2 LM=0.0] (Act=9.4)
+Aligning File: /data/UserSubmissions/Quarantine/Blenderkitty-20090615-qcv/mfc/b0424.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence IT IS A VERY TENABLE HYPOTHESIS AND WILL BEAR LOOKING INTO silence  ==  [499 frames] -48.6516 [Ac=-24277.1 LM=0.0] (Act=10.7)
+Aligning File: /data/UserSubmissions/Quarantine/Blenderkitty-20090615-qcv/mfc/b0425.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence THERE WERE ORANGE-GREEN GOLD-GREEN AND A COPPER-GREEN silence  ==  [487 frames] -47.2109 [Ac=-22991.7 LM=0.0] (Act=9.5)
+Aligning File: /data/UserSubmissions/Quarantine/Blenderkitty-20090615-qcv/mfc/b0426.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence THE GABRIEL VOICE OF THE SAMURAI RANG OUT silence  ==  [374 frames] -46.4280 [Ac=-17364.1 LM=0.0] (Act=10.8)
+Aligning File: /data/UserSubmissions/Quarantine/Blenderkitty-20090615-qcv/mfc/b0427.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence THE SUNSETS GROW MORE BIZARRE AND SPECTACULAR OFF THIS COAST OF THE ARGENTINE silence  ==  [537 frames] -51.2186 [Ac=-27504.4 LM=0.0] (Act=12.5)
+Aligning File: /data/UserSubmissions/Quarantine/Blenderkitty-20090615-qcv/mfc/b0428.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence THE HISTORY OF OUR WESTWARD-FARING RACE IS WRITTEN IN IT silence  ==  [487 frames] -46.9472 [Ac=-22863.3 LM=0.0] (Act=15.5)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

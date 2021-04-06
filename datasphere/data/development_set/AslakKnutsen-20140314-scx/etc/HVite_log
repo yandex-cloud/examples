@@ -1,0 +1,63 @@
+/usr/local/bin/HVite -A -D -T 1 -l * -a -b SENT-END -m -C /data/svn-mirror/Main/VoxForge/lib/Corpus/Quarantine/Submission/Audio/wav_config -H /data/svn-mirror/Main/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/macros -H /data/svn-mirror/Main/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/hmmdefs -m -t 250.0 150.0 1000.0 -I /tmp/Jm0Cytgsgj/words.mlf -i /tmp/Jm0Cytgsgj/aligned.out -S /tmp/Jm0Cytgsgj/fileList /data/svn-mirror/SpeechCorpus/Trunk/Lexicon/VoxForge/VoxForgeDict /data/svn-mirror/Main/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/tiedlist 
+
+HTK Configuration Parameters[11]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_D_N_Z_0
+#                 SOURCEFORMAT                 WAV
+
+Read 8294 physical / 9429 logical HMMs
+Label file will be used to align each file
+Aligning File: /tmp/Jm0Cytgsgj/AslakKnutsen-20140314-scx/a0532.wav
+Created lattice with 7 nodes / 6 arcs from label file
+SENT-END MAY DROUGHT DESTROY YOUR CROPS SENT-END  ==  [386 frames] -56.7650 [Ac=-21911.3 LM=0.0] (Act=9.1)
+Aligning File: /tmp/Jm0Cytgsgj/AslakKnutsen-20140314-scx/a0533.wav
+Created lattice with 10 nodes / 9 arcs from label file
+SENT-END DUNHAM CAN YOUR BOY GO ALONG WITH JESSE SENT-END  ==  [473 frames] -57.5352 [Ac=-27214.1 LM=0.0] (Act=10.3)
+Aligning File: /tmp/Jm0Cytgsgj/AslakKnutsen-20140314-scx/a0534.wav
+Created lattice with 7 nodes / 6 arcs from label file
+SENT-END BUT JOHANNES COULD AND DID SENT-END  ==  [373 frames] -55.1902 [Ac=-20586.0 LM=0.0] (Act=11.2)
+Aligning File: /tmp/Jm0Cytgsgj/AslakKnutsen-20140314-scx/a0535.wav
+Created lattice with 12 nodes / 11 arcs from label file
+SENT-END A NEW PREACHER AND A NEW DOCTRINE COME TO JERUSALEM SENT-END  ==  [536 frames] -60.0680 [Ac=-32196.5 LM=0.0] (Act=14.9)
+Aligning File: /tmp/Jm0Cytgsgj/AslakKnutsen-20140314-scx/a0536.wav
+Created lattice with 10 nodes / 9 arcs from label file
+SENT-END HE WOULD DESTROY ALL THINGS THAT ARE FIXED SENT-END  ==  [423 frames] -57.1766 [Ac=-24185.7 LM=0.0] (Act=9.6)
+Aligning File: /tmp/Jm0Cytgsgj/AslakKnutsen-20140314-scx/a0537.wav
+Created lattice with 10 nodes / 9 arcs from label file
+SENT-END HE WAS AN ENTHUSIAST AND A DESERT DWELLER SENT-END  ==  [473 frames] -57.9856 [Ac=-27427.2 LM=0.0] (Act=12.2)
+Aligning File: /tmp/Jm0Cytgsgj/AslakKnutsen-20140314-scx/a0538.wav
+Created lattice with 14 nodes / 13 arcs from label file
+SENT-END WHAT PASCAL GLIMPSED WITH THE VISION OF A SEER I HAVE LIVED SENT-END  ==  [723 frames] -58.9278 [Ac=-42604.8 LM=0.0] (Act=10.2)
+Aligning File: /tmp/Jm0Cytgsgj/AslakKnutsen-20140314-scx/a0539.wav
+Created lattice with 14 nodes / 13 arcs from label file
+SENT-END I SHOULD LIKE TO ENGAGE JUST FOR ONE WHOLE LIFE IN THAT SENT-END  ==  [536 frames] -59.3434 [Ac=-31808.1 LM=0.0] (Act=11.9)
+Aligning File: /tmp/Jm0Cytgsgj/AslakKnutsen-20140314-scx/a0540.wav
+Created lattice with 12 nodes / 11 arcs from label file
+SENT-END YEA SO ARE ALL THE LESSER ANIMALS OF TODAY CLEAN SENT-END  ==  [573 frames] -58.7989 [Ac=-33691.8 LM=0.0] (Act=13.4)
+Aligning File: /tmp/Jm0Cytgsgj/AslakKnutsen-20140314-scx/a0541.wav
+Created lattice with 9 nodes / 8 arcs from label file
+SENT-END THE WARDEN WITH A QUART OF CHAMPAGNE SENT-END  ==  [423 frames] -57.7102 [Ac=-24411.4 LM=0.0] (Act=11.9)
+
+HTK Configuration Parameters[11]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_D_N_Z_0
+                  SOURCEFORMAT                 WAV
+

@@ -1,0 +1,64 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 41 physical / 41 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-qib/mfc/a0010.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+No tokens survived to final node of network at beam 250.0
+silence I'M PLAYING A SINGLE HAND IN WHAT LOOKS LIKE A LOSING GAME silence  ==  [473 frames] -51.7243 [Ac=-24465.6 LM=0.0] (Act=34.2)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-qib/mfc/a0011.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence IF I EVER NEEDED A FIGHTER IN MY LIFE I NEED ONE NOW silence  ==  [473 frames] -50.7141 [Ac=-23987.8 LM=0.0] (Act=15.4)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-qib/mfc/a0012.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence GREGSON SHOVED BACK HIS CHAIR AND ROSE TO HIS FEET silence  ==  [384 frames] -55.9354 [Ac=-21479.2 LM=0.0] (Act=11.5)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-qib/mfc/a0013.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence HE WAS A HEAD SHORTER THAN HIS COMPANION OF ALMOST DELICATE PHYSIQUE silence  ==  [523 frames] -54.4256 [Ac=-28464.6 LM=0.0] (Act=10.3)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-qib/mfc/a0014.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence NOW YOU'RE COMING DOWN TO BUSINESS PHIL HE EXCLAIMED silence  ==  [473 frames] -49.9744 [Ac=-23637.9 LM=0.0] (Act=8.5)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-qib/mfc/a0015.mfc
+Created lattice with 6 nodes / 5 arcs from label file
+silence IT'S THE AURORA BOREALIS silence  ==  [398 frames] -47.1871 [Ac=-18780.5 LM=0.0] (Act=8.5)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-qib/mfc/a0016.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence THERE'S FORT CHURCHILL A RIFLE-SHOT BEYOND THE RIDGE ASLEEP silence  ==  [523 frames] -53.2360 [Ac=-27842.4 LM=0.0] (Act=10.4)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-qib/mfc/a0017.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+No tokens survived to final node of network at beam 250.0
+No tokens survived to final node of network at beam 400.0
+silence FROM THAT MOMENT HIS FRIENDSHIP FOR BELIZE TURNS TO HATRED AND JEALOUSY silence  ==  [598 frames] -54.0694 [Ac=-32333.5 LM=0.0] (Act=38.2)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-qib/mfc/a0018.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence THERE WAS A CHANGE NOW silence  ==  [298 frames] -45.0941 [Ac=-13438.0 LM=0.0] (Act=10.0)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-qib/mfc/a0019.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence I FOLLOWED THE LINE OF THE PROPOSED RAILROAD LOOKING FOR CHANCES silence  ==  [511 frames] -51.2006 [Ac=-26163.5 LM=0.0] (Act=12.3)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

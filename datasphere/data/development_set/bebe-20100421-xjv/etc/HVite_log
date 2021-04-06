@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 41 physical / 41 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bebe-20100421-xjv/mfc/a0505.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence WE FISHED SHARKS ON NIIHAU TOGETHER silence  ==  [348 frames] -49.4630 [Ac=-17213.1 LM=0.0] (Act=7.9)
+Aligning File: /data/UserSubmissions/Quarantine/bebe-20100421-xjv/mfc/a0506.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence THE CLAUDINE WAS LEAVING NEXT MORNING FOR HONOLULU silence  ==  [436 frames] -53.5432 [Ac=-23344.9 LM=0.0] (Act=9.2)
+Aligning File: /data/UserSubmissions/Quarantine/bebe-20100421-xjv/mfc/a0508.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence SOON SHALL IT BE THRUST BACK FROM OFF PROSTRATE HUMANITY silence  ==  [523 frames] -55.9358 [Ac=-29254.4 LM=0.0] (Act=10.1)
+Aligning File: /data/UserSubmissions/Quarantine/bebe-20100421-xjv/mfc/a0509.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence YET IN ACCORDANCE WITH ERNEST'S TEST OF TRUTH IT WORKED silence  ==  [598 frames] -53.5705 [Ac=-32035.2 LM=0.0] (Act=11.5)
+Aligning File: /data/UserSubmissions/Quarantine/bebe-20100421-xjv/mfc/a0510.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence MUCH MORE ERNEST TOLD THEM OF THEMSELVES AND OF HIS DISILLUSIONMENT silence  ==  [573 frames] -52.3157 [Ac=-29976.9 LM=0.0] (Act=11.2)
+Aligning File: /data/UserSubmissions/Quarantine/bebe-20100421-xjv/mfc/a0511.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence THERE IS MORE BEHIND THIS THAN A MERE UNIVERSITY IDEAL silence  ==  [536 frames] -49.9422 [Ac=-26769.0 LM=0.0] (Act=10.9)
+Aligning File: /data/UserSubmissions/Quarantine/bebe-20100421-xjv/mfc/a0512.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence NO IT IS A PALACE WHEREIN THERE ARE MANY SERVANTS silence  ==  [523 frames] -51.6159 [Ac=-26995.1 LM=0.0] (Act=10.6)
+Aligning File: /data/UserSubmissions/Quarantine/bebe-20100421-xjv/mfc/a0513.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence WE MUST GIVE OURSELVES AND NOT OUR MONEY ALONE silence  ==  [398 frames] -53.1649 [Ac=-21159.6 LM=0.0] (Act=11.8)
+Aligning File: /data/UserSubmissions/Quarantine/bebe-20100421-xjv/mfc/a0514.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence WE ARE CONSUMED IN OUR OWN FLESH-POTS silence  ==  [398 frames] -50.7354 [Ac=-20192.7 LM=0.0] (Act=7.6)
+Aligning File: /data/UserSubmissions/Quarantine/bebe-20100421-xjv/mfc/a0515.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence BUT HERE AMONGST OURSELVES LET US SPEAK OUT silence  ==  [448 frames] -52.6958 [Ac=-23607.7 LM=0.0] (Act=11.0)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 43 physical / 43 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/atterer-20080101-bud/mfc/b0416.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence I AROSE OBEDIENTLY AND WENT DOWN THE BEACH silence  ==  [426 frames] -53.4906 [Ac=-22787.0 LM=0.0] (Act=14.8)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-20080101-bud/mfc/b0417.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence THE NEXT THING TO WATCH OUT FOR IS BED SORES silence  ==  [383 frames] -53.4457 [Ac=-20469.7 LM=0.0] (Act=11.2)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-20080101-bud/mfc/b0418.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence AT THAT MOMENT I GOT THE IMPRESSION THAT SHE WAS WILLOWY silence  ==  [468 frames] -51.8206 [Ac=-24252.1 LM=0.0] (Act=9.8)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-20080101-bud/mfc/b0419.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence YOUR FATHER'S FIFTH COMMAND HE NODDED silence  ==  [349 frames] -52.3883 [Ac=-18283.5 LM=0.0] (Act=9.6)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-20080101-bud/mfc/b0420.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence ON OCCASION ON THIS TRAVERSE THE CAPE VERDE ISLANDS ARE RAISED silence  ==  [511 frames] -54.9431 [Ac=-28075.9 LM=0.0] (Act=10.8)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-20080101-bud/mfc/b0421.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence SHE IS ESSENTIALLY THE LIFE-GIVING LIFE-CONSERVING FEMALE OF THE SPECIES silence  ==  [537 frames] -55.8458 [Ac=-29989.2 LM=0.0] (Act=9.4)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-20080101-bud/mfc/b0422.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence THIS WAS WHEN THE EXPLOSION OCCURRED silence  ==  [306 frames] -53.7861 [Ac=-16458.6 LM=0.0] (Act=9.7)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-20080101-bud/mfc/b0423.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence ALSO AT REGULAR INTERVALS HE WOULD MUTTER silence  ==  [357 frames] -55.8157 [Ac=-19926.2 LM=0.0] (Act=9.5)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-20080101-bud/mfc/b0424.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence IT IS A VERY TENABLE HYPOTHESIS AND WILL BEAR LOOKING INTO silence  ==  [477 frames] -55.0313 [Ac=-26249.9 LM=0.0] (Act=11.8)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-20080101-bud/mfc/b0425.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence THERE WERE ORANGE-GREEN GOLD-GREEN AND A COPPER-GREEN silence  ==  [434 frames] -54.2299 [Ac=-23535.8 LM=0.0] (Act=10.6)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

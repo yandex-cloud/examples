@@ -1,0 +1,55 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 42 physical / 42 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bobriva123-20100611-cuz/mfc/b0451.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence YOU USED TO JOYRIDE LIKE THE VERY DEVIL silence  ==  [552 frames] -46.6034 [Ac=-25725.1 LM=0.0] (Act=9.1)
+Aligning File: /data/UserSubmissions/Quarantine/bobriva123-20100611-cuz/mfc/b0453.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence ISAAC FORD THE AUSTERE SOLDIER OF THE LORD THE OLD HYPOCRITE silence  ==  [1036 frames] -46.2917 [Ac=-47958.2 LM=0.0] (Act=11.0)
+Aligning File: /data/UserSubmissions/Quarantine/bobriva123-20100611-cuz/mfc/b0454.mfc
+Created lattice with 5 nodes / 4 arcs from label file
+silence EIGHTEEN HE ADDED silence  ==  [598 frames] -41.9260 [Ac=-25071.8 LM=0.0] (Act=9.3)
+Aligning File: /data/UserSubmissions/Quarantine/bobriva123-20100611-cuz/mfc/b0455.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence HIS REWARD SHOULD HAVE BEEN PEACE AND REPOSE silence  ==  [861 frames] -45.5405 [Ac=-39210.4 LM=0.0] (Act=10.5)
+Aligning File: /data/UserSubmissions/Quarantine/bobriva123-20100611-cuz/mfc/b0456.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence HE WAS AN AMPHIBIAN AND A MOUNTAINEER silence  ==  [923 frames] -42.8228 [Ac=-39525.4 LM=0.0] (Act=11.7)
+Aligning File: /data/UserSubmissions/Quarantine/bobriva123-20100611-cuz/mfc/b0457.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence IT WAS SANCTIFICATION AND SALVATION silence  ==  [623 frames] -43.9858 [Ac=-27403.1 LM=0.0] (Act=7.3)
+Aligning File: /data/UserSubmissions/Quarantine/bobriva123-20100611-cuz/mfc/b0458.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence THE HISTORY OF THE EIGHTEENTH CENTURY IS WRITTEN ERNEST PROMPTED silence  ==  [823 frames] -46.9023 [Ac=-38600.6 LM=0.0] (Act=12.7)
+Aligning File: /data/UserSubmissions/Quarantine/bobriva123-20100611-cuz/mfc/b0459.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence THEY ARE NOT BIOLOGISTS NOR SOCIOLOGISTS silence  ==  [673 frames] -44.8342 [Ac=-30173.4 LM=0.0] (Act=9.7)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

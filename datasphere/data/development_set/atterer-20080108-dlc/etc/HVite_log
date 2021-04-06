@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 42 physical / 42 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/atterer-20080108-dlc/mfc/b0449.mfc
+Created lattice with 6 nodes / 5 arcs from label file
+silence ALSO SHE WOULDN'T WALK silence  ==  [272 frames] -54.1756 [Ac=-14735.8 LM=0.0] (Act=8.5)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-20080108-dlc/mfc/b0450.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence TO MY DEAREST AND ALWAYS APPRECIATED FRIEND I SUBMIT MYSELF silence  ==  [537 frames] -53.2920 [Ac=-28617.8 LM=0.0] (Act=7.8)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-20080108-dlc/mfc/b0451.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence YOU USED TO JOYRIDE LIKE THE VERY DEVIL silence  ==  [340 frames] -54.7916 [Ac=-18629.1 LM=0.0] (Act=10.1)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-20080108-dlc/mfc/b0452.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence THEY SAW EACH OTHER FOR THE FIRST TIME IN BOSTON silence  ==  [366 frames] -54.0607 [Ac=-19786.2 LM=0.0] (Act=8.7)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-20080108-dlc/mfc/b0453.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence ISAAC FORD THE AUSTERE SOLDIER OF THE LORD THE OLD HYPOCRITE silence  ==  [494 frames] -54.0550 [Ac=-26703.2 LM=0.0] (Act=7.3)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-20080108-dlc/mfc/b0454.mfc
+Created lattice with 5 nodes / 4 arcs from label file
+silence EIGHTEEN HE ADDED silence  ==  [246 frames] -50.6871 [Ac=-12469.0 LM=0.0] (Act=7.3)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-20080108-dlc/mfc/b0455.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence HIS REWARD SHOULD HAVE BEEN PEACE AND REPOSE silence  ==  [383 frames] -51.4853 [Ac=-19718.9 LM=0.0] (Act=8.2)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-20080108-dlc/mfc/b0456.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence HE WAS AN AMPHIBIAN AND A MOUNTAINEER silence  ==  [340 frames] -52.0076 [Ac=-17682.6 LM=0.0] (Act=10.0)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-20080108-dlc/mfc/b0457.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence IT WAS SANCTIFICATION AND SALVATION silence  ==  [366 frames] -50.5941 [Ac=-18517.4 LM=0.0] (Act=6.9)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-20080108-dlc/mfc/b0458.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence THE HISTORY OF THE EIGHTEENTH CENTURY IS WRITTEN ERNEST PROMPTED silence  ==  [460 frames] -56.4924 [Ac=-25986.5 LM=0.0] (Act=11.5)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

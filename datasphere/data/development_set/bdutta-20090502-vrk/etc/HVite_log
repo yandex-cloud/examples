@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 39 physical / 39 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bdutta-20090502-vrk/mfc/a0220.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence A DEAD MAN IS OF NO USE ON A PLANTATION silence  ==  [386 frames] -54.9993 [Ac=-21229.7 LM=0.0] (Act=11.3)
+Aligning File: /data/UserSubmissions/Quarantine/bdutta-20090502-vrk/mfc/a0221.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence I DON'T KNOW WHY YOU'RE HERE AT ALL silence  ==  [324 frames] -53.0483 [Ac=-17187.6 LM=0.0] (Act=10.5)
+Aligning File: /data/UserSubmissions/Quarantine/bdutta-20090502-vrk/mfc/a0222.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence WHAT PART OF THE UNITED STATES IS YOUR HOME silence  ==  [361 frames] -52.2408 [Ac=-18858.9 LM=0.0] (Act=9.9)
+Aligning File: /data/UserSubmissions/Quarantine/bdutta-20090502-vrk/mfc/a0223.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence MY I'M ALMOST HOMESICK FOR IT ALREADY silence  ==  [386 frames] -54.6574 [Ac=-21097.8 LM=0.0] (Act=9.0)
+Aligning File: /data/UserSubmissions/Quarantine/bdutta-20090502-vrk/mfc/a0224.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence SHE NODDED AND HER EYES GREW SOFT AND MOIST silence  ==  [424 frames] -53.8233 [Ac=-22821.1 LM=0.0] (Act=8.4)
+Aligning File: /data/UserSubmissions/Quarantine/bdutta-20090502-vrk/mfc/a0225.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence I WAS BROUGHT UP THE WAY MOST GIRLS IN HAWAII ARE BROUGHT UP silence  ==  [436 frames] -53.8104 [Ac=-23461.3 LM=0.0] (Act=9.5)
+Aligning File: /data/UserSubmissions/Quarantine/bdutta-20090502-vrk/mfc/a0226.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence THAT CAME BEFORE MY A B C'S silence  ==  [411 frames] -51.9418 [Ac=-21348.1 LM=0.0] (Act=7.9)
+Aligning File: /data/UserSubmissions/Quarantine/bdutta-20090502-vrk/mfc/a0227.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence IT WAS THE SAME WAY WITH OUR REVOLVERS AND RIFLES silence  ==  [411 frames] -54.4855 [Ac=-22393.5 LM=0.0] (Act=8.9)
+Aligning File: /data/UserSubmissions/Quarantine/bdutta-20090502-vrk/mfc/a0228.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence BUT IT CONTRIBUTED TO THE SMASH silence  ==  [286 frames] -53.1374 [Ac=-15197.3 LM=0.0] (Act=9.3)
+Aligning File: /data/UserSubmissions/Quarantine/bdutta-20090502-vrk/mfc/a0229.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence THE LAST ONE I KNEW WAS AN OVERSEER silence  ==  [324 frames] -55.1665 [Ac=-17874.0 LM=0.0] (Act=10.1)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 42 physical / 42 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-jxn/mfc/b0359.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence AND AS NEVER BEFORE HE WAS READY TO OBEY silence  ==  [449 frames] -51.9688 [Ac=-23334.0 LM=0.0] (Act=9.5)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-jxn/mfc/b0360.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence THIS STATE OF MIND COMES OF AN UNDUE PROMINENCE OF THE EGO silence  ==  [524 frames] -55.1278 [Ac=-28887.0 LM=0.0] (Act=11.7)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-jxn/mfc/b0361.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence THERE ARE THE CANALS OF CHINA AND THE YANGTSE RIVER silence  ==  [499 frames] -51.5565 [Ac=-25726.7 LM=0.0] (Act=9.4)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-jxn/mfc/b0362.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence WE THREATEN TO BE OF THE ONE MIND BEFORE THE VOYAGE IS COMPLETED silence  ==  [512 frames] -55.0414 [Ac=-28181.2 LM=0.0] (Act=11.2)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-jxn/mfc/b0363.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence SHE WAS BUILT PRIMARILY TO SAIL silence  ==  [336 frames] -52.8370 [Ac=-17753.2 LM=0.0] (Act=9.5)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-jxn/mfc/b0364.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence IN THE BOHEMIAN CLUB OF SAN FRANCISCO THERE ARE SOME CRACK SAILORS silence  ==  [474 frames] -57.1811 [Ac=-27103.9 LM=0.0] (Act=12.3)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-jxn/mfc/b0365.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence MY AGE IN YEARS IS TWENTY TWO silence  ==  [386 frames] -53.7452 [Ac=-20745.7 LM=0.0] (Act=9.6)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-jxn/mfc/b0366.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence I FORGOT HOW EASILY I HAD TAUGHT MYSELF FROM THE PRINTED PAGE silence  ==  [449 frames] -58.2539 [Ac=-26156.0 LM=0.0] (Act=11.7)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-jxn/mfc/b0367.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence ANY AVERAGE YOUNG FELLOW CAN TEACH HIMSELF IN A WEEK silence  ==  [436 frames] -53.7166 [Ac=-23420.4 LM=0.0] (Act=10.3)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-jxn/mfc/b0368.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence PLEASE DO NOT THINK THAT I ALREADY KNOW IT ALL silence  ==  [336 frames] -55.9670 [Ac=-18804.9 LM=0.0] (Act=10.3)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+
