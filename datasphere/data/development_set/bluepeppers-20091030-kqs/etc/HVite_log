@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 41 physical / 41 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bluepeppers-20091030-kqs/mfc/a0528.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence MEN WHO ENDURE IT CALL IT LIVING DEATH silence  ==  [662 frames] -48.1031 [Ac=-31844.2 LM=0.0] (Act=13.4)
+Aligning File: /data/UserSubmissions/Quarantine/bluepeppers-20091030-kqs/mfc/a0529.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence AS I SAY HE HAD TAPPED THE MESSAGE VERY RAPIDLY silence  ==  [574 frames] -52.2059 [Ac=-29966.2 LM=0.0] (Act=13.5)
+Aligning File: /data/UserSubmissions/Quarantine/bluepeppers-20091030-kqs/mfc/a0530.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence ASK HIM I LAUGHED THEN TURNED TO PASQUINI silence  ==  [512 frames] -51.2696 [Ac=-26250.0 LM=0.0] (Act=11.4)
+Aligning File: /data/UserSubmissions/Quarantine/bluepeppers-20091030-kqs/mfc/a0531.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence IN WHAT BUCOLIC SCHOOL OF FENCE HE HAD BEEN TAUGHT WAS BEYOND IMAGINING silence  ==  [687 frames] -52.9035 [Ac=-36344.7 LM=0.0] (Act=10.9)
+Aligning File: /data/UserSubmissions/Quarantine/bluepeppers-20091030-kqs/mfc/a0532.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence MAY DROUGHT DESTROY YOUR CROPS silence  ==  [411 frames] -52.5423 [Ac=-21594.9 LM=0.0] (Act=11.9)
+Aligning File: /data/UserSubmissions/Quarantine/bluepeppers-20091030-kqs/mfc/a0533.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence DUNHAM CAN YOUR BOY GO ALONG WITH JESSE silence  ==  [499 frames] -49.1066 [Ac=-24504.2 LM=0.0] (Act=10.8)
+Aligning File: /data/UserSubmissions/Quarantine/bluepeppers-20091030-kqs/mfc/a0534.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence BUT JOHANNES COULD AND DID silence  ==  [562 frames] -43.6731 [Ac=-24544.3 LM=0.0] (Act=11.1)
+Aligning File: /data/UserSubmissions/Quarantine/bluepeppers-20091030-kqs/mfc/a0535.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence A NEW PREACHER AND A NEW DOCTRINE COME TO JERUSALEM silence  ==  [599 frames] -51.0494 [Ac=-30578.6 LM=0.0] (Act=8.4)
+Aligning File: /data/UserSubmissions/Quarantine/bluepeppers-20091030-kqs/mfc/a0536.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence HE WOULD DESTROY ALL THINGS THAT ARE FIXED silence  ==  [487 frames] -55.2396 [Ac=-26901.7 LM=0.0] (Act=11.1)
+Aligning File: /data/UserSubmissions/Quarantine/bluepeppers-20091030-kqs/mfc/a0537.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence HE WAS AN ENTHUSIAST AND A DESERT DWELLER silence  ==  [499 frames] -54.5236 [Ac=-27207.3 LM=0.0] (Act=10.9)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

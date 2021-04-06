@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 42 physical / 42 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-rxe/mfc/b0335.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence WHOEVER LIVED ON THE RANCH DID THAT silence  ==  [249 frames] -57.3305 [Ac=-14275.3 LM=0.0] (Act=9.1)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-rxe/mfc/b0336.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence HOW OLD ARE YOU MOTHER silence  ==  [211 frames] -51.5504 [Ac=-10877.1 LM=0.0] (Act=8.1)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-rxe/mfc/b0337.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence HERE HE GOT A FRESH THRILL silence  ==  [236 frames] -56.2849 [Ac=-13283.2 LM=0.0] (Act=10.9)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-rxe/mfc/b0338.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence IT WAS UNOBTRUSIVE YET IT WAS THERE silence  ==  [286 frames] -57.1732 [Ac=-16351.5 LM=0.0] (Act=9.8)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-rxe/mfc/b0339.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence WELL I'LL BE PLUMB GOSH DARNED silence  ==  [324 frames] -56.5031 [Ac=-18307.0 LM=0.0] (Act=7.6)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-rxe/mfc/b0340.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence THESE QUICK LITTLE JOYS OF HERS WERE SOURCES OF JOY TO HIM silence  ==  [374 frames] -59.3931 [Ac=-22213.0 LM=0.0] (Act=11.2)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-rxe/mfc/b0341.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence I PLAY THAT CHOICE WIDE OPEN TO WIN silence  ==  [286 frames] -56.6992 [Ac=-16216.0 LM=0.0] (Act=8.3)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-rxe/mfc/b0342.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence EACH IMPROVEMENT MAKES THE VALUE OF EVERYTHING ELSE PUMP UP silence  ==  [374 frames] -58.0021 [Ac=-21692.8 LM=0.0] (Act=9.4)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-rxe/mfc/b0343.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence BUT HOW ARE YOU GOING TO DO IT silence  ==  [211 frames] -54.8404 [Ac=-11571.3 LM=0.0] (Act=8.0)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-rxe/mfc/b0344.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence LOTS OF MEN TAKE WOMEN BUGGY RIDING silence  ==  [299 frames] -54.7608 [Ac=-16373.5 LM=0.0] (Act=9.0)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

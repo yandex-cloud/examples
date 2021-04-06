@@ -1,0 +1,63 @@
+/usr/local/bin/HVite -A -D -T 1 -l * -a -b SENT-END -m -C /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/wav_config -H /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/macros -H /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/hmmdefs -m -t 250.0 150.0 1000.0 -I /tmp/Rxan1Zocuy/words.mlf -i /tmp/Rxan1Zocuy/aligned.out -S /tmp/Rxan1Zocuy/fileList /data/svn-mirror/SpeechCorpus/Trunk/Lexicon/VoxForge/VoxForgeDict /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/tiedlist 
+
+HTK Configuration Parameters[11]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_D_N_Z_0
+#                 SOURCEFORMAT                 WAV
+
+Read 8294 physical / 9429 logical HMMs
+Label file will be used to align each file
+Aligning File: /tmp/Rxan1Zocuy/Bahoke-20130721-qpx/a0421.wav
+Created lattice with 7 nodes / 6 arcs from label file
+SENT-END BY GOLLY THE BOY WINS SENT-END  ==  [323 frames] -58.1712 [Ac=-18789.3 LM=0.0] (Act=8.4)
+Aligning File: /tmp/Rxan1Zocuy/Bahoke-20130721-qpx/a0422.wav
+Created lattice with 15 nodes / 14 arcs from label file
+SENT-END HALFWAY AROUND THE TRACK ONE DONKEY GOT INTO AN ARGUMENT WITH ITS RIDER SENT-END  ==  [548 frames] -61.5016 [Ac=-33702.9 LM=0.0] (Act=16.8)
+Aligning File: /tmp/Rxan1Zocuy/Bahoke-20130721-qpx/a0423.wav
+Created lattice with 11 nodes / 10 arcs from label file
+SENT-END MCVEIGH WHEN HE RETURNS FROM A TRIP TO HONOLULU SENT-END  ==  [386 frames] -59.2950 [Ac=-22887.9 LM=0.0] (Act=15.5)
+Aligning File: /tmp/Rxan1Zocuy/Bahoke-20130721-qpx/a0424.wav
+Created lattice with 13 nodes / 12 arcs from label file
+SENT-END OBVIOUSLY IT WAS A DISEASE THAT COULD BE CONTRACTED BY CONTACT SENT-END  ==  [436 frames] -62.1805 [Ac=-27110.7 LM=0.0] (Act=18.2)
+Aligning File: /tmp/Rxan1Zocuy/Bahoke-20130721-qpx/a0425.wav
+Created lattice with 10 nodes / 9 arcs from label file
+SENT-END OTHERWISE NO RESTRICTION IS PUT UPON THEIR SEAFARING SENT-END  ==  [448 frames] -60.1739 [Ac=-26957.9 LM=0.0] (Act=13.5)
+Aligning File: /tmp/Rxan1Zocuy/Bahoke-20130721-qpx/a0426.wav
+Created lattice with 12 nodes / 11 arcs from label file
+SENT-END THEY DO NOT KNOW THE LENGTH OF TIME OF INCUBATION SENT-END  ==  [373 frames] -58.8356 [Ac=-21945.7 LM=0.0] (Act=14.1)
+Aligning File: /tmp/Rxan1Zocuy/Bahoke-20130721-qpx/a0427.wav
+Created lattice with 9 nodes / 8 arcs from label file
+SENT-END ENTERS NOW THE PSYCHOLOGY OF THE SITUATION SENT-END  ==  [361 frames] -60.6008 [Ac=-21876.9 LM=0.0] (Act=11.7)
+Aligning File: /tmp/Rxan1Zocuy/Bahoke-20130721-qpx/a0428.wav
+Created lattice with 8 nodes / 7 arcs from label file
+SENT-END IT WAS NOT EXACTLY A DEPORTATION SENT-END  ==  [311 frames] -57.6484 [Ac=-17928.6 LM=0.0] (Act=11.8)
+Aligning File: /tmp/Rxan1Zocuy/Bahoke-20130721-qpx/a0429.wav
+Created lattice with 14 nodes / 13 arcs from label file
+SENT-END QUICK WAS THE DISAPPOINTMENT IN HIS FACE YET SMILING WAS THE ACQUIESCENCE SENT-END  ==  [536 frames] -60.4873 [Ac=-32421.2 LM=0.0] (Act=16.3)
+Aligning File: /tmp/Rxan1Zocuy/Bahoke-20130721-qpx/a0430.wav
+Created lattice with 14 nodes / 13 arcs from label file
+SENT-END NEVERTHELESS WE FOUND OURSELVES ONCE MORE IN THE HIGH SEAT OF ABUNDANCE SENT-END  ==  [473 frames] -62.1862 [Ac=-29414.1 LM=0.0] (Act=13.8)
+
+HTK Configuration Parameters[11]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_D_N_Z_0
+                  SOURCEFORMAT                 WAV
+

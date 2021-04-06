@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 41 physical / 41 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-djk/mfc/a0002.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence NOT AT THIS PARTICULAR CASE TOM APOLOGIZED WHITTEMORE silence  ==  [548 frames] -52.8262 [Ac=-28948.8 LM=0.0] (Act=9.8)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-djk/mfc/a0003.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence FOR THE TWENTIETH TIME THAT EVENING THE TWO MEN SHOOK HANDS silence  ==  [611 frames] -46.8307 [Ac=-28613.6 LM=0.0] (Act=9.9)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-djk/mfc/a0004.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence LORD BUT I'M GLAD TO SEE YOU AGAIN PHIL silence  ==  [448 frames] -46.8513 [Ac=-20989.4 LM=0.0] (Act=8.8)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-djk/mfc/a0005.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence WILL WE EVER FORGET IT silence  ==  [348 frames] -45.0803 [Ac=-15687.9 LM=0.0] (Act=8.7)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-djk/mfc/a0006.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence GOD BLESS I HOPE I'LL GO ON SEEING THEM FOREVER silence  ==  [473 frames] -50.2523 [Ac=-23769.3 LM=0.0] (Act=11.1)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-djk/mfc/a0007.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence AND YOU ALWAYS WANT TO SEE IT IN THE SUPERLATIVE DEGREE silence  ==  [523 frames] -50.2191 [Ac=-26264.6 LM=0.0] (Act=8.3)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-djk/mfc/a0008.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence GAD YOUR LETTER CAME JUST IN TIME silence  ==  [498 frames] -45.3741 [Ac=-22596.3 LM=0.0] (Act=8.0)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-djk/mfc/a0009.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence HE TURNED SHARPLY AND FACED GREGSON ACROSS THE TABLE silence  ==  [573 frames] -52.4011 [Ac=-30025.8 LM=0.0] (Act=10.3)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-djk/mfc/a0010.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence I'M PLAYING A SINGLE HAND IN WHAT LOOKS LIKE A LOSING GAME silence  ==  [498 frames] -50.4698 [Ac=-25134.0 LM=0.0] (Act=10.0)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-djk/mfc/a0011.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence IF I EVER NEEDED A FIGHTER IN MY LIFE I NEED ONE NOW silence  ==  [461 frames] -54.3440 [Ac=-25052.6 LM=0.0] (Act=15.8)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

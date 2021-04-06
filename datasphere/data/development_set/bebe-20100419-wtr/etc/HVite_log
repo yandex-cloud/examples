@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 38 physical / 38 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bebe-20100419-wtr/mfc/b0155.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence HIS FRESHLY CAUGHT FURS HE FLUNG TO THE FLOOR silence  ==  [386 frames] -54.0641 [Ac=-20868.7 LM=0.0] (Act=10.0)
+Aligning File: /data/UserSubmissions/Quarantine/bebe-20100419-wtr/mfc/b0156.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence FOR THAT REASON LE BEAU HAD CHOSEN HIM TO FIGHT THE BIG FIGHT silence  ==  [511 frames] -53.4724 [Ac=-27324.4 LM=0.0] (Act=9.5)
+Aligning File: /data/UserSubmissions/Quarantine/bebe-20100419-wtr/mfc/b0157.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence IN THE CRIB THE BABY SAT UP AND BEGAN TO PRATTLE silence  ==  [398 frames] -49.6139 [Ac=-19746.3 LM=0.0] (Act=9.2)
+Aligning File: /data/UserSubmissions/Quarantine/bebe-20100419-wtr/mfc/b0158.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence SHE OBEYED SHRINKING BACK WITH THE BABY IN HER ARMS silence  ==  [411 frames] -51.1400 [Ac=-21018.6 LM=0.0] (Act=9.5)
+Aligning File: /data/UserSubmissions/Quarantine/bebe-20100419-wtr/mfc/b0159.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence HIS TEETH SHUT WITH A LAST CLICK silence  ==  [423 frames] -51.1569 [Ac=-21639.4 LM=0.0] (Act=10.2)
+Aligning File: /data/UserSubmissions/Quarantine/bebe-20100419-wtr/mfc/b0160.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence IT WAS OVER WHEN HE MADE HIS WAY THROUGH THE RING OF SPECTATORS silence  ==  [486 frames] -53.3256 [Ac=-25916.2 LM=0.0] (Act=10.1)
+Aligning File: /data/UserSubmissions/Quarantine/bebe-20100419-wtr/mfc/b0161.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence IN A FLASH HE WAS ON HIS FEET FACING HIM silence  ==  [398 frames] -48.4353 [Ac=-19277.3 LM=0.0] (Act=9.3)
+Aligning File: /data/UserSubmissions/Quarantine/bebe-20100419-wtr/mfc/b0162.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence HE THOUGHT HE SAW A SHUDDER PASS THROUGH THE FACTOR'S SHOULDERS silence  ==  [473 frames] -55.0334 [Ac=-26030.8 LM=0.0] (Act=7.6)
+Aligning File: /data/UserSubmissions/Quarantine/bebe-20100419-wtr/mfc/b0163.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence THE MOON HAD ALREADY BEGUN ITS WESTWARD DECLINE silence  ==  [373 frames] -52.1750 [Ac=-19461.3 LM=0.0] (Act=9.5)
+Aligning File: /data/UserSubmissions/Quarantine/bebe-20100419-wtr/mfc/b0164.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence THEY LAUGHED LIKE TWO HAPPY CHILDREN silence  ==  [323 frames] -48.7663 [Ac=-15751.5 LM=0.0] (Act=7.5)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

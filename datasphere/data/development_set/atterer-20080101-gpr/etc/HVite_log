@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 41 physical / 41 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/atterer-20080101-gpr/mfc/b0395.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence I WAS BENEATH THE WATER SUFFOCATING AND DROWNING silence  ==  [451 frames] -51.9921 [Ac=-23448.4 LM=0.0] (Act=9.2)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-20080101-gpr/mfc/b0396.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence THE PAIN FROM MY HURT KNEE WAS AGONIZING silence  ==  [426 frames] -51.5288 [Ac=-21951.3 LM=0.0] (Act=8.2)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-20080101-gpr/mfc/b0397.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence THE HUNTERS WERE STILL ARGUING AND ROARING LIKE SOME SEMI-HUMAN AMPHIBIOUS BREED silence  ==  [597 frames] -54.4437 [Ac=-32502.9 LM=0.0] (Act=9.5)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-20080101-gpr/mfc/b0398.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence I HAVE BEEN ROBBED SIR I AMENDED silence  ==  [306 frames] -52.0402 [Ac=-15924.3 LM=0.0] (Act=8.5)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-20080101-gpr/mfc/b0399.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence YOU WERE LOOKING SQUEAMISH THIS AFTERNOON HE BEGAN silence  ==  [391 frames] -54.1303 [Ac=-21165.0 LM=0.0] (Act=8.4)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-20080101-gpr/mfc/b0400.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence HOW COULD I ANSWER THE QUESTION ON THE SPUR OF THE MOMENT silence  ==  [451 frames] -52.6580 [Ac=-23748.7 LM=0.0] (Act=10.3)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-20080101-gpr/mfc/b0401.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence I LEARNED IT MYSELF IN ENGLISH SHIPS silence  ==  [357 frames] -52.3810 [Ac=-18700.0 LM=0.0] (Act=9.1)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-20080101-gpr/mfc/b0402.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence AN ALTRUISTIC ACT IS AN ACT PERFORMED FOR THE WELFARE OF OTHERS silence  ==  [503 frames] -56.0427 [Ac=-28189.5 LM=0.0] (Act=11.6)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-20080101-gpr/mfc/b0403.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence KNOWING HIM I REVIEW THE OLD SCANDINAVIAN MYTHS WITH CLEARER UNDERSTANDING silence  ==  [562 frames] -54.5654 [Ac=-30665.8 LM=0.0] (Act=10.0)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-20080101-gpr/mfc/b0404.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence YES AND NO SIR WAS THE SLOW REPLY silence  ==  [349 frames] -52.3310 [Ac=-18263.5 LM=0.0] (Act=8.3)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

@@ -1,0 +1,151 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C ../../HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 44 physical / 44 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-01.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence IT'S A YANKEE JOAN CRIED silence  ==  [381 frames] -49.3285 [Ac=-18794.1 LM=0.0] (Act=7.0)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-02.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence HE WAS THE LEADER AND TUDOR WAS HIS LIEUTENANT silence  ==  [520 frames] -49.6826 [Ac=-25835.0 LM=0.0] (Act=7.4)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-03.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence THEY LIKEWISE ARE DISINCLINED TO BEING EATEN silence  ==  [426 frames] -52.7740 [Ac=-22481.7 LM=0.0] (Act=6.5)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-04.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence BUT TO CULTURE THE REVOLUTION THUS FAR HAD EXHAUSTED THE JUNTA silence  ==  [608 frames] -52.0154 [Ac=-31625.4 LM=0.0] (Act=7.7)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-05.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence THE PRESIDENT OF THE UNITED STATES WAS HIS FRIEND silence  ==  [456 frames] -50.9597 [Ac=-23237.6 LM=0.0] (Act=7.1)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-06.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence YOUR FACE WAS THE PERSONIFICATION OF DUPLICITY silence  ==  [482 frames] -50.7216 [Ac=-24447.8 LM=0.0] (Act=5.9)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-07.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence SHORTY TURNED TO THEIR EMPLOYERS silence  ==  [392 frames] -48.8752 [Ac=-19159.1 LM=0.0] (Act=5.9)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-08.mfc
+Created lattice with 5 nodes / 4 arcs from label file
+silence YOU WERE ENGAGED silence  ==  [289 frames] -46.0404 [Ac=-13305.7 LM=0.0] (Act=6.5)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-09.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence I SAW IT ALL MYSELF AND IT WAS SPLENDID silence  ==  [469 frames] -48.4622 [Ac=-22728.8 LM=0.0] (Act=6.7)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-10.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence NOW RUN ALONG AND TELL THEM TO HURRY silence  ==  [415 frames] -49.9629 [Ac=-20734.6 LM=0.0] (Act=7.4)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-11.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence WHAT'S THAT GRUB-THIEF GOT TO DO WITH IT silence  ==  [420 frames] -50.9781 [Ac=-21410.8 LM=0.0] (Act=6.9)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-12.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence IT WAS A SUPERB PICTURE silence  ==  [316 frames] -50.2452 [Ac=-15877.5 LM=0.0] (Act=7.1)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-13.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence SO SHE SAID THE IRATE SKIPPER DASHED ON silence  ==  [400 frames] -53.5352 [Ac=-21414.1 LM=0.0] (Act=6.8)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-14.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence AND WATCH OUT FOR WET FEET WAS HIS PARTING ADVICE silence  ==  [497 frames] -51.0218 [Ac=-25357.8 LM=0.0] (Act=6.3)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-15.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence RAOUL YELLED IN ORDER TO MAKE HIMSELF HEARD silence  ==  [404 frames] -51.8000 [Ac=-20927.2 LM=0.0] (Act=7.3)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-16.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence OOLONG WAS TWO HUNDRED AND FIFTY MILES FROM THE NEAREST LAND silence  ==  [561 frames] -50.8740 [Ac=-28540.3 LM=0.0] (Act=7.1)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-17.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence THEY JUST LAY OFF IN THE BUSH AND PLUGGED AWAY silence  ==  [471 frames] -50.6379 [Ac=-23850.4 LM=0.0] (Act=6.6)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-18.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence THE VERY THOUGHT OF THE EFFORT TO SWIM OVER WAS NAUSEATING silence  ==  [518 frames] -54.0954 [Ac=-28021.4 LM=0.0] (Act=7.7)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-19.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence AND THERE WAS A DOG THAT BARKED silence  ==  [408 frames] -48.7750 [Ac=-19900.2 LM=0.0] (Act=6.7)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-20.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence THERE ARE FOUR ALL LOW MCCOY ANSWERED silence  ==  [505 frames] -50.8890 [Ac=-25698.9 LM=0.0] (Act=7.0)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-21.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence THE WOMEN THEY CARRIED AWAY WITH THEM TO THE BIG VALLEY silence  ==  [494 frames] -50.3941 [Ac=-24894.7 LM=0.0] (Act=8.2)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-22.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence THE JAPANESE UNDERSTOOD AS WE COULD NEVER SCHOOL OURSELVES OR HOPE TO UNDERSTAND silence  ==  [666 frames] -53.3531 [Ac=-35533.2 LM=0.0] (Act=6.9)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-23.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence THEY HAD BEEN ON THE SAME LAY AS OURSELVES silence  ==  [447 frames] -48.1593 [Ac=-21527.2 LM=0.0] (Act=6.8)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-24.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence YOU ARE POSITIVELY SOULLESS HE SAID SAVAGELY silence  ==  [469 frames] -52.9985 [Ac=-24856.3 LM=0.0] (Act=6.6)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-25.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence HARRISON IS STILL MY CHAUFFEUR silence  ==  [378 frames] -47.4973 [Ac=-17954.0 LM=0.0] (Act=5.6)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-26.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence THE BOY GREW AND PROSPERED silence  ==  [364 frames] -49.4701 [Ac=-18007.1 LM=0.0] (Act=6.8)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-27.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence HE WANTED TO GIVE THE FINISH TO THIS FOE ALREADY SO FAR GONE silence  ==  [548 frames] -52.0361 [Ac=-28515.8 LM=0.0] (Act=6.8)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-28.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence EXCITING TIMES ARE THE LOT OF THE FISH PATROL silence  ==  [454 frames] -53.0582 [Ac=-24088.4 LM=0.0] (Act=7.4)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-29.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence I KNOW THEY ARE MY OYSTERS silence  ==  [347 frames] -47.8908 [Ac=-16618.1 LM=0.0] (Act=6.6)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-30.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence BY THIS TIME CHARLEY WAS AS ENRAGED AS THE GREEK silence  ==  [415 frames] -53.5561 [Ac=-22225.8 LM=0.0] (Act=6.8)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-31.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence THEY MUST HAVE BEEN SWEPT AWAY BY THE CHAOTIC CURRENTS silence  ==  [465 frames] -53.2129 [Ac=-24744.0 LM=0.0] (Act=6.7)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-32.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence IT RESEMBLED TEA LESS THAN LAGER BEER RESEMBLES CHAMPAGNE silence  ==  [561 frames] -52.3883 [Ac=-29389.8 LM=0.0] (Act=6.2)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-33.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence THE VERY OPPOSITE IS TRUE THEY ARE DISCOURAGED VAGABONDS silence  ==  [502 frames] -53.4836 [Ac=-26848.8 LM=0.0] (Act=7.5)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-34.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence AT THE SAME TIME SPEARS AND ARROWS BEGAN TO FALL AMONG THE INVADERS silence  ==  [621 frames] -52.0617 [Ac=-32330.3 LM=0.0] (Act=6.9)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-35.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence THEN AGAIN TUDOR HAD SUCH AN IRRITATING WAY ABOUT HIM silence  ==  [535 frames] -51.3609 [Ac=-27478.1 LM=0.0] (Act=6.8)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-36.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence OUTWARDLY HE MAINTAINED A CALM AND SMILING ASPECT silence  ==  [467 frames] -53.3182 [Ac=-24899.6 LM=0.0] (Act=6.9)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-37.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence TUDOR SURVEYED HIM WITH WITHERING DISGUST silence  ==  [450 frames] -50.6646 [Ac=-22799.1 LM=0.0] (Act=6.5)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-38.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence YOU FIRED ME OUT OF YOUR HOUSE IN SHORT silence  ==  [441 frames] -49.5832 [Ac=-21866.2 LM=0.0] (Act=6.6)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-39.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence HER MOUTH OPENED BUT INSTEAD OF SPEAKING SHE DREW A LONG SIGH silence  ==  [559 frames] -51.2971 [Ac=-28675.1 LM=0.0] (Act=7.1)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-01202007-b/mfc/vf21-40.mfc
+Created lattice with 6 nodes / 5 arcs from label file
+silence IT'S WORTH EIGHT DOLLARS silence  ==  [375 frames] -48.8903 [Ac=-18333.9 LM=0.0] (Act=5.6)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

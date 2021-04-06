@@ -1,0 +1,60 @@
+/usr/local/bin/HVite -A -D -T 1 -l * -a -b SENT-END -m -C /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/wav_config -H /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/macros -H /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/hmmdefs -m -t 250.0 150.0 1000.0 -I /tmp/oMgsbElu3M/words.mlf -i /tmp/oMgsbElu3M/aligned.out -S /tmp/oMgsbElu3M/fileList /data/svn-mirror/SpeechCorpus/Trunk/Lexicon/VoxForge/VoxForgeDict /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/tiedlist 
+
+HTK Configuration Parameters[11]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_D_N_Z_0
+#                 SOURCEFORMAT                 WAV
+
+Read 8294 physical / 9429 logical HMMs
+Label file will be used to align each file
+Aligning File: /tmp/oMgsbElu3M/armond-20121229-wca/b0225.wav
+Created lattice with 20 nodes / 19 arcs from label file
+SENT-END THE PRESIDENT OF THE UNITED STATES WAS HIS FRIEND THE PRESIDENT OF THE UNITED STATES WAS HIS FRIEND SENT-END  ==  [1023 frames] -57.8229 [Ac=-59152.9 LM=0.0] (Act=19.0)
+Aligning File: /tmp/oMgsbElu3M/armond-20121229-wca/b0227.wav
+Created lattice with 17 nodes / 16 arcs from label file
+SENT-END SHORTY TURNED TO THEIR EMPLOYEES SHORTY TURNED TO THEIR EMPLOYEES SHORTY TURNED TO THEIR EMPLOYEES SENT-END  ==  [1111 frames] -57.7838 [Ac=-64197.8 LM=0.0] (Act=11.3)
+Aligning File: /tmp/oMgsbElu3M/armond-20121229-wca/b0228.wav
+Created lattice with 11 nodes / 10 arcs from label file
+SENT-END YOU WERE ENGAGED YOU WERE ENGAGED YOU WERE ENGAGED SENT-END  ==  [861 frames] -58.5585 [Ac=-50418.9 LM=0.0] (Act=13.1)
+Aligning File: /tmp/oMgsbElu3M/armond-20121229-wca/b0229.wav
+Created lattice with 29 nodes / 28 arcs from label file
+SENT-END I SAW IT ALL MYSELF AND IT WAS SPLENDID I SAW IT ALL MYSELF AND IT WAS SPLENDID I SAW IT ALL MYSELF AND IT WAS SPLENDID SENT-END  ==  [1223 frames] -58.4897 [Ac=-71533.0 LM=0.0] (Act=14.0)
+Aligning File: /tmp/oMgsbElu3M/armond-20121229-wca/b0230.wav
+Created lattice with 26 nodes / 25 arcs from label file
+SENT-END NOW RUN ALONG AND TELL THEM TO HURRY NOW RUN ALONG AND TELL THEM TO HURRY NOW RUN ALONG AND TELL THEM TO HURRY SENT-END  ==  [1110 frames] -58.6275 [Ac=-65076.5 LM=0.0] (Act=17.7)
+Aligning File: /tmp/oMgsbElu3M/armond-20121229-wca/b0231.wav
+Created lattice with 26 nodes / 25 arcs from label file
+SENT-END WHAT'S THAT GRUB-THIEF GOT TO DO WITH IT WHAT'S THAT GRUB-THIEF GOT TO DO WITH IT WHAT'S THAT GRUB-THIEF GOT TO DO WITH IT SENT-END  ==  [1423 frames] -59.0742 [Ac=-84062.6 LM=0.0] (Act=17.0)
+Aligning File: /tmp/oMgsbElu3M/armond-20121229-wca/b0232.wav
+Created lattice with 17 nodes / 16 arcs from label file
+SENT-END IT WAS A SUPERB PICTURE IT WAS A SUPERB PICTURE IT WAS A SUPERB PICTURE SENT-END  ==  [1086 frames] -56.5712 [Ac=-61436.3 LM=0.0] (Act=9.9)
+Aligning File: /tmp/oMgsbElu3M/armond-20121229-wca/b0233.wav
+Created lattice with 26 nodes / 25 arcs from label file
+SENT-END SO SHE SAID THE IRATE SKIPPER DASHED ON SO SHE SAID THE IRATE SKIPPER DASHED ON SO SHE SAID THE IRATE SKIPPER DASHED ON SENT-END  ==  [1673 frames] -59.7804 [Ac=-100012.6 LM=0.0] (Act=17.0)
+Aligning File: /tmp/oMgsbElu3M/armond-20121229-wca/b0234.wav
+Created lattice with 32 nodes / 31 arcs from label file
+SENT-END AND WATCH OUT FOR WET FEET WAS HIS PARTING ADVICE AND WATCH OUT FOR WET FEET WAS HIS PARTING ADVICE AND WATCH OUT FOR WET FEET WAS HIS PARTING ADVICE SENT-END  ==  [1586 frames] -59.7070 [Ac=-94695.3 LM=0.0] (Act=14.0)
+
+HTK Configuration Parameters[11]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_D_N_Z_0
+                  SOURCEFORMAT                 WAV
+

@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 43 physical / 43 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bennmann-20091102-vgn/mfc/b0530.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence HE HAD A BIG CHIMPANZEE THAT WAS A WINNER silence  ==  [436 frames] -48.3600 [Ac=-21085.0 LM=0.0] (Act=11.2)
+Aligning File: /data/UserSubmissions/Quarantine/bennmann-20091102-vgn/mfc/b0531.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence I AM SURE IT MUST HAVE BEEN SOME ADVENTURE silence  ==  [349 frames] -48.0003 [Ac=-16752.1 LM=0.0] (Act=8.0)
+Aligning File: /data/UserSubmissions/Quarantine/bennmann-20091102-vgn/mfc/b0532.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence THAT LONGFELLOW CHAP MOST LIKELY HAD WRITTEN COUNTLESS BOOKS OF POETRY silence  ==  [512 frames] -54.5249 [Ac=-27916.8 LM=0.0] (Act=8.9)
+Aligning File: /data/UserSubmissions/Quarantine/bennmann-20091102-vgn/mfc/b0533.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence HIS ABNORMAL POWER OF VISION MADE ABSTRACTIONS TAKE ON CONCRETE FORM silence  ==  [574 frames] -52.9277 [Ac=-30380.5 LM=0.0] (Act=8.9)
+Aligning File: /data/UserSubmissions/Quarantine/bennmann-20091102-vgn/mfc/b0534.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence I'LL TELL YOU THE LIBRARIAN SAID WITH A BRIGHTENING FACE silence  ==  [436 frames] -48.4427 [Ac=-21121.0 LM=0.0] (Act=7.6)
+Aligning File: /data/UserSubmissions/Quarantine/bennmann-20091102-vgn/mfc/b0535.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence HE READ HIS FRAGMENTS ALOUD silence  ==  [336 frames] -49.2171 [Ac=-16537.0 LM=0.0] (Act=8.7)
+Aligning File: /data/UserSubmissions/Quarantine/bennmann-20091102-vgn/mfc/b0536.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence TYPHOID DID I TELL YOU silence  ==  [299 frames] -47.9402 [Ac=-14334.1 LM=0.0] (Act=10.5)
+Aligning File: /data/UserSubmissions/Quarantine/bennmann-20091102-vgn/mfc/b0537.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence BUT SHE HAD BECOME AN AUTOMATON silence  ==  [311 frames] -48.1108 [Ac=-14962.4 LM=0.0] (Act=10.0)
+Aligning File: /data/UserSubmissions/Quarantine/bennmann-20091102-vgn/mfc/b0538.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence AT THE BEST THEY WERE NECESSARY ACCESSORIES silence  ==  [449 frames] -47.9693 [Ac=-21538.2 LM=0.0] (Act=8.3)
+Aligning File: /data/UserSubmissions/Quarantine/bennmann-20091102-vgn/mfc/b0539.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence YOU WERE MAKING THEM TALK SHOP RUTH CHARGED HIM silence  ==  [436 frames] -49.4739 [Ac=-21570.6 LM=0.0] (Act=8.9)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

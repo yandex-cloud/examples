@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 39 physical / 39 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/B-20091220-vus/mfc/b0245.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence HARRISON IS STILL MY CHAUFFEUR silence  ==  [416 frames] -47.6991 [Ac=-19842.8 LM=0.0] (Act=9.3)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091220-vus/mfc/b0246.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence THE BOY GREW AND PROSPERED silence  ==  [339 frames] -49.7154 [Ac=-16853.5 LM=0.0] (Act=8.0)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091220-vus/mfc/b0247.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence HE WANTED TO GIVE THE FINISH TO THIS FOE ALREADY SO FAR GONE silence  ==  [484 frames] -52.2004 [Ac=-25265.0 LM=0.0] (Act=11.0)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091220-vus/mfc/b0248.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence EXCITING TIMES ARE THE LOT OF THE FISH PATROL silence  ==  [459 frames] -52.2892 [Ac=-24000.7 LM=0.0] (Act=11.1)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091220-vus/mfc/b0249.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence I KNOW THEY ARE MY OYSTERS silence  ==  [339 frames] -46.6901 [Ac=-15828.0 LM=0.0] (Act=9.8)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091220-vus/mfc/b0250.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence BY THIS TIME CHARLEY WAS AS ENRAGED AS THE GREEK silence  ==  [553 frames] -50.8164 [Ac=-28101.5 LM=0.0] (Act=10.6)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091220-vus/mfc/b0251.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence THEY MUST HAVE BEEN SWEPT AWAY BY THE CHAOTIC CURRENTS silence  ==  [433 frames] -51.9624 [Ac=-22499.7 LM=0.0] (Act=10.9)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091220-vus/mfc/b0252.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence IT RESEMBLED TEA LESS THAN LAGER BEER RESEMBLES CHAMPAGNE silence  ==  [655 frames] -51.9056 [Ac=-33998.1 LM=0.0] (Act=9.3)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091220-vus/mfc/b0253.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence THE VERY OPPOSITE IS TRUE THEY ARE DISCOURAGED VAGABONDS silence  ==  [561 frames] -52.9241 [Ac=-29690.4 LM=0.0] (Act=9.8)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091220-vus/mfc/b0254.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence AT THE SAME TIME SPEARS AND ARROWS BEGAN TO FALL AMONG THE INVADERS silence  ==  [544 frames] -53.2484 [Ac=-28967.1 LM=0.0] (Act=10.6)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

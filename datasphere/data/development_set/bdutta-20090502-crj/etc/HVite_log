@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 43 physical / 43 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bdutta-20090502-crj/mfc/a0509.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence YET IN ACCORDANCE WITH ERNEST'S TEST OF TRUTH IT WORKED silence  ==  [537 frames] -53.1493 [Ac=-28541.2 LM=0.0] (Act=10.3)
+Aligning File: /data/UserSubmissions/Quarantine/bdutta-20090502-crj/mfc/a0510.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence MUCH MORE ERNEST TOLD THEM OF THEMSELVES AND OF HIS DISILLUSIONMENT silence  ==  [662 frames] -54.1550 [Ac=-35850.6 LM=0.0] (Act=9.0)
+Aligning File: /data/UserSubmissions/Quarantine/bdutta-20090502-crj/mfc/a0511.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence THERE IS MORE BEHIND THIS THAN A MERE UNIVERSITY IDEAL silence  ==  [512 frames] -54.6143 [Ac=-27962.5 LM=0.0] (Act=11.4)
+Aligning File: /data/UserSubmissions/Quarantine/bdutta-20090502-crj/mfc/a0512.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence NO IT IS A PALACE WHEREIN THERE ARE MANY SERVANTS silence  ==  [436 frames] -55.2932 [Ac=-24107.9 LM=0.0] (Act=10.3)
+Aligning File: /data/UserSubmissions/Quarantine/bdutta-20090502-crj/mfc/a0513.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence WE MUST GIVE OURSELVES AND NOT OUR MONEY ALONE silence  ==  [399 frames] -53.1570 [Ac=-21209.6 LM=0.0] (Act=8.3)
+Aligning File: /data/UserSubmissions/Quarantine/bdutta-20090502-crj/mfc/a0514.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence WE ARE CONSUMED IN OUR OWN FLESH-POTS silence  ==  [324 frames] -54.8382 [Ac=-17767.6 LM=0.0] (Act=7.7)
+Aligning File: /data/UserSubmissions/Quarantine/bdutta-20090502-crj/mfc/a0515.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence BUT HERE AMONGST OURSELVES LET US SPEAK OUT silence  ==  [449 frames] -52.9003 [Ac=-23752.2 LM=0.0] (Act=8.7)
+Aligning File: /data/UserSubmissions/Quarantine/bdutta-20090502-crj/mfc/a0516.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence ALSO THERE WAS AWE IN THEIR FACES silence  ==  [411 frames] -51.4845 [Ac=-21160.1 LM=0.0] (Act=8.1)
+Aligning File: /data/UserSubmissions/Quarantine/bdutta-20090502-crj/mfc/a0517.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence OUT OF ABSTRACTIONS ERNEST HAD CONJURED A VISION AND MADE THEM SEE IT silence  ==  [687 frames] -52.8161 [Ac=-36284.7 LM=0.0] (Act=9.6)
+Aligning File: /data/UserSubmissions/Quarantine/bdutta-20090502-crj/mfc/a0518.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence ILLUMINATING OIL WAS BECOMING ALL PROFIT silence  ==  [461 frames] -53.0720 [Ac=-24466.2 LM=0.0] (Act=8.2)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

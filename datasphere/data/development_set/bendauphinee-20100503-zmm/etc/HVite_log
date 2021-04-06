@@ -1,0 +1,62 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 42 physical / 42 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bendauphinee-20100503-zmm/mfc/b0510.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence HE KNEW WHAT TABOOS HE WAS VIOLATING silence  ==  [511 frames] -43.3715 [Ac=-22162.8 LM=0.0] (Act=8.0)
+Aligning File: /data/UserSubmissions/Quarantine/bendauphinee-20100503-zmm/mfc/b0511.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence DO YOU VALUE YOUR HIDE silence  ==  [411 frames] -43.3594 [Ac=-17820.7 LM=0.0] (Act=7.1)
+Aligning File: /data/UserSubmissions/Quarantine/bendauphinee-20100503-zmm/mfc/b0512.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence YOU SHOULD HAVE SEEN THEM WHEN THEY HEARD ME SPITTING CHINOOK silence  ==  [548 frames] -42.7329 [Ac=-23417.7 LM=0.0] (Act=10.1)
+Aligning File: /data/UserSubmissions/Quarantine/bendauphinee-20100503-zmm/mfc/b0513.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence HE PLODDED ON FOR HALF AN HOUR WHEN THE HALLUCINATION AROSE AGAIN silence  ==  [623 frames] -50.5134 [Ac=-31469.9 LM=0.0] (Act=11.3)
+Aligning File: /data/UserSubmissions/Quarantine/bendauphinee-20100503-zmm/mfc/b0514.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence TOMORROW OR THE NEXT DAY IT MIGHT BE GONE silence  ==  [411 frames] -41.9142 [Ac=-17226.7 LM=0.0] (Act=9.8)
+Aligning File: /data/UserSubmissions/Quarantine/bendauphinee-20100503-zmm/mfc/b0515.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence BUT ALREADY HE HAD COMPOSED HIMSELF silence  ==  [411 frames] -45.9963 [Ac=-18904.5 LM=0.0] (Act=7.9)
+Aligning File: /data/UserSubmissions/Quarantine/bendauphinee-20100503-zmm/mfc/b0516.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence ZILLA RELAXED HER SOUR MOUTH LONG ENOUGH TO SIGH HER SATISFACTION silence  ==  [611 frames] -50.1237 [Ac=-30625.6 LM=0.0] (Act=9.6)
+Aligning File: /data/UserSubmissions/Quarantine/bendauphinee-20100503-zmm/mfc/b0517.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+No tokens survived to final node of network at beam 250.0
+silence EGGSHELL IS NOT GOOD TO EAT silence  ==  [386 frames] -50.3102 [Ac=-19419.7 LM=0.0] (Act=14.7)
+Aligning File: /data/UserSubmissions/Quarantine/bendauphinee-20100503-zmm/mfc/b0518.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence BUT THERE WAS ALSO TALK OF WITCHCRAFT IN THE VILLAGE silence  ==  [523 frames] -49.3779 [Ac=-25824.6 LM=0.0] (Act=8.6)
+Aligning File: /data/UserSubmissions/Quarantine/bendauphinee-20100503-zmm/mfc/b0519.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence YEA I WILL TELL THEE silence  ==  [361 frames] -44.5843 [Ac=-16094.9 LM=0.0] (Act=8.9)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 43 physical / 43 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-qbf/mfc/a0373.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence POINTS OF VIEW NEW IDEAS LIFE silence  ==  [286 frames] -56.4455 [Ac=-16143.4 LM=0.0] (Act=7.9)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-qbf/mfc/a0374.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence BUT LIFE'S WORTH MORE THAN CASH SHE ARGUED silence  ==  [324 frames] -53.6359 [Ac=-17378.0 LM=0.0] (Act=7.6)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-qbf/mfc/a0375.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence THE BUTCHERS AND MEAT CUTTERS REFUSED TO HANDLE MEAT DESTINED FOR UNFAIR RESTAURANTS silence  ==  [549 frames] -57.3733 [Ac=-31497.9 LM=0.0] (Act=11.1)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-qbf/mfc/a0376.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence YOUR PRICE MY SON IS JUST ABOUT THIRTY PER WEEK silence  ==  [386 frames] -52.6990 [Ac=-20341.8 LM=0.0] (Act=8.9)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-qbf/mfc/a0377.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence THIS SOUND DID NOT DISTURB THE HUSH AND AWE OF THE PLACE silence  ==  [374 frames] -53.4265 [Ac=-19981.5 LM=0.0] (Act=9.1)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-qbf/mfc/a0378.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence THAT'S WHY ITS BOUNDARIES ARE ALL GOUGED AND JAGGED silence  ==  [399 frames] -52.8858 [Ac=-21101.5 LM=0.0] (Act=9.2)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-qbf/mfc/a0379.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence HOW OLD ARE YOU DADDY silence  ==  [223 frames] -49.2391 [Ac=-10980.3 LM=0.0] (Act=7.6)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-qbf/mfc/a0380.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence BUT IN THE CANYONS WATER WAS PLENTIFUL AND ALSO A LUXURIANT FOREST GROWTH silence  ==  [512 frames] -57.2365 [Ac=-29305.1 LM=0.0] (Act=8.8)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-qbf/mfc/a0381.mfc
+Created lattice with 5 nodes / 4 arcs from label file
+silence MY NAME'S FERGUSON silence  ==  [236 frames] -50.3967 [Ac=-11893.6 LM=0.0] (Act=6.3)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-qbf/mfc/a0382.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence DAYLIGHT FOUND HIMSELF CHARMED AND MADE CURIOUS BY THE LITTLE MAN silence  ==  [487 frames] -54.9993 [Ac=-26784.6 LM=0.0] (Act=9.3)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

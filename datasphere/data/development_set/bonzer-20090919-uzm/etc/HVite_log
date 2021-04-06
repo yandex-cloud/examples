@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 38 physical / 38 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-uzm/mfc/a0388.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence IT WAS MY IDEA TO A TEE silence  ==  [474 frames] -49.9532 [Ac=-23677.8 LM=0.0] (Act=10.4)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-uzm/mfc/a0389.mfc
+Created lattice with 5 nodes / 4 arcs from label file
+silence MAB SHE SAID silence  ==  [211 frames] -48.9100 [Ac=-10320.0 LM=0.0] (Act=7.2)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-uzm/mfc/a0390.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence I'LL GO OVER TOMORROW AFTERNOON silence  ==  [311 frames] -52.1419 [Ac=-16216.1 LM=0.0] (Act=7.8)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-uzm/mfc/a0391.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence BUT HE RECONCILED HIMSELF TO IT BY AN ACT OF FAITH silence  ==  [386 frames] -56.5500 [Ac=-21828.3 LM=0.0] (Act=10.1)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-uzm/mfc/a0392.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence THERE IS THAT MAGNIFICENT BOB EATING HIS HEAD OFF IN THE STABLE silence  ==  [411 frames] -56.1500 [Ac=-23077.7 LM=0.0] (Act=10.3)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-uzm/mfc/a0393.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence ALREADY HE HAD BEGUN BORROWING FROM THE BANKS silence  ==  [361 frames] -54.9368 [Ac=-19832.2 LM=0.0] (Act=9.5)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-uzm/mfc/a0394.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence IT'S THE STRAP HANGERS THAT'LL KEEP US FROM GOING UNDER silence  ==  [386 frames] -55.7300 [Ac=-21511.8 LM=0.0] (Act=11.1)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-uzm/mfc/a0395.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence AS FOR HIMSELF WEREN'T THE STREET RAILWAY EARNINGS INCREASING STEADILY silence  ==  [424 frames] -56.6265 [Ac=-24009.6 LM=0.0] (Act=9.7)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-uzm/mfc/a0396.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence A RISING TIDE OF FAT HAD SUBMERGED THEM silence  ==  [324 frames] -54.9426 [Ac=-17801.4 LM=0.0] (Act=9.8)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-uzm/mfc/a0397.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence CALL ME THAT AGAIN HE MURMURED ECSTATICALLY silence  ==  [336 frames] -53.7950 [Ac=-18075.1 LM=0.0] (Act=8.9)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

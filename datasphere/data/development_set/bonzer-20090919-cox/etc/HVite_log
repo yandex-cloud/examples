@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 42 physical / 42 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-cox/mfc/b0058.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence WE MUST ACHIEVE OUR OWN SALVATION silence  ==  [299 frames] -57.5180 [Ac=-17197.9 LM=0.0] (Act=7.4)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-cox/mfc/b0059.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence IN MOMENTS OF MENTAL ENERGY PHILIP WAS RESTLESS silence  ==  [361 frames] -56.1020 [Ac=-20252.8 LM=0.0] (Act=7.9)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-cox/mfc/b0060.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence HE WOULD KEEP HIS FAITH WITH GREGSON FOR THE PROMISED DAY OR TWO silence  ==  [411 frames] -57.3915 [Ac=-23587.9 LM=0.0] (Act=10.8)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-cox/mfc/b0061.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence SOMETHING ABOUT IT SEEMED TO FASCINATE HIM TO CHALLENGE HIS PRESENCE silence  ==  [411 frames] -59.4956 [Ac=-24452.7 LM=0.0] (Act=9.8)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-cox/mfc/b0062.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence NOW IT WAS MISSING FROM THE WALL silence  ==  [236 frames] -55.9118 [Ac=-13195.2 LM=0.0] (Act=9.4)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-cox/mfc/b0063.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence HE BOILED HIMSELF SOME COFFEE AND SAT DOWN TO WAIT silence  ==  [324 frames] -58.8995 [Ac=-19083.4 LM=0.0] (Act=8.1)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-cox/mfc/b0064.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence I'M GOING DOWN THERE WITH YOU AND I'M GOING TO FIGHT silence  ==  [336 frames] -57.7146 [Ac=-19392.1 LM=0.0] (Act=9.6)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-cox/mfc/b0065.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence NOW HAVE YOU GOT ANYTHING TO SAY AGAINST ME MR PHILIP silence  ==  [386 frames] -55.8925 [Ac=-21574.5 LM=0.0] (Act=8.6)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-cox/mfc/b0066.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence IF I MEET HER AGAIN I SHALL APOLOGIZE SAID EILEEN silence  ==  [361 frames] -57.0428 [Ac=-20592.4 LM=0.0] (Act=8.1)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-cox/mfc/b0067.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence BELOW HIM THE SHADOW WAS BROKEN INTO A POOL OF RIPPLING STARLIGHT silence  ==  [461 frames] -57.8076 [Ac=-26649.3 LM=0.0] (Act=9.2)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

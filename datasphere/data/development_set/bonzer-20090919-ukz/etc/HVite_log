@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 41 physical / 41 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-ukz/mfc/b0438.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence THEY RAN THE CANOE IN AND CLIMBED THE HIGH EARTH BANK silence  ==  [411 frames] -51.0919 [Ac=-20998.8 LM=0.0] (Act=8.2)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-ukz/mfc/b0439.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence THE LAND EXCHANGED ITS AUSTERE ROBES FOR THE GARB OF A SMILING WANTON silence  ==  [562 frames] -54.4575 [Ac=-30605.1 LM=0.0] (Act=8.4)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-ukz/mfc/b0440.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence THERE WERE STIR AND BUSTLE NEW FACES AND FRESH FACTS silence  ==  [474 frames] -52.7978 [Ac=-25026.2 LM=0.0] (Act=7.5)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-ukz/mfc/b0441.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence AND THERE WAS ETHEL BAIRD WHOM ALSO YOU MUST REMEMBER silence  ==  [461 frames] -50.2527 [Ac=-23166.5 LM=0.0] (Act=8.0)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-ukz/mfc/b0442.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence HE HAD BECOME A MAN VERY EARLY IN LIFE silence  ==  [336 frames] -52.3734 [Ac=-17597.4 LM=0.0] (Act=9.5)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-ukz/mfc/b0443.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence I DID NOT THINK YOU WOULD BE SO EARLY silence  ==  [274 frames] -52.7449 [Ac=-14452.1 LM=0.0] (Act=8.9)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-ukz/mfc/b0444.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence HE DID NOT KNOW WHAT WENT ON IN THE MINDS OF HIS SUPERIORS silence  ==  [411 frames] -56.2265 [Ac=-23109.1 LM=0.0] (Act=9.9)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-ukz/mfc/b0445.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence MOPS SIR EAGERLY ANSWERED THE SAILOR AT THE WHEEL silence  ==  [361 frames] -55.5245 [Ac=-20044.3 LM=0.0] (Act=10.4)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-ukz/mfc/b0446.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence SOME ONE HAD THRUST A LARGE SHEATH-KNIFE INTO HIS HAND silence  ==  [449 frames] -52.8785 [Ac=-23742.4 LM=0.0] (Act=8.4)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-ukz/mfc/b0447.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence O'BRIEN EMITTED A SHRIEK THAT SANK SWIFTLY TO A GURGLING SOB silence  ==  [424 frames] -58.2408 [Ac=-24694.1 LM=0.0] (Act=9.6)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

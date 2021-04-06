@@ -1,0 +1,63 @@
+/usr/local/bin/HVite -A -D -T 1 -l * -a -b SENT-END -m -C /data/svn-mirror/Main/VoxForge/lib/Corpus/Quarantine/Submission/Audio/wav_config -H /data/svn-mirror/Main/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/macros -H /data/svn-mirror/Main/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/hmmdefs -m -t 250.0 150.0 1000.0 -I /tmp/MLaHOviVaA/words.mlf -i /tmp/MLaHOviVaA/aligned.out -S /tmp/MLaHOviVaA/fileList /data/svn-mirror/SpeechCorpus/Trunk/Lexicon/VoxForge/VoxForgeDict /data/svn-mirror/Main/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/tiedlist 
+
+HTK Configuration Parameters[11]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_D_N_Z_0
+#                 SOURCEFORMAT                 WAV
+
+Read 8294 physical / 9429 logical HMMs
+Label file will be used to align each file
+Aligning File: /tmp/MLaHOviVaA/AslakKnutsen-20140314-ogu/a0219.wav
+Created lattice with 14 nodes / 13 arcs from label file
+SENT-END AT FIRST HE PUZZLED OVER SOMETHING UNTOWARD HE WAS SURE HAD HAPPENED SENT-END  ==  [773 frames] -57.6504 [Ac=-44563.8 LM=0.0] (Act=11.2)
+Aligning File: /tmp/MLaHOviVaA/AslakKnutsen-20140314-ogu/a0220.wav
+Created lattice with 12 nodes / 11 arcs from label file
+SENT-END A DEAD MAN IS OF NO USE ON A PLANTATION SENT-END  ==  [486 frames] -56.2515 [Ac=-27338.2 LM=0.0] (Act=9.4)
+Aligning File: /tmp/MLaHOviVaA/AslakKnutsen-20140314-ogu/a0221.wav
+Created lattice with 10 nodes / 9 arcs from label file
+SENT-END I DON'T KNOW WHY YOU'RE HERE AT ALL SENT-END  ==  [361 frames] -56.0457 [Ac=-20232.5 LM=0.0] (Act=10.1)
+Aligning File: /tmp/MLaHOviVaA/AslakKnutsen-20140314-ogu/a0222.wav
+Created lattice with 11 nodes / 10 arcs from label file
+SENT-END WHAT PART OF THE UNITED STATES IS YOUR HOME SENT-END  ==  [436 frames] -56.7593 [Ac=-24747.1 LM=0.0] (Act=11.3)
+Aligning File: /tmp/MLaHOviVaA/AslakKnutsen-20140314-ogu/a0223.wav
+Created lattice with 9 nodes / 8 arcs from label file
+SENT-END MY I'M ALMOST HOMESICK FOR IT ALREADY SENT-END  ==  [436 frames] -57.5166 [Ac=-25077.2 LM=0.0] (Act=10.4)
+Aligning File: /tmp/MLaHOviVaA/AslakKnutsen-20140314-ogu/a0224.wav
+Created lattice with 11 nodes / 10 arcs from label file
+SENT-END SHE NODDED AND HER EYES GREW SOFT AND MOIST SENT-END  ==  [473 frames] -57.2766 [Ac=-27091.8 LM=0.0] (Act=12.2)
+Aligning File: /tmp/MLaHOviVaA/AslakKnutsen-20140314-ogu/a0225.wav
+Created lattice with 15 nodes / 14 arcs from label file
+SENT-END I WAS BROUGHT UP THE WAY MOST GIRLS IN HAWAII ARE BROUGHT UP SENT-END  ==  [536 frames] -58.8874 [Ac=-31563.7 LM=0.0] (Act=11.9)
+Aligning File: /tmp/MLaHOviVaA/AslakKnutsen-20140314-ogu/a0226.wav
+Created lattice with 9 nodes / 8 arcs from label file
+SENT-END THAT CAME BEFORE MY A B C'S SENT-END  ==  [436 frames] -57.1754 [Ac=-24928.5 LM=0.0] (Act=8.3)
+Aligning File: /tmp/MLaHOviVaA/AslakKnutsen-20140314-ogu/a0227.wav
+Created lattice with 12 nodes / 11 arcs from label file
+SENT-END IT WAS THE SAME WAY WITH OUR REVOLVERS AND RIFLES SENT-END  ==  [498 frames] -56.9281 [Ac=-28350.2 LM=0.0] (Act=10.2)
+Aligning File: /tmp/MLaHOviVaA/AslakKnutsen-20140314-ogu/a0228.wav
+Created lattice with 8 nodes / 7 arcs from label file
+SENT-END BUT IT CONTRIBUTED TO THE SMASH SENT-END  ==  [348 frames] -56.5246 [Ac=-19670.6 LM=0.0] (Act=13.9)
+
+HTK Configuration Parameters[11]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_D_N_Z_0
+                  SOURCEFORMAT                 WAV
+

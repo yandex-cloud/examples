@@ -1,0 +1,63 @@
+/usr/local/bin/HVite -A -D -T 1 -l * -a -b SENT-END -m -C /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/wav_config -H /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/macros -H /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/hmmdefs -m -t 250.0 150.0 1000.0 -I /tmp/vlSsEKD7ky/words.mlf -i /tmp/vlSsEKD7ky/aligned.out -S /tmp/vlSsEKD7ky/fileList /data/svn-mirror/SpeechCorpus/Trunk/Lexicon/VoxForge/VoxForgeDict /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/tiedlist 
+
+HTK Configuration Parameters[11]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_D_N_Z_0
+#                 SOURCEFORMAT                 WAV
+
+Read 8294 physical / 9429 logical HMMs
+Label file will be used to align each file
+Aligning File: /tmp/vlSsEKD7ky/Bahoke-20130721-brs/b0437.wav
+Created lattice with 11 nodes / 10 arcs from label file
+SENT-END NOWHERE IN THE NORTH IS THE SOIL SO PROLIFIC SENT-END  ==  [411 frames] -59.4353 [Ac=-24427.9 LM=0.0] (Act=11.7)
+Aligning File: /tmp/vlSsEKD7ky/Bahoke-20130721-brs/b0438.wav
+Created lattice with 13 nodes / 12 arcs from label file
+SENT-END THEY RAN THE CANOE IN AND CLIMBED THE HIGH EARTH BANK SENT-END  ==  [373 frames] -60.3214 [Ac=-22499.9 LM=0.0] (Act=13.2)
+Aligning File: /tmp/vlSsEKD7ky/Bahoke-20130721-brs/b0439.wav
+Created lattice with 15 nodes / 14 arcs from label file
+SENT-END THE LAND EXCHANGED ITS AUSTERE ROBES FOR THE GARB OF A SMILING WANTON SENT-END  ==  [523 frames] -60.9838 [Ac=-31894.5 LM=0.0] (Act=15.0)
+Aligning File: /tmp/vlSsEKD7ky/Bahoke-20130721-brs/b0440.wav
+Created lattice with 12 nodes / 11 arcs from label file
+SENT-END THERE WERE STIR AND BUSTLE NEW FACES AND FRESH FACTS SENT-END  ==  [436 frames] -60.5204 [Ac=-26386.9 LM=0.0] (Act=12.7)
+Aligning File: /tmp/vlSsEKD7ky/Bahoke-20130721-brs/b0441.wav
+Created lattice with 12 nodes / 11 arcs from label file
+SENT-END AND THERE WAS ETHEL BAIRD WHOM ALSO YOU MUST REMEMBER SENT-END  ==  [448 frames] -60.1951 [Ac=-26967.4 LM=0.0] (Act=12.8)
+Aligning File: /tmp/vlSsEKD7ky/Bahoke-20130721-brs/b0442.wav
+Created lattice with 11 nodes / 10 arcs from label file
+SENT-END HE HAD BECOME A MAN VERY EARLY IN LIFE SENT-END  ==  [336 frames] -60.5696 [Ac=-20351.4 LM=0.0] (Act=12.7)
+Aligning File: /tmp/vlSsEKD7ky/Bahoke-20130721-brs/b0443.wav
+Created lattice with 11 nodes / 10 arcs from label file
+SENT-END I DID NOT THINK YOU WOULD BE SO EARLY SENT-END  ==  [336 frames] -57.6509 [Ac=-19370.7 LM=0.0] (Act=9.3)
+Aligning File: /tmp/vlSsEKD7ky/Bahoke-20130721-brs/b0444.wav
+Created lattice with 15 nodes / 14 arcs from label file
+SENT-END HE DID NOT KNOW WHAT WENT ON IN THE MINDS OF HIS SUPERIORS SENT-END  ==  [411 frames] -62.7429 [Ac=-25787.4 LM=0.0] (Act=12.4)
+Aligning File: /tmp/vlSsEKD7ky/Bahoke-20130721-brs/b0445.wav
+Created lattice with 11 nodes / 10 arcs from label file
+SENT-END MOPS SIR EAGERLY ANSWERED THE SAILOR AT THE WHEEL SENT-END  ==  [486 frames] -60.4842 [Ac=-29395.3 LM=0.0] (Act=14.7)
+Aligning File: /tmp/vlSsEKD7ky/Bahoke-20130721-brs/b0446.wav
+Created lattice with 12 nodes / 11 arcs from label file
+SENT-END SOME ONE HAD THRUST A LARGE SHEATH-KNIFE INTO HIS HAND SENT-END  ==  [436 frames] -60.3100 [Ac=-26295.2 LM=0.0] (Act=10.7)
+
+HTK Configuration Parameters[11]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_D_N_Z_0
+                  SOURCEFORMAT                 WAV
+

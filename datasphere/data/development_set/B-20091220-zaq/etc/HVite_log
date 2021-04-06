@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 42 physical / 42 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/B-20091220-zaq/mfc/a0283.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence THE WOMAN IN YOU IS ONLY INCIDENTAL ACCIDENTAL AND IRRELEVANT silence  ==  [715 frames] -52.0969 [Ac=-37249.3 LM=0.0] (Act=9.4)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091220-zaq/mfc/a0284.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence THERE WAS NO FORECASTING THIS STRANGE GIRL'S PROCESSES silence  ==  [647 frames] -48.0807 [Ac=-31108.2 LM=0.0] (Act=9.0)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091220-zaq/mfc/a0285.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence BUT WHAT THEY WANT WITH YOUR TOOTHBRUSH IS MORE THAN I CAN IMAGINE silence  ==  [501 frames] -53.6019 [Ac=-26854.6 LM=0.0] (Act=15.6)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091220-zaq/mfc/a0286.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence GIVE THEM THEIR CHOICE BETWEEN A FINE OR AN OFFICIAL WHIPPING silence  ==  [629 frames] -50.0279 [Ac=-31467.6 LM=0.0] (Act=15.0)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091220-zaq/mfc/a0287.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence KEEP AN EYE ON HIM silence  ==  [399 frames] -40.9379 [Ac=-16334.2 LM=0.0] (Act=7.2)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091220-zaq/mfc/a0288.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence THOSE ARE MY OYSTERS HE SAID AT LAST silence  ==  [416 frames] -49.0049 [Ac=-20386.0 LM=0.0] (Act=9.8)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091220-zaq/mfc/a0289.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence THEY ARE NOT REGULAR OYSTER PIRATES NICHOLAS CONTINUED silence  ==  [536 frames] -53.5044 [Ac=-28678.4 LM=0.0] (Act=11.2)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091220-zaq/mfc/a0290.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence ONE BY ONE THE BOYS WERE CAPTURED silence  ==  [382 frames] -49.0592 [Ac=-18740.6 LM=0.0] (Act=11.2)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091220-zaq/mfc/a0291.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence THE WEEKS HAD GONE BY AND NO OVERT ACTS HAD BEEN ATTEMPTED silence  ==  [501 frames] -53.6873 [Ac=-26897.3 LM=0.0] (Act=11.8)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091220-zaq/mfc/a0292.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence HERE IN THE MIDMORNING THE FIRST CASUALTY OCCURRED silence  ==  [527 frames] -50.1850 [Ac=-26447.5 LM=0.0] (Act=10.1)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

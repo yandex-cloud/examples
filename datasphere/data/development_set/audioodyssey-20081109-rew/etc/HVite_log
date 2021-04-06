@@ -1,0 +1,64 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 43 physical / 43 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/audioodyssey-20081109-rew/mfc/a0425.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence OTHERWISE NO RESTRICTION IS PUT UPON THEIR SEAFARING silence  ==  [674 frames] -55.4264 [Ac=-37357.4 LM=0.0] (Act=9.3)
+Aligning File: /data/UserSubmissions/Quarantine/audioodyssey-20081109-rew/mfc/a0426.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+No tokens survived to final node of network at beam 250.0
+silence THEY DO NOT KNOW THE LENGTH OF TIME OF INCUBATION silence  ==  [875 frames] -50.0193 [Ac=-43766.9 LM=0.0] (Act=13.5)
+Aligning File: /data/UserSubmissions/Quarantine/audioodyssey-20081109-rew/mfc/a0427.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence ENTERS NOW THE PSYCHOLOGY OF THE SITUATION silence  ==  [537 frames] -53.2798 [Ac=-28611.3 LM=0.0] (Act=10.0)
+Aligning File: /data/UserSubmissions/Quarantine/audioodyssey-20081109-rew/mfc/a0428.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence IT WAS NOT EXACTLY A DEPORTATION silence  ==  [349 frames] -55.5805 [Ac=-19397.6 LM=0.0] (Act=8.0)
+Aligning File: /data/UserSubmissions/Quarantine/audioodyssey-20081109-rew/mfc/a0429.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence QUICK WAS THE DISAPPOINTMENT IN HIS FACE YET SMILING WAS THE ACQUIESCENCE silence  ==  [787 frames] -55.7885 [Ac=-43905.5 LM=0.0] (Act=9.2)
+Aligning File: /data/UserSubmissions/Quarantine/audioodyssey-20081109-rew/mfc/a0430.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence NEVERTHELESS WE FOUND OURSELVES ONCE MORE IN THE HIGH SEAT OF ABUNDANCE silence  ==  [712 frames] -52.5057 [Ac=-37384.0 LM=0.0] (Act=8.5)
+Aligning File: /data/UserSubmissions/Quarantine/audioodyssey-20081109-rew/mfc/a0431.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence WADA AND NAKATA WERE IN A BIT OF A FUNK silence  ==  [574 frames] -54.3206 [Ac=-31180.0 LM=0.0] (Act=16.3)
+Aligning File: /data/UserSubmissions/Quarantine/audioodyssey-20081109-rew/mfc/a0432.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence THE BOY AT THE WHEEL LOST HIS HEAD silence  ==  [349 frames] -51.0071 [Ac=-17801.5 LM=0.0] (Act=9.5)
+Aligning File: /data/UserSubmissions/Quarantine/audioodyssey-20081109-rew/mfc/a0433.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence TO HER THE BRIDGE WAS TAMBO WHICH IS THE NATIVE FOR TABOO silence  ==  [712 frames] -57.9495 [Ac=-41260.0 LM=0.0] (Act=16.0)
+Aligning File: /data/UserSubmissions/Quarantine/audioodyssey-20081109-rew/mfc/a0434.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+No tokens survived to final node of network at beam 250.0
+No tokens survived to final node of network at beam 400.0
+silence A HALF A CASE OF TOBACCO WAS WORTH THREE POUNDS silence  ==  [512 frames] -60.0621 [Ac=-30751.8 LM=0.0] (Act=17.2)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

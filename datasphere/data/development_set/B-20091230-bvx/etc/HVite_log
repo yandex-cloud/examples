@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 43 physical / 43 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/B-20091230-bvx/mfc/a0576.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence AND THE BIG PERSIAN KNEW OF HIS EXISTENCE BEFORE HE DID OF HERS silence  ==  [570 frames] -51.6965 [Ac=-29467.0 LM=0.0] (Act=8.1)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091230-bvx/mfc/a0577.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence ONCE THE JEWS HARP BEGAN EMITTING ITS BARBARIC RHYTHMS MICHAEL WAS HELPLESS silence  ==  [1031 frames] -51.0327 [Ac=-52614.7 LM=0.0] (Act=8.6)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091230-bvx/mfc/a0578.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence BUT WE'LL JUST POSTPONE THIS silence  ==  [339 frames] -46.8292 [Ac=-15875.1 LM=0.0] (Act=7.3)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091230-bvx/mfc/a0579.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence THERE WAS THE EMMA LOUISA silence  ==  [276 frames] -47.3335 [Ac=-13064.0 LM=0.0] (Act=7.7)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091230-bvx/mfc/a0580.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence THIS IS MY FIFTH VOYAGE silence  ==  [322 frames] -45.5752 [Ac=-14675.2 LM=0.0] (Act=9.0)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091230-bvx/mfc/a0581.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence IT WAS THIS PROPOSITION THAT STARTED THE BIG IDEA IN DAUGHTRY'S MIND silence  ==  [655 frames] -51.4653 [Ac=-33709.8 LM=0.0] (Act=11.8)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091230-bvx/mfc/a0582.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence DAUGHTRY ELABORATED ON THE COUNTING TRICK BY BRINGING COCKY ALONG silence  ==  [749 frames] -50.2421 [Ac=-37631.3 LM=0.0] (Act=8.4)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091230-bvx/mfc/a0583.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence ENJOY IT HE DID BUT PRINCIPALLY FOR STEWARD'S SAKE silence  ==  [493 frames] -52.5762 [Ac=-25920.1 LM=0.0] (Act=10.3)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091230-bvx/mfc/a0584.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence HAVE LONG NOTED YOUR THIRST UNQUENCHABLE silence  ==  [416 frames] -49.5909 [Ac=-20629.8 LM=0.0] (Act=8.2)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091230-bvx/mfc/a0585.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence WONDER IF HE'S A LION DOG CHARLES SUGGESTED silence  ==  [621 frames] -50.8402 [Ac=-31571.7 LM=0.0] (Act=8.1)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

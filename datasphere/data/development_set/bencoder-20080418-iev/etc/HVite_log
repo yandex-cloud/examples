@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 42 physical / 42 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bencoder-20080418-iev/mfc/b0208.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence YOU READ THE QUOTATIONS IN TODAY'S PAPER silence  ==  [374 frames] -47.5895 [Ac=-17798.5 LM=0.0] (Act=10.3)
+Aligning File: /data/UserSubmissions/Quarantine/bencoder-20080418-iev/mfc/b0209.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence HE'S TERRIBLY TOUCHY ABOUT HIS BLACK WARDS AS HE CALLS THEM silence  ==  [451 frames] -49.2708 [Ac=-22221.1 LM=0.0] (Act=10.4)
+Aligning File: /data/UserSubmissions/Quarantine/bencoder-20080418-iev/mfc/b0210.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence WHATEVER HE GUESSED HE LOCKED AWAY IN THE TABOO ROOM OF NAOMI silence  ==  [468 frames] -48.6618 [Ac=-22773.7 LM=0.0] (Act=9.0)
+Aligning File: /data/UserSubmissions/Quarantine/bencoder-20080418-iev/mfc/b0211.mfc
+Created lattice with 6 nodes / 5 arcs from label file
+silence THIS IS EIGHTEEN EIGHTY silence  ==  [357 frames] -42.0224 [Ac=-15002.0 LM=0.0] (Act=7.4)
+Aligning File: /data/UserSubmissions/Quarantine/bencoder-20080418-iev/mfc/b0212.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence DEATH IS AND HAS BEEN EVER SINCE OLD MAUI DIED silence  ==  [503 frames] -47.9112 [Ac=-24099.4 LM=0.0] (Act=10.6)
+Aligning File: /data/UserSubmissions/Quarantine/bencoder-20080418-iev/mfc/b0213.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence SOME BOY SHE LAUGHED ACQUIESCENCE silence  ==  [366 frames] -47.5109 [Ac=-17389.0 LM=0.0] (Act=9.4)
+Aligning File: /data/UserSubmissions/Quarantine/bencoder-20080418-iev/mfc/b0214.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence LET US TALK IT OVER AND FIND A WAY OUT silence  ==  [408 frames] -45.3474 [Ac=-18501.7 LM=0.0] (Act=10.4)
+Aligning File: /data/UserSubmissions/Quarantine/bencoder-20080418-iev/mfc/b0215.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence IT IS A GOOD PROPERTY AND WORTH MORE THAN THAT silence  ==  [408 frames] -45.1214 [Ac=-18409.5 LM=0.0] (Act=8.6)
+Aligning File: /data/UserSubmissions/Quarantine/bencoder-20080418-iev/mfc/b0216.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence I WISH YOU WERE MORE ADAPTABLE JOAN RETORTED silence  ==  [426 frames] -46.8213 [Ac=-19945.9 LM=0.0] (Act=10.0)
+Aligning File: /data/UserSubmissions/Quarantine/bencoder-20080418-iev/mfc/b0217.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence SUCH IS MY PASSAGE ENGAGED ON THE STEAMER silence  ==  [374 frames] -50.3801 [Ac=-18842.1 LM=0.0] (Act=10.8)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

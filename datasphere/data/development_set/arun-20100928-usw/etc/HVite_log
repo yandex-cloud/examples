@@ -1,0 +1,63 @@
+/usr/local/bin/HVite -A -D -T 1 -l * -a -b SENT-END -m -C /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/wav_config -H /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2010-04-16_16kHz_16bit_MFCC_O_D/macros -H /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2010-04-16_16kHz_16bit_MFCC_O_D/hmmdefs -m -t 250.0 150.0 1000.0 -I /tmp/dqBl6weQBI/words.mlf -i /tmp/dqBl6weQBI/aligned.out -S /tmp/dqBl6weQBI/fileList /data/svn-mirror/SpeechCorpus/Trunk/Lexicon/VoxForge/VoxForgeDict /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2010-04-16_16kHz_16bit_MFCC_O_D/tiedlist 
+
+HTK Configuration Parameters[11]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_D_N_Z_0
+#                 SOURCEFORMAT                 WAV
+
+Read 8073 physical / 9417 logical HMMs
+Label file will be used to align each file
+Aligning File: /tmp/dqBl6weQBI/arun-20100928-usw/b0171.wav
+Created lattice with 11 nodes / 10 arcs from label file
+SENT-END HE CHANGED HIS SEAT FOR A STEAMER RECLINING CHAIR SENT-END  ==  [573 frames] -60.0818 [Ac=-34426.9 LM=0.0] (Act=9.9)
+Aligning File: /tmp/dqBl6weQBI/arun-20100928-usw/b0172.wav
+Created lattice with 13 nodes / 12 arcs from label file
+SENT-END ON THE FAR CORNER OF THE COMPOUND FENCE A HAWK BROODED SENT-END  ==  [661 frames] -58.9891 [Ac=-38991.8 LM=0.0] (Act=14.3)
+Aligning File: /tmp/dqBl6weQBI/arun-20100928-usw/b0173.wav
+Created lattice with 8 nodes / 7 arcs from label file
+SENT-END TO THESE HE GAVE CASTOR OIL SENT-END  ==  [486 frames] -56.3069 [Ac=-27365.2 LM=0.0] (Act=8.9)
+Aligning File: /tmp/dqBl6weQBI/arun-20100928-usw/b0174.wav
+Created lattice with 13 nodes / 12 arcs from label file
+SENT-END HATRED AND MURDER AND LUST FOR REVENGE THEY POSSESSED TO OVERFLOWING SENT-END  ==  [761 frames] -58.9208 [Ac=-44838.8 LM=0.0] (Act=10.6)
+Aligning File: /tmp/dqBl6weQBI/arun-20100928-usw/b0175.wav
+Created lattice with 7 nodes / 6 arcs from label file
+SENT-END SHELDON GLANCED AT THE THERMOMETER SENT-END  ==  [548 frames] -55.7879 [Ac=-30571.8 LM=0.0] (Act=9.3)
+Aligning File: /tmp/dqBl6weQBI/arun-20100928-usw/b0176.wav
+Created lattice with 7 nodes / 6 arcs from label file
+SENT-END I'LL SEE TO POOR HUGHIE SENT-END  ==  [511 frames] -56.5023 [Ac=-28872.7 LM=0.0] (Act=9.0)
+Aligning File: /tmp/dqBl6weQBI/arun-20100928-usw/b0177.wav
+Created lattice with 12 nodes / 11 arcs from label file
+SENT-END HER GRAY EYES WERE FLASHING AND HER LIPS WERE QUIVERING SENT-END  ==  [586 frames] -58.5797 [Ac=-34327.7 LM=0.0] (Act=10.9)
+Aligning File: /tmp/dqBl6weQBI/arun-20100928-usw/b0178.wav
+Created lattice with 6 nodes / 5 arcs from label file
+SENT-END ALSO I WANT INFORMATION SENT-END  ==  [473 frames] -56.7648 [Ac=-26849.7 LM=0.0] (Act=8.6)
+Aligning File: /tmp/dqBl6weQBI/arun-20100928-usw/b0179.wav
+Created lattice with 11 nodes / 10 arcs from label file
+SENT-END LET THEM GO OUT AND EAT WITH MY BOYS SENT-END  ==  [511 frames] -56.7960 [Ac=-29022.8 LM=0.0] (Act=9.1)
+Aligning File: /tmp/dqBl6weQBI/arun-20100928-usw/b0180.wav
+Created lattice with 8 nodes / 7 arcs from label file
+SENT-END I I BEG PARDON HE DRAWLED SENT-END  ==  [536 frames] -58.1621 [Ac=-31174.9 LM=0.0] (Act=10.9)
+
+HTK Configuration Parameters[11]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_D_N_Z_0
+                  SOURCEFORMAT                 WAV
+

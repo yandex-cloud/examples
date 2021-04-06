@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 43 physical / 43 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bluSch-20100525-bqg/mfc/b0411.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence BUT HIS MOTIVE WAS OBVIOUS ENOUGH silence  ==  [282 frames] -54.2481 [Ac=-15298.0 LM=0.0] (Act=15.4)
+Aligning File: /data/UserSubmissions/Quarantine/bluSch-20100525-bqg/mfc/b0412.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence IT WAS SWEET IN MY EARS silence  ==  [241 frames] -52.9486 [Ac=-12760.6 LM=0.0] (Act=10.6)
+Aligning File: /data/UserSubmissions/Quarantine/bluSch-20100525-bqg/mfc/b0413.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence HE MAY DESIRE TO ESCAPE PAIN OR TO ENJOY PLEASURE silence  ==  [573 frames] -52.3148 [Ac=-29976.4 LM=0.0] (Act=9.1)
+Aligning File: /data/UserSubmissions/Quarantine/bluSch-20100525-bqg/mfc/b0414.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence IT WAS IMPOSSIBLE TO HOIST SAIL AND CLAW OFF THAT SHORE silence  ==  [561 frames] -54.3632 [Ac=-30497.8 LM=0.0] (Act=10.8)
+Aligning File: /data/UserSubmissions/Quarantine/bluSch-20100525-bqg/mfc/b0415.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence THERE WAS NOTHING FOR US BUT THE WIDE RAW OCEAN silence  ==  [536 frames] -53.5847 [Ac=-28721.4 LM=0.0] (Act=13.3)
+Aligning File: /data/UserSubmissions/Quarantine/bluSch-20100525-bqg/mfc/b0416.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence I AROSE OBEDIENTLY AND WENT DOWN THE BEACH silence  ==  [511 frames] -53.5498 [Ac=-27364.0 LM=0.0] (Act=8.8)
+Aligning File: /data/UserSubmissions/Quarantine/bluSch-20100525-bqg/mfc/b0417.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence THE NEXT THING TO WATCH OUT FOR IS BED SORES silence  ==  [448 frames] -54.7092 [Ac=-24509.7 LM=0.0] (Act=13.5)
+Aligning File: /data/UserSubmissions/Quarantine/bluSch-20100525-bqg/mfc/b0418.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence AT THAT MOMENT I GOT THE IMPRESSION THAT SHE WAS WILLOWY silence  ==  [548 frames] -53.3145 [Ac=-29216.4 LM=0.0] (Act=10.5)
+Aligning File: /data/UserSubmissions/Quarantine/bluSch-20100525-bqg/mfc/b0419.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence YOUR FATHER'S FIFTH COMMAND HE NODDED silence  ==  [598 frames] -50.1127 [Ac=-29967.4 LM=0.0] (Act=8.5)
+Aligning File: /data/UserSubmissions/Quarantine/bluSch-20100525-bqg/mfc/b0420.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence ON OCCASION ON THIS TRAVERSE THE CAPE VERDE ISLANDS ARE RAISED silence  ==  [673 frames] -54.9753 [Ac=-36998.3 LM=0.0] (Act=10.0)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

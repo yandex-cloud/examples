@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 41 physical / 41 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/B-20091221-pxt/mfc/b0217.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence SUCH IS MY PASSAGE ENGAGED ON THE STEAMER silence  ==  [553 frames] -50.4982 [Ac=-27925.5 LM=0.0] (Act=9.3)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091221-pxt/mfc/b0218.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence THE ISSUE WAS NOT IN DOUBT silence  ==  [433 frames] -45.3926 [Ac=-19655.0 LM=0.0] (Act=10.0)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091221-pxt/mfc/b0219.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence WELL THERE ARE BETTER MEN IN HAWAII THAT'S ALL silence  ==  [501 frames] -48.4977 [Ac=-24297.4 LM=0.0] (Act=8.5)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091221-pxt/mfc/b0220.mfc
+Created lattice with 6 nodes / 5 arcs from label file
+silence HARRY BANCROFT DAVE LIED silence  ==  [527 frames] -45.4490 [Ac=-23951.6 LM=0.0] (Act=5.7)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091221-pxt/mfc/b0221.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence IT'S A YANKEE JOAN CRIED silence  ==  [450 frames] -47.1703 [Ac=-21226.6 LM=0.0] (Act=6.2)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091221-pxt/mfc/b0222.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence HE WAS THE LEADER AND TUDOR WAS HIS LIEUTENANT silence  ==  [467 frames] -49.4974 [Ac=-23115.3 LM=0.0] (Act=8.7)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091221-pxt/mfc/b0223.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence THEY LIKEWISE ARE DISINCLINED TO BEING EATEN silence  ==  [459 frames] -50.0259 [Ac=-22961.9 LM=0.0] (Act=7.1)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091221-pxt/mfc/b0224.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence BUT TO CULTURE THE REVOLUTION THUS FAR HAD EXHAUSTED THE JUNTA silence  ==  [681 frames] -49.8268 [Ac=-33932.1 LM=0.0] (Act=8.7)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091221-pxt/mfc/b0225.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence THE PRESIDENT OF THE UNITED STATES WAS HIS FRIEND silence  ==  [484 frames] -48.3922 [Ac=-23421.8 LM=0.0] (Act=9.0)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091221-pxt/mfc/b0226.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence YOUR FACE WAS THE PERSONIFICATION OF DUPLICITY silence  ==  [527 frames] -50.3044 [Ac=-26510.4 LM=0.0] (Act=7.6)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

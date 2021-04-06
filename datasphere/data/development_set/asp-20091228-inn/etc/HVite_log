@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 40 physical / 40 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/asp-20091228-inn/mfc/a0287.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence KEEP AN EYE ON HIM silence  ==  [286 frames] -46.3424 [Ac=-13253.9 LM=0.0] (Act=9.7)
+Aligning File: /data/UserSubmissions/Quarantine/asp-20091228-inn/mfc/a0288.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence THOSE ARE MY OYSTERS HE SAID AT LAST silence  ==  [536 frames] -48.0994 [Ac=-25781.3 LM=0.0] (Act=12.4)
+Aligning File: /data/UserSubmissions/Quarantine/asp-20091228-inn/mfc/a0289.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence THEY ARE NOT REGULAR OYSTER PIRATES NICHOLAS CONTINUED silence  ==  [611 frames] -49.0070 [Ac=-29943.3 LM=0.0] (Act=8.9)
+Aligning File: /data/UserSubmissions/Quarantine/asp-20091228-inn/mfc/a0290.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence ONE BY ONE THE BOYS WERE CAPTURED silence  ==  [498 frames] -46.0865 [Ac=-22951.1 LM=0.0] (Act=8.6)
+Aligning File: /data/UserSubmissions/Quarantine/asp-20091228-inn/mfc/a0291.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence THE WEEKS HAD GONE BY AND NO OVERT ACTS HAD BEEN ATTEMPTED silence  ==  [623 frames] -49.2241 [Ac=-30666.6 LM=0.0] (Act=10.2)
+Aligning File: /data/UserSubmissions/Quarantine/asp-20091228-inn/mfc/a0292.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence HERE IN THE MIDMORNING THE FIRST CASUALTY OCCURRED silence  ==  [636 frames] -49.5074 [Ac=-31486.7 LM=0.0] (Act=12.7)
+Aligning File: /data/UserSubmissions/Quarantine/asp-20091228-inn/mfc/a0293.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence THEY WERE DEEP IN THE PRIMEVAL FOREST silence  ==  [523 frames] -48.2106 [Ac=-25214.1 LM=0.0] (Act=9.8)
+Aligning File: /data/UserSubmissions/Quarantine/asp-20091228-inn/mfc/a0294.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence HE HAD BEEN FOILED IN HIS ATTEMPT TO ESCAPE silence  ==  [461 frames] -49.0447 [Ac=-22609.6 LM=0.0] (Act=13.4)
+Aligning File: /data/UserSubmissions/Quarantine/asp-20091228-inn/mfc/a0295.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence AND TWENTY MEN COULD HOLD IT WITH SPEARS AND ARROWS silence  ==  [561 frames] -50.0156 [Ac=-28058.8 LM=0.0] (Act=9.8)
+Aligning File: /data/UserSubmissions/Quarantine/asp-20091228-inn/mfc/a0296.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence BASSETT WAS A FASTIDIOUS MAN silence  ==  [436 frames] -51.7313 [Ac=-22554.9 LM=0.0] (Act=9.5)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

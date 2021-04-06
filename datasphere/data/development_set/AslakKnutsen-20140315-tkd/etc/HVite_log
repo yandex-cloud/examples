@@ -1,0 +1,63 @@
+/usr/local/bin/HVite -A -D -T 1 -l * -a -b SENT-END -m -C /data/svn-mirror/Main/VoxForge/lib/Corpus/Quarantine/Submission/Audio/wav_config -H /data/svn-mirror/Main/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/macros -H /data/svn-mirror/Main/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/hmmdefs -m -t 250.0 150.0 1000.0 -I /tmp/V46eWLZd_n/words.mlf -i /tmp/V46eWLZd_n/aligned.out -S /tmp/V46eWLZd_n/fileList /data/svn-mirror/SpeechCorpus/Trunk/Lexicon/VoxForge/VoxForgeDict /data/svn-mirror/Main/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/tiedlist 
+
+HTK Configuration Parameters[11]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_D_N_Z_0
+#                 SOURCEFORMAT                 WAV
+
+Read 8294 physical / 9429 logical HMMs
+Label file will be used to align each file
+Aligning File: /tmp/V46eWLZd_n/AslakKnutsen-20140315-tkd/a0196.wav
+Created lattice with 11 nodes / 10 arcs from label file
+SENT-END HE BEGAN TO FOLLOW THE FOOTPRINTS OF THE DOG SENT-END  ==  [423 frames] -57.3465 [Ac=-24257.6 LM=0.0] (Act=11.6)
+Aligning File: /tmp/V46eWLZd_n/AslakKnutsen-20140315-tkd/a0197.wav
+Created lattice with 12 nodes / 11 arcs from label file
+SENT-END SUCH A DOG THE WISE DRIVER KILLS OR TURNS LOOSE SENT-END  ==  [511 frames] -58.0838 [Ac=-29680.8 LM=0.0] (Act=12.9)
+Aligning File: /tmp/V46eWLZd_n/AslakKnutsen-20140315-tkd/a0198.wav
+Created lattice with 9 nodes / 8 arcs from label file
+SENT-END SOMETIMES HER DREAMS WERE FILLED WITH VISIONS SENT-END  ==  [436 frames] -56.5604 [Ac=-24660.4 LM=0.0] (Act=11.0)
+Aligning File: /tmp/V46eWLZd_n/AslakKnutsen-20140315-tkd/a0199.wav
+Created lattice with 12 nodes / 11 arcs from label file
+SENT-END THUS HAD THE RAW WILDERNESS PREPARED HIM FOR THIS DAY SENT-END  ==  [511 frames] -57.4632 [Ac=-29363.7 LM=0.0] (Act=11.9)
+Aligning File: /tmp/V46eWLZd_n/AslakKnutsen-20140315-tkd/a0200.wav
+Created lattice with 12 nodes / 11 arcs from label file
+SENT-END HE LEAPT AGAIN AND THE CLUB CAUGHT HIM ONCE MORE SENT-END  ==  [436 frames] -56.6631 [Ac=-24705.1 LM=0.0] (Act=13.7)
+Aligning File: /tmp/V46eWLZd_n/AslakKnutsen-20140315-tkd/a0201.wav
+Created lattice with 9 nodes / 8 arcs from label file
+SENT-END HE CRIED AND SWUNG THE CLUB WILDLY SENT-END  ==  [448 frames] -53.8883 [Ac=-24142.0 LM=0.0] (Act=10.4)
+Aligning File: /tmp/V46eWLZd_n/AslakKnutsen-20140315-tkd/a0202.wav
+Created lattice with 14 nodes / 13 arcs from label file
+SENT-END SHE TURNED FEARING THAT JACQUES MIGHT SEE WHAT WAS IN HER FACE SENT-END  ==  [636 frames] -57.9466 [Ac=-36854.0 LM=0.0] (Act=15.0)
+Aligning File: /tmp/V46eWLZd_n/AslakKnutsen-20140315-tkd/a0203.wav
+Created lattice with 10 nodes / 9 arcs from label file
+SENT-END THEY WERE FOLLOWING THE SHORE OF A LAKE SENT-END  ==  [361 frames] -55.2647 [Ac=-19950.6 LM=0.0] (Act=9.3)
+Aligning File: /tmp/V46eWLZd_n/AslakKnutsen-20140315-tkd/a0204.wav
+Created lattice with 10 nodes / 9 arcs from label file
+SENT-END THE WOLF-DOG THRUST HIS GAUNT MUZZLE TOWARD HIM SENT-END  ==  [623 frames] -58.0512 [Ac=-36165.9 LM=0.0] (Act=15.4)
+Aligning File: /tmp/V46eWLZd_n/AslakKnutsen-20140315-tkd/a0205.wav
+Created lattice with 7 nodes / 6 arcs from label file
+SENT-END FROM NOW ON WERE PALS SENT-END  ==  [298 frames] -53.1468 [Ac=-15837.8 LM=0.0] (Act=8.9)
+
+HTK Configuration Parameters[11]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_D_N_Z_0
+                  SOURCEFORMAT                 WAV
+

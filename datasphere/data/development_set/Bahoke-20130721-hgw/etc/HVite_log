@@ -1,0 +1,63 @@
+/usr/local/bin/HVite -A -D -T 1 -l * -a -b SENT-END -m -C /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/wav_config -H /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/macros -H /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/hmmdefs -m -t 250.0 150.0 1000.0 -I /tmp/aJXsq0dmRv/words.mlf -i /tmp/aJXsq0dmRv/aligned.out -S /tmp/aJXsq0dmRv/fileList /data/svn-mirror/SpeechCorpus/Trunk/Lexicon/VoxForge/VoxForgeDict /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/tiedlist 
+
+HTK Configuration Parameters[11]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_D_N_Z_0
+#                 SOURCEFORMAT                 WAV
+
+Read 8294 physical / 9429 logical HMMs
+Label file will be used to align each file
+Aligning File: /tmp/aJXsq0dmRv/Bahoke-20130721-hgw/a0403.wav
+Created lattice with 10 nodes / 9 arcs from label file
+SENT-END HIS NEWBORN CUNNING GAVE HIM POISE AND CONTROL SENT-END  ==  [373 frames] -60.4149 [Ac=-22534.8 LM=0.0] (Act=11.5)
+Aligning File: /tmp/aJXsq0dmRv/Bahoke-20130721-hgw/a0404.wav
+Created lattice with 12 nodes / 11 arcs from label file
+SENT-END PERRAULT FOUND ONE WITH HEAD BURIED IN THE GRUB BOX SENT-END  ==  [361 frames] -62.1293 [Ac=-22428.7 LM=0.0] (Act=14.7)
+Aligning File: /tmp/aJXsq0dmRv/Bahoke-20130721-hgw/a0405.wav
+Created lattice with 13 nodes / 12 arcs from label file
+SENT-END IT SEEMED THE ORDAINED ORDER OF THINGS THAT DOGS SHOULD WORK SENT-END  ==  [436 frames] -61.8113 [Ac=-26949.7 LM=0.0] (Act=12.0)
+Aligning File: /tmp/aJXsq0dmRv/Bahoke-20130721-hgw/a0406.wav
+Created lattice with 11 nodes / 10 arcs from label file
+SENT-END AND THAT WAS THE LAST OF FRANCOIS AND PERRAULT SENT-END  ==  [386 frames] -57.6873 [Ac=-22267.3 LM=0.0] (Act=16.8)
+Aligning File: /tmp/aJXsq0dmRv/Bahoke-20130721-hgw/a0407.wav
+Created lattice with 13 nodes / 12 arcs from label file
+SENT-END MERCEDES SCREAMED CRIED LAUGHED AND MANIFESTED THE CHAOTIC ABANDONMENT OF HYSTERIA SENT-END  ==  [648 frames] -61.6594 [Ac=-39955.3 LM=0.0] (Act=14.2)
+Aligning File: /tmp/aJXsq0dmRv/Bahoke-20130721-hgw/a0408.wav
+Created lattice with 14 nodes / 13 arcs from label file
+SENT-END THE ELDORADO EMPTIED ITS OCCUPANTS INTO THE STREET TO SEE THE TEST SENT-END  ==  [523 frames] -60.9128 [Ac=-31857.4 LM=0.0] (Act=14.8)
+Aligning File: /tmp/aJXsq0dmRv/Bahoke-20130721-hgw/a0409.wav
+Created lattice with 11 nodes / 10 arcs from label file
+SENT-END HE COULD FEEL A NEW STIR IN THE LAND SENT-END  ==  [373 frames] -57.7776 [Ac=-21551.0 LM=0.0] (Act=10.7)
+Aligning File: /tmp/aJXsq0dmRv/Bahoke-20130721-hgw/a0410.wav
+Created lattice with 15 nodes / 14 arcs from label file
+SENT-END SO WE HAVE TO FIT THE BOAT THROUGHOUT WITH OIL LAMPS AS WELL SENT-END  ==  [373 frames] -60.8534 [Ac=-22698.3 LM=0.0] (Act=12.8)
+Aligning File: /tmp/aJXsq0dmRv/Bahoke-20130721-hgw/a0411.wav
+Created lattice with 15 nodes / 14 arcs from label file
+SENT-END IT WILL BREAK OUR HEARTS AND OUR BACKS TO HOIST ANCHOR BY HAND SENT-END  ==  [398 frames] -62.7452 [Ac=-24972.6 LM=0.0] (Act=14.3)
+Aligning File: /tmp/aJXsq0dmRv/Bahoke-20130721-hgw/a0412.wav
+Created lattice with 9 nodes / 8 arcs from label file
+SENT-END THERE IS ANOTHER VIRTUE IN THESE BULKHEADS SENT-END  ==  [311 frames] -58.6413 [Ac=-18237.4 LM=0.0] (Act=10.7)
+
+HTK Configuration Parameters[11]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_D_N_Z_0
+                  SOURCEFORMAT                 WAV
+

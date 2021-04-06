@@ -1,0 +1,64 @@
+/usr/local/bin/HVite -A -D -T 1 -l * -a -b SENT-END -m -C /data/svn-mirror/Main/VoxForge/lib/Corpus/Quarantine/Submission/Audio/wav_config -H /data/svn-mirror/Main/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/macros -H /data/svn-mirror/Main/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/hmmdefs -m -t 250.0 150.0 1000.0 -I /tmp/vZgOReXwRI/words.mlf -i /tmp/vZgOReXwRI/aligned.out -S /tmp/vZgOReXwRI/fileList /data/svn-mirror/SpeechCorpus/Trunk/Lexicon/VoxForge/VoxForgeDict /data/svn-mirror/Main/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/tiedlist 
+
+HTK Configuration Parameters[11]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_D_N_Z_0
+#                 SOURCEFORMAT                 WAV
+
+Read 8294 physical / 9429 logical HMMs
+Label file will be used to align each file
+Aligning File: /tmp/vZgOReXwRI/azmisov-20140430-mqe/a0124.wav
+Created lattice with 11 nodes / 10 arcs from label file
+SENT-END IT WAS JEANNE SINGING SOFTLY OVER BEYOND THE ROCKS SENT-END  ==  [523 frames] -58.8764 [Ac=-30792.4 LM=0.0] (Act=11.0)
+Aligning File: /tmp/vZgOReXwRI/azmisov-20140430-mqe/a0125.wav
+Created lattice with 14 nodes / 13 arcs from label file
+SENT-END HE WAS DETERMINED NOW TO MAINTAIN A MORE CERTAIN HOLD UPON HIMSELF SENT-END  ==  [536 frames] -58.2695 [Ac=-31232.4 LM=0.0] (Act=13.4)
+Aligning File: /tmp/vZgOReXwRI/azmisov-20140430-mqe/a0126.wav
+Created lattice with 12 nodes / 11 arcs from label file
+SENT-END EACH DAY SHE BECAME A MORE VITAL PART OF HIM SENT-END  ==  [373 frames] -58.9131 [Ac=-21974.6 LM=0.0] (Act=12.5)
+Aligning File: /tmp/vZgOReXwRI/azmisov-20140430-mqe/a0127.wav
+Created lattice with 10 nodes / 9 arcs from label file
+SENT-END IT WAS A TEMPTATION BUT HE RESISTED IT SENT-END  ==  [373 frames] -58.3271 [Ac=-21756.0 LM=0.0] (Act=10.8)
+Aligning File: /tmp/vZgOReXwRI/azmisov-20140430-mqe/a0128.wav
+Created lattice with 13 nodes / 12 arcs from label file
+SENT-END THIS ONE HOPE WAS DESTROYED AS QUICKLY AS IT WAS BORN SENT-END  ==  [436 frames] -58.2937 [Ac=-25416.0 LM=0.0] (Act=12.8)
+Aligning File: /tmp/vZgOReXwRI/azmisov-20140430-mqe/a0129.wav
+Created lattice with 8 nodes / 7 arcs from label file
+SENT-END HER FACE WAS AGAINST HIS BREAST SENT-END  ==  [373 frames] -54.7687 [Ac=-20428.7 LM=0.0] (Act=9.6)
+Aligning File: /tmp/vZgOReXwRI/azmisov-20140430-mqe/a0130.wav
+Created lattice with 7 nodes / 6 arcs from label file
+SENT-END SHE WAS HIS NOW FOREVER SENT-END  ==  [348 frames] -56.4591 [Ac=-19647.8 LM=0.0] (Act=8.0)
+Aligning File: /tmp/vZgOReXwRI/azmisov-20140430-mqe/a0131.wav
+Created lattice with 9 nodes / 8 arcs from label file
+SENT-END PROVIDENCE HAD DELIVERED HIM THROUGH THE MAELSTROM SENT-END  ==  [411 frames] -57.7187 [Ac=-23722.4 LM=0.0] (Act=11.3)
+Aligning File: /tmp/vZgOReXwRI/azmisov-20140430-mqe/a0132.wav
+Created lattice with 10 nodes / 9 arcs from label file
+SENT-END A CRY OF JOY BURST FROM PHILIP'S LIPS SENT-END  ==  [373 frames] -58.1964 [Ac=-21707.3 LM=0.0] (Act=10.5)
+Aligning File: /tmp/vZgOReXwRI/azmisov-20140430-mqe/a0133.wav
+Created lattice with 13 nodes / 12 arcs from label file
+No tokens survived to final node of network at beam 250.0
+SENT-END PHILIP BEGAN TO FEEL THAT HE HAD FOOLISHLY OVERESTIMATED HIS STRENGTH SENT-END  ==  [548 frames] -61.1947 [Ac=-33534.7 LM=0.0] (Act=20.0)
+
+HTK Configuration Parameters[11]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_D_N_Z_0
+                  SOURCEFORMAT                 WAV
+

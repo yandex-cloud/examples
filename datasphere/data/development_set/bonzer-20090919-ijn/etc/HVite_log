@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 43 physical / 43 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-ijn/mfc/b0499.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence I SAID AND DISMISSED THE MATTER AS NOT WORTH THINKING ABOUT silence  ==  [599 frames] -49.5025 [Ac=-29652.0 LM=0.0] (Act=7.6)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-ijn/mfc/b0500.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence THEN CAME MY BOY CODE silence  ==  [211 frames] -52.5193 [Ac=-11081.6 LM=0.0] (Act=8.6)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-ijn/mfc/b0501.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence AND WHEREVER I RANGED THE WAY LAY ALONG ALCOHOL-DRENCHED ROADS silence  ==  [499 frames] -53.5189 [Ac=-26705.9 LM=0.0] (Act=7.7)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-ijn/mfc/b0502.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence AND AS WE HURRIED UP TOWN JOE GOOSE EXPLAINED silence  ==  [374 frames] -52.9185 [Ac=-19791.5 LM=0.0] (Act=7.8)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-ijn/mfc/b0503.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence THE SCENTS OF STRANGE VEGETATION BLEW OFF THE TROPIC LAND silence  ==  [411 frames] -52.8918 [Ac=-21738.5 LM=0.0] (Act=8.4)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-ijn/mfc/b0504.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence THE LIFE THERE WAS HEALTHFUL AND ATHLETIC BUT TOO JUVENILE silence  ==  [599 frames] -50.3903 [Ac=-30183.8 LM=0.0] (Act=7.7)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-ijn/mfc/b0505.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence HOW VALIANTLY I WENT AT IT THAT FIRST DAY silence  ==  [361 frames] -53.1409 [Ac=-19183.8 LM=0.0] (Act=8.2)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-ijn/mfc/b0506.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence IT WOULD HELP TO TIDE ME ALONG UNTIL I GOT STEADY EMPLOYMENT silence  ==  [386 frames] -54.6603 [Ac=-21098.9 LM=0.0] (Act=9.0)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-ijn/mfc/b0507.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence DID I POSSESS TOO MUCH VITALITY silence  ==  [336 frames] -51.5331 [Ac=-17315.1 LM=0.0] (Act=7.4)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-ijn/mfc/b0508.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence IN HIS ANXIETY AND SOLICITUDE AND LOVE THEY DID NOT COUNT silence  ==  [512 frames] -54.0650 [Ac=-27681.3 LM=0.0] (Act=8.6)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

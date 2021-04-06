@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 42 physical / 42 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bebe-20100419-gpw/mfc/b0084.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence YOUR FACE IS RED WITH BLOOD silence  ==  [286 frames] -46.8373 [Ac=-13395.5 LM=0.0] (Act=6.6)
+Aligning File: /data/UserSubmissions/Quarantine/bebe-20100419-gpw/mfc/b0085.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence HER EYES SMILED TRUTH AT HIM AS HE CAME UP THE BANK silence  ==  [398 frames] -50.3347 [Ac=-20033.2 LM=0.0] (Act=8.1)
+Aligning File: /data/UserSubmissions/Quarantine/bebe-20100419-gpw/mfc/b0086.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence HE CAN CARE FOR HIMSELF silence  ==  [261 frames] -45.2106 [Ac=-11800.0 LM=0.0] (Act=7.8)
+Aligning File: /data/UserSubmissions/Quarantine/bebe-20100419-gpw/mfc/b0087.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence THEY WILL SEARCH FOR US BETWEEN THEIR CAMP AND CHURCHILL silence  ==  [423 frames] -50.0187 [Ac=-21157.9 LM=0.0] (Act=7.0)
+Aligning File: /data/UserSubmissions/Quarantine/bebe-20100419-gpw/mfc/b0088.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence UNTIL I DIE HE EXCLAIMED silence  ==  [298 frames] -49.0579 [Ac=-14619.3 LM=0.0] (Act=6.5)
+Aligning File: /data/UserSubmissions/Quarantine/bebe-20100419-gpw/mfc/b0089.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence HER BEAUTIFUL HAIR WAS DONE UP IN SHINING COILS silence  ==  [373 frames] -56.1280 [Ac=-20935.7 LM=0.0] (Act=8.4)
+Aligning File: /data/UserSubmissions/Quarantine/bebe-20100419-gpw/mfc/b0090.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence THE CHURCHILL NARROWED AND ITS CURRENT BECAME SWIFTER AS THEY PROGRESSED silence  ==  [461 frames] -56.1991 [Ac=-25907.8 LM=0.0] (Act=8.8)
+Aligning File: /data/UserSubmissions/Quarantine/bebe-20100419-gpw/mfc/b0091.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence FOR A FULL HALF MINUTE JEANNE LOOKED AT HIM WITHOUT SPEAKING silence  ==  [461 frames] -48.9954 [Ac=-22586.9 LM=0.0] (Act=9.2)
+Aligning File: /data/UserSubmissions/Quarantine/bebe-20100419-gpw/mfc/b0092.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence I WANT TO DIE IN IT silence  ==  [261 frames] -44.4734 [Ac=-11607.6 LM=0.0] (Act=6.4)
+Aligning File: /data/UserSubmissions/Quarantine/bebe-20100419-gpw/mfc/b0093.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence DARKNESS HID HIM FROM JEANNE silence  ==  [323 frames] -45.3439 [Ac=-14646.1 LM=0.0] (Act=6.3)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

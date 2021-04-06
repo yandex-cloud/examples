@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 39 physical / 39 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/benoliver999-20100207-euk/mfc/a0412.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence THERE IS ANOTHER VIRTUE IN THESE BULKHEADS silence  ==  [386 frames] -45.7837 [Ac=-17672.5 LM=0.0] (Act=7.5)
+Aligning File: /data/UserSubmissions/Quarantine/benoliver999-20100207-euk/mfc/a0413.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence BUT I AM AT THE END OF MY RESOURCES silence  ==  [411 frames] -46.0283 [Ac=-18917.6 LM=0.0] (Act=9.7)
+Aligning File: /data/UserSubmissions/Quarantine/benoliver999-20100207-euk/mfc/a0414.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence NOW OUR FIGURING WAS ALL RIGHT silence  ==  [361 frames] -45.3960 [Ac=-16388.0 LM=0.0] (Act=10.1)
+Aligning File: /data/UserSubmissions/Quarantine/benoliver999-20100207-euk/mfc/a0415.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence IT LASTED AS A DETERRENT FOR TWO DAYS silence  ==  [386 frames] -46.4802 [Ac=-17941.4 LM=0.0] (Act=8.7)
+Aligning File: /data/UserSubmissions/Quarantine/benoliver999-20100207-euk/mfc/a0416.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence THE ADDED WEIGHT HAD A VELOCITY OF FIFTEEN MILES PER HOUR silence  ==  [498 frames] -47.4181 [Ac=-23614.2 LM=0.0] (Act=11.8)
+Aligning File: /data/UserSubmissions/Quarantine/benoliver999-20100207-euk/mfc/a0417.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence IT IS ALSO AN INSIDIOUS DECEITFUL SUN silence  ==  [473 frames] -49.1048 [Ac=-23226.6 LM=0.0] (Act=9.2)
+Aligning File: /data/UserSubmissions/Quarantine/benoliver999-20100207-euk/mfc/a0418.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence THE PORTUGUESE BOY CRAWLED NEARER AND NEARER silence  ==  [498 frames] -45.6893 [Ac=-22753.3 LM=0.0] (Act=9.9)
+Aligning File: /data/UserSubmissions/Quarantine/benoliver999-20100207-euk/mfc/a0419.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence THE PORTUGUESE BOY PASSED THE HAWAIIAN silence  ==  [473 frames] -43.6251 [Ac=-20634.7 LM=0.0] (Act=8.2)
+Aligning File: /data/UserSubmissions/Quarantine/benoliver999-20100207-euk/mfc/a0420.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence WHEN I CAME TO I WAS WAVING MY HAT AND MURMURING ECSTATICALLY silence  ==  [623 frames] -48.0844 [Ac=-29956.6 LM=0.0] (Act=8.6)
+Aligning File: /data/UserSubmissions/Quarantine/benoliver999-20100207-euk/mfc/a0421.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence BY GOLLY THE BOY WINS silence  ==  [348 frames] -45.3324 [Ac=-15775.7 LM=0.0] (Act=8.3)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+
