@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 43 physical / 43 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bloomtom-20080612-mvm/mfc/b0167.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence A LITTLE BEFORE DAWN OF THE DAY FOLLOWING THE FIRE RELIEF CAME silence  ==  [434 frames] -49.4614 [Ac=-21466.3 LM=0.0] (Act=9.2)
+Aligning File: /data/UserSubmissions/Quarantine/bloomtom-20080612-mvm/mfc/b0168.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence THE INDIAN FELT THE WORSHIP OF HER WARM IN HIS HEART silence  ==  [340 frames] -51.8208 [Ac=-17619.1 LM=0.0] (Act=11.5)
+Aligning File: /data/UserSubmissions/Quarantine/bloomtom-20080612-mvm/mfc/b0169.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence HE DREW IN A DEEP BREATH AS HE LOOKED AT THEM silence  ==  [306 frames] -49.1938 [Ac=-15053.3 LM=0.0] (Act=10.6)
+Aligning File: /data/UserSubmissions/Quarantine/bloomtom-20080612-mvm/mfc/b0170.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence THEN HE SHOUTED SHUT UP silence  ==  [237 frames] -48.0048 [Ac=-11377.1 LM=0.0] (Act=8.6)
+Aligning File: /data/UserSubmissions/Quarantine/bloomtom-20080612-mvm/mfc/b0171.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence HE CHANGED HIS SEAT FOR A STEAMER RECLINING CHAIR silence  ==  [408 frames] -46.6845 [Ac=-19047.3 LM=0.0] (Act=7.7)
+Aligning File: /data/UserSubmissions/Quarantine/bloomtom-20080612-mvm/mfc/b0172.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence ON THE FAR CORNER OF THE COMPOUND FENCE A HAWK BROODED silence  ==  [451 frames] -50.3250 [Ac=-22696.6 LM=0.0] (Act=11.0)
+Aligning File: /data/UserSubmissions/Quarantine/bloomtom-20080612-mvm/mfc/b0173.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence TO THESE HE GAVE CASTOR OIL silence  ==  [306 frames] -45.2002 [Ac=-13831.3 LM=0.0] (Act=9.9)
+Aligning File: /data/UserSubmissions/Quarantine/bloomtom-20080612-mvm/mfc/b0174.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence HATRED AND MURDER AND LUST FOR REVENGE THEY POSSESSED TO OVERFLOWING silence  ==  [579 frames] -48.2825 [Ac=-27955.6 LM=0.0] (Act=9.2)
+Aligning File: /data/UserSubmissions/Quarantine/bloomtom-20080612-mvm/mfc/b0175.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence SHELDON GLANCED AT THE THERMOMETER silence  ==  [255 frames] -49.1883 [Ac=-12543.0 LM=0.0] (Act=9.1)
+Aligning File: /data/UserSubmissions/Quarantine/bloomtom-20080612-mvm/mfc/b0176.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence I'LL SEE TO POOR HUGHIE silence  ==  [186 frames] -49.9570 [Ac=-9292.0 LM=0.0] (Act=7.7)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 43 physical / 43 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/Ara-20091021-wpl/mfc/ar-16.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence JUST THEN THE OLD RAT SAW ARTHUR STOP HE ORDERED COARSELY silence  ==  [1013 frames] -46.5524 [Ac=-47157.6 LM=0.0] (Act=9.1)
+Aligning File: /data/UserSubmissions/Quarantine/Ara-20091021-wpl/mfc/ar-17.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence YOU ARE COMING OF COURSE I'M NOT CERTAIN SAID ARTHUR UNDAUNTED silence  ==  [875 frames] -47.8499 [Ac=-41868.7 LM=0.0] (Act=10.4)
+Aligning File: /data/UserSubmissions/Quarantine/Ara-20091021-wpl/mfc/ar-18.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence THE ROOF MAY NOT COME DOWN YET silence  ==  [599 frames] -45.5449 [Ac=-27281.4 LM=0.0] (Act=10.1)
+Aligning File: /data/UserSubmissions/Quarantine/Ara-20091021-wpl/mfc/ar-19.mfc
+Created lattice with 19 nodes / 18 arcs from label file
+silence WELL SAID THE OLD RAT WE CAN'T WAIT FOR YOU TO JOIN US RIGHT ABOUT FACE MARCH silence  ==  [937 frames] -50.7936 [Ac=-47593.6 LM=0.0] (Act=10.1)
+Aligning File: /data/UserSubmissions/Quarantine/Ara-20091021-wpl/mfc/ar-20.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence ARTHUR STOOD AND WATCHED THEM HURRY AWAY silence  ==  [624 frames] -45.9504 [Ac=-28673.1 LM=0.0] (Act=11.0)
+Aligning File: /data/UserSubmissions/Quarantine/Ara-20091021-wpl/mfc/ar-21.mfc
+Created lattice with 18 nodes / 17 arcs from label file
+silence I THINK I'LL GO TOMORROW HE SAID CALMLY TO HIMSELF BUT THEN AGAIN I DON'T KNOW silence  ==  [850 frames] -47.0507 [Ac=-39993.1 LM=0.0] (Act=11.0)
+Aligning File: /data/UserSubmissions/Quarantine/Ara-20091021-wpl/mfc/ar-22.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence IT'S SO NICE AND SNUG HERE THAT NIGHT THERE WAS A BIG CRASH silence  ==  [912 frames] -46.3121 [Ac=-42236.6 LM=0.0] (Act=11.0)
+Aligning File: /data/UserSubmissions/Quarantine/Ara-20091021-wpl/mfc/ar-23.mfc
+Created lattice with 20 nodes / 19 arcs from label file
+silence IN THE FOGGY MORNING SOME MEN WITH SOME BOYS AND GIRLS RODE UP AND LOOKED AT THE BARN silence  ==  [963 frames] -47.9742 [Ac=-46199.2 LM=0.0] (Act=9.1)
+Aligning File: /data/UserSubmissions/Quarantine/Ara-20091021-wpl/mfc/ar-24.mfc
+Created lattice with 22 nodes / 21 arcs from label file
+silence ONE OF THEM MOVED A BOARD AND SAW A RAT QUITE DEAD HALF IN AND HALF OUT OF HIS HOLE silence  ==  [1075 frames] -48.6644 [Ac=-52314.2 LM=0.0] (Act=15.1)
+Aligning File: /data/UserSubmissions/Quarantine/Ara-20091021-wpl/mfc/rb-01.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence HAND-HELD DEVICES SUCH AS PERSONAL DIGITAL ASSISTANTS AND SMARTPHONES ARE QUITE SMALL silence  ==  [912 frames] -50.3528 [Ac=-45921.7 LM=0.0] (Act=9.2)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

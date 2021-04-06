@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 41 physical / 41 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-ldp/mfc/rb-31.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence WHEREAS ON YOUR MOBILE PHONE YOU WOULD HAVE TO STICK TO RUN BROWSER silence  ==  [536 frames] -51.9651 [Ac=-27853.3 LM=0.0] (Act=10.6)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-ldp/mfc/rb-32.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence OBVIOUSLY WHEN RUNNING A FILE BROWSER THE SAME LOGIC WOULD APPLY silence  ==  [511 frames] -53.4490 [Ac=-27312.4 LM=0.0] (Act=11.3)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-ldp/mfc/rb-33.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence WHEN WORKING ON A POWERFUL PC OR LAPTOP silence  ==  [448 frames] -48.3031 [Ac=-21639.8 LM=0.0] (Act=10.3)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-ldp/mfc/rb-34.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence COMMANDS LIKE GO TO THE FOLDER WITH MY UNIVERSITY DOCUMENTS silence  ==  [536 frames] -51.5017 [Ac=-27604.9 LM=0.0] (Act=10.9)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-ldp/mfc/rb-35.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence AND OPEN MY THESIS MIGHT SOON BE QUITE COMMON silence  ==  [523 frames] -49.1016 [Ac=-25680.2 LM=0.0] (Act=9.5)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-ldp/mfc/rb-36.mfc
+Created lattice with 18 nodes / 17 arcs from label file
+silence IT IS HOWEVER LIKELY THAT ON MOBILE DEVICES WE WILL HAVE TO USE MORE RUDIMENTARY COMMANDS silence  ==  [673 frames] -54.9961 [Ac=-37012.4 LM=0.0] (Act=12.7)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-ldp/mfc/rb-37.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence LIKE GO UP ONE FOLDER OPEN THE FOLDER UNIVERSITY OR OPEN DOCUMENT THESIS silence  ==  [1036 frames] -47.4317 [Ac=-49139.2 LM=0.0] (Act=8.5)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-ldp/mfc/a0001.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence AUTHOR OF THE DANGER TRAIL PHILIP STEELS ETC silence  ==  [586 frames] -49.3165 [Ac=-28899.5 LM=0.0] (Act=8.4)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-ldp/mfc/a0002.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence NOT AT THIS PARTICULAR CASE TOM APOLOGIZED WHITTEMORE silence  ==  [686 frames] -50.1651 [Ac=-34413.2 LM=0.0] (Act=10.5)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-ldp/mfc/a0003.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence FOR THE TWENTIETH TIME THAT EVENING THE TWO MEN SHOOK HANDS silence  ==  [473 frames] -51.3656 [Ac=-24295.9 LM=0.0] (Act=13.8)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

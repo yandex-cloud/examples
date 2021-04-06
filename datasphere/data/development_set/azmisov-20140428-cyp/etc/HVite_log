@@ -1,0 +1,63 @@
+/usr/local/bin/HVite -A -D -T 1 -l * -a -b SENT-END -m -C /data/svn-mirror/Main/VoxForge/lib/Corpus/Quarantine/Submission/Audio/wav_config -H /data/svn-mirror/Main/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/macros -H /data/svn-mirror/Main/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/hmmdefs -m -t 250.0 150.0 1000.0 -I /tmp/oAqeSTIISH/words.mlf -i /tmp/oAqeSTIISH/aligned.out -S /tmp/oAqeSTIISH/fileList /data/svn-mirror/SpeechCorpus/Trunk/Lexicon/VoxForge/VoxForgeDict /data/svn-mirror/Main/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/tiedlist 
+
+HTK Configuration Parameters[11]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_D_N_Z_0
+#                 SOURCEFORMAT                 WAV
+
+Read 8294 physical / 9429 logical HMMs
+Label file will be used to align each file
+Aligning File: /tmp/oAqeSTIISH/azmisov-20140428-cyp/a0003.wav
+Created lattice with 13 nodes / 12 arcs from label file
+SENT-END FOR THE TWENTIETH TIME THAT EVENING THE TWO MEN SHOOK HANDS SENT-END  ==  [473 frames] -58.7647 [Ac=-27795.7 LM=0.0] (Act=12.3)
+Aligning File: /tmp/oAqeSTIISH/azmisov-20140428-cyp/a0004.wav
+Created lattice with 11 nodes / 10 arcs from label file
+SENT-END LORD BUT I'M GLAD TO SEE YOU AGAIN PHIL SENT-END  ==  [423 frames] -55.7594 [Ac=-23586.2 LM=0.0] (Act=9.6)
+Aligning File: /tmp/oAqeSTIISH/azmisov-20140428-cyp/a0005.wav
+Created lattice with 7 nodes / 6 arcs from label file
+SENT-END WILL WE EVER FORGET IT SENT-END  ==  [298 frames] -53.8936 [Ac=-16060.3 LM=0.0] (Act=8.2)
+Aligning File: /tmp/oAqeSTIISH/azmisov-20140428-cyp/a0006.wav
+Created lattice with 13 nodes / 12 arcs from label file
+SENT-END GOD BLESS EM I HOPE I'LL GO ON SEEING THEM FOREVER SENT-END  ==  [523 frames] -56.8305 [Ac=-29722.4 LM=0.0] (Act=10.8)
+Aligning File: /tmp/oAqeSTIISH/azmisov-20140428-cyp/a0007.wav
+Created lattice with 13 nodes / 12 arcs from label file
+SENT-END AND YOU ALWAYS WANT TO SEE IT IN THE SUPERLATIVE DEGREE SENT-END  ==  [473 frames] -57.9589 [Ac=-27414.5 LM=0.0] (Act=10.5)
+Aligning File: /tmp/oAqeSTIISH/azmisov-20140428-cyp/a0008.wav
+Created lattice with 9 nodes / 8 arcs from label file
+SENT-END GAD YOUR LETTER CAME JUST IN TIME SENT-END  ==  [448 frames] -56.5685 [Ac=-25342.7 LM=0.0] (Act=11.1)
+Aligning File: /tmp/oAqeSTIISH/azmisov-20140428-cyp/a0009.wav
+Created lattice with 11 nodes / 10 arcs from label file
+SENT-END HE TURNED SHARPLY AND FACED GREGSON ACROSS THE TABLE SENT-END  ==  [511 frames] -57.1634 [Ac=-29210.5 LM=0.0] (Act=10.2)
+Aligning File: /tmp/oAqeSTIISH/azmisov-20140428-cyp/a0010.wav
+Created lattice with 14 nodes / 13 arcs from label file
+SENT-END I'M PLAYING A SINGLE HAND IN WHAT LOOKS LIKE A LOSING GAME SENT-END  ==  [523 frames] -57.4455 [Ac=-30044.0 LM=0.0] (Act=10.4)
+Aligning File: /tmp/oAqeSTIISH/azmisov-20140428-cyp/a0011.wav
+Created lattice with 15 nodes / 14 arcs from label file
+SENT-END IF I EVER NEEDED A FIGHTER IN MY LIFE I NEED ONE NOW SENT-END  ==  [473 frames] -56.0174 [Ac=-26496.2 LM=0.0] (Act=10.5)
+Aligning File: /tmp/oAqeSTIISH/azmisov-20140428-cyp/a0012.wav
+Created lattice with 12 nodes / 11 arcs from label file
+SENT-END GREGSON SHOVED BACK HIS CHAIR AND ROSE TO HIS FEET SENT-END  ==  [498 frames] -54.9782 [Ac=-27379.1 LM=0.0] (Act=9.4)
+
+HTK Configuration Parameters[11]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_D_N_Z_0
+                  SOURCEFORMAT                 WAV
+

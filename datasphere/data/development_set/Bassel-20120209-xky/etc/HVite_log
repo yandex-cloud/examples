@@ -1,0 +1,63 @@
+/usr/local/bin/HVite -A -D -T 1 -l * -a -b SENT-END -m -C /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/wav_config -H /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2010-04-16_16kHz_16bit_MFCC_O_D/macros -H /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2010-04-16_16kHz_16bit_MFCC_O_D/hmmdefs -m -t 250.0 150.0 1000.0 -I /tmp/OmpSYj3R2e/words.mlf -i /tmp/OmpSYj3R2e/aligned.out -S /tmp/OmpSYj3R2e/fileList /data/svn-mirror/SpeechCorpus/Trunk/Lexicon/VoxForge/VoxForgeDict /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2010-04-16_16kHz_16bit_MFCC_O_D/tiedlist 
+
+HTK Configuration Parameters[11]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_D_N_Z_0
+#                 SOURCEFORMAT                 WAV
+
+Read 8073 physical / 9417 logical HMMs
+Label file will be used to align each file
+Aligning File: /tmp/OmpSYj3R2e/Bassel-20120209-xky/b0425.wav
+Created lattice with 9 nodes / 8 arcs from label file
+SENT-END THERE WERE ORANGE-GREEN GOLD-GREEN AND A COPPER-GREEN SENT-END  ==  [473 frames] -59.6275 [Ac=-28203.8 LM=0.0] (Act=11.5)
+Aligning File: /tmp/OmpSYj3R2e/Bassel-20120209-xky/b0426.wav
+Created lattice with 10 nodes / 9 arcs from label file
+SENT-END THE GABRIEL VOICE OF THE SAMURAI RANG OUT SENT-END  ==  [473 frames] -57.9069 [Ac=-27390.0 LM=0.0] (Act=10.9)
+Aligning File: /tmp/OmpSYj3R2e/Bassel-20120209-xky/b0427.wav
+Created lattice with 15 nodes / 14 arcs from label file
+SENT-END THE SUNSETS GROW MORE BIZARRE AND SPECTACULAR OFF THIS COAST OF THE ARGENTINE SENT-END  ==  [786 frames] -60.6868 [Ac=-47699.9 LM=0.0] (Act=13.9)
+Aligning File: /tmp/OmpSYj3R2e/Bassel-20120209-xky/b0428.wav
+Created lattice with 12 nodes / 11 arcs from label file
+SENT-END THE HISTORY OF OUR WESTWARD-FARING RACE IS WRITTEN IN IT SENT-END  ==  [536 frames] -60.3256 [Ac=-32334.5 LM=0.0] (Act=11.2)
+Aligning File: /tmp/OmpSYj3R2e/Bassel-20120209-xky/b0429.wav
+Created lattice with 9 nodes / 8 arcs from label file
+SENT-END AND THE EURASIAN CHINESE-ENGLISHMAN BOWED HIMSELF AWAY SENT-END  ==  [561 frames] -61.0639 [Ac=-34256.8 LM=0.0] (Act=13.4)
+Aligning File: /tmp/OmpSYj3R2e/Bassel-20120209-xky/b0430.wav
+Created lattice with 9 nodes / 8 arcs from label file
+SENT-END THEY WERE BABBLING AND CHATTERING ALL TOGETHER SENT-END  ==  [411 frames] -59.0560 [Ac=-24272.0 LM=0.0] (Act=11.5)
+Aligning File: /tmp/OmpSYj3R2e/Bassel-20120209-xky/b0431.wav
+Created lattice with 11 nodes / 10 arcs from label file
+SENT-END TOO MUCH HE TOLD ME WITH OMINOUS ROLLING HEAD SENT-END  ==  [536 frames] -59.9098 [Ac=-32111.7 LM=0.0] (Act=12.1)
+Aligning File: /tmp/OmpSYj3R2e/Bassel-20120209-xky/b0432.wav
+Created lattice with 14 nodes / 13 arcs from label file
+SENT-END HE IS A CANDIDATE RISING FROM THE SERF CLASS TO OUR CLASS SENT-END  ==  [548 frames] -59.4207 [Ac=-32562.5 LM=0.0] (Act=12.4)
+Aligning File: /tmp/OmpSYj3R2e/Bassel-20120209-xky/b0433.wav
+Created lattice with 14 nodes / 13 arcs from label file
+SENT-END WE ARE COOKING ON THE COAL STOVE AND ON THE OIL BURNERS SENT-END  ==  [623 frames] -59.1141 [Ac=-36828.1 LM=0.0] (Act=11.6)
+Aligning File: /tmp/OmpSYj3R2e/Bassel-20120209-xky/b0434.wav
+Created lattice with 13 nodes / 12 arcs from label file
+SENT-END THE STEWARD HAS JUST TENDERED ME A RESPECTFUL BIT OF ADVICE SENT-END  ==  [586 frames] -59.8369 [Ac=-35064.4 LM=0.0] (Act=14.7)
+
+HTK Configuration Parameters[11]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_D_N_Z_0
+                  SOURCEFORMAT                 WAV
+

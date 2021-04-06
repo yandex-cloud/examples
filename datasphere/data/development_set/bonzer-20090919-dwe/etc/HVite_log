@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 42 physical / 42 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-dwe/mfc/ar-12.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence WITHIN FIVE HOURS THE TEN SCOUTS CAME BACK AND SAID silence  ==  [361 frames] -57.7655 [Ac=-20853.3 LM=0.0] (Act=10.7)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-dwe/mfc/ar-13.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence WE FOUND A STONE HOUSE WHERE THERE IS ROOM FOR US ALL silence  ==  [311 frames] -56.1214 [Ac=-17453.8 LM=0.0] (Act=10.2)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-dwe/mfc/ar-14.mfc
+Created lattice with 20 nodes / 19 arcs from label file
+silence THERE IS A KINDLY HORSE NAMED NELLY A COW A CALF AND A GARDEN WITH AN ELM TREE silence  ==  [537 frames] -55.2881 [Ac=-29689.7 LM=0.0] (Act=11.9)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-dwe/mfc/ar-15.mfc
+Created lattice with 19 nodes / 18 arcs from label file
+silence THE RATS CRAWLED OUT OF THEIR LITTLE HOUSES AND STOOD ON THE FLOOR IN A LONG LINE silence  ==  [461 frames] -56.7830 [Ac=-26177.0 LM=0.0] (Act=11.9)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-dwe/mfc/ar-16.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence JUST THEN THE OLD RAT SAW ARTHUR STOP HE ORDERED COARSELY silence  ==  [499 frames] -54.0125 [Ac=-26952.2 LM=0.0] (Act=7.8)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-dwe/mfc/ar-17.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence YOU ARE COMING OF COURSE I'M NOT CERTAIN SAID ARTHUR UNDAUNTED silence  ==  [537 frames] -51.7036 [Ac=-27764.8 LM=0.0] (Act=7.6)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-dwe/mfc/ar-18.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence THE ROOF MAY NOT COME DOWN YET silence  ==  [286 frames] -53.2214 [Ac=-15221.3 LM=0.0] (Act=9.4)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-dwe/mfc/ar-19.mfc
+Created lattice with 19 nodes / 18 arcs from label file
+silence WELL SAID THE OLD RAT WE CAN'T WAIT FOR YOU TO JOIN US RIGHT ABOUT FACE MARCH silence  ==  [737 frames] -54.8141 [Ac=-40398.0 LM=0.0] (Act=11.9)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-dwe/mfc/ar-20.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence ARTHUR STOOD AND WATCHED THEM HURRY AWAY silence  ==  [286 frames] -54.5600 [Ac=-15604.2 LM=0.0] (Act=10.2)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-dwe/mfc/ar-21.mfc
+Created lattice with 18 nodes / 17 arcs from label file
+silence I THINK I'LL GO TOMORROW HE SAID CALMLY TO HIMSELF BUT THEN AGAIN I DON'T KNOW silence  ==  [587 frames] -52.1034 [Ac=-30584.7 LM=0.0] (Act=9.8)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

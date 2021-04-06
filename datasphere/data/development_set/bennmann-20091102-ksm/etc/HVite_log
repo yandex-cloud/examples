@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 41 physical / 41 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bennmann-20091102-ksm/mfc/b0363.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence SHE WAS BUILT PRIMARILY TO SAIL silence  ==  [349 frames] -49.2596 [Ac=-17191.6 LM=0.0] (Act=7.3)
+Aligning File: /data/UserSubmissions/Quarantine/bennmann-20091102-ksm/mfc/b0364.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence IN THE BOHEMIAN CLUB OF SAN FRANCISCO THERE ARE SOME CRACK SAILORS silence  ==  [512 frames] -53.9599 [Ac=-27627.5 LM=0.0] (Act=8.2)
+Aligning File: /data/UserSubmissions/Quarantine/bennmann-20091102-ksm/mfc/b0365.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence MY AGE IN YEARS IS TWENTY TWO silence  ==  [349 frames] -49.3635 [Ac=-17227.9 LM=0.0] (Act=8.1)
+Aligning File: /data/UserSubmissions/Quarantine/bennmann-20091102-ksm/mfc/b0366.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence I FORGOT HOW EASILY I HAD TAUGHT MYSELF FROM THE PRINTED PAGE silence  ==  [461 frames] -53.1774 [Ac=-24514.8 LM=0.0] (Act=10.5)
+Aligning File: /data/UserSubmissions/Quarantine/bennmann-20091102-ksm/mfc/b0367.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence ANY AVERAGE YOUNG FELLOW CAN TEACH HIMSELF IN A WEEK silence  ==  [386 frames] -51.4195 [Ac=-19847.9 LM=0.0] (Act=8.4)
+Aligning File: /data/UserSubmissions/Quarantine/bennmann-20091102-ksm/mfc/b0368.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence PLEASE DO NOT THINK THAT I ALREADY KNOW IT ALL silence  ==  [374 frames] -51.1967 [Ac=-19147.6 LM=0.0] (Act=8.0)
+Aligning File: /data/UserSubmissions/Quarantine/bennmann-20091102-ksm/mfc/b0369.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence YOU SEE WE WERE TEACHING OURSELVES silence  ==  [386 frames] -49.6202 [Ac=-19153.4 LM=0.0] (Act=8.6)
+Aligning File: /data/UserSubmissions/Quarantine/bennmann-20091102-ksm/mfc/b0370.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence AND NOW BEHOLD THE PERVERSITY OF THINGS silence  ==  [399 frames] -52.0363 [Ac=-20762.5 LM=0.0] (Act=7.7)
+Aligning File: /data/UserSubmissions/Quarantine/bennmann-20091102-ksm/mfc/b0371.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence YIELD YOURSELF TO THE WATERS THAT ARE RIPPING AND TEARING AT YOU silence  ==  [474 frames] -52.6705 [Ac=-24965.8 LM=0.0] (Act=8.3)
+Aligning File: /data/UserSubmissions/Quarantine/bennmann-20091102-ksm/mfc/b0372.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence MR MCVEIGH TOLD ME ABOUT HIM silence  ==  [361 frames] -53.0548 [Ac=-19152.8 LM=0.0] (Act=7.9)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

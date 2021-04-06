@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 40 physical / 40 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/Bitbrit-20090528-fsw/mfc/b0037.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence PHILIP KNEW THAT SHE WAS NOT AN INDIAN silence  ==  [299 frames] -57.9535 [Ac=-17328.1 LM=0.0] (Act=11.0)
+Aligning File: /data/UserSubmissions/Quarantine/Bitbrit-20090528-fsw/mfc/b0038.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence IN HER HASTE TO GET AWAY SHE HAD FORGOTTEN THESE THINGS silence  ==  [411 frames] -58.6215 [Ac=-24093.4 LM=0.0] (Act=13.0)
+Aligning File: /data/UserSubmissions/Quarantine/Bitbrit-20090528-fsw/mfc/b0039.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence PHILIP TOOK A STEP TOWARD GREGSON HALF DETERMINED TO AWAKEN HIM silence  ==  [512 frames] -57.8103 [Ac=-29598.9 LM=0.0] (Act=10.4)
+Aligning File: /data/UserSubmissions/Quarantine/Bitbrit-20090528-fsw/mfc/b0040.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence THE THOUGHT SET HIS BLOOD TINGLING silence  ==  [274 frames] -55.5184 [Ac=-15212.0 LM=0.0] (Act=10.1)
+Aligning File: /data/UserSubmissions/Quarantine/Bitbrit-20090528-fsw/mfc/b0041.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence BUT IF PIERRE DID NOT RETURN UNTIL TOMORROW silence  ==  [399 frames] -56.3235 [Ac=-22473.1 LM=0.0] (Act=10.2)
+Aligning File: /data/UserSubmissions/Quarantine/Bitbrit-20090528-fsw/mfc/b0042.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence TEN MINUTES HAD NOT ELAPSED SINCE HE HAD DROPPED THE HANDKERCHIEF silence  ==  [424 frames] -59.1053 [Ac=-25060.6 LM=0.0] (Act=15.3)
+Aligning File: /data/UserSubmissions/Quarantine/Bitbrit-20090528-fsw/mfc/b0043.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence IT WON'T BE FOR SALE silence  ==  [261 frames] -56.0619 [Ac=-14632.2 LM=0.0] (Act=9.4)
+Aligning File: /data/UserSubmissions/Quarantine/Bitbrit-20090528-fsw/mfc/b0044.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence FOR A FEW MOMENTS HE ATE IN SILENCE silence  ==  [324 frames] -58.4201 [Ac=-18928.1 LM=0.0] (Act=10.5)
+Aligning File: /data/UserSubmissions/Quarantine/Bitbrit-20090528-fsw/mfc/b0045.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence PHILIP DID NOT PURSUE THE SUBJECT silence  ==  [286 frames] -56.4883 [Ac=-16155.7 LM=0.0] (Act=10.2)
+Aligning File: /data/UserSubmissions/Quarantine/Bitbrit-20090528-fsw/mfc/b0046.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence PHILIP PRODUCED A COUPLE OF CIGARS AND TOOK A CHAIR OPPOSITE HIM silence  ==  [399 frames] -60.2103 [Ac=-24023.9 LM=0.0] (Act=11.6)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

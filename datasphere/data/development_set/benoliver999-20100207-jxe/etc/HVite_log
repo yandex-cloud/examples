@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 42 physical / 42 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/benoliver999-20100207-jxe/mfc/b0479.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence VIOLATION OF THIS LAW WAS MADE A HIGH MISDEMEANOR AND PUNISHED ACCORDINGLY silence  ==  [723 frames] -46.6259 [Ac=-33710.5 LM=0.0] (Act=10.6)
+Aligning File: /data/UserSubmissions/Quarantine/benoliver999-20100207-jxe/mfc/b0480.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence WITHOUT DISCUSSION IT WAS THE AGENTS PROVOCATEURS WHO CAUSED THE PEASANT REVOLT silence  ==  [723 frames] -48.6212 [Ac=-35153.1 LM=0.0] (Act=14.7)
+Aligning File: /data/UserSubmissions/Quarantine/benoliver999-20100207-jxe/mfc/b0481.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence THE TASK WE SET OURSELVES WAS THREEFOLD silence  ==  [511 frames] -47.2330 [Ac=-24136.1 LM=0.0] (Act=10.6)
+Aligning File: /data/UserSubmissions/Quarantine/benoliver999-20100207-jxe/mfc/b0482.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence MANY OTHER SIMILAR DISCONCERTING OMISSIONS WILL BE NOTICED IN THE MANUSCRIPT silence  ==  [611 frames] -48.6621 [Ac=-29732.6 LM=0.0] (Act=9.6)
+Aligning File: /data/UserSubmissions/Quarantine/benoliver999-20100207-jxe/mfc/b0483.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence THE FLOWER OF THE ARTISTIC AND INTELLECTUAL WORLD WERE REVOLUTIONISTS silence  ==  [598 frames] -49.0330 [Ac=-29321.7 LM=0.0] (Act=14.3)
+Aligning File: /data/UserSubmissions/Quarantine/benoliver999-20100207-jxe/mfc/b0484.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence THIS THE IRON HEEL FORESAW AND LAID ITS SCHEMES ACCORDINGLY silence  ==  [673 frames] -46.8644 [Ac=-31539.7 LM=0.0] (Act=9.6)
+Aligning File: /data/UserSubmissions/Quarantine/benoliver999-20100207-jxe/mfc/b0485.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence THE MOB CAME ON BUT IT COULD NOT ADVANCE silence  ==  [511 frames] -44.1301 [Ac=-22550.5 LM=0.0] (Act=9.6)
+Aligning File: /data/UserSubmissions/Quarantine/benoliver999-20100207-jxe/mfc/b0486.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence BUT WHY CONTINUE THE TIRADE FOR TIRADE IT WAS silence  ==  [586 frames] -48.4698 [Ac=-28403.3 LM=0.0] (Act=12.2)
+Aligning File: /data/UserSubmissions/Quarantine/benoliver999-20100207-jxe/mfc/b0487.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence AFTER ALL SUPERFLUOUS FLESH IS GONE WHAT IS LEFT IS STRINGY AND RESISTANT silence  ==  [761 frames] -50.3367 [Ac=-38306.2 LM=0.0] (Act=16.2)
+Aligning File: /data/UserSubmissions/Quarantine/benoliver999-20100207-jxe/mfc/b0488.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence BEYOND REFUSING TO SELL US FOOD THEY LEFT US TO OURSELVES silence  ==  [623 frames] -47.8558 [Ac=-29814.2 LM=0.0] (Act=15.9)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

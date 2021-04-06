@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 42 physical / 42 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-uin/mfc/a0309.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence WHITE LEGHORNS SAID MRS MORTIMER silence  ==  [336 frames] -55.7395 [Ac=-18728.5 LM=0.0] (Act=7.9)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-uin/mfc/a0310.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence MASSAGE UNDER TENSION WAS THE CRYPTIC REPLY silence  ==  [374 frames] -56.9230 [Ac=-21289.2 LM=0.0] (Act=10.7)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-uin/mfc/a0311.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence THEREFORE HURRAH FOR THE GAME silence  ==  [286 frames] -56.4454 [Ac=-16143.4 LM=0.0] (Act=9.2)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-uin/mfc/a0312.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence IT LIVED IN PERPETUAL APPREHENSION OF THAT QUARTER OF THE COMPASS silence  ==  [474 frames] -55.6118 [Ac=-26360.0 LM=0.0] (Act=8.9)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-uin/mfc/a0313.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence BROKEN-TOOTH YELLED WITH FRIGHT AND PAIN silence  ==  [374 frames] -55.1993 [Ac=-20644.5 LM=0.0] (Act=9.8)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-uin/mfc/a0314.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence THUS WAS MOMENTUM GAINED IN THE YOUNGER WORLD silence  ==  [386 frames] -54.7338 [Ac=-21127.3 LM=0.0] (Act=9.7)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-uin/mfc/a0315.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence SAXON WAITED FOR SHE KNEW A FRESH IDEA HAD STRUCK BILLY silence  ==  [411 frames] -59.9947 [Ac=-24657.8 LM=0.0] (Act=10.8)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-uin/mfc/a0316.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence WE HAD BEEN CHASED BY THEM OURSELVES MORE THAN ONCE silence  ==  [336 frames] -59.6242 [Ac=-20033.7 LM=0.0] (Act=11.1)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-uin/mfc/a0317.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence HE WAS A WISE HYENA silence  ==  [249 frames] -53.4318 [Ac=-13304.5 LM=0.0] (Act=8.8)
+Aligning File: /data/UserSubmissions/Quarantine/bonzer-20090919-uin/mfc/a0318.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence PRODUCTION IS DOUBLING AND QUADRUPLING UPON ITSELF silence  ==  [361 frames] -60.7465 [Ac=-21929.5 LM=0.0] (Act=8.5)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

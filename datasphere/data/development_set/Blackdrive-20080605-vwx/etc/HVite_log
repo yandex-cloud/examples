@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 42 physical / 42 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/Blackdrive-20080605-vwx/mfc/b0209.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence HE'S TERRIBLY TOUCHY ABOUT HIS BLACK WARDS AS HE CALLS THEM silence  ==  [562 frames] -47.3465 [Ac=-26608.7 LM=0.0] (Act=10.8)
+Aligning File: /data/UserSubmissions/Quarantine/Blackdrive-20080605-vwx/mfc/b0210.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence WHATEVER HE GUESSED HE LOCKED AWAY IN THE TABOO ROOM OF NAOMI silence  ==  [614 frames] -44.7796 [Ac=-27494.7 LM=0.0] (Act=9.8)
+Aligning File: /data/UserSubmissions/Quarantine/Blackdrive-20080605-vwx/mfc/b0211.mfc
+Created lattice with 6 nodes / 5 arcs from label file
+silence THIS IS EIGHTEEN EIGHTY silence  ==  [340 frames] -42.0307 [Ac=-14290.5 LM=0.0] (Act=7.7)
+Aligning File: /data/UserSubmissions/Quarantine/Blackdrive-20080605-vwx/mfc/b0212.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence DEATH IS AND HAS BEEN EVER SINCE OLD MAUI DIED silence  ==  [562 frames] -46.0929 [Ac=-25904.2 LM=0.0] (Act=11.6)
+Aligning File: /data/UserSubmissions/Quarantine/Blackdrive-20080605-vwx/mfc/b0213.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence SOME BOY SHE LAUGHED ACQUIESCENCE silence  ==  [417 frames] -43.8950 [Ac=-18304.2 LM=0.0] (Act=9.3)
+Aligning File: /data/UserSubmissions/Quarantine/Blackdrive-20080605-vwx/mfc/b0214.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence LET US TALK IT OVER AND FIND A WAY OUT silence  ==  [391 frames] -44.2014 [Ac=-17282.8 LM=0.0] (Act=14.4)
+Aligning File: /data/UserSubmissions/Quarantine/Blackdrive-20080605-vwx/mfc/b0215.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence IT IS A GOOD PROPERTY AND WORTH MORE THAN THAT silence  ==  [443 frames] -42.0279 [Ac=-18618.4 LM=0.0] (Act=8.8)
+Aligning File: /data/UserSubmissions/Quarantine/Blackdrive-20080605-vwx/mfc/b0216.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence I WISH YOU WERE MORE ADAPTABLE JOAN RETORTED silence  ==  [503 frames] -42.5478 [Ac=-21401.5 LM=0.0] (Act=9.1)
+Aligning File: /data/UserSubmissions/Quarantine/Blackdrive-20080605-vwx/mfc/b0217.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence SUCH IS MY PASSAGE ENGAGED ON THE STEAMER silence  ==  [520 frames] -45.4876 [Ac=-23653.5 LM=0.0] (Act=8.7)
+Aligning File: /data/UserSubmissions/Quarantine/Blackdrive-20080605-vwx/mfc/b0218.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence THE ISSUE WAS NOT IN DOUBT silence  ==  [366 frames] -40.4094 [Ac=-14789.8 LM=0.0] (Act=8.2)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

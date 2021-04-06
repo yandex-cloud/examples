@@ -1,0 +1,63 @@
+/usr/local/bin/HVite -A -D -T 1 -l * -a -b SENT-END -m -C /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/wav_config -H /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2010-04-16_16kHz_16bit_MFCC_O_D/macros -H /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2010-04-16_16kHz_16bit_MFCC_O_D/hmmdefs -m -t 250.0 150.0 1000.0 -I /tmp/MVvgsGedOh/words.mlf -i /tmp/MVvgsGedOh/aligned.out -S /tmp/MVvgsGedOh/fileList /data/svn-mirror/SpeechCorpus/Trunk/Lexicon/VoxForge/VoxForgeDict /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2010-04-16_16kHz_16bit_MFCC_O_D/tiedlist 
+
+HTK Configuration Parameters[11]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_D_N_Z_0
+#                 SOURCEFORMAT                 WAV
+
+Read 8073 physical / 9417 logical HMMs
+Label file will be used to align each file
+Aligning File: /tmp/MVvgsGedOh/asalkeld-20111226-ets/a0147.wav
+Created lattice with 15 nodes / 14 arcs from label file
+SENT-END A MOMENT BEFORE HE WAS INTOXICATED BY A JOY THAT WAS ALMOST MADNESS SENT-END  ==  [698 frames] -55.4018 [Ac=-38670.4 LM=0.0] (Act=13.9)
+Aligning File: /tmp/MVvgsGedOh/asalkeld-20111226-ets/a0148.wav
+Created lattice with 11 nodes / 10 arcs from label file
+SENT-END NOW THESE THINGS HAD BEEN STRUCK DEAD WITHIN HIM SENT-END  ==  [573 frames] -55.6337 [Ac=-31878.1 LM=0.0] (Act=12.8)
+Aligning File: /tmp/MVvgsGedOh/asalkeld-20111226-ets/a0149.wav
+Created lattice with 15 nodes / 14 arcs from label file
+SENT-END FOR AN INSTANT HE SAW PIERRE DRAWN LIKE A SILHOUETTE AGAINST THE SKY SENT-END  ==  [661 frames] -57.3674 [Ac=-37919.9 LM=0.0] (Act=12.9)
+Aligning File: /tmp/MVvgsGedOh/asalkeld-20111226-ets/a0150.wav
+Created lattice with 6 nodes / 5 arcs from label file
+SENT-END GOODBYE PIERRE HE SHOUTED SENT-END  ==  [461 frames] -55.4291 [Ac=-25552.8 LM=0.0] (Act=9.4)
+Aligning File: /tmp/MVvgsGedOh/asalkeld-20111226-ets/a0151.wav
+Created lattice with 14 nodes / 13 arcs from label file
+SENT-END AND MACDOUGALL WAS BEYOND THE TRAIL AND WITH THREE WEEKS TO SPARE SENT-END  ==  [898 frames] -57.1126 [Ac=-51287.1 LM=0.0] (Act=15.1)
+Aligning File: /tmp/MVvgsGedOh/asalkeld-20111226-ets/a0152.wav
+Created lattice with 9 nodes / 8 arcs from label file
+SENT-END PHILIP THRUST HIMSELF AGAINST IT AND ENTERED SENT-END  ==  [536 frames] -55.7203 [Ac=-29866.1 LM=0.0] (Act=10.6)
+Aligning File: /tmp/MVvgsGedOh/asalkeld-20111226-ets/a0153.wav
+Created lattice with 11 nodes / 10 arcs from label file
+SENT-END MACDOUGALL TAPPED HIS FOREHEAD SUSPICIOUSLY WITH A STUBBY FOREFINGER SENT-END  ==  [611 frames] -56.3280 [Ac=-34416.4 LM=0.0] (Act=12.5)
+Aligning File: /tmp/MVvgsGedOh/asalkeld-20111226-ets/a0154.wav
+Created lattice with 12 nodes / 11 arcs from label file
+SENT-END HE WAS SMOOTH-SHAVEN AND HIS HAIR AND EYES WERE BLACK SENT-END  ==  [561 frames] -56.3268 [Ac=-31599.3 LM=0.0] (Act=13.4)
+Aligning File: /tmp/MVvgsGedOh/asalkeld-20111226-ets/a0155.wav
+Created lattice with 7 nodes / 6 arcs from label file
+SENT-END WON'T YOU DRAW UP GENTLEMEN SENT-END  ==  [398 frames] -56.7730 [Ac=-22595.7 LM=0.0] (Act=9.7)
+Aligning File: /tmp/MVvgsGedOh/asalkeld-20111226-ets/a0156.wav
+Created lattice with 12 nodes / 11 arcs from label file
+SENT-END A STRANGE FIRE BURNED IN HIS EYES WHEN THORPE TURNED SENT-END  ==  [473 frames] -56.7494 [Ac=-26842.5 LM=0.0] (Act=11.6)
+
+HTK Configuration Parameters[11]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_D_N_Z_0
+                  SOURCEFORMAT                 WAV
+

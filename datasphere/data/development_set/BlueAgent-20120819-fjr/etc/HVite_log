@@ -1,0 +1,60 @@
+/usr/local/bin/HVite -A -D -T 1 -l * -a -b SENT-END -m -C /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/wav_config -H /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/macros -H /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/hmmdefs -m -t 250.0 150.0 1000.0 -I /tmp/4Eniz1gWEw/words.mlf -i /tmp/4Eniz1gWEw/aligned.out -S /tmp/4Eniz1gWEw/fileList /data/svn-mirror/SpeechCorpus/Trunk/Lexicon/VoxForge/VoxForgeDict /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/tiedlist 
+
+HTK Configuration Parameters[11]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_D_N_Z_0
+#                 SOURCEFORMAT                 WAV
+
+Read 8294 physical / 9429 logical HMMs
+Label file will be used to align each file
+Aligning File: /tmp/4Eniz1gWEw/BlueAgent-20120819-fjr/a0317.wav
+Created lattice with 7 nodes / 6 arcs from label file
+SENT-END HE WAS A WISE HYENA SENT-END  ==  [373 frames] -56.4268 [Ac=-21047.2 LM=0.0] (Act=8.0)
+Aligning File: /tmp/4Eniz1gWEw/BlueAgent-20120819-fjr/a0318.wav
+Created lattice with 9 nodes / 8 arcs from label file
+SENT-END PRODUCTION IS DOUBLING AND QUADRUPLING UPON ITSELF SENT-END  ==  [486 frames] -62.3038 [Ac=-30279.6 LM=0.0] (Act=11.4)
+Aligning File: /tmp/4Eniz1gWEw/BlueAgent-20120819-fjr/a0319.wav
+Created lattice with 11 nodes / 10 arcs from label file
+SENT-END AND THE EDINBURGH EVENING NEWS SAYS WITH EDITORIAL GLOOM SENT-END  ==  [536 frames] -60.2673 [Ac=-32303.3 LM=0.0] (Act=13.2)
+Aligning File: /tmp/4Eniz1gWEw/BlueAgent-20120819-fjr/a0320.wav
+Created lattice with 12 nodes / 11 arcs from label file
+SENT-END WITH MY STRENGTH I SLAMMED IT FULL INTO RED-EYE'S FACE SENT-END  ==  [486 frames] -62.0498 [Ac=-30156.2 LM=0.0] (Act=11.4)
+Aligning File: /tmp/4Eniz1gWEw/BlueAgent-20120819-fjr/a0321.wav
+Created lattice with 11 nodes / 10 arcs from label file
+SENT-END THE LOG ON WHICH LOP-EAR WAS LYING GOT ADRIFT SENT-END  ==  [486 frames] -60.8855 [Ac=-29590.3 LM=0.0] (Act=10.2)
+Aligning File: /tmp/4Eniz1gWEw/BlueAgent-20120819-fjr/a0322.wav
+Created lattice with 11 nodes / 10 arcs from label file
+SENT-END THIS IS A COMMON EXPERIENCE WITH ALL OF US SENT-END  ==  [373 frames] -61.5216 [Ac=-22947.6 LM=0.0] (Act=11.4)
+Aligning File: /tmp/4Eniz1gWEw/BlueAgent-20120819-fjr/a0323.wav
+Created lattice with 14 nodes / 13 arcs from label file
+SENT-END HE CONSIDERED THE VICTORY ALREADY HIS AND STEPPED FORWARD TO THE MEAT SENT-END  ==  [536 frames] -62.6101 [Ac=-33559.0 LM=0.0] (Act=13.7)
+Aligning File: /tmp/4Eniz1gWEw/BlueAgent-20120819-fjr/a0324.wav
+Created lattice with 12 nodes / 11 arcs from label file
+SENT-END IT WAS NOT RED-EYE'S WAY TO FOREGO REVENGE SO EASILY SENT-END  ==  [486 frames] -61.7720 [Ac=-30021.2 LM=0.0] (Act=9.1)
+Aligning File: /tmp/4Eniz1gWEw/BlueAgent-20120819-fjr/a0325.wav
+Created lattice with 8 nodes / 7 arcs from label file
+SENT-END WHIZ-ZIP-BANG LOP-EAR SCREAMED WITH SUDDEN ANGUISH SENT-END  ==  [523 frames] -60.0800 [Ac=-31421.8 LM=0.0] (Act=12.2)
+
+HTK Configuration Parameters[11]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_D_N_Z_0
+                  SOURCEFORMAT                 WAV
+

@@ -1,0 +1,421 @@
+STAT: jconf successfully finalized
+STAT: *** loading AM00 _default
+Stat: init_phmm: Reading in HMM definition
+Stat: rdhmmdef: ascii format HMM definition
+Stat: rdhmmdef: limit check passed
+Stat: check_hmm_restriction: an HMM with several arcs from initial state found: "sp"
+Stat: rdhmmdef: this HMM requires multipath handling at decoding
+Stat: init_phmm: defined HMMs:  8294
+Stat: init_phmm: loading ascii hmmlist
+Stat: init_phmm: logical names:  9429 in HMMList
+Stat: init_phmm: base phones:    44 used in logical
+Stat: init_phmm: finished reading HMM definitions
+STAT: m_fusion: force multipath HMM handling by user request
+STAT: making pseudo bi/mono-phone for IW-triphone
+Stat: hmm_lookup: 1086 pseudo phones are added to logical HMM list
+STAT: *** AM00 _default loaded
+STAT: *** loading LM00 _default
+STAT: reading [/tmp/atiKFm5H0Q/BhushanNKIITBombay-20140219-bbj.dfa] and [/tmp/atiKFm5H0Q/BhushanNKIITBombay-20140219-bbj.dict]...
+Stat: init_voca: read 73 words
+STAT: done
+STAT: Gram #0 BhushanNKIITBombay-20140219-bbj registered
+STAT: Gram #0 BhushanNKIITBombay-20140219-bbj: new grammar loaded, now mash it up for recognition
+STAT: Gram #0 BhushanNKIITBombay-20140219-bbj: extracting category-pair constraint for the 1st pass
+STAT: Gram #0 BhushanNKIITBombay-20140219-bbj: installed
+STAT: Gram #0 BhushanNKIITBombay-20140219-bbj: turn on active
+STAT: grammar update completed
+STAT: *** LM00 _default loaded
+STAT: ------
+STAT: All models are ready, go for final fusion
+STAT: [1] create MFCC extraction instance(s)
+STAT: *** create MFCC calculation modules from AM
+STAT: AM 0 _default: create a new module MFCC01
+STAT: 1 MFCC modules created
+STAT: [2] create recognition processing instance(s) with AM and LM
+STAT: composing recognizer instance SR00 _default (AM00 _default, LM00 _default)
+STAT: Building HMM lexicon tree
+STAT: lexicon size: 1091 nodes
+STAT: coordination check passed
+STAT: wchmm (re)build completed
+STAT: SR00 _default composed
+STAT: [3] initialize for acoustic HMM calculation
+Stat: outprob_init: state-level mixture PDFs, use calc_mix()
+Stat: addlog: generating addlog table (size = 1953 kB)
+Stat: addlog: addlog table generated
+STAT: [4] prepare MFCC storage(s)
+STAT: All init successfully done
+
+STAT: ###### initialize input device
+----------------------- System Information begin ---------------------
+JuliusLib rev.4.2.1 (standard)
+
+Engine specification:
+ -  Base setup   : standard
+ -  Supported LM : DFA, N-gram, Word
+ -  Extension    : ShortWordTree StrictIWCD2
+ -  Compiled by  : gcc -O6 -fomit-frame-pointer
+
+------------------------------------------------------------
+Configuration of Modules
+
+ Number of defined modules: AM=1, LM=1, SR=1
+
+ Acoustic Model (with input parameter spec.):
+ - AM00 "_default"
+	hmmfilename=/data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/hmmdefs
+	hmmmapfilename=/data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/tiedlist
+
+ Language Model:
+ - LM00 "_default"
+	grammar #1:
+	    dfa  = /tmp/atiKFm5H0Q/BhushanNKIITBombay-20140219-bbj.dfa
+	    dict = /tmp/atiKFm5H0Q/BhushanNKIITBombay-20140219-bbj.dict
+
+ Recognizer:
+ - SR00 "_default" (AM00, LM00)
+
+------------------------------------------------------------
+Speech Analysis Module(s)
+
+[MFCC01]  for [AM00 _default]
+
+ Acoustic analysis condition:
+	       parameter = MFCC_0_D_N_Z (25 dim. from 12 cepstrum + c0, abs energy supressed with CMN)
+	sample frequency = 16000 Hz
+	   sample period =  625  (1 = 100ns)
+	     window size =  400 samples (25.0 ms)
+	     frame shift =  160 samples (10.0 ms)
+	    pre-emphasis = 0.97
+	    # filterbank = 24
+	   cepst. lifter = 22
+	      raw energy = False
+	energy normalize = False
+	    delta window = 2 frames (20.0 ms) around
+	     hi freq cut = OFF
+	     lo freq cut = OFF
+	 zero mean frame = OFF
+	       use power = OFF
+	             CVN = OFF
+	            VTLN = OFF
+    spectral subtraction = off
+  cepstral normalization = sentence CMN
+	 base setup from = Julius defaults
+
+------------------------------------------------------------
+Acoustic Model(s)
+
+[AM00 "_default"]
+
+ HMM Info:
+    8294 models, 7236 states, 7236 mpdfs, 7236 Gaussians are defined
+	      model type = context dependency handling ON
+      training parameter = MFCC_N_D_Z_0
+	   vector length = 25
+	number of stream = 1
+	     stream info = [0-24]
+	cov. matrix type = DIAGC
+	   duration type = NULLD
+	max mixture size = 1 Gaussians
+     max length of model = 5 states
+     logical base phones = 44
+       model skip trans. = exist, require multi-path handling
+      skippable models = sp (1 model(s))
+
+ AM Parameters:
+        Gaussian pruning = none (full computation)  (-gprune)
+    short pause HMM name = "sp" specified, "sp" applied (physical)  (-sp)
+  cross-word CD on pass1 = handle by approx. (use average prob. of same LC)
+   sp transition penalty = -1.0
+
+------------------------------------------------------------
+Language Model(s)
+
+[LM00 "_default"] type=grammar
+
+ DFA grammar info:
+      87 nodes, 95 arcs, 73 terminal(category) symbols
+      category-pair matrix: 412 bytes (6876 bytes allocated)
+
+ Vocabulary Info:
+        vocabulary size  = 73 words, 315 models
+        average word len = 4.3 models, 12.9 states
+       maximum state num = 42 nodes per word
+       transparent words = not exist
+       words under class = not exist
+
+ Parameters:
+   found sp category IDs =
+
+------------------------------------------------------------
+Recognizer(s)
+
+[SR00 "_default"]  AM00 "_default"  +  LM00 "_default"
+
+ Lexicon tree:
+	 total node num =   1091
+	  root node num =     73
+	  leaf node num =     73
+
+	(-penalty1) IW penalty1 = +0.0
+	(-penalty2) IW penalty2 = +0.0
+	(-cmalpha)CM alpha coef = 0.050000
+
+ Search parameters: 
+	    multi-path handling = yes, multi-path mode enabled
+	(-b) trellis beam width = 500
+	(-bs)score pruning thres= disabled
+	(-n)search candidate num= 10
+	(-s)  search stack size = 500
+	(-m)    search overflow = after 2000 hypothesis poped
+	        2nd pass method = searching sentence, generating N-best
+	(-b2)  pass2 beam width = 500
+	(-lookuprange)lookup range= 5  (tm-5 <= t <tm+5)
+	(-sb)2nd scan beamthres = 80.0 (in logscore)
+	(-n)        search till = 10 candidates found
+	(-output)    and output = 1 candidates out of above
+	 IWCD handling:
+	   1st pass: approximation (use average prob. of same LC)
+	   2nd pass: strict (apply when expanding hypo. )
+	 all possible words will be expanded in 2nd pass
+	 build_wchmm2() used
+	 lcdset limited by word-pair constraint
+	short pause segmentation = off
+	fall back on search fail = off, returns search failure
+
+------------------------------------------------------------
+Decoding algorithm:
+
+	1st pass input processing = (forced) buffered, batch
+	1st pass method = 1-best approx. generating indexed trellis
+	output word confidence measure based on search-time scores
+
+------------------------------------------------------------
+FrontEnd:
+
+ Input stream:
+	             input type = waveform
+	           input source = waveform file
+	          input filelist = /tmp/atiKFm5H0Q/fileList
+	          sampling freq. = 16000 Hz required
+	         threaded A/D-in = supported, off
+	   zero frames stripping = on
+	         silence cutting = off
+	    long-term DC removal = off
+	      reject short input = off
+
+----------------------- System Information end -----------------------
+
+------
+.....................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................### read waveform input
+Stat: adin_file: input speechfile: /tmp/atiKFm5H0Q/BhushanNKIITBombay-20140219-bbj/b0425.wav
+STAT: 170000 samples (10.62 sec.)
+STAT: ### speech analysis (waveform -> MFCC)
+### Recognition: 1st pass (LR beam)
+pass1_best: <s> THE HISTORY OF THE HISTORY OF THE ARGENTINE <s>
+pass1_best_wordseq: 0 9 25 12 9 25 12 9 24 1
+pass1_best_phonemeseq: sil | dh ax | hh ih s t er iy | ah v | dh ax | hh ih s t er iy | ah v | dh ax | aa r jh ax n t iy n | sil
+pass1_best_score: -27170.138672
+### Recognition: 2nd pass (RL heuristic best-first)
+WARNING: 00 _default: hypothesis stack exhausted, terminate search now
+STAT: 00 _default: 0 sentences have been found
+WARNING: 00 _default: got no candidates, search failed
+STAT: 00 _default: 30 generated, 30 pushed, 30 nodes popped in 1061
+<search failed>
+
+
+------
+.......................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................### read waveform input
+Stat: adin_file: input speechfile: /tmp/atiKFm5H0Q/BhushanNKIITBombay-20140219-bbj/b0426.wav
+STAT: 114000 samples (7.12 sec.)
+STAT: ### speech analysis (waveform -> MFCC)
+### Recognition: 1st pass (LR beam)
+pass1_best: <s> AND THE GABRIEL VOICE OF ADVICE <s>
+pass1_best_wordseq: 0 6 9 10 11 12 72 1
+pass1_best_phonemeseq: sil | ae n d | dh ax | g ey b r iy ax l | v oy s | ah v | ae d v ay s | sil
+pass1_best_score: -18759.660156
+### Recognition: 2nd pass (RL heuristic best-first)
+WARNING: IW-triphone for word head "iy-ax+r" not found, fallback to pseudo {ax+r}
+WARNING: 00 _default: hypothesis stack exhausted, terminate search now
+STAT: 00 _default: 0 sentences have been found
+WARNING: 00 _default: got no candidates, search failed
+STAT: 00 _default: 40 generated, 40 pushed, 40 nodes popped in 711
+<search failed>
+
+
+------
+...............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................### read waveform input
+Stat: adin_file: input speechfile: /tmp/atiKFm5H0Q/BhushanNKIITBombay-20140219-bbj/b0427.wav
+STAT: 146000 samples (9.12 sec.)
+STAT: ### speech analysis (waveform -> MFCC)
+### Recognition: 1st pass (LR beam)
+pass1_best: <s> THE SUNSETS GROW MORE BIZARRE AND SPECTACULAR OFF THIS COAST OF ADVICE <s>
+pass1_best_wordseq: 0 9 16 17 18 19 6 20 21 22 23 12 72 1
+pass1_best_phonemeseq: sil | dh ax | s ah n s eh t s | g r ow | m ao r | b ax z aa r | ae n d | s p eh k t ae k y ax l er | ao f | dh ih s | k ow s t | ah v | ae d v ay s | sil
+pass1_best_score: -24274.060547
+### Recognition: 2nd pass (RL heuristic best-first)
+WARNING: 00 _default: hypothesis stack exhausted, terminate search now
+STAT: 00 _default: 1 sentences have been found
+STAT: 00 _default: 42 generated, 42 pushed, 43 nodes popped in 911
+sentence1: <s> THE SUNSETS GROW MORE BIZARRE AND SPECTACULAR OFF THIS COAST OF THE ARGENTINE <s>
+wseq1: 0 9 16 17 18 19 6 20 21 22 23 12 9 24 1
+phseq1: sil | dh ax | s ah n s eh t s | g r ow | m ao r | b ax z aa r | ae n d | s p eh k t ae k y ax l er | ao f | dh ih s | k ow s t | ah v | dh ax | aa r jh ax n t iy n | sil
+cmscore1: 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 0.022 1.000
+score1: -24306.777344
+
+
+------
+............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................### read waveform input
+Stat: adin_file: input speechfile: /tmp/atiKFm5H0Q/BhushanNKIITBombay-20140219-bbj/b0428.wav
+STAT: 102000 samples (6.38 sec.)
+STAT: ### speech analysis (waveform -> MFCC)
+### Recognition: 1st pass (LR beam)
+pass1_best: <s> THE HISTORY OF OUR WESTWARD-FARING RACE IS WRITTEN IN IT <s>
+pass1_best_wordseq: 0 9 25 12 26 27 28 29 30 31 32 1
+pass1_best_phonemeseq: sil | dh ax | hh ih s t er iy | ah v | aw er | w eh s t w er d f eh r ix ng | r ey s | ih z | r ih t ax n | ix n | ih t | sil
+pass1_best_score: -16299.957031
+### Recognition: 2nd pass (RL heuristic best-first)
+WARNING: IW-triphone for word head "iy-ax+r" not found, fallback to pseudo {ax+r}
+WARNING: 00 _default: hypothesis stack exhausted, terminate search now
+STAT: 00 _default: 1 sentences have been found
+STAT: 00 _default: 40 generated, 40 pushed, 41 nodes popped in 636
+sentence1: <s> THE HISTORY OF OUR WESTWARD-FARING RACE IS WRITTEN IN IT <s>
+wseq1: 0 9 25 12 26 27 28 29 30 31 32 1
+phseq1: sil | dh ax | hh ih s t er iy | ah v | aw er | w eh s t w er d f eh r ix ng | r ey s | ih z | r ih t ax n | ix n | ih t | sil
+cmscore1: 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 0.994 1.000
+score1: -16299.979492
+
+
+------
+.......................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................### read waveform input
+Stat: adin_file: input speechfile: /tmp/atiKFm5H0Q/BhushanNKIITBombay-20140219-bbj/b0429.wav
+STAT: 114000 samples (7.12 sec.)
+STAT: ### speech analysis (waveform -> MFCC)
+### Recognition: 1st pass (LR beam)
+pass1_best: <s> AND ON THE EURASIAN CHINESE-ENGLISHMAN BOWED HIMSELF AWAY <s>
+pass1_best_wordseq: 0 6 61 9 33 34 35 36 37 1
+pass1_best_phonemeseq: sil | ae n d | aa n | dh ax | y uh r ey zh ix n | ch ay n iy z ih ng g l ix sh m ax n | b aw d | hh ix m s eh l f | ax w ey | sil
+pass1_best_score: -19381.419922
+### Recognition: 2nd pass (RL heuristic best-first)
+WARNING: IW-triphone for word head "iy-ax+r" not found, fallback to pseudo {ax+r}
+WARNING: 00 _default: hypothesis stack exhausted, terminate search now
+STAT: 00 _default: 1 sentences have been found
+STAT: 00 _default: 43 generated, 43 pushed, 44 nodes popped in 711
+sentence1: <s> AND THE EURASIAN CHINESE-ENGLISHMAN BOWED HIMSELF AWAY <s>
+wseq1: 0 6 9 33 34 35 36 37 1
+phseq1: sil | ae n d | dh ax | y uh r ey zh ix n | ch ay n iy z ih ng g l ix sh m ax n | b aw d | hh ix m s eh l f | ax w ey | sil
+cmscore1: 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000
+score1: -19372.154297
+
+
+------
+......................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................### read waveform input
+Stat: adin_file: input speechfile: /tmp/atiKFm5H0Q/BhushanNKIITBombay-20140219-bbj/b0430.wav
+STAT: 78000 samples (4.88 sec.)
+STAT: ### speech analysis (waveform -> MFCC)
+### Recognition: 1st pass (LR beam)
+pass1_best: <s> THEY WERE BABBLING AND CHATTERING ALL TOGETHER <s>
+pass1_best_wordseq: 0 38 3 39 6 40 41 42 1
+pass1_best_phonemeseq: sil | dh ey | w er | b ae b ax l ix ng | ae n d | ch ae dx er ix ng | ao l | t ax g eh dh er | sil
+pass1_best_score: -12444.023438
+### Recognition: 2nd pass (RL heuristic best-first)
+WARNING: IW-triphone for word head "iy-ax+r" not found, fallback to pseudo {ax+r}
+WARNING: 00 _default: hypothesis stack exhausted, terminate search now
+STAT: 00 _default: 1 sentences have been found
+STAT: 00 _default: 35 generated, 35 pushed, 36 nodes popped in 486
+sentence1: <s> THEY WERE BABBLING AND CHATTERING ALL TOGETHER <s>
+wseq1: 0 38 3 39 6 40 41 42 1
+phseq1: sil | dh ey | w er | b ae b ax l ix ng | ae n d | ch ae dx er ix ng | ao l | t ax g eh dh er | sil
+cmscore1: 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000
+score1: -12443.388672
+
+
+------
+..........................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................### read waveform input
+Stat: adin_file: input speechfile: /tmp/atiKFm5H0Q/BhushanNKIITBombay-20140219-bbj/b0431.wav
+STAT: 94000 samples (5.88 sec.)
+STAT: ### speech analysis (waveform -> MFCC)
+### Recognition: 1st pass (LR beam)
+pass1_best: <s> TOO MUCH HE TOLD ME A RESPECTFUL BIT OF THE HISTORY OF ADVICE <s>
+pass1_best_wordseq: 0 43 44 45 46 47 7 70 71 12 9 25 12 72 1
+pass1_best_phonemeseq: sil | t uw | m ah ch | hh iy | t ow l d | m iy | ax | r ix s p eh k t f ax l | b ih t | ah v | dh ax | hh ih s t er iy | ah v | ae d v ay s | sil
+pass1_best_score: -15483.687500
+### Recognition: 2nd pass (RL heuristic best-first)
+WARNING: IW-triphone for word head "iy-ax+r" not found, fallback to pseudo {ax+r}
+WARNING: 00 _default: hypothesis stack exhausted, terminate search now
+STAT: 00 _default: 1 sentences have been found
+STAT: 00 _default: 47 generated, 47 pushed, 48 nodes popped in 586
+sentence1: <s> TOO MUCH HE TOLD ME WITH OMINOUS ROLLING HEAD <s>
+wseq1: 0 43 44 45 46 47 48 49 50 51 1
+phseq1: sil | t uw | m ah ch | hh iy | t ow l d | m iy | w ih dh | aa m ax n ax s | r ow l ix ng | hh eh d | sil
+cmscore1: 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 0.280 1.000
+score1: -15474.632812
+
+
+------
+.......................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................### read waveform input
+Stat: adin_file: input speechfile: /tmp/atiKFm5H0Q/BhushanNKIITBombay-20140219-bbj/b0432.wav
+STAT: 114000 samples (7.12 sec.)
+STAT: ### speech analysis (waveform -> MFCC)
+### Recognition: 1st pass (LR beam)
+pass1_best: <s> HE IS A CANDIDATE RISING FROM THE SERF CLASS TO OUR CLASS <s>
+pass1_best_wordseq: 0 45 29 7 52 53 54 9 55 56 57 26 56 1
+pass1_best_phonemeseq: sil | hh iy | ih z | ax | k ae n d ax dx ey t | r ay z ix ng | f r ah m | dh ax | s er f | k l ae s | t uw | aw er | k l ae s | sil
+pass1_best_score: -18608.558594
+### Recognition: 2nd pass (RL heuristic best-first)
+WARNING: IW-triphone for word head "iy-ax+r" not found, fallback to pseudo {ax+r}
+WARNING: 00 _default: hypothesis stack exhausted, terminate search now
+STAT: 00 _default: 1 sentences have been found
+STAT: 00 _default: 33 generated, 33 pushed, 34 nodes popped in 711
+sentence1: <s> HE IS A CANDIDATE RISING FROM THE SERF CLASS TO OUR CLASS <s>
+wseq1: 0 45 29 7 52 53 54 9 55 56 57 26 56 1
+phseq1: sil | hh iy | ih z | ax | k ae n d ax dx ey t | r ay z ix ng | f r ah m | dh ax | s er f | k l ae s | t uw | aw er | k l ae s | sil
+cmscore1: 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000
+score1: -18600.416016
+
+
+------
+......................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................### read waveform input
+Stat: adin_file: input speechfile: /tmp/atiKFm5H0Q/BhushanNKIITBombay-20140219-bbj/b0433.wav
+STAT: 96000 samples (6.00 sec.)
+STAT: ### speech analysis (waveform -> MFCC)
+### Recognition: 1st pass (LR beam)
+pass1_best: <s> WE ARE COOKING ON THE COAL STOVE AND ON THE OIL BURNERS <s>
+pass1_best_wordseq: 0 58 59 60 61 9 62 63 6 61 9 64 65 1
+pass1_best_phonemeseq: sil | w iy | aa r | k uh k ix ng | aa n | dh ax | k ow l | s t ow v | ae n d | aa n | dh ax | oy l | b er n er z | sil
+pass1_best_score: -15649.548828
+### Recognition: 2nd pass (RL heuristic best-first)
+WARNING: 00 _default: hypothesis stack exhausted, terminate search now
+STAT: 00 _default: 1 sentences have been found
+STAT: 00 _default: 33 generated, 33 pushed, 34 nodes popped in 598
+sentence1: <s> WE ARE COOKING ON THE COAL STOVE AND ON THE OIL BURNERS <s>
+wseq1: 0 58 59 60 61 9 62 63 6 61 9 64 65 1
+phseq1: sil | w iy | aa r | k uh k ix ng | aa n | dh ax | k ow l | s t ow v | ae n d | aa n | dh ax | oy l | b er n er z | sil
+cmscore1: 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000
+score1: -15647.928711
+
+
+------
+............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................### read waveform input
+Stat: adin_file: input speechfile: /tmp/atiKFm5H0Q/BhushanNKIITBombay-20140219-bbj/b0434.wav
+STAT: 102000 samples (6.38 sec.)
+STAT: ### speech analysis (waveform -> MFCC)
+### Recognition: 1st pass (LR beam)
+pass1_best: <s> THE STEWARD HAS JUST TENDERED ME A RESPECTFUL BIT OF ADVICE <s>
+pass1_best_wordseq: 0 9 66 67 68 69 47 7 70 71 12 72 1
+pass1_best_phonemeseq: sil | dh ax | s t uw er d | hh ae z | jh ah s t | t eh n d er d | m iy | ax | r ix s p eh k t f ax l | b ih t | ah v | ae d v ay s | sil
+pass1_best_score: -16851.666016
+### Recognition: 2nd pass (RL heuristic best-first)
+WARNING: IW-triphone for word head "iy-ax+r" not found, fallback to pseudo {ax+r}
+WARNING: 00 _default: hypothesis stack exhausted, terminate search now
+STAT: 00 _default: 1 sentences have been found
+STAT: 00 _default: 38 generated, 38 pushed, 39 nodes popped in 636
+sentence1: <s> THE STEWARD HAS JUST TENDERED ME A RESPECTFUL BIT OF ADVICE <s>
+wseq1: 0 9 66 67 68 69 47 7 70 71 12 72 1
+phseq1: sil | dh ax | s t uw er d | hh ae z | jh ah s t | t eh n d er d | m iy | ax | r ix s p eh k t f ax l | b ih t | ah v | ae d v ay s | sil
+cmscore1: 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 0.834 1.000
+score1: -16869.742188
+
+
+------
+10 files processed
+### read waveform input

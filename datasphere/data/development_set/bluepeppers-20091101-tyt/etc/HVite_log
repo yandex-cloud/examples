@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 42 physical / 42 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bluepeppers-20091101-tyt/mfc/b0242.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence THE JAPANESE UNDERSTOOD AS WE COULD NEVER SCHOOL OURSELVES OR HOPE TO UNDERSTAND silence  ==  [699 frames] -61.4341 [Ac=-42942.4 LM=0.0] (Act=9.5)
+Aligning File: /data/UserSubmissions/Quarantine/bluepeppers-20091101-tyt/mfc/b0243.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence THEY HAD BEEN ON THE SAME LAY AS OURSELVES silence  ==  [461 frames] -55.9763 [Ac=-25805.1 LM=0.0] (Act=11.8)
+Aligning File: /data/UserSubmissions/Quarantine/bluepeppers-20091101-tyt/mfc/b0244.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence YOU ARE POSITIVELY SOULLESS HE SAID SAVAGELY silence  ==  [512 frames] -57.7431 [Ac=-29564.5 LM=0.0] (Act=8.1)
+Aligning File: /data/UserSubmissions/Quarantine/bluepeppers-20091101-tyt/mfc/b0245.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence HARRISON IS STILL MY CHAUFFEUR silence  ==  [374 frames] -53.3422 [Ac=-19950.0 LM=0.0] (Act=6.6)
+Aligning File: /data/UserSubmissions/Quarantine/bluepeppers-20091101-tyt/mfc/b0246.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence THE BOY GREW AND PROSPERED silence  ==  [324 frames] -57.9426 [Ac=-18773.4 LM=0.0] (Act=9.7)
+Aligning File: /data/UserSubmissions/Quarantine/bluepeppers-20091101-tyt/mfc/b0247.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence HE WANTED TO GIVE THE FINISH TO THIS FOE ALREADY SO FAR GONE silence  ==  [587 frames] -58.1042 [Ac=-34107.1 LM=0.0] (Act=7.8)
+Aligning File: /data/UserSubmissions/Quarantine/bluepeppers-20091101-tyt/mfc/b0248.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence EXCITING TIMES ARE THE LOT OF THE FISH PATROL silence  ==  [499 frames] -60.6368 [Ac=-30257.8 LM=0.0] (Act=10.8)
+Aligning File: /data/UserSubmissions/Quarantine/bluepeppers-20091101-tyt/mfc/b0249.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence I KNOW THEY ARE MY OYSTERS silence  ==  [361 frames] -54.8436 [Ac=-19798.5 LM=0.0] (Act=8.5)
+Aligning File: /data/UserSubmissions/Quarantine/bluepeppers-20091101-tyt/mfc/b0250.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence BY THIS TIME CHARLEY WAS AS ENRAGED AS THE GREEK silence  ==  [499 frames] -59.8873 [Ac=-29883.8 LM=0.0] (Act=9.1)
+Aligning File: /data/UserSubmissions/Quarantine/bluepeppers-20091101-tyt/mfc/b0251.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence THEY MUST HAVE BEEN SWEPT AWAY BY THE CHAOTIC CURRENTS silence  ==  [474 frames] -58.9971 [Ac=-27964.6 LM=0.0] (Act=8.9)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

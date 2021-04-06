@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 41 physical / 41 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100108-yqc/mfc/b0313.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence THE APRON STRING LOOMED NEAR AND HE SHIED LIKE AN UNBROKEN COLT silence  ==  [611 frames] -55.0569 [Ac=-33639.8 LM=0.0] (Act=12.1)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100108-yqc/mfc/b0314.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence HE HAD BEEN BORN WITH THIS ENDOWMENT silence  ==  [386 frames] -49.8098 [Ac=-19226.6 LM=0.0] (Act=10.2)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100108-yqc/mfc/b0315.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence AND THIS WAS THEIR SOLE CONVERSATION THROUGHOUT THE MEAL silence  ==  [461 frames] -53.8042 [Ac=-24803.7 LM=0.0] (Act=12.2)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100108-yqc/mfc/b0316.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence THOUGH THE AURORA STILL FLAMED ANOTHER DAY HAD BEGUN silence  ==  [473 frames] -51.1415 [Ac=-24189.9 LM=0.0] (Act=9.6)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100108-yqc/mfc/b0317.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence HE DID NOT BELIEVE IN THE BURNING OF DAYLIGHT FOR SUCH A LUXURY silence  ==  [486 frames] -54.7025 [Ac=-26585.4 LM=0.0] (Act=12.4)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100108-yqc/mfc/b0318.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence AGAIN HE HAD DONE THE BIG THING silence  ==  [398 frames] -49.5011 [Ac=-19701.4 LM=0.0] (Act=11.0)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100108-yqc/mfc/b0319.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence DAYLIGHT WAS TIRED PROFOUNDLY TIRED silence  ==  [461 frames] -50.6239 [Ac=-23337.6 LM=0.0] (Act=7.7)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100108-yqc/mfc/b0320.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence THE REGRET IN HIS VOICE WAS PROVOCATIVE OF A SECOND BURST OF LAUGHTER silence  ==  [548 frames] -53.0871 [Ac=-29091.7 LM=0.0] (Act=13.6)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100108-yqc/mfc/b0321.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence INSTEAD HE ARRIVED ON THE NIGHT OF THE SECOND DAY silence  ==  [486 frames] -52.2406 [Ac=-25388.9 LM=0.0] (Act=12.5)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100108-yqc/mfc/b0322.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence THEIR SUPPLY OF GRUB WAS GONE silence  ==  [373 frames] -51.2386 [Ac=-19112.0 LM=0.0] (Act=7.5)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

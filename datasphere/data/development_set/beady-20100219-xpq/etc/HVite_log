@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 40 physical / 40 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/beady-20100219-xpq/mfc/a0441.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence VIOLENT LIFE AND ATHLETIC SPORTS HAD NEVER APPEALED TO ME silence  ==  [578 frames] -47.1320 [Ac=-27242.3 LM=0.0] (Act=11.7)
+Aligning File: /data/UserSubmissions/Quarantine/beady-20100219-xpq/mfc/a0442.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence YOU LIVE ON AN INCOME WHICH YOUR FATHER EARNED silence  ==  [527 frames] -43.9293 [Ac=-23150.7 LM=0.0] (Act=10.7)
+Aligning File: /data/UserSubmissions/Quarantine/beady-20100219-xpq/mfc/a0443.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence HE WAS WORTH NOTHING TO THE WORLD silence  ==  [476 frames] -41.9055 [Ac=-19947.0 LM=0.0] (Act=10.6)
+Aligning File: /data/UserSubmissions/Quarantine/beady-20100219-xpq/mfc/a0444.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence THEN YOU DON'T BELIEVE IN ALTRUISM silence  ==  [450 frames] -45.2000 [Ac=-20340.0 LM=0.0] (Act=12.1)
+Aligning File: /data/UserSubmissions/Quarantine/beady-20100219-xpq/mfc/a0445.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence THE CREATIVE JOY I MURMURED silence  ==  [373 frames] -44.7624 [Ac=-16696.4 LM=0.0] (Act=8.1)
+Aligning File: /data/UserSubmissions/Quarantine/beady-20100219-xpq/mfc/a0446.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence HE DELUGED ME OVERWHELMED ME WITH ARGUMENT silence  ==  [467 frames] -49.1674 [Ac=-22961.2 LM=0.0] (Act=9.5)
+Aligning File: /data/UserSubmissions/Quarantine/beady-20100219-xpq/mfc/a0447.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence AH IT IS GROWING DARK AND DARKER silence  ==  [408 frames] -45.7020 [Ac=-18646.4 LM=0.0] (Act=9.9)
+Aligning File: /data/UserSubmissions/Quarantine/beady-20100219-xpq/mfc/a0448.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence I WAS HUMP CABIN BOY ON THE SCHOONER GHOST silence  ==  [484 frames] -47.7408 [Ac=-23106.5 LM=0.0] (Act=13.0)
+Aligning File: /data/UserSubmissions/Quarantine/beady-20100219-xpq/mfc/a0449.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence A SINEWY HAND DRIPPING WITH WATER WAS CLUTCHING THE RAIL silence  ==  [527 frames] -48.2226 [Ac=-25413.3 LM=0.0] (Act=8.8)
+Aligning File: /data/UserSubmissions/Quarantine/beady-20100219-xpq/mfc/a0450.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence NO MAN ATE OF THE SEAL MEAT OR THE OIL silence  ==  [484 frames] -47.4768 [Ac=-22978.8 LM=0.0] (Act=12.0)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

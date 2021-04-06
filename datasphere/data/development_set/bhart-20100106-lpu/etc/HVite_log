@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 40 physical / 40 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-lpu/mfc/b0256.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence OUTWARDLY HE MAINTAINED A CALM AND SMILING ASPECT silence  ==  [461 frames] -55.7386 [Ac=-25695.5 LM=0.0] (Act=9.2)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-lpu/mfc/b0257.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence TUDOR SURVEYED HIM WITH WITHERING DISGUST silence  ==  [436 frames] -50.3663 [Ac=-21959.7 LM=0.0] (Act=9.3)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-lpu/mfc/b0258.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence YOU FIRED ME OUT OF YOUR HOUSE IN SHORT silence  ==  [461 frames] -48.8583 [Ac=-22523.7 LM=0.0] (Act=8.0)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-lpu/mfc/b0259.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence HER MOUTH OPENED BUT INSTEAD OF SPEAKING SHE DREW A LONG SIGH silence  ==  [598 frames] -51.9322 [Ac=-31055.5 LM=0.0] (Act=8.8)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-lpu/mfc/b0260.mfc
+Created lattice with 6 nodes / 5 arcs from label file
+silence IT'S WORTH EIGHT DOLLARS silence  ==  [386 frames] -47.0638 [Ac=-18166.6 LM=0.0] (Act=7.8)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-lpu/mfc/b0261.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence AND HE DID HURT MY ARM silence  ==  [348 frames] -44.6882 [Ac=-15551.5 LM=0.0] (Act=8.9)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-lpu/mfc/b0262.mfc
+Created lattice with 6 nodes / 5 arcs from label file
+silence SAXON'S ONTO HER JOB silence  ==  [386 frames] -46.4857 [Ac=-17943.5 LM=0.0] (Act=6.3)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-lpu/mfc/b0263.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence ONLY ONCE DID I CONFIDE THE STRANGENESS OF IT ALL TO ANOTHER silence  ==  [536 frames] -53.9226 [Ac=-28902.5 LM=0.0] (Act=13.4)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-lpu/mfc/b0264.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence BUT THIS TIME IT WAS SAXON WHO REBELLED silence  ==  [436 frames] -51.2391 [Ac=-22340.3 LM=0.0] (Act=8.7)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-lpu/mfc/b0265.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence I WAS NOT TO CRY OUT IN THE FACE OF FEAR silence  ==  [386 frames] -53.4763 [Ac=-20641.8 LM=0.0] (Act=8.3)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

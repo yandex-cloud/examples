@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 36 physical / 36 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-giy/mfc/a0078.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence THEN AND AT SUPPER HE TRIED TO FATHOM HER silence  ==  [536 frames] -46.8897 [Ac=-25132.9 LM=0.0] (Act=7.3)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-giy/mfc/a0079.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence IT WAS A LARGE CANOE silence  ==  [336 frames] -44.3928 [Ac=-14916.0 LM=0.0] (Act=7.3)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-giy/mfc/a0080.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence WHAT IF JEANNE FAILED HIM silence  ==  [373 frames] -43.0543 [Ac=-16059.3 LM=0.0] (Act=7.2)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-giy/mfc/a0081.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence WHAT IF SHE DID NOT COME TO THE ROCK silence  ==  [423 frames] -46.5379 [Ac=-19685.5 LM=0.0] (Act=10.7)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-giy/mfc/a0082.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence HIS FACE WAS STREAMING WITH BLOOD silence  ==  [386 frames] -46.3265 [Ac=-17882.0 LM=0.0] (Act=5.3)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-giy/mfc/a0083.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence A SHADOW WAS CREEPING OVER PIERRE'S EYES silence  ==  [448 frames] -50.0221 [Ac=-22409.9 LM=0.0] (Act=6.3)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-giy/mfc/a0084.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence SCARCELY HAD HE UTTERED THE NAME WHEN PIERRE'S CLOSING EYES SHOT OPEN silence  ==  [623 frames] -49.7235 [Ac=-30977.8 LM=0.0] (Act=9.4)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-giy/mfc/a0085.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence A TRICKLE OF FRESH BLOOD RAN OVER HIS FACE silence  ==  [473 frames] -47.9811 [Ac=-22695.1 LM=0.0] (Act=8.3)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-giy/mfc/a0086.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence DEATH HAD COME WITH TERRIBLE SUDDENNESS silence  ==  [498 frames] -44.6650 [Ac=-22243.2 LM=0.0] (Act=7.1)
+Aligning File: /data/UserSubmissions/Quarantine/bhart-20100106-giy/mfc/a0087.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence PHILIP BENT LOWER AND STARED INTO THE FACE OF THE DEAD MAN silence  ==  [548 frames] -48.4212 [Ac=-26534.8 LM=0.0] (Act=6.8)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

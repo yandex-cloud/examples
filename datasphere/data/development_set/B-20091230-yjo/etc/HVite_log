@@ -1,0 +1,61 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C /data/svn-mirror/Main/Trunk/Scripts/AcousticModel_scripts/HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 41 physical / 41 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/B-20091230-yjo/mfc/a0185.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence THE QUESTIONS MAY HAVE COME VAGUELY IN HIS MIND silence  ==  [484 frames] -51.4707 [Ac=-24911.8 LM=0.0] (Act=9.9)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091230-yjo/mfc/a0186.mfc
+Created lattice with 15 nodes / 14 arcs from label file
+silence LIKE A FLASH HE LAUNCHED HIMSELF INTO THE FEATHERED MASS OF THE OWL silence  ==  [570 frames] -51.1949 [Ac=-29181.1 LM=0.0] (Act=9.8)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091230-yjo/mfc/a0187.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence AHEAD OF THEM THEY SAW A GLIMMER OF SUNSHINE silence  ==  [467 frames] -46.7444 [Ac=-21829.6 LM=0.0] (Act=11.1)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091230-yjo/mfc/a0188.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence TWO GIGANTIC OWLS WERE TEARING AT THE CARCASS silence  ==  [493 frames] -51.9242 [Ac=-25598.6 LM=0.0] (Act=8.5)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091230-yjo/mfc/a0189.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence THE BIG-EYED CLUCKING MOOSE-BIRDS WERE MOST ANNOYING silence  ==  [612 frames] -52.2399 [Ac=-31970.8 LM=0.0] (Act=12.0)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091230-yjo/mfc/a0190.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence NEXT TO THEM THE CANADA JAYS WERE MOST PERSISTENT silence  ==  [587 frames] -50.7779 [Ac=-29806.6 LM=0.0] (Act=10.3)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091230-yjo/mfc/a0191.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence FOR A TIME THE EXCITING THRILL OF HIS ADVENTURE WAS GONE silence  ==  [544 frames] -51.8409 [Ac=-28201.4 LM=0.0] (Act=10.0)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091230-yjo/mfc/a0192.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence HE DID NOT RUSH IN silence  ==  [331 frames] -45.1280 [Ac=-14937.4 LM=0.0] (Act=8.2)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091230-yjo/mfc/a0193.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence IT WAS EDGED WITH ICE silence  ==  [339 frames] -47.1156 [Ac=-15972.2 LM=0.0] (Act=8.4)
+Aligning File: /data/UserSubmissions/Quarantine/B-20091230-yjo/mfc/a0194.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence HE DRANK OF THE WATER CAUTIOUSLY silence  ==  [365 frames] -49.7082 [Ac=-18143.5 LM=0.0] (Act=8.9)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+

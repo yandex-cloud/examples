@@ -1,0 +1,63 @@
+/usr/local/bin/HVite -A -D -T 1 -l * -a -b SENT-END -m -C /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/wav_config -H /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/macros -H /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/hmmdefs -m -t 250.0 150.0 1000.0 -I /tmp/7DG_9Vo1H8/words.mlf -i /tmp/7DG_9Vo1H8/aligned.out -S /tmp/7DG_9Vo1H8/fileList /data/svn-mirror/SpeechCorpus/Trunk/Lexicon/VoxForge/VoxForgeDict /data/svn-mirror/Main/Trunk/Scripts/VoxForge/lib/Corpus/Quarantine/Submission/Audio/HTK_AcousticModel-2012-07-24_16kHz_16bit_MFCC_O_D/tiedlist 
+
+HTK Configuration Parameters[11]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_D_N_Z_0
+#                 SOURCEFORMAT                 WAV
+
+Read 8294 physical / 9429 logical HMMs
+Label file will be used to align each file
+Aligning File: /tmp/7DG_9Vo1H8/Bahoke-20130721-wit/a0525.wav
+Created lattice with 14 nodes / 13 arcs from label file
+SENT-END THE OLIGARCHY WANTED VIOLENCE AND IT SET ITS AGENTS PROVOCATEURS TO WORK SENT-END  ==  [711 frames] -59.2819 [Ac=-42149.5 LM=0.0] (Act=17.1)
+Aligning File: /tmp/7DG_9Vo1H8/Bahoke-20130721-wit/a0526.wav
+Created lattice with 8 nodes / 7 arcs from label file
+SENT-END NOWHERE DID THE RAW EARTH APPEAR SENT-END  ==  [336 frames] -58.9953 [Ac=-19822.4 LM=0.0] (Act=8.8)
+Aligning File: /tmp/7DG_9Vo1H8/Bahoke-20130721-wit/a0527.wav
+Created lattice with 13 nodes / 12 arcs from label file
+SENT-END THE LUSH VEGETATION OF THAT SHELTERED SPOT MAKE A NATURAL SHIELD SENT-END  ==  [448 frames] -60.4669 [Ac=-27089.2 LM=0.0] (Act=12.4)
+Aligning File: /tmp/7DG_9Vo1H8/Bahoke-20130721-wit/a0528.wav
+Created lattice with 10 nodes / 9 arcs from label file
+SENT-END MEN WHO ENDURE IT CALL IT LIVING DEATH SENT-END  ==  [361 frames] -57.7676 [Ac=-20854.1 LM=0.0] (Act=13.2)
+Aligning File: /tmp/7DG_9Vo1H8/Bahoke-20130721-wit/a0529.wav
+Created lattice with 12 nodes / 11 arcs from label file
+SENT-END AS I SAY HE HAD TAPPED THE MESSAGE VERY RAPIDLY SENT-END  ==  [411 frames] -60.0288 [Ac=-24671.9 LM=0.0] (Act=18.3)
+Aligning File: /tmp/7DG_9Vo1H8/Bahoke-20130721-wit/a0530.wav
+Created lattice with 10 nodes / 9 arcs from label file
+SENT-END ASK HIM I LAUGHED THEN TURNED TO PASQUINI SENT-END  ==  [411 frames] -58.8014 [Ac=-24167.4 LM=0.0] (Act=14.7)
+Aligning File: /tmp/7DG_9Vo1H8/Bahoke-20130721-wit/a0531.wav
+Created lattice with 15 nodes / 14 arcs from label file
+SENT-END IN WHAT BUCOLIC SCHOOL OF FENCE HE HAD BEEN TAUGHT WAS BEYOND IMAGINING SENT-END  ==  [423 frames] -62.3866 [Ac=-26389.5 LM=0.0] (Act=15.7)
+Aligning File: /tmp/7DG_9Vo1H8/Bahoke-20130721-wit/a0532.wav
+Created lattice with 7 nodes / 6 arcs from label file
+SENT-END MAY DROUGHT DESTROY YOUR CROPS SENT-END  ==  [286 frames] -59.5525 [Ac=-17032.0 LM=0.0] (Act=9.7)
+Aligning File: /tmp/7DG_9Vo1H8/Bahoke-20130721-wit/a0533.wav
+Created lattice with 10 nodes / 9 arcs from label file
+SENT-END DUNHAM CAN YOUR BOY GO ALONG WITH JESSE SENT-END  ==  [348 frames] -60.8072 [Ac=-21160.9 LM=0.0] (Act=11.2)
+Aligning File: /tmp/7DG_9Vo1H8/Bahoke-20130721-wit/a0534.wav
+Created lattice with 7 nodes / 6 arcs from label file
+SENT-END BUT JOHANNES COULD AND DID SENT-END  ==  [298 frames] -55.5055 [Ac=-16540.7 LM=0.0] (Act=12.1)
+
+HTK Configuration Parameters[11]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_D_N_Z_0
+                  SOURCEFORMAT                 WAV
+

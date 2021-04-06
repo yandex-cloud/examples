@@ -1,0 +1,151 @@
+HVite -A -D -T 1 -l * -o SWT -b silence -C ../../HTK/AMCreate_scripts/input_files/config -H ./interim_files/hmm7/macros -H ./interim_files/hmm7/hmmdefs -i ./interim_files/aligned.mlf -m -t 250.0 150.0 1000.0 -y lab -a -I ./interim_files/words.mlf -S ./interim_files/train.scp ./interim_files/dict1 ./interim_files/monophones1 
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+#                 NUMCEPS                       12
+#                 CEPLIFTER                     22
+#                 NUMCHANS                      26
+#                 PREEMCOEF               0.970000
+#                 USEHAMMING                  TRUE
+#                 WINDOWSIZE         250000.000000
+#                 SAVEWITHCRC                 TRUE
+#                 SAVECOMPRESSED              TRUE
+#                 TARGETRATE         100000.000000
+#                 TARGETKIND          MFCC_0_D_N_Z
+
+Read 44 physical / 44 logical HMMs
+Label file will be used to align each file
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-01.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence AND HE DID HURT MY ARM silence  ==  [333 frames] -47.6954 [Ac=-15882.6 LM=0.0] (Act=7.9)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-02.mfc
+Created lattice with 6 nodes / 5 arcs from label file
+silence SAXON'S ONTO HER JOB silence  ==  [325 frames] -49.0758 [Ac=-15949.6 LM=0.0] (Act=6.3)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-03.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence ONLY ONCE DID I CONFIDE THE STRANGENESS OF IT ALL TO ANOTHER silence  ==  [537 frames] -50.5602 [Ac=-27150.9 LM=0.0] (Act=7.5)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-04.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence BUT THIS TIME IT WAS SAXON WHO REBELLED silence  ==  [394 frames] -51.1102 [Ac=-20137.4 LM=0.0] (Act=7.4)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-05.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence I WAS NOT TO CRY OUT IN THE FACE OF FEAR silence  ==  [430 frames] -48.2449 [Ac=-20745.3 LM=0.0] (Act=7.6)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-06.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence AND NOW PUT YOURSELF IN MY PLACE FOR A MOMENT silence  ==  [444 frames] -50.1329 [Ac=-22259.0 LM=0.0] (Act=6.5)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-07.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence THE BOY THREW BACK HIS HEAD WITH PRIDE silence  ==  [368 frames] -50.1830 [Ac=-18467.3 LM=0.0] (Act=7.6)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-08.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence SAXON NODDED AND THE BOY FROWNED silence  ==  [401 frames] -48.8198 [Ac=-19576.7 LM=0.0] (Act=6.9)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-09.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence WHY NOT LIKE ANY RAILROAD STATION OR FERRY DEPOT silence  ==  [492 frames] -50.8225 [Ac=-25004.7 LM=0.0] (Act=6.8)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-10.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence WE COULD THROW STONES WITH OUR FEET silence  ==  [397 frames] -50.0788 [Ac=-19881.3 LM=0.0] (Act=6.8)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-11.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence IT WAS PUT TOGETHER IN A CASUAL HELTER-SKELTER SORT OF WAY silence  ==  [492 frames] -55.0510 [Ac=-27085.1 LM=0.0] (Act=8.6)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-12.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence THESE WERE MERELY STOUT STICKS AN INCH OR SO IN DIAMETER silence  ==  [516 frames] -51.4845 [Ac=-26566.0 LM=0.0] (Act=6.4)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-13.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence THEN IT WAS THAT A STRANGE THING HAPPENED silence  ==  [399 frames] -50.9847 [Ac=-20342.9 LM=0.0] (Act=6.9)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-14.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence FROM THE SOURCE OF LIGHT A HARSH VOICE SAID silence  ==  [438 frames] -50.4631 [Ac=-22102.8 LM=0.0] (Act=6.1)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-15.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence BUT I DID NOT ENJOY IT LONG silence  ==  [333 frames] -49.9414 [Ac=-16630.5 LM=0.0] (Act=7.1)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-16.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence WE WERE NOW GOOD FRIENDS silence  ==  [333 frames] -46.9752 [Ac=-15642.7 LM=0.0] (Act=6.8)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-17.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence TWO OF THE FOLK WERE ALREADY UP silence  ==  [380 frames] -49.8056 [Ac=-18926.1 LM=0.0] (Act=7.7)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-18.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence NOW ANIMALS DO NOT LIKE MOCKERY silence  ==  [360 frames] -50.1665 [Ac=-18059.9 LM=0.0] (Act=6.1)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-19.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence HE GAVE ONE LAST SNARL AND SLID FROM VIEW AMONG THE TREES silence  ==  [511 frames] -54.6891 [Ac=-27946.1 LM=0.0] (Act=7.9)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-20.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence AGAIN THE GIRLS APPLAUDED AND MRS HALL CRIED silence  ==  [434 frames] -50.5129 [Ac=-21922.6 LM=0.0] (Act=6.9)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-21.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence JUST THE SAME I'D SOONER BE MYSELF THAN HAVE BOOK INDIGESTION silence  ==  [558 frames] -52.1609 [Ac=-29105.8 LM=0.0] (Act=6.7)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-22.mfc
+Created lattice with 11 nodes / 10 arcs from label file
+silence SOME OF THE SMALLER VEINS HAD DOUBTLESS BEEN RUPTURED silence  ==  [470 frames] -50.8526 [Ac=-23900.7 LM=0.0] (Act=6.3)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-23.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence BUT WE WERE WITHOUT THIS MOMENTUM silence  ==  [377 frames] -49.2930 [Ac=-18583.5 LM=0.0] (Act=7.1)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-24.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence THERE WAS ONE DIFFICULTY HOWEVER silence  ==  [362 frames] -49.0476 [Ac=-17755.2 LM=0.0] (Act=5.6)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-25.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence THE HYENA PROCEEDED TO DINE silence  ==  [362 frames] -50.6387 [Ac=-18331.2 LM=0.0] (Act=7.3)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-26.mfc
+Created lattice with 7 nodes / 6 arcs from label file
+silence THE TIME WAS CONSIDERED AUSPICIOUS silence  ==  [384 frames] -50.6885 [Ac=-19464.4 LM=0.0] (Act=6.3)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-27.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence OR HAVE THEY ALREADY DEVISED ONE silence  ==  [362 frames] -50.0933 [Ac=-18133.8 LM=0.0] (Act=6.0)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-28.mfc
+Created lattice with 9 nodes / 8 arcs from label file
+silence WE WOULD NOT SPEND ANOTHER SUCH NIGHT silence  ==  [401 frames] -51.2506 [Ac=-20551.5 LM=0.0] (Act=7.2)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-29.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence AT FIRST HIS PROGRESS WAS SLOW AND ERRATIC silence  ==  [459 frames] -49.9699 [Ac=-22936.2 LM=0.0] (Act=7.1)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-30.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence HE PLACED HIS PAW ON ONE AND ITS MOVEMENTS WERE ACCELERATED silence  ==  [537 frames] -54.4491 [Ac=-29239.2 LM=0.0] (Act=7.6)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-31.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence THE AWE OF MAN RUSHED OVER HIM AGAIN silence  ==  [435 frames] -49.6081 [Ac=-21579.5 LM=0.0] (Act=7.1)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-32.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence THE FIRE-MEN WORE ANIMAL SKINS AROUND THEIR WAISTS AND ACROSS THEIR SHOULDERS silence  ==  [655 frames] -51.6251 [Ac=-33814.4 LM=0.0] (Act=6.9)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-33.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence BETWEEN HIM AND ALL DOMESTIC ANIMALS THERE MUST BE NO HOSTILITIES silence  ==  [578 frames] -53.1985 [Ac=-30748.7 LM=0.0] (Act=7.1)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-34.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence FOR A MUCH LONGER TIME LOP-EAR AND I REMAINED AND WATCHED silence  ==  [547 frames] -51.1370 [Ac=-27972.0 LM=0.0] (Act=6.6)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-35.mfc
+Created lattice with 10 nodes / 9 arcs from label file
+silence ALL RIGHT SIR REPLIED JOCK WITH GREAT REGRET silence  ==  [473 frames] -52.0977 [Ac=-24642.2 LM=0.0] (Act=7.3)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-36.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence AT TIMES I WONDERED WHERE SIR ARCHIBALD GOT HIS STYLE silence  ==  [532 frames] -51.5708 [Ac=-27435.7 LM=0.0] (Act=6.7)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-37.mfc
+Created lattice with 14 nodes / 13 arcs from label file
+silence WHY SHOULD A FELLOW THROW UP THE SPONGE AFTER THE FIRST ROUND silence  ==  [526 frames] -51.5756 [Ac=-27128.8 LM=0.0] (Act=6.9)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-38.mfc
+Created lattice with 12 nodes / 11 arcs from label file
+silence HIS HAND SHOT OUT AND CLUTCHED CROOKED-LEG BY THE NECK silence  ==  [478 frames] -51.6203 [Ac=-24674.5 LM=0.0] (Act=7.2)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-39.mfc
+Created lattice with 8 nodes / 7 arcs from label file
+silence MISS BRODIE'S SMILE WAS SLIGHTLY SARCASTIC silence  ==  [438 frames] -52.4860 [Ac=-22988.9 LM=0.0] (Act=5.9)
+Aligning File: /data/UserSubmissions/Quarantine/atterer-21012007-vf22/mfc/vf22-40.mfc
+Created lattice with 13 nodes / 12 arcs from label file
+silence DOES THE OLD BOY OFTEN GO OFF AT HALF-COCK THAT WAY silence  ==  [490 frames] -50.6128 [Ac=-24800.3 LM=0.0] (Act=7.5)
+
+HTK Configuration Parameters[10]
+  Module/Tool     Parameter                  Value
+                  NUMCEPS                       12
+                  CEPLIFTER                     22
+                  NUMCHANS                      26
+                  PREEMCOEF               0.970000
+                  USEHAMMING                  TRUE
+                  WINDOWSIZE         250000.000000
+                  SAVEWITHCRC                 TRUE
+                  SAVECOMPRESSED              TRUE
+                  TARGETRATE         100000.000000
+                  TARGETKIND          MFCC_0_D_N_Z
+
