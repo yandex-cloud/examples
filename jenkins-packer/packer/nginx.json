@@ -12,7 +12,7 @@
       "subnet_id": "{{user `subnet_id`}}",
       "zone":      "ru-central1-b",
 
-      "image_name":        "debian-10-nginx-{{isotime | clean_image_name}}",
+      "image_name":        "debian-10-nginx-{{isotime | clean_resource_name}}",
       "image_family":      "debian-10-nginx",
       "image_description": "My very custom nginx proxy",
 
