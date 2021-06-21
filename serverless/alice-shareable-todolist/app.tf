@@ -113,7 +113,6 @@ terraform {
 provider "yandex" {
   folder_id = var.folder-id
   token     = var.yc-token
-  version   = "0.99"
 }
 
 variable "folder-id" {
