@@ -1,0 +1,7 @@
+{
+    "name": "nginx-data-transfer-parser",
+    "version": "1.0.0",
+    "dependencies": {
+      "@robojones/nginx-log-parser": "0.0.6"
+    }
+  }
