@@ -1,0 +1,34 @@
+[
+    {
+        "name": "remote_addr",
+        "type": "string"
+      },
+      {
+        "name": "remote_user",
+        "type": "string"
+      },
+      {
+        "name": "time_local",
+        "type": "string"
+      },
+      {
+        "name": "request",
+        "type": "string"
+      },
+      {
+        "name": "status",
+        "type": "int32"
+      },
+      {
+        "name": "bytes_sent",
+        "type": "int32"
+      },
+      {
+        "name": "http_referer",
+        "type": "string"
+      },
+      {
+        "name": "http_user_agent",
+        "type": "string"
+      }
+]
