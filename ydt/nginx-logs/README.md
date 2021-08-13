@@ -1,7 +1,7 @@
 # Example of YDT and YDS nginx logs integrations
 
 Sample project for parse and delivery nginx log
-
+![](images/overall.png)
 
 # Yandex Services
 * [Yandex Data Transfer](https://cloud.yandex.ru/services/data-transfer)
