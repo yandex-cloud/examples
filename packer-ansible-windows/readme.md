@@ -10,7 +10,7 @@ yc init
 Создайте сервисный аккаунт и передайте его идентификатор в переменную окружения, выполнив команды:
 ```
 $ yc iam service-account create --name <имя пользователя>
-$ yc iam key create --service-account-name <имя пользователя> -o <имя пользователя.json>
+$ yc iam key create --service-account-name <имя пользователя> -o service-account.json
 $ SERVICE_ACCOUNT_ID=$(yc iam service-account get --name <имя пользователя> --format json | jq -r .id)
 ```
 Назначьте сервисному аккаунту роль admin в каталоге, где будут выполняться операции:
