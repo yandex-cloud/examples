@@ -20,7 +20,7 @@ $ yc resource-manager folder add-access-binding <имя_каталога> --role
 
 Получите folder_id из `yc config list`
 
-Заполните файл
+Заполните файл windows-ansible.json
 ```
     "folder_id": "<ваш folder_id>",
     "service_account_key_file": "service-account.json",
