@@ -5,6 +5,9 @@ sudo apt install git jq python3-pip
 sudo pip3 install ansible==2.6.17
 ```
 
+Установка Packer
+Необходимо установить packer по инструкции с официального сайта https://learn.hashicorp.com/tutorials/packer/get-started-install-cli
+
 Установка Yandex.Cloud CLI
 https://cloud.yandex.com/en/docs/cli/quickstart#install
 ```
