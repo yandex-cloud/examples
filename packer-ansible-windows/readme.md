@@ -1,3 +1,10 @@
+Установка необходимых пакетов
+```
+sudo apt update
+sudo apt install git jq python3-pip
+sudo pip3 install ansible==2.6.17
+```
+
 Установка Yandex.Cloud CLI
 https://cloud.yandex.com/en/docs/cli/quickstart#install
 ```
