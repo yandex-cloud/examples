@@ -2,7 +2,7 @@
 - hosts: all
 
   vars:
-    uri_exch2016cu12: "https://storage.yandexcloud.net/msft-exchange/ExchangeServer2016-x64-cu12.iso"
+    uri_exch2016cu12: "https://download.microsoft.com/download/2/5/8/258D30CF-CA4C-433A-A618-FB7E6BCC4EEE/ExchangeServer2016-x64-cu12.iso"
     uri_ndp471: "https://storage.yandexcloud.net/msft-exchange/NDP471-KB4033342-x86-x64-AllOS-ENU.exe"
     uri_vcr12: "https://storage.yandexcloud.net/msft-exchange/vcredist_x64_2012.exe"
     uri_vcr13: "https://storage.yandexcloud.net/msft-exchange/vcredist_x64_2013.exe"
