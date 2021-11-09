@@ -46,10 +46,31 @@ function getOSVersion {
 
 
 function preCheck {
+    echo "$1" > /tmp/aa
     case "$1" in
         "CentOS Linux")
             case "$2" in
-                "7"|"8")
+                "6"|"7"|"8")
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
+                    ;;
+            esac
+            ;;
+        "CentOS Stream")
+            case "$2" in
+                "8")
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
+                    ;;
+            esac
+            ;;
+        "AlmaLinux")
+            case "$2" in
+                "8.4")
                     echo "OK"
                     ;;
                 *)
@@ -59,7 +80,7 @@ function preCheck {
             ;;
         "Ubuntu")
             case "$2" in
-                "16.04"|"18.04"|"20.04")
+                "14.04"|"16.04"|"18.04"|"20.04")
                     echo "OK"
                     ;;
                 *)
@@ -69,7 +90,67 @@ function preCheck {
             ;;
         "Debian GNU/Linux")
             case "$2" in
-                "10")
+                "8"|"9"|"10"|"11")
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
+                    ;;
+            esac
+            ;;
+        "RED OS")
+            case "$2" in
+                "7.3")
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
+                    ;;
+            esac
+            ;;
+        "openSUSE Leap")
+            case "$2" in
+                "15.1"|"15.2"|"42.3")
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
+                    ;;
+            esac
+            ;;
+        "SLES")
+            case "$2" in
+                "15.2")
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
+                    ;;
+            esac
+            ;;
+        "Fedora")
+            case "$2" in
+                "28"|"29"|"30"|"31"|"32"|"33"|"34")
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
+                    ;;
+            esac
+            ;;
+        "Red Hat Enterprise Linux Server")
+            case "$2" in
+                "7.8")
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
+                    ;;
+            esac
+            ;;
+        "Red Hat Enterprise Linux")
+            case "$2" in
+                "8.2")
                     echo "OK"
                     ;;
                 *)
@@ -88,7 +169,7 @@ function definePMSType {
     case "$1" in
         "CentOS Linux")
             case "$2" in
-                "7")
+                "6"|"7")
                     echo "rpm"
                     ;;
                 "8")
@@ -96,17 +177,73 @@ function definePMSType {
                     ;;
             esac
             ;;
+        "CentOS Stream")
+            case "$2" in
+                "8")
+                    echo "dnf"
+                    ;;
+            esac
+            ;;
+        "AlmaLinux")
+            case "$2" in
+                "8.4")
+                    echo "dnf"
+                    ;;
+            esac
+            ;;
         "Ubuntu")
             case "$2" in
-                "16.04"|"18.04"|"20.04")
+                "14.04"|"16.04"|"18.04"|"20.04")
                     echo "deb"
                     ;;
             esac
             ;;
         "Debian GNU/Linux")
             case "$2" in
-                "10")
+                "8"|"9"|"10"|"11")
                     echo "deb"
+                    ;;
+            esac
+            ;;
+        "RED OS")
+            case "$2" in
+                "7.3")
+                    echo "rpm"
+                    ;;
+            esac
+            ;;
+        "openSUSE Leap")
+            case "$2" in
+                "15.1"|"15.2"|"42.3")
+                    echo "rpm"
+                    ;;
+            esac
+            ;;
+        "SLES")
+            case "$2" in
+                "15.2")
+                    echo "rpm"
+                    ;;
+            esac
+            ;;
+        "Fedora")
+            case "$2" in
+                "28"|"29"|"30"|"31"|"32"|"33"|"34")
+                    echo "dnf"
+                    ;;
+            esac
+            ;;
+        "Red Hat Enterprise Linux Server")
+            case "$2" in
+                "7.8")
+                    echo "rpm"
+                    ;;
+            esac
+            ;;
+        "Red Hat Enterprise Linux")
+            case "$2" in
+                "8.2")
+                    echo "dnf"
                     ;;
             esac
             ;;
@@ -241,9 +378,20 @@ function removeSystemUser {
 
 # Functions for image and VM checking
 
+
+function getStringsNumInVar {
+    VAR="$1"
+    if [ "$VAR" == "" ]; then
+        echo 0
+    else
+        echo "$VAR" | wc -l
+    fi
+}
+
+
 function getNonLockedUsers {
     SYSDB_DELIMITER=":"
-    NOPASSWORD_VALUES=$(printf '!\n!!\n*\n')
+    NOPASSWORD_VALUES=$(printf '!\n!!\n*\n!*\n*!\n')
     for USER in $(cat /etc/passwd | getColumn "$SYSDB_DELIMITER" 1); do
         USERPW=$(cat /etc/shadow | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($2)}')
         if notIn "$USERPW" "$NOPASSWORD_VALUES"; then
@@ -254,11 +402,17 @@ function getNonLockedUsers {
 
 
 function allUsersAreLocked {
-    USERS_COUNT=$(getNonLockedUsers | wc -l)
-    if [ "$USERS_COUNT" -eq "0" ]; then
-        echo PASS
+    V="$1"
+    NON_LOCKED_USERS=$(getNonLockedUsers)
+    if [ "$V" == "normal" ]; then
+        NON_LOCKED_USERS_SINGLE_STRING=$(echo $NON_LOCKED_USERS)
+        DETAILS=" Details: $NON_LOCKED_USERS_SINGLE_STRING"
+    fi
+    USERS_COUNT=$(getStringsNumInVar "$NON_LOCKED_USERS")
+    if [ "$USERS_COUNT" == "0" ]; then
+        echo "PASS;"
     else
-        echo FAIL
+        echo "FAIL;${DETAILS}"
     fi
 }
 
@@ -277,11 +431,17 @@ function getUsersWithNonEmptyBashHistory {
 
 
 function allUsersHaveEmptyBashHistory {
-    USERS_COUNT=$(getUsersWithNonEmptyBashHistory | wc -l)
-    if [ "$USERS_COUNT" -eq "0" ]; then
-        echo PASS
+    V="$1"
+    NON_EMPTYHIST_USERS=$(getUsersWithNonEmptyBashHistory)
+    if [ "$V" == "normal" ]; then
+        NON_EMPTYHIST_USERS_SINGLE_STRING=$(echo $NON_EMPTYHIST_USERS)
+        DETAILS=" Details: $NON_EMPTYHIST_USERS_SINGLE_STRING"
+    fi
+    USERS_COUNT=$(getStringsNumInVar "$NON_EMPTYHIST_USERS")
+    if [ "$USERS_COUNT" == "0" ]; then
+        echo "PASS;"
     else
-        echo FAIL
+        echo "FAIL;${DETAILS}"
     fi
 }
 
@@ -300,21 +460,27 @@ function getUsersWithAuthKeys {
 
 
 function onlyOneNonRootUserHasAuthKeys {
-    USERS_COUNT=$(getUsersWithAuthKeys | grep -v '^root$\|^operator$' | wc -l)
-    if [ "$USERS_COUNT" -eq "1" ]; then
-        echo PASS
+    V="$1"
+    AUTHKEY_USERS=$(getUsersWithAuthKeys | grep -v '^root$\|^operator$')
+    if [ "$V" == "normal" ]; then
+        AUTHKEY_USERS_SINGLE_STRING=$(echo $AUTHKEY_USERS)
+        DETAILS=" Details: $AUTHKEY_USERS_SINGLE_STRING"
+    fi
+    USERS_COUNT=$(getStringsNumInVar "$AUTHKEY_USERS")
+    if [ "$USERS_COUNT" == "1" ]; then
+        echo "PASS;"
     else
-        echo FAIL
+        echo "FAIL;${DETAILS}"
     fi
 }
 
 
 function noOneUserHasAuthKeys {
     USERS_COUNT=$(getUsersWithAuthKeys | wc -l)
-    if [ "$USERS_COUNT" -eq "0" ]; then
-        echo PASS
+    if [ "$USERS_COUNT" == "0" ]; then
+        echo "PASS;"
     else
-        echo FAIL
+        echo FAIL;
     fi
 }
 
@@ -336,11 +502,17 @@ function getUsersWithMoreThanOneAuthKeys {
 
 
 function noOneUserHaveMoreThanOneAuthKeys {
-    USERS_COUNT=$(getUsersWithMoreThanOneAuthKeys | wc -l)
-    if [ "$USERS_COUNT" -eq "0" ]; then
-        echo PASS
+    V="$1"
+    MORE1AUTHKEY_USERS=$(getUsersWithMoreThanOneAuthKeys)
+    if [ "$V" == "normal" ]; then
+        MORE1AUTHKEY_USERS_SINGLE_STRING=$(echo $MORE1AUTHKEY_USERS)
+        DETAILS=" Details: $MORE1AUTHKEY_USERS_SINGLE_STRING"
+    fi
+    USERS_COUNT=$(getStringsNumInVar "$MORE1AUTHKEY_USERS")
+    if [ "$USERS_COUNT" == "0" ]; then
+        echo "PASS;"
     else
-        echo FAIL
+        echo "FAIL;${DETAILS}"
     fi
 }
 
@@ -360,26 +532,46 @@ function getUsersWithKeyPairs {
 
 
 function noOneUserHasKeyPairs {
-    USERS_COUNT=$(getUsersWithKeyPairs | wc -l)
-    if [ "$USERS_COUNT" -eq "0" ]; then
-        echo PASS
+    V="$1"
+    KEYPAIR_USERS=$(getUsersWithKeyPairs)
+    if [ "$V" == "normal" ]; then
+        KEYPAIR_USERS_SINGLE_STRING=$(echo $KEYPAIR_USERS)
+        DETAILS=" Details: $KEYPAIR_USERS_SINGLE_STRING"
+    fi
+    USERS_COUNT=$(getStringsNumInVar "$KEYPAIR_USERS")
+    if [ "$USERS_COUNT" == "0" ]; then
+        echo "PASS;"
     else
-        echo FAIL
+        echo "FAIL;${DETAILS}"
     fi
 }
 
 
 function noPasswordAuthSSH {
+    V="$1"
     CONF_VAULE=$(sshd -T 2>/dev/null | sed -n 's/^passwordauthentication \(.*\)/\1/p')
+    if [ "$V" == "normal" ]; then
+        DETAILS=" Details: passwordauthentication ${CONF_VAULE}"
+    fi
     if [ "$CONF_VAULE" == "no" ]; then
-        echo PASS
+        echo "PASS;"
     else
-        echo FAIL
+        echo "FAIL;${DETAILS}"
     fi
 }
 
 
 # Summary functions
+
+function summarize {
+    INPUT=$(cat)
+    echo "$INPUT"
+    FAILSNUM=$(echo -n "$INPUT" | awk '/\ FAIL;/' | wc -l)
+    if [ "$FAILSNUM" -gt 0 ]; then
+        return 1
+    fi
+    return 0
+}
 
 function cleanupImage {
     echo -n "Starting to clean up SSH key pairs... "
@@ -422,46 +614,73 @@ function checkImage {
 
 
 function checkVM {
-    echo -n "Checking that all users are locked (password or empty password authentication is not allowed)... "
-    allUsersAreLocked
-    echo -n "Checking that all users have empty bash history... "
-    allUsersHaveEmptyBashHistory
-    echo -n "Checking that only one non-root user has non-empty authorized_keys... "
-    onlyOneNonRootUserHasAuthKeys
-    echo -n "Checking that no one user has more than one record in authorized_keys... "
-    noOneUserHaveMoreThanOneAuthKeys
-    echo -n "Checking that no one user has key pairs in .ssh directory... "
-    noOneUserHasKeyPairs
-    echo -n "Checking for SSH password authentication is disabled... "
-    noPasswordAuthSSH
+    CHECK_VM_SPECS="$1"
+    VERBOSITY="$2"
+    CHECK_VM_SPECS_NEWLINES=$(echo $CHECK_VM_SPECS | tr -s ',' '\n')
+    if notIn "users-locked-nocheck" "$CHECK_VM_SPECS_NEWLINES"; then
+        echo -n "Checking that all users are locked (password or empty password authentication is not allowed)... "
+        allUsersAreLocked "$VERBOSITY"
+    fi
+    if notIn "empty-history-nocheck" "$CHECK_VM_SPECS_NEWLINES"; then
+        echo -n "Checking that all users have empty bash history... "
+        allUsersHaveEmptyBashHistory "$VERBOSITY"
+    fi
+    if notIn "one-auth-user-nocheck" "$CHECK_VM_SPECS_NEWLINES"; then
+        echo -n "Checking that only one non-root user has non-empty authorized_keys... "
+        onlyOneNonRootUserHasAuthKeys "$VERBOSITY"
+    fi
+    if notIn "one-auth-key-nocheck" "$CHECK_VM_SPECS_NEWLINES"; then
+        echo -n "Checking that no one user has more than one record in authorized_keys... "
+        noOneUserHaveMoreThanOneAuthKeys "$VERBOSITY"
+    fi
+    if notIn "no-private-keys-nocheck" "$CHECK_VM_SPECS_NEWLINES"; then
+        echo -n "Checking that no one user has key pairs in .ssh directory... "
+        noOneUserHasKeyPairs "$VERBOSITY"
+    fi
+    if notIn "no-passwords-nocheck" "$CHECK_VM_SPECS_NEWLINES"; then
+        echo -n "Checking for SSH password authentication is disabled... "
+        noPasswordAuthSSH "$VERBOSITY"
+    fi
 }
 
 
 # Main
 
-USAGE="Usage: $(basename "$0") -h | -c | -d | -t
+USAGE="Usage: $(basename "$0") -h | -c | -d | -t [ -s SPECS ]
 Script for checking and cleaning up a virtual machine image before publication in Yandex Cloud.
 This script must be run as superuser. Be careful!
 
-Options:
+Options (order matters!):
   -h\thelp
+  -v\tverbose mode (supported modes: normal)
+  -s\tcomma-separated no-whitespaced list of specs for cleanup/check process
   -c\tclean up the image
   -d\tcheck the image just after preparing procedure, \"dry run mode\" of clean up process
   -t\tperform cleannes tests on running VM created from image
-  
+  -o\trunning distribution overview and check whether this distribution is supported or not 
+
+Results of running tests are printed to the stdout.
+In \"-d\" and \"-t\" modes exit code equals to 1 if at least one test fails, 0 otherwise.
+
 Environment variables can be set:
   YCCLEANUP_SYS_USER\tthe username used to perform image preparing tasks"
 
-if [ "$#" -ne "1" ]; then
+if [ "$#" -lt "1" ]; then
     echo -e "$USAGE" >&2
     exit 1
 fi
 
-while getopts ':htcd' OPTION; do
+while getopts ':hv::s::tcdo' OPTION; do
     case "$OPTION" in
         h) 
             echo -e "$USAGE"
             exit
+            ;;
+        v)
+            VERBOSE_MODE="${OPTARG}"
+            ;;
+        s)
+            SPECS="${OPTARG}"
             ;;
         c)
             echo "# Cleaning up the image"
@@ -485,9 +704,9 @@ while getopts ':htcd' OPTION; do
                 echo "Unsupported OS/distribution: $OS_TYPE/$OS_VERSION"
                 exit 1
             else
-                checkImage
+                checkImage | summarize
+                exit "$?"
             fi
-            exit
             ;;
         t)
             echo "# Checking the VM for cleannes"
@@ -498,9 +717,23 @@ while getopts ':htcd' OPTION; do
                 echo "Unsupported OS/distribution: $OS_TYPE/$OS_VERSION"
                 exit 1
             else
-                checkVM
+                checkVM "$SPECS" "$VERBOSE_MODE" | summarize
+                exit "$?"
             fi
-            exit
+            ;;
+        o)
+            echo "OS & distribution summary"
+            OS_TYPE=$(getOS)
+            echo "  OS: ${OS_TYPE}"
+            OS_VERSION=$(getOSVersion)
+            echo "  OS version: ${OS_VERSION}"
+            PRECHECK_RESULT=$(preCheck "$OS_TYPE" "$OS_VERSION")
+            if [ "$PRECHECK_RESULT" == FAIL ]; then
+                echo "  Unsupported OS/distribution; can't determine package manager type"
+            else
+                PM_TYPE=$(definePMSType "$OS_TYPE" "$OS_VERSION")
+                echo "  Package manager type: $PM_TYPE"
+            fi
             ;;
         \?)
             echo $(basename "$0")": illegal option -- $OPTARG"
