@@ -4,7 +4,7 @@
     "folder_id": "",
     "service_account_key_file": "service-account.json",
     "password": "",
-    "source_image_family": "windows-2016-gvlk",
+    "source_image_family": "windows-2019-gvlk",
     "platform_id": "standard-v2",
     "instance_name": "exmbprereq",
     "instance_cores": "4",
