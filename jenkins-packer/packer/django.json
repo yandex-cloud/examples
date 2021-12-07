@@ -12,7 +12,7 @@
       "subnet_id": "{{user `subnet_id`}}",
       "zone":      "ru-central1-b",
 
-      "image_name":        "debian-10-django-{{isotime | clean_image_name}}",
+      "image_name":        "debian-10-django-{{isotime | clean_resource_name}}",
       "image_family":      "debian-10-django",
       "image_description": "My very custom Django build",
 
