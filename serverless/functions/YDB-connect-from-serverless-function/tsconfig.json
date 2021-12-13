@@ -1,0 +1,31 @@
+{
+  "compilerOptions":
+  {
+    "target": "ESNext",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "sourceMap": true,
+    "removeComments": true,
+    "strict": true,                                 /* Enable all strict type-checking options. */
+    "resolveJsonModule": true,
+    "isolatedModules": false, // нужно true для babel
+    "inlineSources": true,
+    "esModuleInterop": true, //                        /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
+    "allowSyntheticDefaultImports": true,     /*allows you to write an import like:     import React from "react";     instead of:     import * as React from "react";*/
+    "skipLibCheck": true,                           /* Skip type checking of declaration files. */
+    "allowJs": false,                          /* Allow JavaScript files to be imported inside your project */
+    //    декораторы
+    //    emitDecoratorMetadata и experimentalDecorators
+//    "experimentalDecorators": true,
+//    "emitDecoratorMetadata": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"],
+  "baseUrl": "src/", // this must be specified if "paths" is specified.
+  "paths": { // A series of entries which re-map imports to lookup locations relative to the baseUrl,
+    "@/*": [
+      "src/*"
+    ]
+  }
+}
