@@ -2,7 +2,7 @@
 #source ../.env
 #cd s3-compress-after-presign
 pwd
-export $(grep -v '^#' ./.env | xargs -d '\n')
+export $(grep -v '^#' ./.env)
 rm -R dist
 
 echo "npx tsc --build tsconfig.json"
