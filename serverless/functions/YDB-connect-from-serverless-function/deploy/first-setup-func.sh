@@ -1,6 +1,6 @@
 #!/bin/sh
 pwd
-export $(grep -v '^#' main.env | xargs -d '\n')
+export $(grep -v '^#' main.env)
 
 echo "Удалить $FUNCTION_NAME"
 yc serverless function delete --name=$FUNCTION_NAME
