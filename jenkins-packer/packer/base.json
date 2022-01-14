@@ -12,11 +12,11 @@
       "subnet_id": "{{user `subnet_id`}}",
       "zone":      "ru-central1-b",
 
-      "image_name":   "debian-10-base-{{isotime | clean_image_name}}",
-      "image_family": "debian-10-base",
+      "image_name":   "debian-11-base-{{isotime | clean_resource_name}}",
+      "image_family": "debian-11-base",
       "image_description": "Yet another debian build 2",
 
-      "source_image_family": "debian-10",
+      "source_image_family": "debian-11",
       "disk_type":           "network-nvme",
       "ssh_username":        "debian",
 
@@ -33,7 +33,7 @@
         "sleep 10",
         "echo changed",
 	"export DEBIAN_FRONTEND=noninteractive",
-	"sudo apt-get install -y linux-image-amd64=4.19+105 linux-image-4.19.0-5-amd64=4.19.37-5"
+	"sudo apt-get install -y linux-image-5.14.0-0.bpo.2-cloud-amd64 linux-headers-5.14.0-0.bpo.2-cloud-amd64"
       ]
     }
   ]

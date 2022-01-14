@@ -12,11 +12,11 @@
       "subnet_id": "{{user `subnet_id`}}",
       "zone":      "ru-central1-b",
 
-      "image_name":        "debian-10-django-{{isotime | clean_image_name}}",
-      "image_family":      "debian-10-django",
+      "image_name":        "debian-11-django-{{isotime | clean_resource_name}}",
+      "image_family":      "debian-11-django",
       "image_description": "My very custom Django build",
 
-      "source_image_family":    "debian-10-base",
+      "source_image_family":    "debian-11-base",
       "source_image_folder_id": "{{user `folder_id`}}",
       "disk_type":              "network-nvme",
       "ssh_username":           "debian",
