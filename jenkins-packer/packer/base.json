@@ -33,7 +33,7 @@
         "sleep 10",
         "echo changed",
 	"export DEBIAN_FRONTEND=noninteractive",
-	"sudo apt-get install -y linux-image-5.14.0-0.bpo.2-cloud-amd64 linux-headers-5.14.0-0.bpo.2-cloud-amd64"
+	"sudo apt-get install -y linux-image-amd64=5.14.9-2~bpo11+1 linux-image-5.14.0-0.bpo.2-amd64=5.14.9-2~bpo11+1"
       ]
     }
   ]
