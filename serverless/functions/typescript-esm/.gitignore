@@ -1,0 +1,10 @@
+.DS_Store
+.vscode
+
+# npm
+node_modules
+npm-debug.log
+
+# Dist files
+/dist
+
