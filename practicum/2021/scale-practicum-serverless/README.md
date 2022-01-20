@@ -1,5 +1,12 @@
 # Настройка окружения для практикума «Веб-приложение на Serverless»
 
+# Оглавление
+1. [Предварительная инсталяция](#Предварительная-инсталяция)
+2. [Получение логина и пароля](#Получение-логина-и-пароля)
+3. [Конфигурирование консольных утилит](#Конфигурирование-консольных-утилит)
+
+# Предварительная инсталяция
+
 Для работы вам потребуются:
 
 - WebStorm(или любая другая среда разработки с поддержкой typescript)
@@ -58,8 +65,7 @@ exec -l $SHELL
 yc version
 ```
 
-Настройте профиль по [инструкции](https://cloud.yandex.ru/docs/cli/operations/profile/profile-create#interactive-create)
-.
+Настройте профиль по [инструкции](https://cloud.yandex.ru/docs/cli/operations/profile/profile-create#interactive-create) сразу после получения логина и пароля.
 
 #### aws CLI
 
@@ -153,8 +159,8 @@ exec -l $SHELL
 yc version
 ```
 
-Настройте профиль по [инструкции](https://cloud.yandex.ru/docs/cli/operations/profile/profile-create#interactive-create)
-.
+Настройте профиль по [инструкции](https://cloud.yandex.ru/docs/cli/operations/profile/profile-create#interactive-create) сразу после получения логина и пароля.
+
 
 #### aws CLI
 
@@ -184,3 +190,21 @@ terraform version
 ```bash
 brew install curl git
 ```
+
+# Получение логина и пароля
+Примерно за сутки до практикума вы получите специально письмо с логином и паролем для доступа в облако. Вам необходимо использовать их для входа в веб-консоль Yandex.Cloud. Войдя в консоль Yandex.Cloud определите название вашего рабочего каталога, его имя будет соответсовать вашему логину: если ваш логин `yc.participants-400@yandexcloudlab.yaconnect.com` то рабочий каталог будет называться `yc-participants-400-yandexcloudlab-yaconnect-com` 
+
+![Alt-текст](folder.png)
+
+Не выходите из веб-консоли Yandex.Cloud и приступите к следующему пункту инструкции.
+
+
+# Конфигурирование консольных утилит
+## Настройте профиль yc CLI
+Настройте профиль yc CLI по [инструкции](https://cloud.yandex.ru/docs/cli/operations/profile/profile-create#interactive-create).
+
+## Настройте профиль aws CLI
+
+Для конфигурирования профиля aws CLI потребуется создать сервисный аккаунт, выдать ему права и получить идентификатор ключа и ключ доступа созданного сервисного аккаунта. Для всего этого используйте имя вашего пользователя как имя, например: если ваш логин `yc.participants-400@yandexcloudlab.yaconnect.com` то имя должно быть `yc-participants-400`.
+
+Произведите настройку профиля aws CLI по [инструкции](https://cloud.yandex.ru/docs/ydb/quickstart/document-api/aws-setup).
