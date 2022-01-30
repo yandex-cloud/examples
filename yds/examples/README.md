@@ -1,6 +1,6 @@
 # Example of how to send Yandex Data Streams messages by raw HTTP
 
-Sample project for send messages by row HTTP.
+Sample project for send messages by raw HTTP.
 
 # Yandex Services
 * [Yandex Data Stream](https://cloud.yandex.ru/services/yds)
