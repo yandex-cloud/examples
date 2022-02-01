@@ -1,6 +1,6 @@
-# Example of how to send Yandex Data Streams messages by raw HTTP
+# Example on how to send Yandex Data Streams messages by raw HTTP
 
-Sample project for send messages by raw HTTP.
+Sample python3 project for send messages by raw HTTP.
 
 # Yandex Services
 * [Yandex Data Stream](https://cloud.yandex.ru/services/yds)
@@ -8,7 +8,7 @@ Sample project for send messages by raw HTTP.
 
 # Prepare services
 
-1. Create _Yandex Data Streams_ stream and save full stream name
+1. Create _Yandex Data Streams_ stream and save full stream name (full stream name includes stream name and containing database id)
 2. Create static credentials with `yds.writer` role
 
 # Send message to stream
