@@ -1,6 +1,6 @@
 # Example on how to send Yandex Data Streams messages by raw HTTP
 
-Sample python3 project for send messages by raw HTTP.
+Sample python3 project for send messages by raw HTTP. Based on [original example](https://stackoverflow.com/questions/51991401/how-to-implement-amazon-kinesis-putmedia-method-using-python).
 
 # Yandex Services
 * [Yandex Data Stream](https://cloud.yandex.ru/services/yds)
