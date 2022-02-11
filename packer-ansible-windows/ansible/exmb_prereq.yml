@@ -2,11 +2,11 @@
 - hosts: all
 
   vars:
-    uri_exch2016cu12: "https://storage.yandexcloud.net/msft-exchange/ExchangeServer2016-x64-cu12.iso"
-    uri_ndp471: "https://storage.yandexcloud.net/msft-exchange/NDP471-KB4033342-x86-x64-AllOS-ENU.exe"
-    uri_vcr12: "https://storage.yandexcloud.net/msft-exchange/vcredist_x64_2012.exe"
-    uri_vcr13: "https://storage.yandexcloud.net/msft-exchange/vcredist_x64_2013.exe"
-    uri_ucmar: "https://storage.yandexcloud.net/msft-exchange/UcmaRuntimeSetup.exe"
+    uri_exch2016cu12: "https://download.microsoft.com/download/2/5/8/258D30CF-CA4C-433A-A618-FB7E6BCC4EEE/ExchangeServer2016-x64-cu12.iso"
+    uri_ndp471: "https://download.visualstudio.microsoft.com/download/pr/2d6bb6b2-226a-4baa-bdec-798822606ff1/8494001c276a4b96804cde7829c04d7f/ndp48-x86-x64-allos-enu.exe"
+    uri_vcr12: "https://download.microsoft.com/download/1/6/B/16B06F60-3B20-4FF2-B699-5E9B7962F9AE/VSU_4/vcredist_x64.exe"
+    uri_vcr13: "http://download.microsoft.com/download/0/5/6/056dcda9-d667-4e27-8001-8a0c6971d6b1/vcredist_x64.exe"
+    uri_ucmar: "https://download.microsoft.com/download/2/C/4/2C47A5C1-A1F3-4843-B9FE-84C0032C61EC/UcmaRuntimeSetup.exe"
 
   tasks:
     - name: download required modules
