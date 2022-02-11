@@ -26,12 +26,12 @@ variable "zones" {
 variable "yc_image_family" {
   description = "family"
 
-  type = "map"
+  type = map
 
   default = {
-    nginx  = "debian-10-nginx"
-    django = "debian-10-django"
-    base   = "debian-10-base"
+    nginx  = "debian-11-nginx"
+    django = "debian-11-django"
+    base   = "debian-11-base"
   }
 }
 
