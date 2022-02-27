@@ -1,18 +1,19 @@
 {
   "variables": {
     "playbook": "exmb_prereq.yml",
-    "folder_id": "",
-    "service_account_key_file": "service-account.json",
-    "password": "",
-    "source_image_family": "windows-2016-gvlk",
-    "platform_id": "standard-v2",
+    "folder_id": "b1g8bj7i6er34jgvb7mf",
+    "service_account_key_file": "service_account.json",
+    "password": "qWfwmvqXCk75rT",
+    "source_image_name": "windows-server-2019-datacenter-v20220221",
+    "platform_id": "standard-v3",
     "instance_name": "exmbprereq",
     "instance_cores": "4",
     "instance_mem_gb": "8",
     "disk_size_gb": "50",
     "disk_type": "network-ssd",
     "use_ipv4_nat": "true",
-    "subnet_id": "",
+    "subnet_id": "e2lic8fb0u8f21iv0kks",
+    "zone": "ru-central1-b",
     "image_name": "exmbprereq"
   },
   "builders": [
@@ -20,7 +21,7 @@
       "type": "yandex",
       "folder_id": "{{user `folder_id`}}",
       "service_account_key_file": "{{template_dir}}/{{user `service_account_key_file`}}",
-      "source_image_family": "{{user `source_image_family`}}",
+      "source_image_name": "{{user `source_image_name`}}",
       "instance_name": "{{user `instance_name`}}",
       "instance_cores": "{{user `instance_cores`}}",
       "instance_mem_gb": "{{user `instance_mem_gb`}}",
@@ -28,6 +29,7 @@
       "disk_type": "{{user `disk_type`}}",
       "use_ipv4_nat": "{{user `use_ipv4_nat`}}",
       "subnet_id": "{{user `subnet_id`}}",
+      "zone": "{{user `zone`}}",
       "image_name": "win-{{user `image_name`}}-{{isotime | clean_resource_name}}",
       "metadata": {
         "user-data": "#ps1\nnet user Administrator {{user `password`}}\nls \"C:\\Program Files\\Cloudbase Solutions\\Cloudbase-Init\\LocalScripts\" | rm\nRemove-Item -Path WSMan:\\Localhost\\listener\\listener* -Recurse\nRemove-Item -Path Cert:\\LocalMachine\\My\\*\n$DnsName = Invoke-RestMethod -Headers @{\"Metadata-Flavor\"=\"Google\"} \"http://169.254.169.254/computeMetadata/v1/instance/hostname\"\n$HostName = Invoke-RestMethod -Headers @{\"Metadata-Flavor\"=\"Google\"} \"http://169.254.169.254/computeMetadata/v1/instance/name\"\n$Certificate = New-SelfSignedCertificate -CertStoreLocation Cert:\\LocalMachine\\My -DnsName $DnsName -Subject $HostName\nNew-Item -Path WSMan:\\LocalHost\\Listener -Transport HTTP -Address * -Force\nNew-Item -Path WSMan:\\LocalHost\\Listener -Transport HTTPS -Address * -Force -HostName $HostName -CertificateThumbPrint $Certificate.Thumbprint\n& netsh advfirewall firewall add rule name=\"WINRM-HTTPS-In-TCP\" protocol=TCP dir=in localport=5986 action=allow profile=any"
@@ -45,15 +47,6 @@
       "type": "file",
       "source": "{{template_dir}}/setup_complete/",
       "destination": "C:\\Windows\\Setup\\Scripts\\"
-    },
-    {
-      "type": "ansible",
-      "playbook_file": "{{template_dir}}/ansible/{{user `playbook`}}",
-      "extra_arguments": [
-        "--connection=packer",
-        "--extra-vars", "ansible_shell_type=powershell ansible_shell_executable=None ansible_python_interpreter=/usr/bin/python"
-      ],
-      "ansible_env_vars": ["ANSIBLE_SSH_ARGS='-o ControlPersist=10m'"]
     },
     {
       "type": "windows-restart"
