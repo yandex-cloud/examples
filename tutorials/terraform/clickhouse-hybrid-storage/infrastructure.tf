@@ -42,7 +42,7 @@ resource "yandex_vpc_default_security_group" "clickhouse-security-group" {
   }
 }
 
-# Managed Service for ClickHouse cluster with hybrid storage
+# Managed Service for ClickHouse cluster with enabled hybrid storage
 resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster" {
   name               = "clickhouse-cluster"
   environment        = "PRODUCTION"
@@ -69,8 +69,8 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster" {
   }
 
   user {
-    name     = "user1"    # Set the user name
-    password = "_1234567" # Set the user password
+    name     = "" # Set the user name
+    password = "" # Set the user password
     permission {
       database_name = "tutorial"
     }
@@ -80,5 +80,4 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster" {
   cloud_storage {
     enabled = true
   }
-
 }
