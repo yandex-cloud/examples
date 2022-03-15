@@ -8,13 +8,13 @@
 
 # Network
 resource "yandex_vpc_network" "clickhouse_hybrid_storage_network" {
-  name        = "clickHouse_hybrid_storage_network"
+  name        = "clickhouse-hybrid-storage-network"
   description = "Network for Managed Service for ClickHouse cluster with hybrid storage."
 }
 
 # Subnet in ru-central1-a availability zone
-resource "yandex_vpc_subnet_zone_a" "subnet-a" {
-  name           = "subnet-a"
+resource "yandex_vpc_subnet" "subnet-a" {
+  name           = "clickhouse-subnet-a"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.clickhouse_hybrid_storage_network.id
   v4_cidr_blocks = ["10.1.0.0/16"]
@@ -22,9 +22,9 @@ resource "yandex_vpc_subnet_zone_a" "subnet-a" {
 
 # Security group for Managed Service for ClickHouse cluster
 resource "yandex_vpc_default_security_group" "clickhouse-security-group" {
-  name = "clickhouse-security-group"
+  network_id = yandex_vpc_network.clickhouse_hybrid_storage_network.id
 
-  # Allow connections to cluster from internet
+  # Allow connections to cluster from Internet
   ingress {
     protocol       = "TCP"
     description    = "Allow incoming SSL-connections with clickhouse-client from Internet"
@@ -58,9 +58,10 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster" {
   }
 
   host {
-    type      = "CLICKHOUSE"
-    zone      = "ru-central1-a"
-    subnet_id = yandex_vpc_subneb.subnet-a.id
+    type             = "CLICKHOUSE"
+    zone             = "ru-central1-a"
+    subnet_id        = yandex_vpc_subnet.subnet-a.id
+    assign_public_ip = true # Required for connection from Internet
   }
 
   database {
@@ -68,12 +69,16 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster" {
   }
 
   user {
-    name     = "" # Set the user name
-    password = "" # Set the user password
+    name     = "user1"    # Set the user name
+    password = "_1234567" # Set the user password
     permission {
-      database_name = "tutorials"
+      database_name = "tutorial"
     }
   }
 
-  cloud_storage = true # Allow use hybrid storage
+  # Enable hybrid storage
+  cloud_storage {
+    enabled = true
+  }
+
 }
