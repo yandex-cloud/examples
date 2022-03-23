@@ -1,4 +1,4 @@
-# Terraform configuration files for Yandex.Cloud practical guides
+# Terraform configuration files for Yandex Cloud practical guides
 
 * [clickhouse-hybrid-storage.tf](./clickhouse-hybrid-storage.tf)
 

@@ -1,4 +1,4 @@
-# Infrastructure for Yandex.Cloud Managed Service for ClickHouse cluster with hybrid storage
+# Infrastructure for Yandex Cloud Managed Service for ClickHouse cluster with hybrid storage
 #
 # RU: https://cloud.yandex.ru/docs/managed-clickhouse/tutorials/hybrid-storage
 # EN: https://cloud.yandex.com/en/docs/managed-clickhouse/tutorials/hybrid-storage
@@ -69,8 +69,8 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster" {
   }
 
   user {
-    name     = "" # Set the user name
-    password = "" # Set the user password
+    name     = "" # Set username
+    password = "" # Set user password
     permission {
       database_name = "tutorial"
     }
