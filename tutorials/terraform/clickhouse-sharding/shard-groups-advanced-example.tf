@@ -106,12 +106,19 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster-sharded" {
   }
 
   shard_group {
-    name        = "three_shard_group"
-    description = "Cluster configuration that contains three shards"
+    name        = "sgroup"
+    description = "Group with one shard"
     shard_names = [
-      "shard1",
+      "shard1"
+    ]
+  }
+
+  shard_group {
+    name        = "sgroup_data"
+    description = "Group with two shards"
+    shard_names = [
       "shard2",
-      "shard3",
+      "shard3"
     ]
   }
 
