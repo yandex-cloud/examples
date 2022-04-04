@@ -1,4 +1,4 @@
-# Infrastructure for Yandex Cloud Managed Service for ClickHouse cluster with sharding
+# Infrastructure for Yandex Cloud Managed Service for ClickHouse cluster with advanced sharding: one shard in the first group, two shards in the second one
 #
 # RU: https://cloud.yandex.ru/docs/managed-clickhouse/tutorials/sharding
 # EN: https://cloud.yandex.com/en/docs/managed-clickhouse/tutorials/sharding
@@ -48,6 +48,14 @@ resource "yandex_vpc_default_security_group" "clickhouse-security-group" {
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
+  # Allow connections to cluster from Internet
+  ingress {
+    protocol       = "TCP"
+    description    = "Allow incoming SSL-connections with clickhouse-client from Internet"
+    port           = 8443
+    v4_cidr_blocks = ["0.0.0.0/0"]
+  }
+
   # Allow connections from cluster to Yandex Object Storage
   egress {
     protocol       = "ANY"
@@ -58,9 +66,9 @@ resource "yandex_vpc_default_security_group" "clickhouse-security-group" {
   }
 }
 
-# Managed Service for ClickHouse cluster with sharding
-resource "yandex_mdb_clickhouse_cluster" "chcluster" {
-  name               = "chcluster"
+# Managed Service for ClickHouse cluster with advanced sharding
+resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster-sharded" {
+  name               = "clickhouse-cluster-sharded"
   environment        = "PRODUCTION"
   network_id         = yandex_vpc_network.clickhouse_sharding_network.id
   security_group_ids = [yandex_vpc_default_security_group.clickhouse-security-group.id]
@@ -107,10 +115,18 @@ resource "yandex_mdb_clickhouse_cluster" "chcluster" {
 
   shard_group {
     name        = "sgroup"
-    description = "Cluster configuration that contains three shards"
+    description = "Group with one shard"
     shard_names = [
-      "shard1",
-      "shard2"
+      "shard1"
+    ]
+  }
+
+  shard_group {
+    name        = "sgroup_data"
+    description = "Group with two shards"
+    shard_names = [
+      "shard2",
+      "shard3"
     ]
   }
 
@@ -119,7 +135,7 @@ resource "yandex_mdb_clickhouse_cluster" "chcluster" {
   }
 
   user {
-    name     = ""     # Set username
+    name     = "" # Set username
     password = "" # Set user password
     permission {
       database_name = "tutorial"

@@ -1,4 +1,4 @@
-# Infrastructure for Yandex Cloud Managed Service for ClickHouse cluster with sharding
+# Infrastructure for Yandex Cloud Managed Service for ClickHouse cluster with group sharding: two shards in a group
 #
 # RU: https://cloud.yandex.ru/docs/managed-clickhouse/tutorials/sharding
 # EN: https://cloud.yandex.com/en/docs/managed-clickhouse/tutorials/sharding
@@ -48,6 +48,14 @@ resource "yandex_vpc_default_security_group" "clickhouse-security-group" {
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
+  # Allow connections to cluster from Internet
+  ingress {
+    protocol       = "TCP"
+    description    = "Allow incoming SSL-connections with clickhouse-client from Internet"
+    port           = 8443
+    v4_cidr_blocks = ["0.0.0.0/0"]
+  }
+
   # Allow connections from cluster to Yandex Object Storage
   egress {
     protocol       = "ANY"
@@ -58,8 +66,8 @@ resource "yandex_vpc_default_security_group" "clickhouse-security-group" {
   }
 }
 
-# Managed Service for ClickHouse cluster with sharding
-resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster-sharded" {
+# Managed Service for ClickHouse cluster with group sharding
+resource "yandex_mdb_clickhouse_cluster" "chcluster" {
   name               = "chcluster"
   environment        = "PRODUCTION"
   network_id         = yandex_vpc_network.clickhouse_sharding_network.id
@@ -105,12 +113,21 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster-sharded" {
     shard_name       = "shard3"
   }
 
+  shard_group {
+    name        = "sgroup"
+    description = "Cluster configuration that contains three shards"
+    shard_names = [
+      "shard1",
+      "shard2"
+    ]
+  }
+
   database {
     name = "tutorial"
   }
 
   user {
-    name     = ""     # Set username
+    name     = "" # Set username
     password = "" # Set user password
     permission {
       database_name = "tutorial"
