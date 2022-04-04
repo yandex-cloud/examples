@@ -110,8 +110,7 @@ resource "yandex_mdb_clickhouse_cluster" "chcluster" {
     description = "Cluster configuration that contains three shards"
     shard_names = [
       "shard1",
-      "shard2",
-      "shard3"
+      "shard2"
     ]
   }
 
