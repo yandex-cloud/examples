@@ -113,6 +113,24 @@ resource "yandex_mdb_clickhouse_cluster" "chcluster" {
     shard_name       = "shard3"
   }
 
+  host {
+    type             = "ZOOKEEPER"
+    zone             = "ru-central1-a"
+    subnet_id        = yandex_vpc_subnet.subnet-a.id
+  }
+
+  host {
+    type             = "ZOOKEEPER"
+    zone             = "ru-central1-b"
+    subnet_id        = yandex_vpc_subnet.subnet-b.id
+  }
+
+  host {
+    type             = "ZOOKEEPER"
+    zone             = "ru-central1-c"
+    subnet_id        = yandex_vpc_subnet.subnet-c.id
+  }
+
   shard_group {
     name        = "sgroup"
     description = "Cluster configuration that contains three shards"

@@ -113,11 +113,30 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster-sharded" {
     shard_name       = "shard3"
   }
 
+  host {
+    type             = "ZOOKEEPER"
+    zone             = "ru-central1-a"
+    subnet_id        = yandex_vpc_subnet.subnet-a.id
+  }
+
+  host {
+    type             = "ZOOKEEPER"
+    zone             = "ru-central1-b"
+    subnet_id        = yandex_vpc_subnet.subnet-b.id
+  }
+
+  host {
+    type             = "ZOOKEEPER"
+    zone             = "ru-central1-c"
+    subnet_id        = yandex_vpc_subnet.subnet-c.id
+  }
+
   shard_group {
     name        = "sgroup"
     description = "Group with one shard"
     shard_names = [
-      "shard1"
+      "shard1",
+      "shard2"
     ]
   }
 
@@ -125,7 +144,6 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster-sharded" {
     name        = "sgroup_data"
     description = "Group with two shards"
     shard_names = [
-      "shard2",
       "shard3"
     ]
   }
