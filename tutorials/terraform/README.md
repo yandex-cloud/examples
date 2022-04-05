@@ -1,5 +1,7 @@
 # Terraform configuration files for Yandex Cloud practical guides
 
+File with provider settings / Файл с настройками провайдера: [provider.tf](./provider.tf)
+
 ## Managed Service for ClickHouse
 
 ### Using hybrid storage
