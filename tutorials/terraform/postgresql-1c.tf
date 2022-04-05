@@ -1,7 +1,7 @@
 # Infrastructure for Yandex Cloud Managed Service for PostgreSQL 1C cluster
 #
 # RU: https://cloud.yandex.ru/docs/managed-postgresql/tutorials/1c-postgresql
-# EN: https://cloud.yandex.com/en-ru/docs/managed-postgresql/tutorials/1c-postgresql
+# EN: https://cloud.yandex.com/en/docs/managed-postgresql/tutorials/1c-postgresql
 #
 # Set the user password for Managed Service for PostgreSQL 1C cluster
 
