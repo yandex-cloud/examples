@@ -10,7 +10,7 @@ terraform {
 
 provider "yandex" {
   token     = "" # Set OAuth or IAM token
-  cloud_id  = "" # Set you cloud ID
-  folder_id = "" # Set you cloud folder ID
+  cloud_id  = "" # Set your cloud ID
+  folder_id = "" # Set your cloud folder ID
   zone      = "" # Availability zone by default, one of ru-centlra1-a, ru-central1-b, ru-central1-c
 }
