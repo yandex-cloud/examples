@@ -27,17 +27,8 @@ resource "yandex_vpc_default_security_group" "postgresql-security-group" {
   # Allow connections to cluster from Internet
   ingress {
     protocol       = "TCP"
-    description    = "Allow incoming SSL-connections with postgresql-client from Internet"
+    description    = "Allow connections from Internet"
     port           = 6432
-    v4_cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  # Allow connections from cluster to Yandex Object Storage
-  egress {
-    protocol       = "ANY"
-    description    = "Allow outgoing connections to any required resource"
-    from_port      = 0
-    to_port        = 65535
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 }
