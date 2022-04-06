@@ -40,7 +40,7 @@ resource "yandex_vpc_subnet" "subnet-c" {
 resource "yandex_vpc_default_security_group" "clickhouse-security-group" {
   network_id = yandex_vpc_network.clickhouse_sharding_network.id
 
-  # Allow connections to cluster from Internet
+  # Allow connections to cluster from the Internet
   ingress {
     protocol       = "TCP"
     description    = "Allow incoming SSL-connections with clickhouse-client from Internet"
@@ -48,15 +48,7 @@ resource "yandex_vpc_default_security_group" "clickhouse-security-group" {
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
-  # Allow connections to cluster from Internet
-  ingress {
-    protocol       = "TCP"
-    description    = "Allow incoming SSL-connections with clickhouse-client from Internet"
-    port           = 8443
-    v4_cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  # Allow connections from cluster to Yandex Object Storage
+  # Allow connections from cluster to any required resource
   egress {
     protocol       = "ANY"
     description    = "Allow outgoing connections to any required resource"
@@ -93,7 +85,7 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster-sharded" {
     type             = "CLICKHOUSE"
     zone             = "ru-central1-a"
     subnet_id        = yandex_vpc_subnet.subnet-a.id
-    assign_public_ip = true # Required for connection from Internet
+    assign_public_ip = true # Required for connection from the Internet
     shard_name       = "shard1"
   }
 
@@ -101,7 +93,7 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster-sharded" {
     type             = "CLICKHOUSE"
     zone             = "ru-central1-b"
     subnet_id        = yandex_vpc_subnet.subnet-b.id
-    assign_public_ip = true # Required for connection from Internet
+    assign_public_ip = true # Required for connection from the Internet
     shard_name       = "shard2"
   }
 
@@ -109,7 +101,7 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster-sharded" {
     type             = "CLICKHOUSE"
     zone             = "ru-central1-c"
     subnet_id        = yandex_vpc_subnet.subnet-c.id
-    assign_public_ip = true # Required for connection from Internet
+    assign_public_ip = true # Required for connection from the Internet
     shard_name       = "shard3"
   }
 
@@ -133,7 +125,7 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster-sharded" {
 
   shard_group {
     name        = "sgroup"
-    description = "Group with one shard"
+    description = "Shard group with two shards"
     shard_names = [
       "shard1",
       "shard2"
@@ -142,7 +134,7 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster-sharded" {
 
   shard_group {
     name        = "sgroup_data"
-    description = "Group with two shards"
+    description = "Shard group with one shard"
     shard_names = [
       "shard3"
     ]

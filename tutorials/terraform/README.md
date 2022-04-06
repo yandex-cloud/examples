@@ -17,9 +17,9 @@
 
 **Files**:
 
-* [simple-sharding.tf](./simple-sharding.tf)
+* [simple-sharding.tf](./clickhouse-sharding/simple-sharding.tf)
     Cluster with three shards without groups.
-* [sharding-with-group.tf](./sharding-with-group.tf)
+* [sharding-with-group.tf](./clickhouse-sharding/sharding-with-group.tf)
     Cluster with three shards and one shard group which contains `shard1` and `shard2`.
-* [advanced-sharding-with-groups.tf](./advanced-sharding-with-groups.tf)
-    Cluster with three shards and two shard groups. The first contains `shard1`, the second contains `shard2` and `shard3`.
+* [advanced-sharding-with-groups.tf](./clickhouse-sharding/advanced-sharding-with-groups.tf)
+    Cluster with three shards and two shard groups. The first contains `shard1` and `shard2`, the second contains `shard3`.
