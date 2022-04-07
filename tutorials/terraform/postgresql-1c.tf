@@ -24,10 +24,10 @@ resource "yandex_vpc_subnet" "subnet-a" {
 resource "yandex_vpc_default_security_group" "postgresql-security-group" {
   network_id = yandex_vpc_network.postgresql-1c-network.id
 
-  # Allow connections to cluster from Internet
+  # Allow connections to cluster from the Internet
   ingress {
     protocol       = "TCP"
-    description    = "Allow connections from Internet"
+    description    = "Allow connections from the Internet"
     port           = 6432
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
