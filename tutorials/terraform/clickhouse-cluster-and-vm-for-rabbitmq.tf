@@ -3,8 +3,7 @@
 # RU: https://cloud.yandex.ru/docs/managed-clickhouse/tutorials/fetch-data-from-rabbitmq
 # EN: https://cloud.yandex.com/en/docs/managed-clickhouse/tutorials/fetch-data-from-rabbitmq
 #
-# Set the user name and password for Managed Service for ClickHouse cluster
-# Set the user name and SSH-key for Virtual Machine
+# Set the settings for Managed Service for ClickHouse cluster and Virtual Machine
 
 
 # Network
@@ -25,53 +24,26 @@ resource "yandex_vpc_subnet" "subnet-a" {
 resource "yandex_vpc_default_security_group" "clickhouse-and-vm-security-group" {
   network_id = yandex_vpc_network.clickhouse-and-vm-network.id
 
-  # Allow connections to cluster from Internet
+  # Allow connections to cluster from the Internet
   ingress {
     protocol       = "TCP"
-    description    = "Allow connections from Internet"
-    port           = 8123
-    v4_cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    protocol       = "TCP"
-    description    = "Allow connections from Internet"
-    port           = 8443
-    v4_cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    protocol       = "TCP"
-    description    = "Allow connections from Internet"
-    port           = 9000
-    v4_cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    protocol       = "TCP"
-    description    = "Allow connections from Internet"
+    description    = "Allow connections from the Internet"
     port           = 9440
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
-  egress {
-    protocol       = "TCP"
-    description    = "Allow connections from Internet"
-    port           = 8443
-    v4_cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    protocol       = "TCP"
-    description    = "Allow connections from Internet"
-    port           = 9440
-    v4_cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  # Allow connections for VM
+  # Allow connections to RabbitMQ
   ingress {
     protocol       = "TCP"
-    description    = "Allow connections for VM"
+    description    = "Allow connections to RabbitMQ"
+    port           = 5672
+    v4_cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  # Allow SSH connections for VM
+  ingress {
+    protocol       = "TCP"
+    description    = "Allow SSH connections for VM from the Internet"
     port           = 22
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
@@ -104,7 +76,7 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster" {
     type             = "CLICKHOUSE"
     zone             = "ru-central1-a"
     subnet_id        = yandex_vpc_subnet.subnet-a.id
-    assign_public_ip = true # Required for connection from Internet
+    assign_public_ip = true # Required for connection from the Internet
   }
 
   database {
@@ -120,29 +92,29 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster" {
   }
 }
 
-# Compute Virtual Machine
+# VM in Yandex Compute Cloud
 resource "yandex_compute_instance" "vm-1" {
 
   name        = "linux-vm"
-  platform_id = "standard-v3"
+  platform_id = "standard-v3" # Intel Ice Lake
 
   resources {
     cores  = 2
-    memory = 2
+    memory = 2 # GB
   }
 
   boot_disk {
     initialize_params {
-      image_id = "" # Set image id
+      image_id = "" # Set image ID
     }
   }
 
   network_interface {
     subnet_id = yandex_vpc_subnet.subnet-a.id
-    nat       = true # Required for connection from Internet
+    nat       = true # Required for connection from the Internet
   }
 
   metadata = {
-    ssh-keys = ":" # Set username:SSH-key for VM
+    ssh-keys = "<username>:${file("path for SSH public key")}" # Set username and path for SSH public key
   }
 }
