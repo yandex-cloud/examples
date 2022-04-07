@@ -26,15 +26,16 @@ resource "yandex_compute_instance" "vm-ubuntu-20-04" {
 
   name        = "vm-ubuntu-20-04"
   platform_id = "standard-v1"
+  zone        = "ru-central1-a"
 
   resources {
-    cores  = 32
-    memory = 1
+    cores  = 2
+    memory = 2
   }
 
   boot_disk {
     initialize_params {
-      image_id = "fd81hgrcv6lsnkremf32"
+      image_id = "fd879gb88170to70d38a"
     }
   }
 
@@ -44,7 +45,7 @@ resource "yandex_compute_instance" "vm-ubuntu-20-04" {
   }
 
   metadata = {
-    ssh-keys = "<user name>:<public SSH>" # Specify the user name and public SSH key
+    ssh-keys = "<username>:<publicSSH>" # Set the user name and public SSH key
   }
 
 }
@@ -88,7 +89,7 @@ resource "yandex_mdb_kafka_cluster" "tutorial_kafka_cluster" {
 
   user {
     name     = "" # Set the user name
-    password = "" # Set a password
+    password = "" # Set password
     permission {
       topic_name = "messages"
       role       = "ACCESS_ROLE_CONSUMER"
@@ -101,15 +102,10 @@ resource "yandex_mdb_kafka_cluster" "tutorial_kafka_cluster" {
 
 }
 
+# Kafka topic
 resource "yandex_mdb_kafka_topic" "messages" {
   cluster_id         = yandex_mdb_kafka_cluster.tutorial_kafka_cluster.id
   name               = "messages"
   partitions         = 1
   replication_factor = 1
-}
-
-# Kafka Connect
-resource "yandex_mdb_kafka_connector" "tutorial_kafka_connector" {
-  cluster_id = yandex_mdb_kafka_cluster.tutorial_kafka_cluster.id
-  name       = "tutorial_kafka_connector"
 }
