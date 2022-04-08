@@ -22,4 +22,4 @@
 * [sharding-with-group.tf](./clickhouse-sharding/sharding-with-group.tf)
     Cluster with three shards and one shard group which contains `shard1` and `shard2`.
 * [advanced-sharding-with-groups.tf](./clickhouse-sharding/advanced-sharding-with-groups.tf)
-    Cluster with three shards and two shard groups. The first contains `shard1` and `shard2`, the second contains `shard3`.
+    Cluster with three shards and two shard groups. The first group contains `shard1` and `shard2`, the second one contains `shard3`.
