@@ -3,7 +3,7 @@
 # RU: https://cloud.yandex.ru/docs/managed-postgresql/tutorials/1c-postgresql
 # EN: https://cloud.yandex.com/en/docs/managed-postgresql/tutorials/1c-postgresql
 #
-# Set the user password for Managed Service for PostgreSQL 1C cluster
+# Set the user password for Managed Service for PostgreSQL 1C cluster on line 59
 
 
 # Network
@@ -65,6 +65,6 @@ resource "yandex_mdb_postgresql_cluster" "postgresql-1c" {
   host {
     zone             = "ru-central1-a"
     subnet_id        = yandex_vpc_subnet.subnet-a.id
-    assign_public_ip = true # Required for connection from Internet
+    assign_public_ip = true # Required for connection from the Internet
   }
 }
