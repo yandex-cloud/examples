@@ -3,8 +3,7 @@
 # RU: https://cloud.yandex.ru/docs/managed-redis/tutorials/redis-as-php-sessions-storage
 # EN: https://cloud.yandex.com/en/docs/managed-redis/tutorials/redis-as-php-sessions-storage
 #
-# Set the password for Managed Service for Redis cluster
-# Set the image id, username and SSH-key for Virtual Machine
+# Set the settings for Managed Service for Redis cluster and Virtual Machine
 
 
 # Network
@@ -113,25 +112,25 @@ resource "yandex_mdb_redis_cluster" "redis-cluster" {
 resource "yandex_compute_instance" "lamp-vm" {
 
   name        = "lamp-vm"
-  platform_id = "standard-v3"
+  platform_id = "standard-v3" # Intel Ice Lake
 
   resources {
     cores  = 2
-    memory = 2
+    memory = 2 # GB
   }
 
   boot_disk {
     initialize_params {
-      image_id = "" # Set image id
+      image_id = "" # Set image ID
     }
   }
 
   network_interface {
     subnet_id = yandex_vpc_subnet.subnet-a.id
-    nat       = true # Required for connection from Internet
+    nat       = true # Required for connection from the Internet
   }
 
   metadata = {
-    ssh-keys = ":" # Set username:SSH-key for VM
+    ssh-keys = "<username>:${file("path for SSH public key")}" # Set username and path for SSH public key
   }
 }
