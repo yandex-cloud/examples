@@ -3,7 +3,7 @@
 # RU: https://cloud.yandex.ru/docs/managed-clickhouse/tutorials/fetch-data-from-rabbitmq
 # EN: https://cloud.yandex.com/en/docs/managed-clickhouse/tutorials/fetch-data-from-rabbitmq
 #
-# Set the settings for Managed Service for ClickHouse cluster and Virtual Machine
+# Set the configuration of Managed Service for ClickHouse cluster and Virtual Machine
 
 
 # Network
@@ -40,10 +40,10 @@ resource "yandex_vpc_default_security_group" "clickhouse-and-vm-security-group" 
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
-  # Allow SSH connections for VM
+  # Allow SSH connections to VM
   ingress {
     protocol       = "TCP"
-    description    = "Allow SSH connections for VM from the Internet"
+    description    = "Allow SSH connections to VM from the Internet"
     port           = 22
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
