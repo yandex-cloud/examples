@@ -5,7 +5,7 @@
 #
 # Set the user name and SSH key for virtual machine
 #
-# Set the user name and password for Managed Service for Apache Kafka
+# Set a password for Managed Service for Apache Kafka
 
 # Network
 resource "yandex_vpc_network" "kafka_network" {
@@ -88,7 +88,7 @@ resource "yandex_mdb_kafka_cluster" "tutorial_kafka_cluster" {
   }
 
   user {
-    name     = "" # Set the user name
+    name     = "tutorial-user"
     password = "" # Set password
     permission {
       topic_name = "messages"
