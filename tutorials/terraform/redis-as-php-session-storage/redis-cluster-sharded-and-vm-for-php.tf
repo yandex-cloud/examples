@@ -3,7 +3,7 @@
 # RU: https://cloud.yandex.ru/docs/managed-redis/tutorials/redis-as-php-sessions-storage
 # EN: https://cloud.yandex.com/en/docs/managed-redis/tutorials/redis-as-php-sessions-storage
 #
-# Set the settings for Managed Service for Redis cluster and Virtual Machine
+# Set the configuration of Managed Service for Redis cluster and Virtual Machine
 
 
 # Network
