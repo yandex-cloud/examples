@@ -58,16 +58,28 @@ resource "yandex_mdb_kafka_cluster" "kafka-cluster" {
   security_group_ids = [yandex_vpc_default_security_group.security-group.id]
 
   config {
-    assign_public_ip = true
     brokers_count    = 1
     version          = "2.8"
     zones            = ["ru-central1-a"]
+    unmanaged_topics = true # Topic management via the Admin API
     kafka {
       resources {
         disk_size          = 10 # GB
         disk_type_id       = "network-hdd"
         resource_preset_id = "s2.micro"
       }
+      kafka_config {
+        auto_create_topics_enable = true
+      }
+    }
+  }
+
+  user {
+    name     = "" # Set admin username for Kafka cluster
+    password = "" # Set admin password for Kafka cluster
+    permission {
+      topic_name = "*"
+      role       = "ACCESS_ROLE_ADMIN"
     }
   }
 }
