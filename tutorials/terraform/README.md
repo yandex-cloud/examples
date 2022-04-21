@@ -13,4 +13,4 @@ File with provider settings / Файл с настройками провайд�
 
 **Files**:
 
-* [postgresql-1c.tf](./postgresql-1c.tf) PostgreSQL cluster for 1c.
+* [postgresql-1c.tf](./postgresql-1c.tf) PostgreSQL cluster for 1C
