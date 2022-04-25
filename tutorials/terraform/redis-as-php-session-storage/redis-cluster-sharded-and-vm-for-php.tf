@@ -106,6 +106,7 @@ resource "yandex_mdb_redis_cluster" "redis-cluster" {
   environment        = "PRODUCTION"
   network_id         = yandex_vpc_network.redis-and-vm-network.id
   security_group_ids = [yandex_vpc_default_security_group.redis-and-vm-security-group.id]
+  sharded            = true
 
   config {
     password = ""    # Set password for Redis cluster
