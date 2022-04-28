@@ -3,7 +3,13 @@
 # RU: https://cloud.yandex.ru/docs/managed-kafka/tutorials/mirrormaker-unmanaged-topics
 # EN: https://cloud.yandex.com/en/docs/managed-kafka/tutorials/mirrormaker-unmanaged-topics
 #
-# Set the configuration of Managed Service for Kafka and Virtual Machine
+# Set the configuration:
+# * Managed Service for Apache Kafka cluster:
+#      * admin account name
+#      * admin account password
+# * Virtual Machine:
+#      * Image ID
+#      * Path to public part of SSH key
 
 
 # Network
@@ -85,9 +91,9 @@ resource "yandex_mdb_kafka_cluster" "kafka-cluster" {
 }
 
 # VM in Yandex Compute Cloud
-resource "yandex_compute_instance" "vm-1" {
+resource "yandex_compute_instance" "vm-mirror-maker" {
 
-  name        = "linux-vm"
+  name        = "vm-mirror-maker"
   platform_id = "standard-v3" # Intel Ice Lake
 
   resources {
