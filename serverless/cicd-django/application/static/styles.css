@@ -1,0 +1,12 @@
+.item-image {
+    max-width: 200px;
+}
+
+body {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+td.text-center {
+    text-align: center;
+}
