@@ -1,6 +1,6 @@
 # Terraform configuration files for Yandex Cloud practical guides
 
-All files contains resources:
+All files contains the following resources:
 
 * Network
 * Subnets
@@ -11,9 +11,9 @@ All files contains resources:
 
 [Using hybrid storage](https://cloud.yandex.com/en/docs/managed-clickhouse/tutorials/hybrid-storage) / [Использование гибридного хранилища](https://cloud.yandex.ru/docs/managed-clickhouse/tutorials/hybrid-storage).
 
-**FIles**:
+**Files**:
 
-* [clickhouse-hybrid-storage.tf](./clickhouse-hybrid-storage.tf) — Yandex Managed Service for ClickHouse cluster with hybrid storage.
+* [clickhouse-hybrid-storage.tf](./clickhouse-hybrid-storage.tf) — Yandex Managed Service for ClickHouse cluster with a hybrid storage.
 
 ## Using Managed Service for Redis clusters as PHP session storage
 
