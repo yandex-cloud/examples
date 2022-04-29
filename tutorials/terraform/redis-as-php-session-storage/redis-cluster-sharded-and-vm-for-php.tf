@@ -3,7 +3,13 @@
 # RU: https://cloud.yandex.ru/docs/managed-redis/tutorials/redis-as-php-sessions-storage
 # EN: https://cloud.yandex.com/en/docs/managed-redis/tutorials/redis-as-php-sessions-storage
 #
-# Set the configuration of Managed Service for Redis cluster and Virtual Machine
+# Set the:
+#
+# * Password for Yandex Managed Service for Redis cluster
+# * Virtual Machine
+#     * Image ID: https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list
+#     * Username (for Ubuntu images used `ubuntu` name)
+#     * Path to public part of SSH key
 
 
 # Network
@@ -161,6 +167,6 @@ resource "yandex_compute_instance" "lamp-vm" {
   }
 
   metadata = {
-    ssh-keys = "<username>:${file("path for SSH public key")}" # Set username and path for SSH public key
+    ssh-keys = "<username>:${file("<path for SSH public key>")}" # Set username and path for SSH public key
   }
 }

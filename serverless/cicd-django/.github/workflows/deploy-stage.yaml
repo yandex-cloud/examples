@@ -1,0 +1,101 @@
+name: Deploy feature branch
+on:
+  workflow_call:
+    inputs:
+      app_image_id:
+        type: string
+        required: true
+        description: Имя собранного docker-образа
+      stage_name:
+        type: string
+        required: true
+        description: Название стенда
+      environment:
+        type: string
+        required: true
+        description: Название окружения для деплоя стенда
+    secrets:
+      SA_DEPLOYER_PRIVATE_KEY:
+        required: true
+        description: Статический ключ сервисного аккаунта, имеющего права на развертывание ресурсов в окружении
+    outputs:
+      domain:
+        description: Доменное имя развернутого стенда
+        value: ${{ jobs.deploy-gateway.outputs.domain }}
+
+jobs:
+  read-env-config:
+    runs-on: ubuntu-latest
+    outputs:
+      data: ${{ steps.read-yaml.outputs.data }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up yq
+        uses: frenck/action-setup-yq@v1
+      - name: Read yaml
+        id: read-yaml
+        run: |
+          echo -n '::set-output name=data::'
+          yq -o=json -I=0 '.' "config/${{inputs.environment}}.yaml"
+  deploy-container:
+    runs-on: ubuntu-latest
+    needs: read-env-config
+    outputs:
+      container_id: ${{ steps.deploy-sls-container.outputs.id }}
+    steps:
+      - name: Deploy Serverless Container
+        id: deploy-sls-container
+        uses: yc-actions/yc-sls-container-deploy@v1.0.1
+        with:
+          yc-sa-json-credentials: ${{ secrets.SA_DEPLOYER_PRIVATE_KEY }}
+          container-name: ${{ inputs.stage_name }}
+          folder-id: ${{ fromJson(needs.read-env-config.outputs.data).folder-id }}
+          revision-cores: ${{ fromJson(needs.read-env-config.outputs.data).app-container.cores }}
+          revision-memory: ${{ fromJson(needs.read-env-config.outputs.data).app-container.memory }}
+          revision-core-fraction: ${{ fromJson(needs.read-env-config.outputs.data).app-container.core-fraction }}
+          revision-concurrency: ${{ fromJson(needs.read-env-config.outputs.data).app-container.concurrency }}
+          revision-image-url: ${{ inputs.app_image_id }}
+          revision-execution-timeout: ${{ fromJson(needs.read-env-config.outputs.data).app-container.timeout }}
+          revision-service-account-id: ${{ fromJson(needs.read-env-config.outputs.data).app-container.sa-id }}
+          revision-env: |
+            SECRET_ID=${{ fromJson(needs.read-env-config.outputs.data).app-container.secret-id }}
+            DOCAPI_ENDPOINT=${{ fromJson(needs.read-env-config.outputs.data).docapi.endpoint }}
+  deploy-gateway:
+    runs-on: ubuntu-latest
+    needs:
+      - deploy-container
+      - read-env-config
+    outputs:
+      domain: ${{ steps.deploy-gateway.outputs.domain }}
+    steps:
+      - uses: actions/checkout@v3
+      # В YAML-спецификации API Gateway требуется указать идентификатор Serverless Container, в который требуется направлять трафик со стенда.
+      # Поэтому мы шаблонизируем спецификацию API Gateway непосредственно в процессе развертывания, когда id контейнера нам известен
+      - name: Render specification
+        id: render-spec
+        uses: cuchi/jinja2-action@v1.2.0
+        with:
+          template: apigw.yaml.j2
+          output_file: apigw.yaml
+          strict: true
+          variables: |
+            container_id=${{ needs.deploy-container.outputs.container_id }}
+            sa_id=${{ fromJson(needs.read-env-config.outputs.data).apigw.sa-id }}
+      - run: |
+          echo "Rendered spec:"
+          cat apigw.yaml
+      - name: Deploy API Gateway
+        id: deploy-gateway
+        uses: yc-actions/yc-api-gateway-deploy@v1.0.0
+        with:
+          yc-sa-json-credentials: ${{ secrets.SA_DEPLOYER_PRIVATE_KEY }}
+          gateway-name: ${{ inputs.stage_name }}
+          folder-id: ${{ fromJson(needs.read-env-config.outputs.data).folder-id }}
+          spec-file: apigw.yaml
+  e2e-test:
+    # Хороший end-to-end тест представляет из себя более сложную конструкцию, чем curl, проверяющий статус ответа главной страницы стенда. Такой простой тест использован для целей демонстрации
+    runs-on: ubuntu-latest
+    needs: deploy-gateway
+    steps:
+      - run: |
+          curl 'https://${{ needs.deploy-gateway.outputs.domain }}/'
