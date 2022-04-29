@@ -9,9 +9,9 @@ All files contains resources:
 
 ## Using hybrid storage for Yandex Managed Service for ClickHouse cluster
 
-**FIles**:
-
 [Using hybrid storage](https://cloud.yandex.com/en/docs/managed-clickhouse/tutorials/hybrid-storage) / [Использование гибридного хранилища](https://cloud.yandex.ru/docs/managed-clickhouse/tutorials/hybrid-storage).
+
+**FIles**:
 
 * [clickhouse-hybrid-storage.tf](./clickhouse-hybrid-storage.tf) — Yandex Managed Service for ClickHouse cluster with hybrid storage.
 
