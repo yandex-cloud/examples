@@ -1,0 +1,52 @@
+name: Create or update PR comment
+on:
+  workflow_call:
+    inputs:
+      comment_tag:
+        type: string
+        required: true
+        description: Тег комментария. Не отображается в теле комментария. Если в PR уже есть комментарий с таким тегом - его текст будет заменен на переданный. Иначе комментарий с переданным текстом будет добавлен в PR
+      comment_text:
+        type: string
+        required: true
+        description: Текст комментария
+      pr_number:
+        type: string
+        required: true
+        description: Номер PR для добавления комментария
+      repo_name:
+        type: string
+        required: true
+        description: Имя репозитория
+    secrets:
+      GH_TOKEN:
+        required: true
+        description: Токен, позволяющий совершать действия над GitHub PR
+jobs:
+  update-comment:
+    env:
+      workdir: ./actions/pr-comment/
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+          working-directory: ${{ env.workdir }}
+      - name: deps
+        working-directory: ${{ env.workdir }}
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: run
+        working-directory: ${{ env.workdir }}
+        env:
+          COMMENT_TAG: ${{ inputs.comment_tag }}
+          COMMENT_TEXT: ${{ inputs.comment_text }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          PR_NUMBER: ${{ inputs.pr_number }}
+          REPO_NAME: ${{ inputs.repo_name }}
+        run: |
+          python index.py
