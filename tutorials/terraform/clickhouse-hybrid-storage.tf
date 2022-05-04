@@ -27,7 +27,7 @@ resource "yandex_vpc_default_security_group" "clickhouse-security-group" {
   # Allow connections to cluster from Internet
   ingress {
     protocol       = "TCP"
-    description    = "Allow incoming SSL-connections with clickhouse-client from Internet"
+    description    = "Allow connections from Internet"
     port           = 9440
     v4_cidr_blocks = ["0.0.0.0/0"]
   }

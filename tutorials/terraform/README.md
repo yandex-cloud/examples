@@ -31,3 +31,11 @@ All files contains the following resources:
 **Files**:
 
 * [data-from-kafka-to-clickhouse.tf](./data-from-kafka-to-clickhouse/data-from-kafka-to-clickhouse.tf) — Yandex Managed Service for Apache Kafka® cluster and Yandex Managed Service for ClickHouse cluster.
+
+## Creating a PostgreSQL cluster for 1C:Enterprise
+
+[Creating a PostgreSQL cluster for 1C:Enterprise](https://cloud.yandex.com/en-ru/docs/managed-postgresql/tutorials/1c-postgresql) / [Создание кластера PostgreSQL для «1С:Предприятия»](https://cloud.yandex.ru/docs/managed-postgresql/tutorials/1c-postgresql)
+
+**Files**:
+
+* [postgresql-1c.tf](./postgresql-1c.tf) — Yandex Managed Service for PostgreSQL cluster for 1С
