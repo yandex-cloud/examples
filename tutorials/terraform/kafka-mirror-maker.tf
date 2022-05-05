@@ -56,7 +56,7 @@ resource "yandex_vpc_default_security_group" "security-group" {
   }
 }
 
-# Managed Service for Kafka cluster
+# Yandex Managed Service for Apache Kafka® cluster
 resource "yandex_mdb_kafka_cluster" "kafka-cluster" {
   name               = "kafka-cluster"
   environment        = "PRODUCTION"
