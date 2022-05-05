@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Витрина
+{% endblock %}
+{% block content %}
+<h1>Витрина</h1>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col"></th>
+        <th scope="col">Товар</th>
+        <th scope="col">Цена</th>
+        <th scope="col">Добавить в корзину</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in items %}
+    <tr>
+        <td>
+            <img src="{{ item.image_url }}" style="max-width: 200px">
+        </td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.price }}₽</td>
+        <td><a href="{% url "cart_add" item.id%}">Добавить</a></td>
+    </tr>
+    {% endfor %}
+</table>
+<p class="text-right">
+    <a href="{% url "cart" %}" class="button light">В корзину</a>
+</p>
+{% endblock %}
