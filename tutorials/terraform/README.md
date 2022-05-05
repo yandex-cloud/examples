@@ -23,7 +23,7 @@ All files contains the following resources:
 
 * [clickhouse-hybrid-storage.tf](./clickhouse-hybrid-storage.tf) — Yandex Managed Service for ClickHouse cluster with a hybrid storage.
 
-## Getting data from Managed Service for Apache Kafka
+## Getting data from Yandex Managed Service for Apache Kafka
 
 [Getting data from Managed Service for Apache Kafka](https://cloud.yandex.com/en/docs/managed-clickhouse/tutorials/fetch-data-from-mkf) / [Получение данных из Managed Service for Apache Kafka](https://cloud.yandex.ru/docs/managed-clickhouse/tutorials/fetch-data-from-mkf)
 
@@ -31,14 +31,14 @@ All files contains the following resources:
 
 * [data-from-kafka-to-clickhouse.tf](./data-from-kafka-to-clickhouse/data-from-kafka-to-clickhouse.tf) — Yandex Managed Service for Apache Kafka® cluster and Yandex Managed Service for ClickHouse cluster.
 
-## Using Managed Service for Redis clusters as PHP session storage
+## Using Yandex Managed Service for Redis clusters as PHP session storage
 
 [Using Managed Service for Redis clusters as PHP session storage](https://cloud.yandex.com/en/docs/managed-redis/tutorials/redis-as-php-sessions-storage) / [Использование кластера Managed Service for Redis в качестве хранилища сессий PHP](https://cloud.yandex.ru/docs/managed-redis/tutorials/redis-as-php-sessions-storage)
 
 **Files**:
 
-* [redis-cluster-non-sharded-and-vm.tf](./redis-cluster-non-sharded-and-vm.tf) — non-sharded Yandex Managed Service for Redis cluster and VM.
-* [redis-cluster-sharded-and-vm.tf](./redis-cluster-non-sharded-and-vm.tf) — sharded Yandex Managed Service for Redis cluster and VM.
+* [redis-as-php-session-storage/redis-cluster-non-sharded-and-vm.tf](./redis-cluster-non-sharded-and-vm.tf) — non-sharded Yandex Managed Service for Redis cluster and VM.
+* [redis-as-php-session-storage/redis-cluster-sharded-and-vm.tf](./redis-cluster-non-sharded-and-vm.tf) — sharded Yandex Managed Service for Redis cluster and VM.
 
 ## Creating a PostgreSQL cluster for 1C:Enterprise
 
@@ -46,4 +46,4 @@ All files contains the following resources:
 
 **Files**:
 
-* [postgresql-1c.tf](./postgresql-1c.tf) — Yandex Managed Service for PostgreSQL cluster for 1С
+* [postgresql-1c.tf](./postgresql-1c.tf) — Yandex Managed Service for PostgreSQL cluster for 1С:Enterprise
