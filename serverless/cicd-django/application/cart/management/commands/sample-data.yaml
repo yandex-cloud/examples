@@ -1,0 +1,29 @@
+items:
+  - id: 280bf714c44e4720
+    name: Торт
+    price: 200
+    image_url: https://storage.yandexcloud.net/cart-demo-images/cake.jpeg
+  - id: 122fa0773dab712f
+    name: Клубничный пирог
+    price: 500
+    image_url: https://storage.yandexcloud.net/cart-demo-images/strawberry-cake.jpeg
+  - id: ef68a8a4a60a3592
+    name: Пицца домашняя
+    price: 300
+    image_url: https://storage.yandexcloud.net/cart-demo-images/pizza.jpeg
+  - id: 980b8208347f2379
+    name: Помидоры черри (кг)
+    price: 200
+    image_url: https://storage.yandexcloud.net/cart-demo-images/tomato.jpeg
+  - id: ced2a12763e473d6
+    name: Кешью (кг)
+    price: 1500
+    image_url: https://storage.yandexcloud.net/cart-demo-images/nuts.jpeg
+  - id: f2af0a4d348ad290
+    name: Мандарины (кг)
+    price: 200
+    image_url: https://storage.yandexcloud.net/cart-demo-images/tangerine.jpeg
+  - id: cc01c6cac3098364
+    name: Кофе
+    price: 125
+    image_url: https://storage.yandexcloud.net/cart-demo-images/coffee.jpeg
