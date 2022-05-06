@@ -13,4 +13,4 @@ provider "yandex" {
   cloud_id  = "" # Set your cloud ID
   folder_id = "" # Set your cloud folder ID
   zone      = "" # Availability zone by default, one of ru-central1-a, ru-central1-b, ru-central1-c
-} 
+}
