@@ -1,0 +1,57 @@
+name: Release application
+on:
+  push:
+    branches:
+      - 'main'
+  workflow_dispatch: # Разрешает ручной вызов действия. Может быть использовано для отката testing и prod окружений на ранее собранную версию.
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+jobs:
+  release-name:
+    runs-on: ubuntu-latest
+    outputs:
+      name: ${{ join(steps.*.outputs.new_tag, '') }}
+    steps:
+      - uses: actions/checkout@v3
+      # В случае ручного запуска workflow из ранее созданного релизного тега,
+      # мы не хотим создавать новый тег - нам требуется использовать выбранный пользователем.
+      - name: Pick existing tag
+        id: existing-tag
+        if: github.ref_type == 'tag' && startsWith(github.ref_name, 'v')
+        run: echo '::set-output name=new_tag::${{ github.ref_name }}'
+      - name: Bump version and push tag
+        id: tag-release
+        uses: mathieudutour/github-tag-action@v6.0
+        if: steps.existing-tag.conclusion == 'skipped'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+  build:
+    needs: release-name
+    uses: ./.github/workflows/build.yaml
+    secrets:
+      SA_BUILDER_PRIVATE_KEY: ${{ secrets.SA_BUILDER_PRIVATE_KEY }}
+    with:
+      build_name: release-${{ needs.release-name.outputs.name }}
+      build_kind: releases
+  deploy-testing:
+    needs: build
+    uses: ./.github/workflows/deploy-stage.yaml
+    secrets:
+      SA_DEPLOYER_PRIVATE_KEY: ${{ secrets.SA_TESTING_DEPLOYER_PRIVATE_KEY }}
+    with:
+      app_image_id: ${{ needs.build.outputs.docker_image }}
+      stage_name: testing
+      environment: testing
+  deploy-prod:
+    needs:
+      - build
+      - deploy-testing
+    uses: ./.github/workflows/deploy-stage.yaml
+    secrets:
+      SA_DEPLOYER_PRIVATE_KEY: ${{ secrets.SA_PROD_DEPLOYER_PRIVATE_KEY }}
+    with:
+      app_image_id: ${{ needs.build.outputs.docker_image }}
+      stage_name: prod
+      environment: prod

@@ -1,0 +1,36 @@
+name: Deploy feature stand
+on:
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: pr-${{ github.event.number }}
+  cancel-in-progress: true
+jobs:
+  build:
+    uses: ./.github/workflows/build.yaml
+    secrets:
+      SA_BUILDER_PRIVATE_KEY: ${{ secrets.SA_BUILDER_PRIVATE_KEY }}
+    with:
+      build_name: pr-${{ github.event.number }}
+      build_kind: pr-builds
+  deploy:
+    needs: build
+    uses: ./.github/workflows/deploy-stage.yaml
+    secrets:
+      SA_DEPLOYER_PRIVATE_KEY: ${{ secrets.SA_FEATURE_DEPLOYER_PRIVATE_KEY }}
+    with:
+      app_image_id: ${{ needs.build.outputs.docker_image }}
+      stage_name: pr-${{ github.event.number }}
+      environment: feature
+  post-stand-link:
+    needs: deploy
+    uses: ./.github/workflows/pr-comment.yaml
+    secrets:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    with:
+      comment_tag: stand-deployed
+      comment_text: "Feature stand deployed: https://${{ needs.deploy.outputs.domain }}/"
+      pr_number: ${{ github.event.number }}
+      repo_name: ${{ github.repository }}
