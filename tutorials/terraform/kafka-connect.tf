@@ -30,11 +30,13 @@ resource "yandex_compute_instance" "vm-ubuntu-20-04" {
 
   resources {
     cores  = 2
-    memory = 2
+    memory = 2 # GB
   }
 
   boot_disk {
     initialize_params {
+      # How to list available images list:
+      # https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list
       image_id = "fd879gb88170to70d38a"
     }
   }
@@ -45,9 +47,10 @@ resource "yandex_compute_instance" "vm-ubuntu-20-04" {
   }
 
   metadata = {
-    ssh-keys = "<username>:<publicSSH>" # Set the user name and public SSH key
+    # Set username and path for SSH public key
+    # For Ubuntu images used `ubuntu` username by default
+    ssh-keys = "<username>:${file("path for SSH public key")}"
   }
-
 }
 
 # Security group for Managed Service for Apache Kafka
@@ -76,7 +79,7 @@ resource "yandex_mdb_kafka_cluster" "tutorial_kafka_cluster" {
     version          = "2.8"
     kafka {
       resources {
-        disk_size          = 10
+        disk_size          = 10 # GB
         disk_type_id       = "network-ssd"
         resource_preset_id = "s2.micro"
       }
@@ -99,7 +102,6 @@ resource "yandex_mdb_kafka_cluster" "tutorial_kafka_cluster" {
       role       = "ACCESS_ROLE_PRODUCER"
     }
   }
-
 }
 
 # Kafka topic
