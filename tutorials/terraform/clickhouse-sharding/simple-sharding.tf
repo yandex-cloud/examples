@@ -3,7 +3,7 @@
 # RU: https://cloud.yandex.ru/docs/managed-clickhouse/tutorials/sharding
 # EN: https://cloud.yandex.com/en/docs/managed-clickhouse/tutorials/sharding
 #
-# Set the user name and password for Managed Service for ClickHouse cluster on lines 131-132
+# Set the user name and password for Managed Service for ClickHouse cluster
 
 
 # Network
