@@ -2,14 +2,19 @@
 #
 # Set the configuration of Managed Service for Kubernetes cluster
 
+locals {
+  folder_id = "<Your folder ID>" # Set your cloud folder ID
+}
 
 # Network
+
 resource "yandex_vpc_network" "k8s-network" {
   name        = "k8s-network"
   description = "Network for Managed Service for Kubernetes cluster"
 }
 
 # Subnet in ru-central1-a availability zone
+
 resource "yandex_vpc_subnet" "subnet-a" {
   name           = "subnet-a"
   zone           = "ru-central1-a"
@@ -18,6 +23,7 @@ resource "yandex_vpc_subnet" "subnet-a" {
 }
 
 # Security group for Managed Service for Kubernetes cluster
+
 resource "yandex_vpc_security_group" "k8s-main-sg" {
   name        = "k8s-main-sg"
   description = "Group rules ensure the basic performance of the cluster. Apply it to the cluster and node groups."
@@ -48,13 +54,6 @@ resource "yandex_vpc_security_group" "k8s-main-sg" {
     description    = "The rule allows receipt of debugging ICMP packets from internal subnets."
     v4_cidr_blocks = ["10.1.0.0/16"]
   }
-  egress {
-    protocol       = "ANY"
-    description    = "The rule allows all outgoing traffic. Nodes can connect to Yandex Container Registry, Object Storage, Docker Hub, and more."
-    v4_cidr_blocks = ["0.0.0.0/0"]
-    from_port      = 0
-    to_port        = 65535
-  }
 
   ingress {
     protocol       = "TCP"
@@ -70,13 +69,39 @@ resource "yandex_vpc_security_group" "k8s-main-sg" {
     port           = 443
   }
 
+  egress {
+    protocol       = "ANY"
+    description    = "The rule allows all outgoing traffic. Nodes can connect to Yandex Container Registry, Object Storage, Docker Hub, and more."
+    v4_cidr_blocks = ["0.0.0.0/0"]
+    from_port      = 0
+    to_port        = 65535
+  }
 }
 
 resource "yandex_iam_service_account" "k8s-sa" {
   name = "k8s-sa"
 }
 
+resource "yandex_resourcemanager_folder_iam_binding" "editor" {
+  # Assign "editor" role to service account.
+  folder_id = local.folder_id
+  role      = "editor"
+  members = [
+    "serviceAccount:${yandex_iam_service_account.k8s-sa.id}"
+  ]
+}
+
+resource "yandex_resourcemanager_folder_iam_binding" "images-puller" {
+  # Assign "container-registry.images.puller" role to service account.
+  folder_id = local.folder_id
+  role      = "container-registry.images.puller"
+  members = [
+    "serviceAccount:${yandex_iam_service_account.k8s-sa.id}"
+  ]
+}
+
 # Managed Service for Kubernetes cluster
+
 resource "yandex_kubernetes_cluster" "k8s-cluster" {
   name        = "k8s-cluster"
   description = "Managed Service for Kubernetes cluster"
