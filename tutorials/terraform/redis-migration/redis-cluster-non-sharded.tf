@@ -26,15 +26,29 @@ resource "yandex_vpc_default_security_group" "redis-and-vm-security-group" {
 
   ingress {
     protocol       = "TCP"
-    description    = "Allow direct connections to cluster"
+    description    = "Allow direct connections to master without SSL"
     port           = 6379
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
-  # Allow connections for VM
+  # Required for clusters created with TLS
+  # ingress {
+  #   protocol       = "TCP"
+  #   description    = "Allow direct connections to master with SSL"
+  #   port           = 6380
+  #   v4_cidr_blocks = ["0.0.0.0/0"]
+  # }
+
   ingress {
     protocol       = "TCP"
-    description    = "Allow connections for VM"
+    description    = "Allow connections to Redis Sentinel"
+    port           = 26379
+    v4_cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    protocol       = "TCP"
+    description    = "Allow SSH connections for VM"
     port           = 22
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
