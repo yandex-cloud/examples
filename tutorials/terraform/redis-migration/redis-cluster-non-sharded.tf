@@ -105,8 +105,9 @@ resource "yandex_compute_instance" "intermediate-vm" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.subnet-a.id
-    nat       = true # Required for connection from the Internet
+    subnet_id          = yandex_vpc_subnet.subnet-a.id
+    nat                = true # Required for connection from the Internet
+    security_group_ids = [yandex_vpc_default_security_group.redis-and-vm-security-group.id]
   }
 
   metadata = {
