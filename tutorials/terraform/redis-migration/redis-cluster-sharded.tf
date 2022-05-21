@@ -40,21 +40,6 @@ resource "yandex_vpc_subnet" "subnet-c" {
 resource "yandex_vpc_default_security_group" "redis-and-vm-security-group" {
   network_id = yandex_vpc_network.redis-and-vm-network.id
 
-  # Allow connections to cluster from the Internet
-  ingress {
-    protocol       = "TCP"
-    description    = "Allow HTTP connections"
-    port           = 80
-    v4_cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    protocol       = "TCP"
-    description    = "Allow HTTPS connections"
-    port           = 443
-    v4_cidr_blocks = ["0.0.0.0/0"]
-  }
-
   ingress {
     protocol       = "TCP"
     description    = "Allow direct connections to cluster"
