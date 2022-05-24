@@ -3,18 +3,17 @@
 # Set the configuration of Managed Service for Kubernetes cluster
 
 locals {
-  folder_id = "<Your folder ID>" # Set your cloud folder ID
+  folder_id   = "<Your folder ID>"        # Set your cloud folder ID
+  k8s_version = "<Version of Kubernetes>" # Set the version of Kubernetes
 }
 
 # Network
-
 resource "yandex_vpc_network" "k8s-network" {
   name        = "k8s-network"
   description = "Network for Managed Service for Kubernetes cluster"
 }
 
 # Subnet in ru-central1-a availability zone
-
 resource "yandex_vpc_subnet" "subnet-a" {
   name           = "subnet-a"
   zone           = "ru-central1-a"
@@ -23,7 +22,6 @@ resource "yandex_vpc_subnet" "subnet-a" {
 }
 
 # Security group for Managed Service for Kubernetes cluster
-
 resource "yandex_vpc_security_group" "k8s-main-sg" {
   name        = "k8s-main-sg"
   description = "Group rules ensure the basic performance of the cluster. Apply it to the cluster and node groups."
@@ -101,7 +99,6 @@ resource "yandex_resourcemanager_folder_iam_binding" "images-puller" {
 }
 
 # Managed Service for Kubernetes cluster
-
 resource "yandex_kubernetes_cluster" "k8s-cluster" {
   name        = "k8s-cluster"
   description = "Managed Service for Kubernetes cluster"
@@ -116,7 +113,7 @@ resource "yandex_kubernetes_cluster" "k8s-cluster" {
 
     public_ip = true
 
-    security_group_ids = ["${yandex_vpc_security_group.k8s-main-sg.id}"]
+    security_group_ids = [yandex_vpc_security_group.k8s-main-sg.id]
 
   }
   service_account_id      = yandex_iam_service_account.k8s-sa.id # Cluster service account ID
@@ -131,10 +128,10 @@ resource "yandex_kubernetes_node_group" "k8s-node-group" {
   cluster_id  = yandex_kubernetes_cluster.k8s-cluster.id
   name        = "k8s-node-group"
   description = "Node group for Managed Service for Kubernetes cluster"
-  version     = "1.21"
+  version     = local.k8s_version
   scale_policy {
     fixed_scale {
-      size = 1
+      size = 1 # Number of hosts
     }
   }
 
@@ -149,17 +146,17 @@ resource "yandex_kubernetes_node_group" "k8s-node-group" {
 
     network_interface {
       nat        = true
-      subnet_ids = ["${yandex_vpc_subnet.subnet-a.id}"]
+      subnet_ids = [yandex_vpc_subnet.subnet-a.id]
     }
 
     resources {
-      memory = 4
-      cores  = 4
+      memory = 4 # RAM quantity in GB
+      cores  = 4 # Number of CPU cores
     }
 
     boot_disk {
       type = "network-hdd"
-      size = 64
+      size = 64 # Disk size in GB
     }
   }
 }
