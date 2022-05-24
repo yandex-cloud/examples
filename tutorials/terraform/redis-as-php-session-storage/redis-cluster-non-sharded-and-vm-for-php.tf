@@ -3,19 +3,17 @@
 # RU: https://cloud.yandex.ru/docs/managed-redis/tutorials/redis-as-php-sessions-storage
 # EN: https://cloud.yandex.com/en/docs/managed-redis/tutorials/redis-as-php-sessions-storage
 #
-# Set the:
-#
-# * Password for Yandex Managed Service for Redis cluster
+# Set the following settings:
+# * Password for the Yandex Managed Service for Redis cluster
 # * Virtual Machine
 #     * Image ID: https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list
 #     * Username (for Ubuntu images used `ubuntu` name)
 #     * Path to public part of SSH key
 
 
-# Network
 resource "yandex_vpc_network" "redis-and-vm-network" {
   name        = "redis-and-vm-network"
-  description = "Network for Managed Service for Redis cluster and VM."
+  description = "Network for the Managed Service for Redis cluster and VM."
 }
 
 # Subnet in ru-central1-a availability zone
@@ -26,57 +24,34 @@ resource "yandex_vpc_subnet" "subnet-a" {
   v4_cidr_blocks = ["10.1.0.0/16"]
 }
 
-# Security group for Managed Service for Redis cluster and VM
+# Security group for the Managed Service for Redis cluster and VM
 resource "yandex_vpc_default_security_group" "redis-and-vm-security-group" {
   network_id = yandex_vpc_network.redis-and-vm-network.id
 
-  # Allow connections to cluster from the Internet
   ingress {
     protocol       = "TCP"
-    description    = "Allow HTTP connections"
-    port           = 80
-    v4_cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    protocol       = "TCP"
-    description    = "Allow HTTP connections"
+    description    = "Allow incoming HTTP connections from the Internet"
     port           = 80
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
     protocol       = "TCP"
-    description    = "Allow HTTPS connections"
-    port           = 443
-    v4_cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    protocol       = "TCP"
-    description    = "Allow HTTPS connections"
+    description    = "Allow incoming HTTPS connections from the Internet"
     port           = 443
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
     protocol       = "TCP"
-    description    = "Allow direct connections to cluster"
+    description    = "Allow direct connections to cluster from the Internet"
     port           = 6379
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
-  egress {
-    protocol       = "TCP"
-    description    = "Allow direct connections to cluster"
-    port           = 6379
-    v4_cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  # Allow connections for VM
   ingress {
     protocol       = "TCP"
-    description    = "Allow connections for VM"
+    description    = "Allow incoming SSH connections to VM from the Internet"
     port           = 22
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
@@ -98,8 +73,8 @@ resource "yandex_mdb_redis_cluster" "redis-cluster" {
   security_group_ids = [yandex_vpc_default_security_group.redis-and-vm-security-group.id]
 
   config {
-    password = ""    # Set password for Redis cluster
-    version  = "6.2" # Version of Redis cluster
+    password = ""    # Set the password
+    version  = "6.2" # Version of the Redis
   }
 
   resources {
@@ -127,7 +102,7 @@ resource "yandex_compute_instance" "lamp-vm" {
 
   boot_disk {
     initialize_params {
-      image_id = "" # Set image ID
+      image_id = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list
     }
   }
 

@@ -1,10 +1,10 @@
-# Infrastructure for Yandex Cloud Managed Service for Kafka and Virtual Machine
+# Infrastructure for Yandex Cloud Managed Service for Apache Kafka® cluster and Virtual Machine
 #
 # RU: https://cloud.yandex.ru/docs/managed-kafka/tutorials/mirrormaker-unmanaged-topics
 # EN: https://cloud.yandex.com/en/docs/managed-kafka/tutorials/mirrormaker-unmanaged-topics
 #
-# Set the configuration:
-# * Managed Service for Apache Kafka cluster:
+# Set the following settings:
+# * Managed Service for Apache Kafka® cluster:
 #      * admin account name
 #      * admin account password
 # * Virtual Machine:
@@ -12,10 +12,9 @@
 #      * Path to public part of SSH key
 
 
-# Network
 resource "yandex_vpc_network" "network" {
   name        = "network"
-  description = "Network for Managed Service for Kafka and VM."
+  description = "Network for the Managed Service for Apache Kafka® cluster and VM."
 }
 
 # Subnet in ru-central1-a availability zone
@@ -26,14 +25,13 @@ resource "yandex_vpc_subnet" "subnet-a" {
   v4_cidr_blocks = ["10.1.0.0/16"]
 }
 
-# Security group for Managed Service for Kafka and VM
+# Security group for the Managed Service for Apache Kafka® cluster and VM
 resource "yandex_vpc_default_security_group" "security-group" {
   network_id = yandex_vpc_network.network.id
 
-  # Allow connections to Kafka cluster from the Internet
   ingress {
     protocol       = "TCP"
-    description    = "Allow connections to Kafka cluster from the Internet"
+    description    = "Allow connections to the Managed Service for Apache Kafka® cluster from the Internet"
     from_port      = 9091
     to_port        = 9092
     v4_cidr_blocks = ["0.0.0.0/0"]
@@ -81,8 +79,8 @@ resource "yandex_mdb_kafka_cluster" "kafka-cluster" {
   }
 
   user {
-    name     = "" # Set admin username for Kafka cluster
-    password = "" # Set admin password for Kafka cluster
+    name     = "" # Set admin username
+    password = "" # Set admin password
     permission {
       topic_name = "*"
       role       = "ACCESS_ROLE_ADMIN"
@@ -103,7 +101,7 @@ resource "yandex_compute_instance" "vm-mirror-maker" {
 
   boot_disk {
     initialize_params {
-      image_id = "" # Set image ID
+      image_id = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list
     }
   }
 

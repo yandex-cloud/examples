@@ -1,15 +1,14 @@
-# Infrastructure for Yandex Cloud Managed Service for Redis non sharded cluster and Virtual Machine
+# Infrastructure for the Yandex Cloud Managed Service for Redis non sharded cluster and Virtual Machine
 #
 # RU: https://cloud.yandex.ru/docs/managed-redis/tutorials/redis-as-php-sessions-storage
 # EN: https://cloud.yandex.com/en/docs/managed-redis/tutorials/redis-as-php-sessions-storage
 #
-# Set the configuration of Managed Service for Redis cluster and Virtual Machine
+# Set the configuration of the Managed Service for Redis cluster and Virtual Machine
 
 
-# Network
 resource "yandex_vpc_network" "redis-and-vm-network" {
   name        = "redis-and-vm-network"
-  description = "Network for Managed Service for Redis cluster and VM."
+  description = "Network for the Managed Service for Redis cluster and VM."
 }
 
 # Subnet in ru-central1-a availability zone
@@ -20,7 +19,7 @@ resource "yandex_vpc_subnet" "subnet-a" {
   v4_cidr_blocks = ["10.1.0.0/16"]
 }
 
-# Security group for Managed Service for Redis cluster and VM
+# Security group for the Managed Service for Redis cluster and VM
 resource "yandex_vpc_default_security_group" "redis-and-vm-security-group" {
   network_id = yandex_vpc_network.redis-and-vm-network.id
 
@@ -70,8 +69,8 @@ resource "yandex_mdb_redis_cluster" "redis-cluster" {
   security_group_ids = [yandex_vpc_default_security_group.redis-and-vm-security-group.id]
 
   config {
-    password = ""    # Set password for Redis cluster
-    version  = "6.2" # Version of Redis cluster
+    password = ""    # Set the password
+    version  = "6.2" # Version of the Redis
   }
 
   resources {
@@ -99,7 +98,7 @@ resource "yandex_compute_instance" "intermediate-vm" {
 
   boot_disk {
     initialize_params {
-      image_id = "" # Set public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list
+      image_id = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list
     }
   }
 

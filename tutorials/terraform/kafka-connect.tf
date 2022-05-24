@@ -3,17 +3,16 @@
 # RU: https://cloud.yandex.ru/docs/managed-kafka/tutorials/kafka-connect
 # EN: https://cloud.yandex.com/en/docs/managed-kafka/tutorials/kafka-connect
 #
-# Set setting:
+# Specify the following settings:
 # * Virtual Machine
 #     * Image ID: https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list
 #     * OpenSSH public key
 # * Managed Service for Apache Kafka® cluster:
 #     * password for `user` account
 
-# Network
 resource "yandex_vpc_network" "kafka-connect-network" {
   name        = "kafka-connect-network"
-  description = "Network for Managed Service for Apache Kafka® cluster"
+  description = "Network for the Managed Service for Apache Kafka® cluster."
 }
 
 # Subnet in ru-central1-a availability zone
@@ -38,9 +37,7 @@ resource "yandex_compute_instance" "vm-ubuntu-20-04" {
 
   boot_disk {
     initialize_params {
-      # How to list available images list:
-      # https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list
-      image_id = ""
+      image_id = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list
     }
   }
 
@@ -57,20 +54,20 @@ resource "yandex_compute_instance" "vm-ubuntu-20-04" {
   }
 }
 
-# Security group for Managed Service for Apache Kafka® cluster
+# Security group for the Managed Service for Apache Kafka® cluster
 resource "yandex_vpc_default_security_group" "kafka-connect-security-group" {
   network_id = yandex_vpc_network.kafka-connect-network.id
 
   ingress {
     protocol       = "TCP"
-    description    = "Allow connections to Managed Service for Apache Kafka® broker hosts from the Internet"
+    description    = "Allow connections to the Managed Service for Apache Kafka® broker hosts from the Internet"
     port           = 9091
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
     protocol       = "TCP"
-    description    = "Allow connections to Managed Service for Apache Kafka® schema registry from the Internet"
+    description    = "Allow connections to the Managed Service for Apache Kafka® schema registry from the Internet"
     port           = 9440
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
@@ -117,7 +114,7 @@ resource "yandex_mdb_kafka_cluster" "kafka-connect-cluster" {
 
   user {
     name     = "user"
-    password = "" # Set password
+    password = "" # Set the password
     permission {
       topic_name = "messages"
       role       = "ACCESS_ROLE_CONSUMER"

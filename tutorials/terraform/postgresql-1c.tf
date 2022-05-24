@@ -3,13 +3,12 @@
 # RU: https://cloud.yandex.ru/docs/managed-postgresql/tutorials/1c-postgresql
 # EN: https://cloud.yandex.com/en/docs/managed-postgresql/tutorials/1c-postgresql
 #
-# Set the user password for Managed Service for PostgreSQL 1C cluster on line 59
+# Set the user password for Managed Service for PostgreSQL 1C cluster
 
 
-# Network
 resource "yandex_vpc_network" "postgresql-1c-network" {
   name        = "postgresql-1c-network"
-  description = "Network for Managed Service for PostgreSQL 1C cluster"
+  description = "Network for the Managed Service for PostgreSQL 1C cluster."
 }
 
 # Subnet in ru-central1-a availability zone
@@ -36,14 +35,13 @@ resource "yandex_vpc_subnet" "subnet-c" {
   v4_cidr_blocks = ["10.3.0.0/16"]
 }
 
-# Security group for Managed Service for PostgreSQL 1C cluster
+# Security group for the Managed Service for PostgreSQL 1C cluster
 resource "yandex_vpc_default_security_group" "postgresql-security-group" {
   network_id = yandex_vpc_network.postgresql-1c-network.id
 
-  # Allow connections to cluster from the Internet
   ingress {
     protocol       = "TCP"
-    description    = "Allow connections from the Internet"
+    description    = "Allow incoming connections to cluster from the Internet"
     port           = 6432
     v4_cidr_blocks = ["0.0.0.0/0"]
   }

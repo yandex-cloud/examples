@@ -3,13 +3,12 @@
 # RU: https://cloud.yandex.ru/docs/managed-clickhouse/tutorials/fetch-data-from-rabbitmq
 # EN: https://cloud.yandex.com/en/docs/managed-clickhouse/tutorials/fetch-data-from-rabbitmq
 #
-# Set the configuration of Managed Service for ClickHouse cluster and Virtual Machine
+# Set the configuration of the Managed Service for ClickHouse cluster and Virtual Machine
 
 
-# Network
 resource "yandex_vpc_network" "clickhouse-and-vm-network" {
   name        = "clickhouse-and-vm-network"
-  description = "Network for Managed Service for ClickHouse cluster and VM."
+  description = "Network for the Managed Service for ClickHouse cluster and VM."
 }
 
 # Subnet in ru-central1-a availability zone
@@ -20,30 +19,27 @@ resource "yandex_vpc_subnet" "subnet-a" {
   v4_cidr_blocks = ["10.1.0.0/16"]
 }
 
-# Security group for Managed Service for ClickHouse cluster and VM
+# Security group for the Managed Service for ClickHouse cluster and VM
 resource "yandex_vpc_default_security_group" "clickhouse-and-vm-security-group" {
   network_id = yandex_vpc_network.clickhouse-and-vm-network.id
 
-  # Allow connections to cluster from the Internet
   ingress {
     protocol       = "TCP"
-    description    = "Allow connections from the Internet"
+    description    = "Allow incoming connections to cluster from any network"
     port           = 9440
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
-  # Allow connections to RabbitMQ
   ingress {
     protocol       = "TCP"
-    description    = "Allow connections to RabbitMQ"
+    description    = "Allow incoming connections to RabbitMQ from any network"
     port           = 5672
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
-  # Allow SSH connections to VM
   ingress {
     protocol       = "TCP"
-    description    = "Allow SSH connections to VM from the Internet"
+    description    = "Allow incoming SSH connections to VM from the Internet"
     port           = 22
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
@@ -84,8 +80,8 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster" {
   }
 
   user {
-    name     = "" # Set username for ClickHouse cluster
-    password = "" # Set user password for ClickHouse cluster
+    name     = "" # Set the username
+    password = "" # Set the user password
     permission {
       database_name = "db1"
     }
@@ -105,7 +101,7 @@ resource "yandex_compute_instance" "vm-1" {
 
   boot_disk {
     initialize_params {
-      image_id = "" # Set image ID
+      image_id = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list
     }
   }
 

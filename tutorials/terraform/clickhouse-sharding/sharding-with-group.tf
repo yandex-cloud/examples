@@ -6,10 +6,9 @@
 # Set the user name and password for Managed Service for ClickHouse cluster
 
 
-# Network
 resource "yandex_vpc_network" "clickhouse_sharding_network" {
   name        = "clickhouse_sharding_network"
-  description = "Network for Managed Service for ClickHouse cluster with sharding."
+  description = "Network for the Managed Service for ClickHouse cluster with sharding."
 }
 
 # Subnet in ru-central1-a availability zone
@@ -36,7 +35,7 @@ resource "yandex_vpc_subnet" "subnet-c" {
   v4_cidr_blocks = ["10.3.0.0/24"]
 }
 
-# Security group for Managed Service for ClickHouse cluster
+# Security group for the Managed Service for ClickHouse cluster
 resource "yandex_vpc_default_security_group" "clickhouse-security-group" {
   network_id = yandex_vpc_network.clickhouse_sharding_network.id
 

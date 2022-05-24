@@ -1,15 +1,14 @@
-# Infrastructure for Yandex Cloud Managed Service for Kafka and ClickHouse clusters
+# Infrastructure for the Yandex Cloud Managed Service for Apache Kafka® and ClickHouse clusters
 #
 # RU: https://cloud.yandex.ru/docs/managed-clickhouse/tutorials/fetch-data-from-mkf
 # EN: https://cloud.yandex.com/en/docs/managed-clickhouse/tutorials/fetch-data-from-mkf
 #
-# Set the configuration of Managed Service for Kafka and ClickHouse clusters
+# Set the configuration of the Managed Service for Apache Kafka® and ClickHouse clusters
 
 
-# Network
 resource "yandex_vpc_network" "network" {
   name        = "network"
-  description = "Network for Managed Service for Kafka and ClickHouse clusters."
+  description = "Network for the Managed Service for Apache Kafka® and ClickHouse clusters."
 }
 
 # Subnet in ru-central1-a availability zone
@@ -20,22 +19,20 @@ resource "yandex_vpc_subnet" "subnet-a" {
   v4_cidr_blocks = ["10.1.0.0/16"]
 }
 
-# Security group for Managed Service for Kafka and ClickHouse clusters
+# Security group for the Managed Service for Apache Kafka® and ClickHouse clusters
 resource "yandex_vpc_default_security_group" "security-group" {
   network_id = yandex_vpc_network.network.id
 
-  # Allow connections to Kafka cluster from the Internet
   ingress {
     protocol       = "TCP"
-    description    = "Allow connections to Kafka cluster from the Internet"
+    description    = "Allow connections to the Managed Service for Apache Kafka® cluster from the Internet"
     port           = 9091
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
-  # Allow connections to ClickHouse cluster from the Internet
   ingress {
     protocol       = "TCP"
-    description    = "# Allow connections to ClickHouse cluster from the Internet"
+    description    = "# Allow connections to the Managed Service for ClickHouse cluster from the Internet"
     port           = 9440
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
@@ -49,7 +46,7 @@ resource "yandex_vpc_default_security_group" "security-group" {
   }
 }
 
-# Managed Service for Kafka cluster
+# Managed Service for Apache Kafka® cluster
 resource "yandex_mdb_kafka_cluster" "kafka-cluster" {
   name               = "kafka-cluster"
   environment        = "PRODUCTION"
@@ -72,7 +69,7 @@ resource "yandex_mdb_kafka_cluster" "kafka-cluster" {
 
   user {
     name     = "" # Set name of the producer
-    password = "" # Set password of the producer
+    password = "" # Set the password of the producer
     permission {
       topic_name = "" # Topic name from line 94
       role       = "ACCESS_ROLE_PRODUCER"
@@ -81,7 +78,7 @@ resource "yandex_mdb_kafka_cluster" "kafka-cluster" {
 
   user {
     name     = "" # Set name of the consumer
-    password = "" # Set password of the consumer
+    password = "" # Set the password of the consumer
     permission {
       topic_name = "" # Topic name from line 94
       role       = "ACCESS_ROLE_CONSUMER"
@@ -123,8 +120,8 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster" {
   }
 
   user {
-    name     = "" # Set username for ClickHouse cluster
-    password = "" # Set user password for ClickHouse cluster
+    name     = "" # Set username
+    password = "" # Set user password
     permission {
       database_name = "db1"
     }
