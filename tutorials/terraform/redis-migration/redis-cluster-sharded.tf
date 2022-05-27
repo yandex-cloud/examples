@@ -3,13 +3,7 @@
 # RU: https://cloud.yandex.ru/docs/managed-redis/tutorials/redis-as-php-sessions-storage
 # EN: https://cloud.yandex.com/en/docs/managed-redis/tutorials/redis-as-php-sessions-storage
 #
-# Set the following settings:
-#
-# * Password for the Yandex Managed Service for Redis cluster
-# * Virtual Machine
-#     * Image ID: https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list
-#     * Username (for Ubuntu images used `ubuntu` name)
-#     * Path to public part of SSH key
+# Set the configuration of the Managed Service for Redis cluster and Virtual Machine
 
 
 resource "yandex_vpc_network" "redis-and-vm-network" {
@@ -47,28 +41,22 @@ resource "yandex_vpc_default_security_group" "redis-and-vm-security-group" {
 
   ingress {
     protocol       = "TCP"
-    description    = "Allow incoming HTTP connections from the Internet"
-    port           = 80
-    v4_cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    protocol       = "TCP"
-    description    = "Allow incoming HTTPS connections from the Internet"
-    port           = 443
-    v4_cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    protocol       = "TCP"
-    description    = "Allow incoming connections to cluster from the Internet"
+    description    = "Allow direct connections to masters without SSL"
     port           = 6379
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
+  # Required for clusters created with TLS support
+  # ingress {
+  #   protocol       = "TCP"
+  #   description    = "Allow direct connections to master with SSL"
+  #   port           = 6380
+  #   v4_cidr_blocks = ["0.0.0.0/0"]
+  # }
+
   ingress {
     protocol       = "TCP"
-    description    = "Allow incoming SSH connections to VM from the Internet"
+    description    = "Allow SSH connections for VM"
     port           = 22
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
@@ -121,9 +109,9 @@ resource "yandex_mdb_redis_cluster" "redis-cluster" {
 }
 
 # Compute Virtual Machine
-resource "yandex_compute_instance" "lamp-vm" {
+resource "yandex_compute_instance" "intermediate-vm" {
 
-  name        = "lamp-vm"
+  name        = "intermediate-vm"
   platform_id = "standard-v3" # Intel Ice Lake
 
   resources {
@@ -138,11 +126,12 @@ resource "yandex_compute_instance" "lamp-vm" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.subnet-a.id
-    nat       = true # Required for connection from the Internet
+    subnet_id          = yandex_vpc_subnet.subnet-a.id
+    nat                = true # Required for connection from the Internet
+    security_group_ids = [yandex_vpc_default_security_group.redis-and-vm-security-group.id]
   }
 
   metadata = {
-    ssh-keys = "<username>:${file("<path for SSH public key>")}" # Set username and path for SSH public key
+    ssh-keys = "<username>:${file("path for SSH public key")}" # Set username and path for SSH public key. If an Ubuntu image is used, the username will be "ubuntu".
   }
 }

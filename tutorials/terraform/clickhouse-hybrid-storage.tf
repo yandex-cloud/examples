@@ -1,15 +1,14 @@
-# Infrastructure for Yandex Cloud Managed Service for ClickHouse cluster with hybrid storage
+# Infrastructure for the Yandex Cloud Managed Service for ClickHouse cluster with hybrid storage
 #
 # RU: https://cloud.yandex.ru/docs/managed-clickhouse/tutorials/hybrid-storage
 # EN: https://cloud.yandex.com/en/docs/managed-clickhouse/tutorials/hybrid-storage
 #
-# Set the user name and password for Managed Service for ClickHouse cluster
+# Set the user name and password for the Managed Service for ClickHouse cluster
 
 
-# Network
 resource "yandex_vpc_network" "clickhouse_hybrid_storage_network" {
   name        = "clickhouse-hybrid-storage-network"
-  description = "Network for Managed Service for ClickHouse cluster with hybrid storage."
+  description = "Network for the Managed Service for ClickHouse cluster with hybrid storage."
 }
 
 # Subnet in ru-central1-a availability zone
@@ -20,19 +19,17 @@ resource "yandex_vpc_subnet" "subnet-a" {
   v4_cidr_blocks = ["10.1.0.0/16"]
 }
 
-# Security group for Managed Service for ClickHouse cluster
+# Security group for the Managed Service for ClickHouse cluster
 resource "yandex_vpc_default_security_group" "clickhouse-security-group" {
   network_id = yandex_vpc_network.clickhouse_hybrid_storage_network.id
 
-  # Allow connections to cluster from Internet
   ingress {
     protocol       = "TCP"
-    description    = "Allow connections from Internet"
+    description    = "Allow incoming connections to cluster from Internet"
     port           = 9440
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
-  # Allow connections from cluster to Yandex Object Storage
   egress {
     protocol       = "ANY"
     description    = "Allow outgoing connections to any required resource"
