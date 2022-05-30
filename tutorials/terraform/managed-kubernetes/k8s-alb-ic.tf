@@ -3,17 +3,19 @@
 # Set the configuration of Managed Service for Kubernetes cluster
 
 locals {
-  folder_id   = ""        # Set your cloud folder ID
-  k8s_node_group_version = "1.21" # Set the version of Kubernetes for the node group
-  k8s_cluster_version = "1.21" # Set the version of Kubernetes for the master host
-  zone_a_v4_cidr_blocks = "10.1.0.0/16" # Set the CIDR block for the Subnet in ru-central1-a availability zone
+  folder_id              = ""            # Set your cloud folder ID
+  k8s_node_group_version = "1.21"        # Set the version of Kubernetes for the node group
+  k8s_cluster_version    = "1.21"        # Set the version of Kubernetes for the master host
+  zone_a_v4_cidr_blocks  = "10.1.0.0/16" # Set the CIDR block for the Subnet in ru-central1-a availability zone
 }
 
+# Network
 resource "yandex_vpc_network" "k8s-network" {
   name        = "k8s-network"
   description = "Network for the Managed Service for Kubernetes cluster"
 }
 
+# Subnet
 resource "yandex_vpc_subnet" "subnet-a" {
   name           = "subnet-a"
   description    = "Subnet in ru-central1-a availability zone"
@@ -90,7 +92,7 @@ resource "yandex_vpc_security_group" "k8s-main-sg" {
 }
 
 resource "yandex_iam_service_account" "k8s-sa" {
-  name = "k8s-sa"
+  name        = "k8s-sa"
   description = "Service account for Kubernetes cluster and node group"
 }
 
