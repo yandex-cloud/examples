@@ -1,31 +1,39 @@
 # Infrastructure for Yandex Cloud Managed Service for Kubernetes cluster
 #
-# Set the configuration of Managed Service for Kubernetes cluster
+# Set the configuration of the Managed Service for Kubernetes cluster
 
 locals {
-  folder_id   = ""        # Set your cloud folder ID
+  folder_id              = ""     # Set your cloud folder ID
   k8s_node_group_version = "1.21" # Set the version of Kubernetes for the node group
-  k8s_cluster_version = "1.21" # Set the version of Kubernetes for the master host
+  k8s_cluster_version    = "1.21" # Set the version of Kubernetes for the master host
+  #zone_a_v4_cidr_blocks  = "10.1.0.0/16" # Set the CIDR range for subnet
 }
 
-resource "yandex_vpc_network" "k8s-network" {
-  name        = "k8s-network"
+variable "zone_a_v4_cidr_blocks" {
+  type    = string
+  default = "10.1.0.0/16"
+}
+
+
+
+resource "yandex_vpc_network" "k8s-network-vb" {
+  name        = "k8s-network-vb"
   description = "Network for the Managed Service for Kubernetes cluster"
 }
 
-resource "yandex_vpc_subnet" "subnet-a" {
-  name           = "subnet-a"
+resource "yandex_vpc_subnet" "subnet-a-vb" {
+  name           = "subnet-a-vb"
   description    = "Subnet in ru-central1-a availability zone"
-  zone           = "yandex_vpc_subnet.subnet-a.zone"
-  network_id     = yandex_vpc_network.k8s-network.id
-  v4_cidr_blocks = ["10.1.0.0/16"]
+  zone           = "ru-central1-a"
+  network_id     = yandex_vpc_network.k8s-network-vb.id
+  v4_cidr_blocks = [var.zone_a_v4_cidr_blocks]
 }
 
 # Security group for the Managed Service for Kubernetes cluster
-resource "yandex_vpc_security_group" "k8s-main-sg" {
-  name        = "k8s-main-sg"
+resource "yandex_vpc_security_group" "k8s-main-sg-vb" {
+  name        = "k8s-main-sg-vb"
   description = "Group rules ensure the basic performance of the cluster. Apply it to the cluster and node groups."
-  network_id  = yandex_vpc_network.k8s-network.id
+  network_id  = yandex_vpc_network.k8s-network-vb.id
 
   ingress {
     protocol       = "TCP"
@@ -46,7 +54,7 @@ resource "yandex_vpc_security_group" "k8s-main-sg" {
   ingress {
     protocol       = "ANY"
     description    = "The rule allows the pod-pod and service-service interaction. Specify the subnets of your cluster and services."
-    v4_cidr_blocks = ["10.1.0.0/16"]
+    v4_cidr_blocks = [var.zone_a_v4_cidr_blocks]
     from_port      = 0
     to_port        = 65535
   }
@@ -54,7 +62,7 @@ resource "yandex_vpc_security_group" "k8s-main-sg" {
   ingress {
     protocol       = "ICMP"
     description    = "The rule allows receipt of debugging ICMP packets from internal subnets."
-    v4_cidr_blocks = ["10.1.0.0/16"]
+    v4_cidr_blocks = [var.zone_a_v4_cidr_blocks]
   }
 
   ingress {
@@ -80,8 +88,8 @@ resource "yandex_vpc_security_group" "k8s-main-sg" {
   }
 }
 
-resource "yandex_iam_service_account" "k8s-sa" {
-  name = "k8s-sa"
+resource "yandex_iam_service_account" "k8s-sa-vb" {
+  name        = "k8s-sa-vb"
   description = "Service account for Kubernetes cluster and node group"
 }
 
@@ -90,7 +98,7 @@ resource "yandex_resourcemanager_folder_iam_binding" "editor" {
   folder_id = local.folder_id
   role      = "editor"
   members = [
-    "serviceAccount:${yandex_iam_service_account.k8s-sa.id}"
+    "serviceAccount:${yandex_iam_service_account.k8s-sa-vb.id}"
   ]
 }
 
@@ -99,37 +107,37 @@ resource "yandex_resourcemanager_folder_iam_binding" "images-puller" {
   folder_id = local.folder_id
   role      = "container-registry.images.puller"
   members = [
-    "serviceAccount:${yandex_iam_service_account.k8s-sa.id}"
+    "serviceAccount:${yandex_iam_service_account.k8s-sa-vb.id}"
   ]
 }
 
-resource "yandex_kubernetes_cluster" "k8s-cluster" {
-  name        = "k8s-cluster"
+resource "yandex_kubernetes_cluster" "k8s-cluster-vb" {
+  name        = "k8s-cluster-vb"
   description = "Managed Service for Kubernetes cluster"
-  network_id  = yandex_vpc_network.k8s-network.id
+  network_id  = yandex_vpc_network.k8s-network-vb.id
 
   master {
-    version = "locals.k8s_cluster_version"
+    version = "local.k8s_cluster_version"
     zonal {
-      zone      = yandex_vpc_subnet.subnet-a.zone
-      subnet_id = yandex_vpc_subnet.subnet-a.id
+      zone      = yandex_vpc_subnet.subnet-a-vb.zone
+      subnet_id = yandex_vpc_subnet.subnet-a-vb.id
     }
 
     public_ip = true
 
-    security_group_ids = [yandex_vpc_security_group.k8s-main-sg.id]
+    security_group_ids = [yandex_vpc_security_group.k8s-main-sg-vb.id]
   }
-  service_account_id      = yandex_iam_service_account.k8s-sa.id # Cluster service account ID
-  node_service_account_id = yandex_iam_service_account.k8s-sa.id # Node group service account ID
+  service_account_id      = yandex_iam_service_account.k8s-sa-vb.id # Cluster service account ID
+  node_service_account_id = yandex_iam_service_account.k8s-sa-vb.id # Node group service account ID
   depends_on = [
     yandex_resourcemanager_folder_iam_binding.editor,
     yandex_resourcemanager_folder_iam_binding.images-puller
   ]
 }
 
-resource "yandex_kubernetes_node_group" "k8s-node-group" {
-  cluster_id  = yandex_kubernetes_cluster.k8s-cluster.id
-  name        = "k8s-node-group"
+resource "yandex_kubernetes_node_group" "k8s-node-group-vb" {
+  cluster_id  = yandex_kubernetes_cluster.k8s-cluster-vb.id
+  name        = "k8s-node-group-vb"
   description = "Node group for the Managed Service for Kubernetes cluster"
   version     = local.k8s_node_group_version
 
@@ -141,7 +149,7 @@ resource "yandex_kubernetes_node_group" "k8s-node-group" {
 
   allocation_policy {
     location {
-      zone = "yandex_vpc_subnet.subnet-a.zone"
+      zone = "yandex_vpc_subnet.subnet-a-vb.zone"
     }
   }
 
@@ -150,7 +158,7 @@ resource "yandex_kubernetes_node_group" "k8s-node-group" {
 
     network_interface {
       nat        = true
-      subnet_ids = [yandex_vpc_subnet.subnet-a.id]
+      subnet_ids = [yandex_vpc_subnet.subnet-a-vb.id]
     }
 
     resources {
