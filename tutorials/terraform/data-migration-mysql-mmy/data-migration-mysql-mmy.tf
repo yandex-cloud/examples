@@ -1,0 +1,126 @@
+# Infrastructure for Yandex Cloud Managed Service for MySQL cluster and Virtual Machine
+#
+# RU: https://cloud.yandex.ru/docs/managed-mysql/tutorials/data-migration
+# EN: https://cloud.yandex.com/en/docs/managed-mysql/tutorials/data-migration
+#
+# Set the following settings:
+locals {
+  # Managed Service for MySQL cluster
+  target_version  = ""   # Set the MySQL version. Мust be the same or higher than the version in the source cluster.
+  target_sql_mode = ""   # Set the MySQL SQL mode. Must be the same as in the source cluster.
+  target_db       = ""   # Set the target cluster database name
+  target_user     = ""   # Set the target cluster username
+  target_pwd      = ""   # Set the target cluster password
+  target_port     = 3306 # Set the target cluster port number for connections from the Internet
+  # (Optional) Virtual Machine
+  vm_image_id   = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list
+  vm_public_key = "" # Set a path to SSH public key
+}
+
+# Images with Ubuntu Linux use username `ubuntu` by default.
+variable "vm_user_name" {
+  description = "User name for VM"
+  type        = string
+  default     = "ubuntu"
+}
+
+resource "yandex_vpc_network" "network" {
+  description = "Network for the Managed Service for MySQL cluster and VM"
+  name        = "network"
+}
+
+resource "yandex_vpc_subnet" "subnet-a" {
+  description    = "Subnet in ru-central1-a availability zone"
+  name           = "subnet-a"
+  zone           = "ru-central1-a"
+  network_id     = yandex_vpc_network.network.id
+  v4_cidr_blocks = ["10.1.0.0/24"]
+}
+
+resource "yandex_vpc_security_group" "security-group" {
+  description = "Security group for the Managed Service for MySQL and VM"
+  network_id  = yandex_vpc_network.network.id
+
+  ingress {
+    protocol       = "TCP"
+    description    = "Allow connections to MySQL from the Internet"
+    port           = local.target_port
+    v4_cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  #ingress {
+  #  description    = "Allow SSH connections for VM from the Internet"
+  #  protocol       = "TCP"
+  #  port           = 22
+  #  v4_cidr_blocks = ["0.0.0.0/0"]
+  #}
+
+  egress {
+    description    = "Allow outgoing connections to any required resource"
+    protocol       = "ANY"
+    from_port      = 0
+    to_port        = 65535
+    v4_cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+resource "yandex_mdb_mysql_cluster" "mysql-cluster" {
+  description        = "Managed Service for MySQL cluster"
+  name               = "mysql-cluster"
+  environment        = "PRODUCTION"
+  network_id         = yandex_vpc_network.network.id
+  version            = local.target_version
+  security_group_ids = [yandex_vpc_security_group.security-group.id]
+
+  resources {
+    resource_preset_id = "s2.micro" # 2 vCPU, 8 GB RAM
+    disk_type_id       = "network-hdd"
+    disk_size          = 10 # GB
+  }
+
+  mysql_config = {
+    sql_mode = local.target_sql_mode
+  }
+
+  host {
+    zone             = "ru-central1-a"
+    subnet_id        = yandex_vpc_subnet.subnet-a.id
+    assign_public_ip = true # Required for connection from the Internet. For a method without intermediate VM.
+  }
+
+  database {
+    name = local.target_db
+  }
+
+  user {
+    name     = local.target_user
+    password = local.target_pwd
+    permission {
+      database_name = local.target_db
+      roles         = ["ALL"]
+    }
+  }
+
+}
+
+#resource "yandex_compute_instance" "vm-linux" {
+#  description = "Virtual Machine in Yandex Compute Cloud"
+#  name        = "vm-linux"
+#  platform_id = "standard-v3" # Intel Ice Lake
+#  resources {
+#    cores  = 2
+#    memory = 2 # GB
+#  }
+#  boot_disk {
+#    initialize_params {
+#      image_id = local.vm_image_id
+#    }
+#  }
+#  network_interface {
+#    subnet_id = yandex_vpc_subnet.subnet-a.id
+#    nat       = true # Required for connection from the Internet
+#  }
+#  metadata = {
+#    ssh-keys = "${var.vm_user_name}:${file(local.vm_public_key)}" # Username and SSH public key path
+#  }
+#}

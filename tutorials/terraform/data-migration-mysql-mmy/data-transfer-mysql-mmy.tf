@@ -1,0 +1,135 @@
+# Infrastructure for the Yandex Cloud Managed Service for MySQL cluster and Data Transfer
+#
+# RU: https://cloud.yandex.ru/docs/managed-mysql/tutorials/data-migration
+# EN: https://cloud.yandex.com/en/docs/managed-mysql/tutorials/data-migration
+#
+# Set source and target clusters settings
+locals {
+  # Source cluster settings
+  source-user = ""   # Set the source cluster username
+  source-db   = ""   # Set the source cluster database name
+  source-pwd  = ""   # Set the source cluster password
+  source-host = ""   # Set the source cluster master host IP address or FQDN
+  source-port = 3306 # Set the source cluster port number that Data Transfer will use for connections
+  # Target cluster settings
+  target-version  = "" # Set the MySQL version. Мust be the same or higher than the version in the source cluster.
+  target-sql-mode = "" # Set the MySQL SQL mode. Must be the same as in the source cluster.
+  target-db       = "" # Set the target cluster database name
+  target-user     = "" # Set the target cluster username
+  target-pwd      = "" # Set the target cluster password
+}
+
+resource "yandex_vpc_network" "network" {
+  description = "Network for the Managed Service for MySQL"
+  name        = "network"
+}
+
+resource "yandex_vpc_subnet" "subnet-a" {
+  description    = "Subnet in ru-central1-a availability zone"
+  name           = "subnet-a"
+  zone           = "ru-central1-a"
+  network_id     = yandex_vpc_network.network.id
+  v4_cidr_blocks = ["10.1.0.0/16"]
+}
+
+resource "yandex_vpc_security_group" "security-group" {
+  description = "Security group for the Managed Service for MySQL"
+  network_id  = yandex_vpc_network.network.id
+
+  ingress {
+    protocol       = "TCP"
+    description    = "Allow connections to MySQL from the Internet"
+    port           = local.source-port
+    v4_cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    protocol       = "ANY"
+    description    = "Allow outgoing connections to any required resource"
+    from_port      = 0
+    to_port        = 65535
+    v4_cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+resource "yandex_mdb_mysql_cluster" "mysql-cluster" {
+  description        = "Managed Service for MySQL cluster"
+  name               = "mysql-cluster"
+  environment        = "PRODUCTION"
+  network_id         = yandex_vpc_network.network.id
+  version            = local.target-version
+  security_group_ids = [yandex_vpc_security_group.security-group.id]
+
+  resources {
+    resource_preset_id = "s2.micro" # 2 vCPU, 8 GB RAM
+    disk_type_id       = "network-hdd"
+    disk_size          = 10 # GB
+  }
+
+  mysql_config = {
+    sql_mode = local.target-sql-mode
+  }
+
+  host {
+    zone      = "ru-central1-a"
+    subnet_id = "yandex_vpc_subnet.subnet-a.id"
+  }
+
+  database {
+    name = local.target_db
+  }
+
+  user {
+    name     = local.target_user
+    password = local.target_pwd
+    permission {
+      database_name = local.target_db
+      roles         = ["ALL"]
+    }
+  }
+}
+
+resource "yandex_datatransfer_endpoint" "mysql-source" {
+  description = "Source endpoint for MySQL cluster"
+  name        = "mysql-source"
+  settings {
+    mysql_source {
+      connection {
+        on_premise {
+          hosts = [local.source-host]
+          port  = local.source-port
+        }
+      }
+      database = local.source-db
+      user     = local.source-user
+      password {
+        raw = local.source-pwd
+      }
+    }
+  }
+}
+
+resource "yandex_datatransfer_endpoint" "managed-mysql-target" {
+  description = "Target endpoint for Managed Service for MySQL cluster"
+  name        = "managed-mysql-target"
+  settings {
+    target {
+      connection {
+        mdb_cluster_id = yandex_mdb_mysql_cluster.mysql-cluster.id
+      }
+      database = target.source-db
+      user     = target.source-user
+      password {
+        raw = target.source-pwd
+      }
+    }
+  }
+}
+
+resource "yandex_datatransfer_transfer" "mysql-transfer" {
+  description = "Transfer from MySQL cluster to Managed for MySQL cluster"
+  name        = "transfer-from-onpremise-mysql-to-managed-mysql"
+  source_id   = yandex_datatransfer_endpoint.mysql-source.id
+  target_id   = yandex_datatransfer_endpoint.managed-mysql-target.id
+  type        = "SNAPSHOT_AND_INCREMENT" # Copy all data from the source cluster and start replication
+}
