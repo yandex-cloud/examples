@@ -4,9 +4,14 @@
 
 locals {
   folder_id              = ""            # Set your cloud folder ID
-  k8s_node_group_version = "1.21"        # Set the version of Kubernetes for the node group
+  k8s_node_group_version = "1.20"        # Set the version of Kubernetes for the node group
   k8s_cluster_version    = "1.21"        # Set the version of Kubernetes for the master host
   zone_a_v4_cidr_blocks  = "10.1.0.0/16" # Set the CIDR block for the Subnet in ru-central1-a availability zone
+}
+
+variable "zone_a_v4_cidr_blocks" {
+  type = string
+  default = "10.1.0.0/16"
 }
 
 resource "yandex_vpc_network" "k8s-network" {
@@ -17,9 +22,9 @@ resource "yandex_vpc_network" "k8s-network" {
 resource "yandex_vpc_subnet" "subnet-a" {
   description    = "Subnet in ru-central1-a availability zone"
   name           = "subnet-a"
-  zone           = "yandex_vpc_subnet.subnet-a.zone"
+  zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.k8s-network.id
-  v4_cidr_blocks = ["10.1.0.0/16"]
+  v4_cidr_blocks = [var.zone_a_v4_cidr_blocks]
 }
 
 resource "yandex_vpc_security_group" "k8s-main-sg" {
@@ -54,7 +59,7 @@ resource "yandex_vpc_security_group" "k8s-main-sg" {
   ingress {
     protocol       = "ANY"
     description    = "The rule allows the pod-pod and service-service interaction. Specify the subnets of your cluster and services."
-    v4_cidr_blocks = ["10.1.0.0/16"]
+    v4_cidr_blocks = [var.zone_a_v4_cidr_blocks]
     from_port      = 0
     to_port        = 65535
   }
@@ -62,7 +67,7 @@ resource "yandex_vpc_security_group" "k8s-main-sg" {
   ingress {
     protocol       = "ICMP"
     description    = "The rule allows receipt of debugging ICMP packets from internal subnets."
-    v4_cidr_blocks = ["10.1.0.0/16"]
+    v4_cidr_blocks = [var.zone_a_v4_cidr_blocks]
   }
 
   ingress {
@@ -117,7 +122,7 @@ resource "yandex_kubernetes_cluster" "k8s-cluster" {
   network_id  = yandex_vpc_network.k8s-network.id
 
   master {
-    version = "locals.k8s_cluster_version"
+    version = local.k8s_cluster_version
     zonal {
       zone      = yandex_vpc_subnet.subnet-a.zone
       subnet_id = yandex_vpc_subnet.subnet-a.id
@@ -149,7 +154,7 @@ resource "yandex_kubernetes_node_group" "k8s-node-group" {
 
   allocation_policy {
     location {
-      zone = "yandex_vpc_subnet.subnet-a.zone"
+      zone = yandex_vpc_subnet.subnet-a.zone
     }
   }
 
