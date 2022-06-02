@@ -47,14 +47,6 @@ resource "yandex_vpc_security_group" "security-group" {
     port           = local.source_port
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
-
-  egress {
-    protocol       = "ANY"
-    description    = "Allow outgoing connections to any required resource"
-    from_port      = 0
-    to_port        = 65535
-    v4_cidr_blocks = ["0.0.0.0/0"]
-  }
 }
 
 resource "yandex_mdb_mysql_cluster" "mysql-cluster" {
