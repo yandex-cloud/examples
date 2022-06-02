@@ -6,17 +6,22 @@
 # Set source and target clusters settings
 locals {
   # Source cluster settings
-  source-user = ""   # Set the source cluster username
-  source-db   = ""   # Set the source cluster database name
-  source-pwd  = ""   # Set the source cluster password
-  source-host = ""   # Set the source cluster master host IP address or FQDN
-  source-port = 3306 # Set the source cluster port number that Data Transfer will use for connections
+  source_user = ""   # Set the source cluster username
+  source_db   = ""   # Set the source cluster database name
+  source_pwd  = ""   # Set the source cluster password
+  source_host = ""   # Set the source cluster master host IP address or FQDN
+  source_port = 3306 # Set the source cluster port number that Data Transfer will use for connections
   # Target cluster settings
-  target-version  = "" # Set the MySQL version. Мust be the same or higher than the version in the source cluster.
-  target-sql-mode = "" # Set the MySQL SQL mode. Must be the same as in the source cluster.
-  target-db       = "" # Set the target cluster database name
-  target-user     = "" # Set the target cluster username
-  target-pwd      = "" # Set the target cluster password
+  target_sql_mode = "" # Set the MySQL SQL mode. Must be the same as in the source cluster.
+  target_db       = "" # Set the target cluster database name
+  target_user     = "" # Set the target cluster username
+  target_pwd      = "" # Set the target cluster password
+}
+
+variable "mysql_version" {
+  description = "MySQL version. Мust be the same or higher than the version in the source cluster."
+  type        = string
+  default     = "8.0"
 }
 
 resource "yandex_vpc_network" "network" {
@@ -39,7 +44,7 @@ resource "yandex_vpc_security_group" "security-group" {
   ingress {
     protocol       = "TCP"
     description    = "Allow connections to MySQL from the Internet"
-    port           = local.source-port
+    port           = local.source_port
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -57,7 +62,7 @@ resource "yandex_mdb_mysql_cluster" "mysql-cluster" {
   name               = "mysql-cluster"
   environment        = "PRODUCTION"
   network_id         = yandex_vpc_network.network.id
-  version            = local.target-version
+  version            = var.mysql_version
   security_group_ids = [yandex_vpc_security_group.security-group.id]
 
   resources {
@@ -67,7 +72,7 @@ resource "yandex_mdb_mysql_cluster" "mysql-cluster" {
   }
 
   mysql_config = {
-    sql_mode = local.target-sql-mode
+    sql_mode = local.target_sql_mode
   }
 
   host {
@@ -96,14 +101,14 @@ resource "yandex_datatransfer_endpoint" "mysql-source" {
     mysql_source {
       connection {
         on_premise {
-          hosts = [local.source-host]
-          port  = local.source-port
+          hosts = [local.source_host]
+          port  = local.source_port
         }
       }
-      database = local.source-db
-      user     = local.source-user
+      database = local.source_db
+      user     = local.source_user
       password {
-        raw = local.source-pwd
+        raw = local.source_pwd
       }
     }
   }
@@ -117,17 +122,17 @@ resource "yandex_datatransfer_endpoint" "managed-mysql-target" {
       connection {
         mdb_cluster_id = yandex_mdb_mysql_cluster.mysql-cluster.id
       }
-      database = target.source-db
-      user     = target.source-user
+      database = local.target_db
+      user     = local.target_user
       password {
-        raw = target.source-pwd
+        raw = local.target_pwd
       }
     }
   }
 }
 
 resource "yandex_datatransfer_transfer" "mysql-transfer" {
-  description = "Transfer from MySQL cluster to Managed for MySQL cluster"
+  description = "TTransfer from MySQL cluster to the Managed Service for MySQL cluster"
   name        = "transfer-from-onpremise-mysql-to-managed-mysql"
   source_id   = yandex_datatransfer_endpoint.mysql-source.id
   target_id   = yandex_datatransfer_endpoint.managed-mysql-target.id

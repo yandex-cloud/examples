@@ -6,15 +6,14 @@
 # Set the following settings:
 locals {
   # Managed Service for MySQL cluster
-  target_version  = ""   # Set the MySQL version. Мust be the same or higher than the version in the source cluster.
-  target_sql_mode = ""   # Set the MySQL SQL mode. Must be the same as in the source cluster.
-  target_db       = ""   # Set the target cluster database name
-  target_user     = ""   # Set the target cluster username
-  target_pwd      = ""   # Set the target cluster password
-  target_port     = 3306 # Set the target cluster port number for connections from the Internet
+  target_version  = "" # Set the MySQL version. Мust be the same or higher than the version in the source cluster.
+  target_sql_mode = "" # Set the MySQL SQL mode. Must be the same as in the source cluster.
+  target_db       = "" # Set the target cluster database name
+  target_user     = "" # Set the target cluster username
+  target_pwd      = "" # Set the target cluster password
   # (Optional) Virtual Machine
   vm_image_id   = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list
-  vm_public_key = "" # Set a path to SSH public key
+  vm_public_key = "" # Set a full path to SSH public key
 }
 
 # Images with Ubuntu Linux use username `ubuntu` by default.
@@ -37,32 +36,37 @@ resource "yandex_vpc_subnet" "subnet-a" {
   v4_cidr_blocks = ["10.1.0.0/24"]
 }
 
-resource "yandex_vpc_security_group" "security-group" {
-  description = "Security group for the Managed Service for MySQL and VM"
+resource "yandex_vpc_security_group" "security-group-mysql" {
+  description = "Security group for the Managed Service for MySQL"
   network_id  = yandex_vpc_network.network.id
 
   ingress {
     protocol       = "TCP"
-    description    = "Allow connections to MySQL from the Internet"
-    port           = local.target_port
-    v4_cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  #ingress {
-  #  description    = "Allow SSH connections for VM from the Internet"
-  #  protocol       = "TCP"
-  #  port           = 22
-  #  v4_cidr_blocks = ["0.0.0.0/0"]
-  #}
-
-  egress {
-    description    = "Allow outgoing connections to any required resource"
-    protocol       = "ANY"
-    from_port      = 0
-    to_port        = 65535
+    description    = "Allow connections to cluster from the Internet"
+    port           = 3306
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
+#resource "yandex_vpc_security_group" "security-group-vm" {
+#  description = "Security group for VM"
+#  network_id  = yandex_vpc_network.network.id
+#
+#  ingress {
+#    description    = "Allow SSH connections for VM from the Internet"
+#    protocol       = "TCP"
+#    port           = 22
+#    v4_cidr_blocks = ["0.0.0.0/0"]
+#  }
+#
+#  egress {
+#    description    = "Allow outgoing connections to any required resource"
+#    protocol       = "ANY"
+#    from_port      = 0
+#    to_port        = 65535
+#    v4_cidr_blocks = ["0.0.0.0/0"]
+#  }
+#}
 
 resource "yandex_mdb_mysql_cluster" "mysql-cluster" {
   description        = "Managed Service for MySQL cluster"
@@ -70,7 +74,7 @@ resource "yandex_mdb_mysql_cluster" "mysql-cluster" {
   environment        = "PRODUCTION"
   network_id         = yandex_vpc_network.network.id
   version            = local.target_version
-  security_group_ids = [yandex_vpc_security_group.security-group.id]
+  security_group_ids = [yandex_vpc_security_group.security-group-mysql.id]
 
   resources {
     resource_preset_id = "s2.micro" # 2 vCPU, 8 GB RAM
@@ -100,26 +104,34 @@ resource "yandex_mdb_mysql_cluster" "mysql-cluster" {
       roles         = ["ALL"]
     }
   }
-
 }
 
 #resource "yandex_compute_instance" "vm-linux" {
 #  description = "Virtual Machine in Yandex Compute Cloud"
 #  name        = "vm-linux"
 #  platform_id = "standard-v3" # Intel Ice Lake
+#
 #  resources {
 #    cores  = 2
 #    memory = 2 # GB
 #  }
+#
 #  boot_disk {
 #    initialize_params {
 #      image_id = local.vm_image_id
 #    }
 #  }
+#
 #  network_interface {
 #    subnet_id = yandex_vpc_subnet.subnet-a.id
 #    nat       = true # Required for connection from the Internet
+#
+#    security_group_ids = [
+#      yandex_vpc_security_group.security-group-mysql.id,
+#      yandex_vpc_security_group.security-group-vm.id
+#    ]
 #  }
+#
 #  metadata = {
 #    ssh-keys = "${var.vm_user_name}:${file(local.vm_public_key)}" # Username and SSH public key path
 #  }
