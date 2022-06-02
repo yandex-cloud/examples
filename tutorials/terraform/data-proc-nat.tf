@@ -3,24 +3,59 @@
 # RU: https://cloud.yandex.ru/docs/data-proc/tutorials/configure-network
 # EN: https://cloud.yandex.com/en-ru/docs/data-proc/tutorials/configure-network
 
+
+# Set the following settings:
 locals {
-  # Required settings for Data Proc cluster and NAT instance
-  folder_id              = ""          # Set your folder ID. Required for binding roles to service account
-  path_to_ssh_public_key = ""          # Set a full path to SSH public key
-  network_id             = ""          # Set an ID of network for Data Proc cluster and NAT instance
-  subnet_id              = ""          # Set an ID if subnet with enabled NAT
+  folder_id              = ""          # Yout folder ID. Required for binding roles to service account
+  path_to_ssh_public_key = ""          # Set a full path to SSH public key. NAT instance use username `ubuntu` by default.
   cidr_internet          = "0.0.0.0/0" # All IPv4 addresses
+  data_proc_sa_name      = ""          # Set name for service account for the Data Proc cluster
 }
 
+locals {
+  # Required settings for Data Proc cluster and NAT instance
+  folder_id              = "" # Set your folder ID
+  path_to_ssh_public_key = "" # Set a full path to SSH public key
 
+  # Settings for Network
+  cidr_internet = "0.0.0.0/0" # All IPv4 addresses of the Internet
+}
+
+variable "nat_instance_image_id" {
+  description = "ID of NAT instance image."
+  type        = string
+  default     = "fd82fnsvr0bgt1fid7cl"
+}
+
+resource "yandex_vpc_network" "network-data-proc" {
+  description = "Network for DataProc cluster and NAT instance."
+  name        = "network-data-proc"
+}
+
+resource "yandex_vpc_subnet" "subnet-cluster" {
+  description    = "Subnet for the Data Proc cluster."
+  name           = "subnet-cluster"
+  network_id     = yandex_vpc_network.network-data-proc.id
+  v4_cidr_blocks = ["192.168.1.0/24"]
+  zone           = "ru-central1-a"
+  route_table_id = yandex_vpc_route_table.route-table-nat.id
+}
+
+resource "yandex_vpc_subnet" "subnet-nat" {
+  description    = "Subnet for NAT instance."
+  name           = "subnet-nat"
+  network_id     = yandex_vpc_network.network-data-proc.id
+  v4_cidr_blocks = ["192.168.100.0/24"]
+  zone           = "ru-central1-b"
+}
 
 resource "yandex_vpc_security_group" "sg-internet" {
+  description = "Allow any outgoing traffic to the Internet. Used by Yandex Data Proc cluster and NAT instance."
   name        = "sg-internet"
-  description = "Security group allow any outgoing traffic to Internet. Used by Yandex Data Proc cluster and NAT instance."
-  network_id  = local.network_id
+  network_id  = yandex_vpc_network.network-data-proc.id
 
   egress {
-    description    = "Allow any outgoing traffic to Internet"
+    description    = "Allow any outgoing traffic to the Internet"
     protocol       = "ANY"
     from_port      = 0
     to_port        = 65535
@@ -29,9 +64,9 @@ resource "yandex_vpc_security_group" "sg-internet" {
 }
 
 resource "yandex_vpc_security_group" "sg-data-proc-cluster" {
+  description = "Security group for the Yandex Data Proc cluster."
   name        = "sg-data-proc-cluster"
-  description = "Security group for the Yandex Data Proc cluster"
-  network_id  = local.network_id
+  network_id  = yandex_vpc_network.network-data-proc.id
 
   ingress {
     description       = "Allow any traffic within one security group"
@@ -43,9 +78,9 @@ resource "yandex_vpc_security_group" "sg-data-proc-cluster" {
 }
 
 resource "yandex_vpc_security_group" "sg-nat-instance" {
+  description = "Security group for the NAT instance."
   name        = "sg-nat-instance"
-  description = "Security group for the NAT instance"
-  network_id  = local.network_id
+  network_id  = yandex_vpc_network.network-data-proc.id
 
   ingress {
     description    = "Allow any outgoing traffic from the Yandex Data Proc cluster"
@@ -71,13 +106,9 @@ resource "yandex_vpc_security_group" "sg-nat-instance" {
   }
 }
 
-resource yandex_vpc_route_table "route-table" {
-  network_id = yandex_vpc_network.data-proc-cluster-network.id
-}
-
 resource "yandex_iam_service_account" "dataproc-sa" {
-  name        = "maxdunaevsky-dataproc-sa"
   description = "Service account for the Yandex Data Proc cluster"
+  name        = local.data_proc_sa_name
 }
 
 data "yandex_resourcemanager_folder" "cloud-folder" {
@@ -86,7 +117,7 @@ data "yandex_resourcemanager_folder" "cloud-folder" {
 }
 
 resource "yandex_resourcemanager_folder_iam_binding" "dataproc-sa-role-dataproc-agent" {
-  # Bind role `dataproc.agent` to service account. Required for creation of Data Proc cluster
+  # Bind role `mdb.dataproc.agent` to the service account. Required for creation of Data Proc cluster
   folder_id = data.yandex_resourcemanager_folder.cloud-folder.id
   role      = "mdb.dataproc.agent"
 
@@ -96,17 +127,15 @@ resource "yandex_resourcemanager_folder_iam_binding" "dataproc-sa-role-dataproc-
 }
 
 resource "yandex_dataproc_cluster" "dataproc-cluster" {
-
-  name               = "dataproc-cluster"
   description        = "Yandex Data Proc cluster"
+  name               = "dataproc-cluster"
   service_account_id = yandex_iam_service_account.dataproc-sa.id # Required role `dataproc.agent`
+  zone_id = "ru-central1-a"
 
   security_group_ids = [
     yandex_vpc_security_group.sg-internet.id,         # Allow any outgoing traffic to Internet
     yandex_vpc_security_group.sg-data-proc-cluster.id # Allow connections from VM and inside security group
   ]
-
-  zone_id = "ru-central1-a"
 
   cluster_config {
     hadoop {
@@ -119,12 +148,12 @@ resource "yandex_dataproc_cluster" "dataproc-cluster" {
     subcluster_spec {
       name        = "subcluster-master"
       role        = "MASTERNODE"
-      subnet_id   = local.subnet_id
+      subnet_id   = yandex_vpc_subnet.subnet-cluster.id
       hosts_count = 1 # For MASTERNODE only one hosts assigned
 
       resources {
-        resource_preset_id = "s2.small"    # 4 vCPU Intel Cascade, 16 GB RAM
-        disk_type_id       = "network-ssd" # Fast network SSD disk
+        resource_preset_id = "s2.micro"    # 4 vCPU Intel Cascade, 16 GB RAM
+        disk_type_id       = "network-ssd" # Fast network SSD storage
         disk_size          = 20            # GB
       }
     }
@@ -132,23 +161,25 @@ resource "yandex_dataproc_cluster" "dataproc-cluster" {
     subcluster_spec {
       name        = "subcluster-data"
       role        = "DATANODE"
-      subnet_id   = local.subnet_id
-      hosts_count = 2 #
+      subnet_id   = yandex_vpc_subnet.subnet-cluster.id
+      hosts_count = 2
 
       resources {
-        resource_preset_id = "s2.small" # 4 vCPU, 16 GB RAM
+        resource_preset_id = "s2.micro" # 4 vCPU, 16 GB RAM
         disk_type_id       = "network-hdd"
-        disk_size          = 100 # GB
+        disk_size          = 20 # GB
       }
     }
   }
 }
 
-resource "yandex_compute_instance" "nat-instance" {
-
+resource "yandex_compute_instance" "nat-instance-vm" {
   description = "NAT instance VM"
-  name        = "nat-instance"
+  name        = "nat-instance-vm"
   platform_id = "standard-v3" # Intel Ice Lake
+  zone        = "ru-central1-b"
+
+  labels = {}
 
   resources {
     cores  = 2 # vCPU
@@ -157,12 +188,12 @@ resource "yandex_compute_instance" "nat-instance" {
 
   boot_disk {
     initialize_params {
-      image_id = "fd82fnsvr0bgt1fid7cl" # ID of NAT instance image
+      image_id = var.nat_instance_image_id
     }
   }
 
   network_interface {
-    subnet_id = local.subnet_id
+    subnet_id = yandex_vpc_subnet.subnet-nat.id
     nat       = true # Required for connection from the Internet
 
     security_group_ids = [
@@ -172,6 +203,22 @@ resource "yandex_compute_instance" "nat-instance" {
   }
 
   metadata = {
-    ssh-keys = file(local.path_to_ssh_public_key)
+    ssh-keys = "${file(local.path_to_ssh_public_key)}"
+  }
+}
+
+resource "yandex_vpc_route_table" "route-table-nat" {
+  description = "Route table for Data Proc cluster subnet. All requests can be forwarded to the NAT instance IP address."
+  name        = "route-table-nat"
+
+  depends_on = [
+    yandex_compute_instance.nat-instance-vm
+  ]
+
+  network_id = yandex_vpc_network.network-data-proc.id
+
+  static_route {
+    destination_prefix = local.cidr_internet
+    next_hop_address   = yandex_compute_instance.nat-instance-vm.network_interface.0.ip_address
   }
 }
