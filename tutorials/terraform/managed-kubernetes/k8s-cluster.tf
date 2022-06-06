@@ -5,7 +5,7 @@
 locals {
   folder_id              = ""            # Set your cloud folder ID.
   k8s_node_group_version = "1.20"        # Set the version of Kubernetes for the node group.
-  k8s_cluster_version    = "1.21"        # Set the version of Kubernetes for the master host.
+  k8s_cluster_version    = "1.20"        # Set the version of Kubernetes for the master host.
 }
 
 variable "zone_a_v4_cidr_blocks" {
