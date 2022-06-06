@@ -6,22 +6,17 @@
 # Set source and target clusters settings.
 locals {
   # Source cluster settings:
-  source_user = ""   # Set the source cluster username.
-  source_db   = ""   # Set the source cluster database name.
-  source_pwd  = ""   # Set the source cluster password.
-  source_host = ""   # Set the source cluster master host IP address or FQDN.
-  source_port = 3306 # Set the source cluster port number that Data Transfer will use for connections.
+  source_user    = ""   # Set the source cluster username.
+  source_db_name = ""   # Set the source cluster database name.
+  source_pwd     = ""   # Set the source cluster password.
+  source_host    = ""   # Set the source cluster master host IP address or FQDN.
+  source_port    = 3306 # Set the source cluster port number that Data Transfer will use for connections.
   # Target cluster settings:
-  target_sql_mode = "" # Set the MySQL SQL mode. It must be the same as in the source cluster.
-  target_db       = "" # Set the target cluster database name.
-  target_user     = "" # Set the target cluster username.
-  target_pwd      = "" # Set the target cluster password.
-}
-
-variable "mysql_version" {
-  description = "MySQL version. It must be the same or higher than the version in the source cluster."
-  type        = string
-  default     = "8.0"
+  target_mysql_version = "" # Set MySQL version. It must be the same or higher than the version in the source cluster.
+  target_sql_mode      = "" # Set the MySQL SQL mode. It must be the same as in the source cluster.
+  target_db_name       = "" # Set the target cluster database name.
+  target_user          = "" # Set the target cluster username.
+  target_password      = "" # Set the target cluster password.
 }
 
 resource "yandex_vpc_network" "network" {
@@ -54,7 +49,7 @@ resource "yandex_mdb_mysql_cluster" "mysql-cluster" {
   name               = "mysql-cluster"
   environment        = "PRODUCTION"
   network_id         = yandex_vpc_network.network.id
-  version            = var.mysql_version
+  version            = local.target_mysql_version
   security_group_ids = [yandex_vpc_security_group.security-group.id]
 
   resources {
@@ -73,14 +68,14 @@ resource "yandex_mdb_mysql_cluster" "mysql-cluster" {
   }
 
   database {
-    name = local.target_db
+    name = local.target_db_name
   }
 
   user {
     name     = local.target_user
-    password = local.target_pwd
+    password = local.target_password
     permission {
-      database_name = local.target_db
+      database_name = local.target_db_name
       roles         = ["ALL"]
     }
   }
@@ -97,7 +92,7 @@ resource "yandex_datatransfer_endpoint" "mysql-source" {
           port  = local.source_port
         }
       }
-      database = local.source_db
+      database = local.source_db_name
       user     = local.source_user
       password {
         raw = local.source_pwd
@@ -114,10 +109,10 @@ resource "yandex_datatransfer_endpoint" "managed-mysql-target" {
       connection {
         mdb_cluster_id = yandex_mdb_mysql_cluster.mysql-cluster.id
       }
-      database = local.target_db
+      database = local.target_db_name
       user     = local.target_user
       password {
-        raw = local.target_pwd
+        raw = local.target_password
       }
     }
   }

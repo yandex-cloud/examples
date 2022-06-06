@@ -6,20 +6,15 @@
 # Set the following settings:
 locals {
   # Managed Service for MySQL cluster.
-  target_version  = "" # Set the MySQL version. It must be the same or higher than the version in the source cluster.
-  target_sql_mode = "" # Set the MySQL SQL mode. It must be the same as in the source cluster.
-  target_db_name  = "" # Set the target cluster database name.
-  target_user     = "" # Set the target cluster username.
-  target_pwd      = "" # Set the target cluster password.
+  target_mysql_version = "" # Set the MySQL version. It must be the same or higher than the version in the source cluster.
+  target_sql_mode      = "" # Set the MySQL SQL mode. It must be the same as in the source cluster.
+  target_db_name       = "" # Set the target cluster database name.
+  target_user          = "" # Set the target cluster username.
+  target_password      = "" # Set the target cluster password.
   # (Optional) Virtual Machine.
   vm_image_id   = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list.
+  vm_username   = "" # Set a username for VM. Images with Ubuntu Linux use username `ubuntu` by default.
   vm_public_key = "" # Set a full path to SSH public key.
-}
-
-variable "vm_user_name" {
-  description = "User name for VM. Images with Ubuntu Linux use username `ubuntu` by default."
-  type        = string
-  default     = "ubuntu"
 }
 
 resource "yandex_vpc_network" "network" {
@@ -73,7 +68,7 @@ resource "yandex_mdb_mysql_cluster" "mysql-cluster" {
   name               = "mysql-cluster"
   environment        = "PRODUCTION"
   network_id         = yandex_vpc_network.network.id
-  version            = local.target_version
+  version            = local.target_mysql_version
   security_group_ids = [yandex_vpc_security_group.security-group-mysql.id]
 
   resources {
@@ -98,7 +93,7 @@ resource "yandex_mdb_mysql_cluster" "mysql-cluster" {
 
   user {
     name     = local.target_user
-    password = local.target_pwd
+    password = local.target_password
     permission {
       database_name = local.target_db_name
       roles         = ["ALL"]
@@ -134,6 +129,6 @@ resource "yandex_mdb_mysql_cluster" "mysql-cluster" {
 #  }
 #
 #  metadata = {
-#    ssh-keys = "${var.vm_user_name}:${file(local.vm_public_key)}" # Username and SSH public key full path.
+#    ssh-keys = "local.vm_username:${file(local.vm_public_key)}" # Username and SSH public key full path.
 #  }
 #}
