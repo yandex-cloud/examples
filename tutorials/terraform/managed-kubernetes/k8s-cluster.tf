@@ -86,7 +86,7 @@ resource "yandex_vpc_security_group" "k8s-main-sg" {
 }
 
 resource "yandex_iam_service_account" "k8s-sa" {
-  description = "Service account for Kubernetes cluster and node group."
+  description = "Service account for the Managed Service for Kubernetes cluster and node group."
   name        = "k8s-sa"
 }
 
