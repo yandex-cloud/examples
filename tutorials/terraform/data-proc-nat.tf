@@ -13,10 +13,10 @@ locals {
 }
 
 variable "nat_instance_image_id" {
-  description = "ID of NAT instance image" # See https://cloud.yandex.ru/marketplace/products/yc/nat-instance-ubuntu-18-04-lts for details."
+  description = "ID of NAT instance image" # See https://cloud.yandex.ru/marketplace/products/yc/nat-instance-ubuntu-18-04-lts for details.
 
-  type        = string
-  default     = "fd82fnsvr0bgt1fid7cl"
+  type    = string
+  default = "fd82fnsvr0bgt1fid7cl"
 }
 
 resource "yandex_vpc_network" "network-data-proc" {
@@ -116,7 +116,7 @@ resource "yandex_dataproc_cluster" "dataproc-cluster" {
   description        = "Yandex Data Proc cluster"
   name               = "dataproc-cluster"
   service_account_id = yandex_iam_service_account.dataproc-sa.id
-  zone_id = "ru-central1-a"
+  zone_id            = "ru-central1-a"
 
   security_group_ids = [
     yandex_vpc_security_group.sg-internet.id,         # Allow any outgoing traffic to the Internet.
