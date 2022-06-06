@@ -1,49 +1,49 @@
-# Infrastructure for Yandex Cloud Managed Service for ClickHouse cluster, Data Proc cluster and virtual machine
+# Infrastructure for Yandex Cloud Managed Service for ClickHouse cluster, Data Proc cluster and virtual machine.
 #
 # RU: https://cloud.yandex.ru/docs/data-proc/tutorials/exchange-data-with-mch
 #
-# Set the configuration of the Managed Service for ClickHouse cluster, Data Proc cluster and Virtual Machine
+# Set the configuration of the Managed Service for ClickHouse cluster, Data Proc cluster and Virtual Machine.
 
-# Specify the pre-installation parameters
+# Specify the pre-installation parameters:
 locals {
-  folder_id          = ""                                                # Your Folder ID
-  network_id         = ""                                                # Network ID for Managed Service for ClickHouse cluster, Data Proc cluster and VM
-  subnet_id          = ""                                                # Subnet ID (enable NAT for this subnet)
-  ch_password        = ""                                                # Set user password for ClickHouse cluster
-  vm_ssh_keys        = "<username>:${file("<path to public key file>")}" # Set username and SSH public key path for VM
-  vm_image_id        = "fd8ciuqfa001h8s9sa7i"                            # Ubuntu 20.04. See this page to list all available images: https://cloud.yandex.ru/docs/compute/operations/images-with-pre-installed-software/get-list
-  dp_ssh_public_keys = [file("<path to public key file>")]               # Set SSH public key path for Data Proc Cluster
-  bucket_name        = ""                                                # Name for the Object Storage bucket. Should be unique in Cloud
+  folder_id          = ""                                                # Your Folder ID.
+  network_id         = ""                                                # Network ID for Managed Service for ClickHouse cluster, Data Proc cluster and VM.
+  subnet_id          = ""                                                # Subnet ID (enable NAT for this subnet).
+  ch_password        = ""                                                # Set user password for ClickHouse cluster.
+  vm_ssh_keys        = "<username>:${file("<path to public key file>")}" # Set username and SSH public key path for VM.
+  vm_image_id        = "fd8ciuqfa001h8s9sa7i"                            # Ubuntu 20.04. See this page to list all available images: https://cloud.yandex.ru/docs/compute/operations/images-with-pre-installed-software/get-list.
+  dp_ssh_public_keys = [file("<path to public key file>")]               # Set SSH public key path for Data Proc Cluster.
+  bucket_name        = ""                                                # Name for the Object Storage bucket. Should be unique in Cloud.
 }
 
 resource "yandex_vpc_security_group" "clickhouse-and-vm-security-group" {
-  description = "Security group for the Managed Service for ClickHouse cluster and VM"
+  description = "Security group for the Managed Service for ClickHouse cluster and VM."
   network_id  = local.network_id
 
   ingress {
+    description    = "Allow SSL connections to the Managed Service for ClickHouse cluster with clickhouse-client."
     protocol       = "TCP"
-    description    = "Allow SSL connections to the Managed Service for ClickHouse cluster with clickhouse-client"
     port           = 9440
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
+    description    = "Allow HTTPS connections to the Managed Service for ClickHouse cluster."
     protocol       = "TCP"
-    description    = "Allow HTTPS connections to the Managed Service for ClickHouse cluster"
     port           = 8443
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
+    description    = "Allow SSH connections to VM from the Internet."
     protocol       = "TCP"
-    description    = "Allow SSH connections to VM from the Internet"
     port           = 22
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
+    description    = "Allow outgoing connections to any required resource."
     protocol       = "ANY"
-    description    = "Allow outgoing connections to any required resource"
     from_port      = 0
     to_port        = 65535
     v4_cidr_blocks = ["0.0.0.0/0"]
@@ -51,35 +51,35 @@ resource "yandex_vpc_security_group" "clickhouse-and-vm-security-group" {
 }
 
 resource "yandex_vpc_security_group" "data-proc-security-group" {
-  description = "Security group for the Data Proc cluster"
+  description = "Security group for the Data Proc cluster."
   network_id  = local.network_id
 
   ingress {
+    description       = "Inbound internal traffic rules."
     protocol          = "ANY"
-    description       = "Inbound internal traffic rules"
     from_port         = 0
     to_port           = 65535
     predefined_target = "self_security_group"
   }
 
   egress {
+    description       = "Outbound internal traffic rules."
     protocol          = "ANY"
-    description       = "Outbound internal traffic rules"
     from_port         = 0
     to_port           = 65535
     predefined_target = "self_security_group"
   }
 
   egress {
+    description    = "Allow connections to the HTTPS port."
     protocol       = "TCP"
-    description    = "Allow connections to the HTTPS port"
     port           = 443
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
 resource "yandex_iam_service_account" "dataproc" {
-  description = "Service account to manage the Dataproc Cluster"
+  description = "Service account to manage the Dataproc cluster."
   name        = "dataproc"
 }
 
@@ -87,7 +87,7 @@ data "yandex_resourcemanager_folder" "my-folder" {
   folder_id = local.folder_id
 }
 
-# Role to create Data Proc cluster
+# Roles to create Data Proc cluster.
 resource "yandex_resourcemanager_folder_iam_binding" "dataproc-agent" {
   folder_id = data.yandex_resourcemanager_folder.my-folder.id
   role      = "dataproc.agent"
@@ -184,11 +184,12 @@ resource "yandex_compute_instance" "vm-1" {
   }
 }
 
-# Object Storage Bucket
+# Object Storage bucket static key
 resource "yandex_iam_service_account_static_access_key" "my-bucket-key" {
   service_account_id = yandex_iam_service_account.dataproc.id
 }
 
+# Object Storage bucket
 resource "yandex_storage_bucket" "my-bucket" {
   depends_on = [
     yandex_resourcemanager_folder_iam_binding.bucket-creator
@@ -200,7 +201,7 @@ resource "yandex_storage_bucket" "my-bucket" {
 }
 
 resource "yandex_dataproc_cluster" "my-dp-cluster" {
-  description = "Dataproc Cluster"
+  description = "Dataproc cluster."
   depends_on  = [yandex_resourcemanager_folder_iam_binding.dataproc-agent]
   bucket      = yandex_storage_bucket.my-bucket.bucket
   name        = "my-dp-cluster"
@@ -228,7 +229,7 @@ resource "yandex_dataproc_cluster" "my-dp-cluster" {
       resources {
         resource_preset_id = "s2.micro" # 2 vCPU, 8 GB RAM
         disk_type_id       = "network-hdd"
-        disk_size          = 20
+        disk_size          = 20 # GB
       }
       subnet_id   = local.subnet_id
       hosts_count = 1
@@ -240,19 +241,19 @@ resource "yandex_dataproc_cluster" "my-dp-cluster" {
       resources {
         resource_preset_id = "s2.micro" # 2 vCPU, 8 GB RAM
         disk_type_id       = "network-hdd"
-        disk_size          = 20
+        disk_size          = 20 # GB
       }
       subnet_id   = local.subnet_id
       hosts_count = 1
     }
 
     subcluster_spec {
-      name = "compute"
+      name = "compute_static"
       role = "COMPUTENODE"
       resources {
         resource_preset_id = "s2.micro" # 2 vCPU, 8 GB RAM
         disk_type_id       = "network-hdd"
-        disk_size          = 20
+        disk_size          = 20 # GB
       }
       subnet_id   = local.subnet_id
       hosts_count = 1
@@ -264,11 +265,11 @@ resource "yandex_dataproc_cluster" "my-dp-cluster" {
       resources {
         resource_preset_id = "s2.micro" # 2 vCPU, 8 GB RAM
         disk_type_id       = "network-hdd"
-        disk_size          = 20
+        disk_size          = 20 # GB
       }
       subnet_id   = local.subnet_id
       hosts_count = 1
-      autoscaling_config {
+      autoscaling_config { # All settings in seconds
         max_hosts_count        = 10
         measurement_duration   = 60
         warmup_duration        = 60
