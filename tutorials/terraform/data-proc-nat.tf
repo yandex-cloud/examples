@@ -6,17 +6,11 @@
 
 # Set the following settings:
 locals {
-  folder_id              = ""          # Yout folder ID. Required for binding roles to service account.
-  path_to_ssh_public_key = ""          # Set a full path to SSH public key. NAT instance use username `ubuntu` by default.
-  cidr_internet          = "0.0.0.0/0" # All IPv4 addresses.
-  data_proc_sa_name      = ""          # Set name for service account for the Data Proc cluster.
-}
-
-variable "nat_instance_image_id" {
-  description = "ID of NAT instance image" # See https://cloud.yandex.ru/marketplace/products/yc/nat-instance-ubuntu-18-04-lts for details.
-
-  type    = string
-  default = "fd82fnsvr0bgt1fid7cl"
+  folder_id              = ""                     # Yout folder ID. Required for binding roles to service account.
+  path_to_ssh_public_key = ""                     # Set a full path to SSH public key. NAT instance use username `ubuntu` by default.
+  data_proc_sa_name      = ""                     # Set name for service account for the Data Proc cluster.
+  nat_instance_image_id  = "fd82fnsvr0bgt1fid7cl" # Image ID for NAT instance. See https://cloud.yandex.ru/marketplace/products/yc/nat-instance-ubuntu-18-04-lts for details.
+  cidr_internet          = "0.0.0.0/0"            # All IPv4 addresses.
 }
 
 resource "yandex_vpc_network" "network-data-proc" {
@@ -172,7 +166,7 @@ resource "yandex_compute_instance" "nat-instance-vm" {
 
   boot_disk {
     initialize_params {
-      image_id = var.nat_instance_image_id
+      image_id = local.nat_instance_image_id
     }
   }
 
