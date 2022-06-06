@@ -1,35 +1,34 @@
-# Infrastructure for Yandex Cloud Managed Service for MySQL cluster and Virtual Machine
+# Infrastructure for Yandex Cloud Managed Service for MySQL cluster and Virtual Machine.
 #
 # RU: https://cloud.yandex.ru/docs/managed-mysql/tutorials/data-migration
 # EN: https://cloud.yandex.com/en/docs/managed-mysql/tutorials/data-migration
 #
 # Set the following settings:
 locals {
-  # Managed Service for MySQL cluster
-  target_version  = "" # Set the MySQL version. Мust be the same or higher than the version in the source cluster.
-  target_sql_mode = "" # Set the MySQL SQL mode. Must be the same as in the source cluster.
-  target_db       = "" # Set the target cluster database name
-  target_user     = "" # Set the target cluster username
-  target_pwd      = "" # Set the target cluster password
-  # (Optional) Virtual Machine
-  vm_image_id   = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list
-  vm_public_key = "" # Set a full path to SSH public key
+  # Managed Service for MySQL cluster.
+  target_version  = "" # Set the MySQL version. It must be the same or higher than the version in the source cluster.
+  target_sql_mode = "" # Set the MySQL SQL mode. It must be the same as in the source cluster.
+  target_db_name  = "" # Set the target cluster database name.
+  target_user     = "" # Set the target cluster username.
+  target_pwd      = "" # Set the target cluster password.
+  # (Optional) Virtual Machine.
+  vm_image_id   = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list.
+  vm_public_key = "" # Set a full path to SSH public key.
 }
 
-# Images with Ubuntu Linux use username `ubuntu` by default.
 variable "vm_user_name" {
-  description = "User name for VM"
+  description = "User name for VM. Images with Ubuntu Linux use username `ubuntu` by default."
   type        = string
   default     = "ubuntu"
 }
 
 resource "yandex_vpc_network" "network" {
-  description = "Network for the Managed Service for MySQL cluster and VM"
+  description = "Network for the Managed Service for MySQL cluster and VM."
   name        = "network"
 }
 
 resource "yandex_vpc_subnet" "subnet-a" {
-  description    = "Subnet in ru-central1-a availability zone"
+  description    = "Subnet in the ru-central1-a availability zone."
   name           = "subnet-a"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.network.id
@@ -37,30 +36,31 @@ resource "yandex_vpc_subnet" "subnet-a" {
 }
 
 resource "yandex_vpc_security_group" "security-group-mysql" {
-  description = "Security group for the Managed Service for MySQL"
+  description = "Security group for the Managed Service for MySQL."
   network_id  = yandex_vpc_network.network.id
 
   ingress {
     protocol       = "TCP"
-    description    = "Allow connections to cluster from the Internet"
+    description    = "Allow connections to cluster from the Internet."
     port           = 3306
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
+# If you use VM for connection to cluster, uncomment these lines.
 #resource "yandex_vpc_security_group" "security-group-vm" {
-#  description = "Security group for VM"
+#  description = "Security group for VM."
 #  network_id  = yandex_vpc_network.network.id
 #
 #  ingress {
-#    description    = "Allow SSH connections for VM from the Internet"
+#    description    = "Allow SSH connections for VM from the Internet."
 #    protocol       = "TCP"
 #    port           = 22
 #    v4_cidr_blocks = ["0.0.0.0/0"]
 #  }
 #
 #  egress {
-#    description    = "Allow outgoing connections to any required resource"
+#    description    = "Allow outgoing connections to any required resource."
 #    protocol       = "ANY"
 #    from_port      = 0
 #    to_port        = 65535
@@ -69,7 +69,7 @@ resource "yandex_vpc_security_group" "security-group-mysql" {
 #}
 
 resource "yandex_mdb_mysql_cluster" "mysql-cluster" {
-  description        = "Managed Service for MySQL cluster"
+  description        = "Managed Service for MySQL cluster."
   name               = "mysql-cluster"
   environment        = "PRODUCTION"
   network_id         = yandex_vpc_network.network.id
@@ -93,21 +93,22 @@ resource "yandex_mdb_mysql_cluster" "mysql-cluster" {
   }
 
   database {
-    name = local.target_db
+    name = local.target_db_name
   }
 
   user {
     name     = local.target_user
     password = local.target_pwd
     permission {
-      database_name = local.target_db
+      database_name = local.target_db_name
       roles         = ["ALL"]
     }
   }
 }
 
+# If you use VM for connection to cluster, uncomment these lines.
 #resource "yandex_compute_instance" "vm-linux" {
-#  description = "Virtual Machine in Yandex Compute Cloud"
+#  description = "Virtual Machine in Yandex Compute Cloud."
 #  name        = "vm-linux"
 #  platform_id = "standard-v3" # Intel Ice Lake
 #
@@ -124,7 +125,7 @@ resource "yandex_mdb_mysql_cluster" "mysql-cluster" {
 #
 #  network_interface {
 #    subnet_id = yandex_vpc_subnet.subnet-a.id
-#    nat       = true # Required for connection from the Internet
+#    nat       = true # Required for connection from the Internet.
 #
 #    security_group_ids = [
 #      yandex_vpc_security_group.security-group-mysql.id,
@@ -133,6 +134,6 @@ resource "yandex_mdb_mysql_cluster" "mysql-cluster" {
 #  }
 #
 #  metadata = {
-#    ssh-keys = "${var.vm_user_name}:${file(local.vm_public_key)}" # Username and SSH public key path
+#    ssh-keys = "${var.vm_user_name}:${file(local.vm_public_key)}" # Username and SSH public key full path.
 #  }
 #}
