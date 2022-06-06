@@ -1,4 +1,4 @@
-# Infrastructure for Yandex Data Proc cluster with NAT instance
+# Infrastructure for Yandex Data Proc cluster with NAT instance.
 #
 # RU: https://cloud.yandex.ru/docs/data-proc/tutorials/configure-network
 # EN: https://cloud.yandex.com/en-ru/docs/data-proc/tutorials/configure-network
@@ -6,29 +6,21 @@
 
 # Set the following settings:
 locals {
-  folder_id              = ""          # Yout folder ID. Required for binding roles to service account
+  folder_id              = ""          # Yout folder ID. Required for binding roles to service account.
   path_to_ssh_public_key = ""          # Set a full path to SSH public key. NAT instance use username `ubuntu` by default.
-  cidr_internet          = "0.0.0.0/0" # All IPv4 addresses
-  data_proc_sa_name      = ""          # Set name for service account for the Data Proc cluster
-}
-
-locals {
-  # Required settings for Data Proc cluster and NAT instance
-  folder_id              = "" # Set your folder ID
-  path_to_ssh_public_key = "" # Set a full path to SSH public key
-
-  # Settings for Network
-  cidr_internet = "0.0.0.0/0" # All IPv4 addresses of the Internet
+  cidr_internet          = "0.0.0.0/0" # All IPv4 addresses.
+  data_proc_sa_name      = ""          # Set name for service account for the Data Proc cluster.
 }
 
 variable "nat_instance_image_id" {
-  description = "ID of NAT instance image."
+  description = "ID of NAT instance image" # See https://cloud.yandex.ru/marketplace/products/yc/nat-instance-ubuntu-18-04-lts for details."
+
   type        = string
   default     = "fd82fnsvr0bgt1fid7cl"
 }
 
 resource "yandex_vpc_network" "network-data-proc" {
-  description = "Network for DataProc cluster and NAT instance."
+  description = "Network for DataProc cluster and NAT instance"
   name        = "network-data-proc"
 }
 
@@ -50,7 +42,7 @@ resource "yandex_vpc_subnet" "subnet-nat" {
 }
 
 resource "yandex_vpc_security_group" "sg-internet" {
-  description = "Allow any outgoing traffic to the Internet. Used by Yandex Data Proc cluster and NAT instance."
+  description = "Allow any outgoing traffic to the Internet"
   name        = "sg-internet"
   network_id  = yandex_vpc_network.network-data-proc.id
 
@@ -64,7 +56,7 @@ resource "yandex_vpc_security_group" "sg-internet" {
 }
 
 resource "yandex_vpc_security_group" "sg-data-proc-cluster" {
-  description = "Security group for the Yandex Data Proc cluster."
+  description = "Security group for the Yandex Data Proc cluster"
   name        = "sg-data-proc-cluster"
   network_id  = yandex_vpc_network.network-data-proc.id
 
@@ -78,7 +70,7 @@ resource "yandex_vpc_security_group" "sg-data-proc-cluster" {
 }
 
 resource "yandex_vpc_security_group" "sg-nat-instance" {
-  description = "Security group for the NAT instance."
+  description = "Security group for the NAT instance"
   name        = "sg-nat-instance"
   network_id  = yandex_vpc_network.network-data-proc.id
 
@@ -91,7 +83,7 @@ resource "yandex_vpc_security_group" "sg-nat-instance" {
   }
 
   ingress {
-    description    = "Allow incoming SSH connections to NAT instance"
+    description    = "Allow SSH connections to NAT instance"
     protocol       = "TCP"
     port           = 22
     v4_cidr_blocks = [local.cidr_internet]
@@ -111,16 +103,10 @@ resource "yandex_iam_service_account" "dataproc-sa" {
   name        = local.data_proc_sa_name
 }
 
-data "yandex_resourcemanager_folder" "cloud-folder" {
-  # Folder ID required for binding roles to service account
-  folder_id = local.folder_id
-}
-
 resource "yandex_resourcemanager_folder_iam_binding" "dataproc-sa-role-dataproc-agent" {
-  # Bind role `mdb.dataproc.agent` to the service account. Required for creation of Data Proc cluster
-  folder_id = data.yandex_resourcemanager_folder.cloud-folder.id
+  # Bind role `mdb.dataproc.agent` to the service account. Required for creation of Data Proc cluster.
+  folder_id = local.folder_id
   role      = "mdb.dataproc.agent"
-
   members = [
     "serviceAccount:${yandex_iam_service_account.dataproc-sa.id}"
   ]
@@ -129,12 +115,12 @@ resource "yandex_resourcemanager_folder_iam_binding" "dataproc-sa-role-dataproc-
 resource "yandex_dataproc_cluster" "dataproc-cluster" {
   description        = "Yandex Data Proc cluster"
   name               = "dataproc-cluster"
-  service_account_id = yandex_iam_service_account.dataproc-sa.id # Required role `dataproc.agent`
+  service_account_id = yandex_iam_service_account.dataproc-sa.id
   zone_id = "ru-central1-a"
 
   security_group_ids = [
-    yandex_vpc_security_group.sg-internet.id,         # Allow any outgoing traffic to Internet
-    yandex_vpc_security_group.sg-data-proc-cluster.id # Allow connections from VM and inside security group
+    yandex_vpc_security_group.sg-internet.id,         # Allow any outgoing traffic to the Internet.
+    yandex_vpc_security_group.sg-data-proc-cluster.id # Allow connections from VM and inside security group.
   ]
 
   cluster_config {
@@ -149,11 +135,11 @@ resource "yandex_dataproc_cluster" "dataproc-cluster" {
       name        = "subcluster-master"
       role        = "MASTERNODE"
       subnet_id   = yandex_vpc_subnet.subnet-cluster.id
-      hosts_count = 1 # For MASTERNODE only one hosts assigned
+      hosts_count = 1 # For MASTERNODE only one hosts assigned.
 
       resources {
-        resource_preset_id = "s2.micro"    # 4 vCPU Intel Cascade, 16 GB RAM
-        disk_type_id       = "network-ssd" # Fast network SSD storage
+        resource_preset_id = "s2.micro"    # 4 vCPU Intel Cascade, 16 GB RAM/
+        disk_type_id       = "network-ssd" # Fast network SSD storage.
         disk_size          = 20            # GB
       }
     }
@@ -165,7 +151,7 @@ resource "yandex_dataproc_cluster" "dataproc-cluster" {
       hosts_count = 2
 
       resources {
-        resource_preset_id = "s2.micro" # 4 vCPU, 16 GB RAM
+        resource_preset_id = "s2.micro" # 4 vCPU, 16 GB RAM.
         disk_type_id       = "network-hdd"
         disk_size          = 20 # GB
       }
@@ -174,12 +160,10 @@ resource "yandex_dataproc_cluster" "dataproc-cluster" {
 }
 
 resource "yandex_compute_instance" "nat-instance-vm" {
-  description = "NAT instance VM"
+  description = "NAT instance VM."
   name        = "nat-instance-vm"
   platform_id = "standard-v3" # Intel Ice Lake
   zone        = "ru-central1-b"
-
-  labels = {}
 
   resources {
     cores  = 2 # vCPU
@@ -194,11 +178,11 @@ resource "yandex_compute_instance" "nat-instance-vm" {
 
   network_interface {
     subnet_id = yandex_vpc_subnet.subnet-nat.id
-    nat       = true # Required for connection from the Internet
+    nat       = true # Required for connection from the Internet.
 
     security_group_ids = [
-      yandex_vpc_security_group.sg-internet.id,    # Allow any outgoing traffic to Internet
-      yandex_vpc_security_group.sg-nat-instance.id # Allow connections to and from Data Proc cluster
+      yandex_vpc_security_group.sg-internet.id,    # Allow any outgoing traffic to Internet.
+      yandex_vpc_security_group.sg-nat-instance.id # Allow connections to and from Data Proc cluster.
     ]
   }
 
@@ -208,7 +192,7 @@ resource "yandex_compute_instance" "nat-instance-vm" {
 }
 
 resource "yandex_vpc_route_table" "route-table-nat" {
-  description = "Route table for Data Proc cluster subnet. All requests can be forwarded to the NAT instance IP address."
+  description = "Route table for Data Proc cluster subnet" # All requests can be forwarded to the NAT instance IP address.
   name        = "route-table-nat"
 
   depends_on = [
