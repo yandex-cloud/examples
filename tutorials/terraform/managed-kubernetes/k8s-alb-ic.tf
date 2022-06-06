@@ -1,26 +1,26 @@
-# Infrastructure for Yandex Cloud Managed Service for Kubernetes cluster and Application Load Balancer Ingress Controller
+# Infrastructure for Yandex Cloud Managed Service for Kubernetes cluster and Application Load Balancer Ingress Controller.
 #
-# Set the configuration of Managed Service for Kubernetes cluster
+# Set the configuration of Managed Service for Kubernetes cluster.
 
 locals {
-  folder_id              = ""            # Set your cloud folder ID
-  k8s_node_group_version = "1.20"        # Set the version of Kubernetes for the node group
-  k8s_cluster_version    = "1.21"        # Set the version of Kubernetes for the master host
-  zone_a_v4_cidr_blocks  = "10.1.0.0/16" # Set the CIDR block for the Subnet in ru-central1-a availability zone
+  folder_id              = ""            # Set your cloud folder ID.
+  k8s_node_group_version = "1.20"        # Set the version of Kubernetes for the node group.
+  k8s_cluster_version    = "1.21"        # Set the version of Kubernetes for the master host.
+  zone_a_v4_cidr_blocks  = "10.1.0.0/16" # Set the CIDR block for the Subnet in ru-central1-a availability zone.
 }
 
 variable "zone_a_v4_cidr_blocks" {
-  type = string
+  type    = string
   default = "10.1.0.0/16"
 }
 
 resource "yandex_vpc_network" "k8s-network" {
-  description = "Network for the Managed Service for Kubernetes cluster"
+  description = "Network for the Managed Service for Kubernetes cluster."
   name        = "k8s-network"
 }
 
 resource "yandex_vpc_subnet" "subnet-a" {
-  description    = "Subnet in ru-central1-a availability zone"
+  description    = "Subnet in ru-central1-a availability zone."
   name           = "subnet-a"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.k8s-network.id
@@ -33,60 +33,60 @@ resource "yandex_vpc_security_group" "k8s-main-sg" {
   network_id  = yandex_vpc_network.k8s-network.id
 
   ingress {
-    protocol       = "TCP"
-    description    = "The rule allows availability checks from the load balancer's range of addresses. It is required for the operation of a fault-tolerant cluster and load balancer services."
-    v4_cidr_blocks = ["198.18.235.0/24", "198.18.248.0/24"] # The load balancer's address range
-    from_port      = 0
-    to_port        = 65535
+    description       = "The rule allows availability checks from the load balancer's range of addresses. It is required for the operation of a fault-tolerant cluster and load balancer services."
+    protocol          = "TCP"
+    predefined_target = "loadbalancer_healthchecks"
+    from_port         = 0
+    to_port           = 65535
   }
 
   ingress {
-    protocol       = "TCP"
-    description    = "The rule allows incoming TCP-connections on ports 10501 and 10502 from the load balancer's range of addresses."
-    v4_cidr_blocks = ["198.18.235.0/24", "198.18.248.0/24"] # The load balancer's address range
-    from_port      = 10501
-    to_port        = 10502
+    description       = "The rule allows incoming TCP-connections on ports 10501 and 10502 from the load balancer's range of addresses."
+    protocol          = "TCP"
+    predefined_target = "loadbalancer_healthchecks"
+    from_port         = 10501
+    to_port           = 10502
   }
 
   ingress {
-    protocol          = "ANY"
     description       = "The rule allows the master-node and node-node interaction within the security group."
+    protocol          = "ANY"
     predefined_target = "self_security_group"
     from_port         = 0
     to_port           = 65535
   }
 
   ingress {
-    protocol       = "ANY"
     description    = "The rule allows the pod-pod and service-service interaction. Specify the subnets of your cluster and services."
+    protocol       = "ANY"
     v4_cidr_blocks = [var.zone_a_v4_cidr_blocks]
     from_port      = 0
     to_port        = 65535
   }
 
   ingress {
-    protocol       = "ICMP"
     description    = "The rule allows receipt of debugging ICMP packets from internal subnets."
+    protocol       = "ICMP"
     v4_cidr_blocks = [var.zone_a_v4_cidr_blocks]
   }
 
   ingress {
-    protocol       = "TCP"
     description    = "The rule allows connection to Kubernetes API on 6443 port from the Internet."
+    protocol       = "TCP"
     v4_cidr_blocks = ["0.0.0.0/0"]
     port           = 6443
   }
 
   ingress {
-    protocol       = "TCP"
     description    = "The rule allows connection to Kubernetes API on 443 port from the Internet."
+    protocol       = "TCP"
     v4_cidr_blocks = ["0.0.0.0/0"]
     port           = 443
   }
 
   egress {
-    protocol       = "ANY"
     description    = "The rule allows all outgoing traffic. Nodes can connect to Yandex Container Registry, Object Storage, Docker Hub, and more."
+    protocol       = "ANY"
     v4_cidr_blocks = ["0.0.0.0/0"]
     from_port      = 0
     to_port        = 65535
@@ -94,7 +94,7 @@ resource "yandex_vpc_security_group" "k8s-main-sg" {
 }
 
 resource "yandex_iam_service_account" "k8s-sa" {
-  description = "Service account for Kubernetes cluster and node group"
+  description = "Service account for the Managed Service for Kubernetes cluster and node group."
   name        = "k8s-sa"
 }
 
@@ -117,7 +117,7 @@ resource "yandex_resourcemanager_folder_iam_binding" "images-puller" {
 }
 
 resource "yandex_kubernetes_cluster" "k8s-cluster" {
-  description = "Managed Service for Kubernetes cluster"
+  description = "Managed Service for Kubernetes cluster."
   name        = "k8s-cluster"
   network_id  = yandex_vpc_network.k8s-network.id
 
@@ -132,8 +132,8 @@ resource "yandex_kubernetes_cluster" "k8s-cluster" {
 
     security_group_ids = [yandex_vpc_security_group.k8s-main-sg.id]
   }
-  service_account_id      = yandex_iam_service_account.k8s-sa.id # Cluster service account ID
-  node_service_account_id = yandex_iam_service_account.k8s-sa.id # Node group service account ID
+  service_account_id      = yandex_iam_service_account.k8s-sa.id # Cluster service account ID.
+  node_service_account_id = yandex_iam_service_account.k8s-sa.id # Node group service account ID.
   depends_on = [
     yandex_resourcemanager_folder_iam_binding.editor,
     yandex_resourcemanager_folder_iam_binding.images-puller
@@ -141,7 +141,7 @@ resource "yandex_kubernetes_cluster" "k8s-cluster" {
 }
 
 resource "yandex_kubernetes_node_group" "k8s-node-group" {
-  description = "Node group for the Managed Service for Kubernetes cluster"
+  description = "Node group for the Managed Service for Kubernetes cluster."
   cluster_id  = yandex_kubernetes_cluster.k8s-cluster.id
   name        = "k8s-node-group"
   version     = local.k8s_node_group_version
@@ -159,7 +159,7 @@ resource "yandex_kubernetes_node_group" "k8s-node-group" {
   }
 
   instance_template {
-    platform_id = "standard-v2" # Intel Cascade Lake
+    platform_id = "standard-v2" # Intel Cascade Lake.
 
     network_interface {
       nat        = true
@@ -168,7 +168,7 @@ resource "yandex_kubernetes_node_group" "k8s-node-group" {
 
     resources {
       memory = 4 # GB
-      cores  = 4 # Number of CPU cores
+      cores  = 4 # vCPU cores.
     }
 
     boot_disk {
