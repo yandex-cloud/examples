@@ -20,12 +20,12 @@ locals {
 }
 
 resource "yandex_vpc_network" "network" {
-  description = "Network for the Managed Service for MySQL."
+  description = "Network for the Managed Service for MySQL cluster"
   name        = "network"
 }
 
 resource "yandex_vpc_subnet" "subnet-a" {
-  description    = "Subnet in the ru-central1-a availability zone."
+  description    = "Subnet in the ru-central1-a availability zone"
   name           = "subnet-a"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.network.id
@@ -33,19 +33,19 @@ resource "yandex_vpc_subnet" "subnet-a" {
 }
 
 resource "yandex_vpc_security_group" "security-group" {
-  description = "Security group for the Managed Service for MySQL."
+  description = "Security group for the Managed Service for MySQL cluster"
   network_id  = yandex_vpc_network.network.id
 
   ingress {
+    description    = "Allow connections to cluster from the Internet"
     protocol       = "TCP"
-    description    = "Allow connections to cluster from the Internet."
     port           = local.source_port
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
 resource "yandex_mdb_mysql_cluster" "mysql-cluster" {
-  description        = "Managed Service for MySQL cluster."
+  description        = "Managed Service for MySQL cluster"
   name               = "mysql-cluster"
   environment        = "PRODUCTION"
   network_id         = yandex_vpc_network.network.id
@@ -82,7 +82,7 @@ resource "yandex_mdb_mysql_cluster" "mysql-cluster" {
 }
 
 resource "yandex_datatransfer_endpoint" "mysql-source" {
-  description = "Source endpoint for MySQL cluster."
+  description = "Source endpoint for MySQL cluster"
   name        = "mysql-source"
   settings {
     mysql_source {
@@ -102,7 +102,7 @@ resource "yandex_datatransfer_endpoint" "mysql-source" {
 }
 
 resource "yandex_datatransfer_endpoint" "managed-mysql-target" {
-  description = "Target endpoint for the Managed Service for MySQL cluster."
+  description = "Target endpoint for the Managed Service for MySQL cluster"
   name        = "managed-mysql-target"
   settings {
     target {
@@ -119,7 +119,7 @@ resource "yandex_datatransfer_endpoint" "managed-mysql-target" {
 }
 
 resource "yandex_datatransfer_transfer" "mysql-transfer" {
-  description = "Transfer from MySQL cluster to the Managed Service for MySQL cluster."
+  description = "Transfer from MySQL cluster to the Managed Service for MySQL cluster"
   name        = "transfer-from-onpremise-mysql-to-managed-mysql"
   source_id   = yandex_datatransfer_endpoint.mysql-source.id
   target_id   = yandex_datatransfer_endpoint.managed-mysql-target.id

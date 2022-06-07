@@ -18,12 +18,12 @@ locals {
 }
 
 resource "yandex_vpc_network" "network" {
-  description = "Network for the Managed Service for MySQL cluster and VM."
+  description = "Network for the Managed Service for MySQL cluster and VM"
   name        = "network"
 }
 
 resource "yandex_vpc_subnet" "subnet-a" {
-  description    = "Subnet in the ru-central1-a availability zone."
+  description    = "Subnet in the ru-central1-a availability zone"
   name           = "subnet-a"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.network.id
@@ -31,12 +31,12 @@ resource "yandex_vpc_subnet" "subnet-a" {
 }
 
 resource "yandex_vpc_security_group" "security-group-mysql" {
-  description = "Security group for the Managed Service for MySQL."
+  description = "Security group for the Managed Service for MySQL cluster"
   network_id  = yandex_vpc_network.network.id
 
   ingress {
+    description    = "Allow connections to cluster from the Internet"
     protocol       = "TCP"
-    description    = "Allow connections to cluster from the Internet."
     port           = 3306
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
@@ -44,18 +44,18 @@ resource "yandex_vpc_security_group" "security-group-mysql" {
 
 # If you use VM for connection to cluster, uncomment these lines.
 #resource "yandex_vpc_security_group" "security-group-vm" {
-#  description = "Security group for VM."
+#  description = "Security group for VM"
 #  network_id  = yandex_vpc_network.network.id
 #
 #  ingress {
-#    description    = "Allow SSH connections for VM from the Internet."
+#    description    = "Allow SSH connections for VM from the Internet"
 #    protocol       = "TCP"
 #    port           = 22
 #    v4_cidr_blocks = ["0.0.0.0/0"]
 #  }
 #
 #  egress {
-#    description    = "Allow outgoing connections to any required resource."
+#    description    = "Allow outgoing connections to any required resource"
 #    protocol       = "ANY"
 #    from_port      = 0
 #    to_port        = 65535
@@ -64,7 +64,7 @@ resource "yandex_vpc_security_group" "security-group-mysql" {
 #}
 
 resource "yandex_mdb_mysql_cluster" "mysql-cluster" {
-  description        = "Managed Service for MySQL cluster."
+  description        = "Managed Service for MySQL cluster"
   name               = "mysql-cluster"
   environment        = "PRODUCTION"
   network_id         = yandex_vpc_network.network.id
@@ -103,7 +103,7 @@ resource "yandex_mdb_mysql_cluster" "mysql-cluster" {
 
 # If you use VM for connection to cluster, uncomment these lines.
 #resource "yandex_compute_instance" "vm-linux" {
-#  description = "Virtual Machine in Yandex Compute Cloud."
+#  description = "Virtual Machine in Yandex Compute Cloud"
 #  name        = "vm-linux"
 #  platform_id = "standard-v3" # Intel Ice Lake
 #
