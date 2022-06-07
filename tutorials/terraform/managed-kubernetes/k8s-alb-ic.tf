@@ -1,4 +1,6 @@
 # Infrastructure for Yandex Cloud Managed Service for Kubernetes cluster and Application Load Balancer Ingress Controller.
+# EN: https://cloud.yandex.com/en/docs/managed-kubernetes/tutorials/alb-ingress-controller
+# RU: https://cloud.yandex.ru/docs/managed-kubernetes/tutorials/alb-ingress-controller
 #
 # Set the configuration of Managed Service for Kubernetes cluster.
 
@@ -27,12 +29,12 @@ resource "yandex_vpc_subnet" "subnet-a" {
 }
 
 resource "yandex_vpc_security_group" "k8s-main-sg" {
-  description = "Group rules ensure the basic performance of the cluster. Apply it to the cluster and node groups"
+  description = "Group rules ensure the basic performance of the cluster, apply it to the cluster and node groups"
   name        = "k8s-main-sg"
   network_id  = yandex_vpc_network.k8s-network.id
 
   ingress {
-    description       = "The rule allows availability checks from the load balancer's range of addresses. It is required for the operation of a fault-tolerant cluster and load balancer services"
+    description       = "The rule allows availability checks from the load balancer's range of addresses, it is required for the operation of a fault-tolerant cluster and load balancer services"
     protocol          = "TCP"
     predefined_target = "loadbalancer_healthchecks"
     from_port         = 0
@@ -84,7 +86,7 @@ resource "yandex_vpc_security_group" "k8s-main-sg" {
   }
 
   egress {
-    description    = "The rule allows all outgoing traffic. Nodes can connect to Yandex Container Registry, Object Storage, Docker Hub, and more"
+    description    = "The rule allows all outgoing traffic, nodes can connect to Yandex Container Registry, Object Storage, Docker Hub, and more"
     protocol       = "ANY"
     v4_cidr_blocks = ["0.0.0.0/0"]
     from_port      = 0
