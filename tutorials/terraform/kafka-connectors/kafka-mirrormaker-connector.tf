@@ -66,7 +66,7 @@ resource "yandex_mdb_kafka_cluster" "kafka-cluster" {
   }
 
   user {
-    name     = "admin_source" # admin account name
+    name     = "admin_source"   # admin account name
     password = "local.password" # admin account password
     permission {
       topic_name = "*"
@@ -77,29 +77,29 @@ resource "yandex_mdb_kafka_cluster" "kafka-cluster" {
 
 # MirrorMaker connector
 
-resource "yandex_mdb_kafka_connector" connector {
-  cluster_id         = yandex_mdb_kafka_cluster.kafka-cluster.id
-  name               = "replication"
-  tasks_max          = 3
+resource "yandex_mdb_kafka_connector" "connector" {
+  cluster_id = yandex_mdb_kafka_cluster.kafka-cluster.id
+  name       = "replication"
+  tasks_max  = 3
   properties = {
-          refresh.topics.enabled = "true"
+    refresh.topics.enabled = "true"
   }
   connector_config_mirrormaker {
-          topics = "data.*" # Specify topics that must be to migrated
-          replication_factor = 1
-          source_cluster {
-                  alias = "source" # Specify prefix for the source cluster
-                  external_cluster {
-                          bootstrap_servers = "somebroker1:9091,somebroker2:9091" # Specify bootstrap servers to connect to cluster
-                          sasl_username = "admin_source" # admin account name
-                          sasl_password = "" # admin account password
-                          sasl_mechanism = "SCRAM-SHA-512" # Specify encryption algorythm for username and password
-                          security_protocol = "SASL_SSL" # Specify connection protocol for the MirrorMaker connector
-                  }
-          }
-          target_cluster {
-                  alias = "target"
-                  this_cluster {}
-          }
+    topics             = "data.*" # Specify topics that must be to migrated
+    replication_factor = 1
+    source_cluster {
+      alias = "source" # Specify prefix for the source cluster
+      external_cluster {
+        bootstrap_servers = "somebroker1:9091,somebroker2:9091" # Specify bootstrap servers to connect to cluster
+        sasl_username     = "admin_source"                      # admin account name
+        sasl_password     = ""                                  # admin account password
+        sasl_mechanism    = "SCRAM-SHA-512"                     # Specify encryption algorythm for username and password
+        security_protocol = "SASL_SSL"                          # Specify connection protocol for the MirrorMaker connector
+      }
+    }
+    target_cluster {
+      alias = "target"
+      this_cluster {}
+    }
   }
 }
