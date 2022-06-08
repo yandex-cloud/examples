@@ -44,7 +44,7 @@ resource "yandex_vpc_security_group" "k8s-main-sg" {
   }
 
   ingress {
-    description    = "The rule allows the pod-pod and service-service interaction. Specify the subnets of your cluster and services"
+    description    = "The rule allows the pod-pod and service-service interaction"
     protocol       = "ANY"
     v4_cidr_blocks = [local.zone_a_v4_cidr_blocks]
     from_port      = 0
@@ -72,7 +72,7 @@ resource "yandex_vpc_security_group" "k8s-main-sg" {
   }
 
   egress {
-    description    = "The rule allows all outgoing traffic. Nodes can connect to Yandex Container Registry, Object Storage, Docker Hub, and more"
+    description    = "The rule allows all outgoing traffic"
     protocol       = "ANY"
     v4_cidr_blocks = ["0.0.0.0/0"]
     from_port      = 0
@@ -89,8 +89,8 @@ data "yandex_resourcemanager_folder" "cloud-folder" {
   folder_id = local.folder_id # Folder ID required for binding roles to service account.
 }
 
+# Assign "editor" role to service account.
 resource "yandex_resourcemanager_folder_iam_binding" "editor" {
-  # Assign "editor" role to service account.
   folder_id = data.yandex_resourcemanager_folder.cloud-folder.id
   role      = "editor"
   members = [
@@ -108,7 +108,7 @@ resource "yandex_resourcemanager_folder_iam_binding" "images-puller" {
 }
 
 resource "yandex_kubernetes_cluster" "k8s-cluster" {
-  description = "Managed Service for Kubernetes cluster."
+  description = "Managed Service for Kubernetes cluster"
   name        = "k8s-cluster"
   network_id  = yandex_vpc_network.k8s-network.id
 
@@ -132,7 +132,7 @@ resource "yandex_kubernetes_cluster" "k8s-cluster" {
 }
 
 resource "yandex_kubernetes_node_group" "k8s-node-group" {
-  description = "Node group for the Managed Service for Kubernetes cluster."
+  description = "Node group for the Managed Service for Kubernetes cluster"
   name        = "k8s-node-group"
   cluster_id  = yandex_kubernetes_cluster.k8s-cluster.id
   version     = local.k8s_node_group_version
@@ -150,7 +150,7 @@ resource "yandex_kubernetes_node_group" "k8s-node-group" {
   }
 
   instance_template {
-    platform_id = "standard-v2" # Intel Cascade Lake.
+    platform_id = "standard-v2" # Intel Cascade Lake
 
     network_interface {
       nat        = true
