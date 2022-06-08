@@ -1,8 +1,5 @@
 .idea
 node_modules
-tmp
 dist
-
-# env files
-.env
-funcid.env
+build
+service_account_key_file.json

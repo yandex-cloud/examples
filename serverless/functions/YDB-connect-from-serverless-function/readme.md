@@ -1,7 +1,7 @@
 # Авторизация в Yandex database c помощью сервиса метаданных.
 
 # Документация
-[Авторизация в YDB CLI](https://cloud.yandex.ru/docs/ydb/ydb-cli/authorization)
+[Авторизация в YDB CLI](https://cloud.yandex.ru/docs/ydb/concepts/connect)
 
 ## Где работает сервис метаданных
 Сервис метаданных работает на виртуальных машинах внутри Yandex compute cloud, а также в serverless функциях Yandex
@@ -12,15 +12,38 @@
 
 1. клонировать репозитарий
 2. установить зависимости командой npm i
-3. убедитесь что у Вас в базе данных есть таблица series (если нет - то создайте таблицу с любыми полями)
-4. внесите Ваши данные в main.env (DOCUMENT_API_ENDPOINT и DATABASENAME)
+3. внесите Ваши данные в .env (
+ 
+   ENDPOINT=grpcs://ydb.serverless.yandexcloud.net:2135
+   возьмите из окна свойств Вашей базы данных
+   DATABASE=/ru-central1/b1gu1b9o1gq4ptfngmvq/etnj5859gt3uqe803bls
+   FUNCTION_NAME=func-test-ydb
+   перейдите в Ваше облако и вставьте id folder
+   FOLDER_ID=b1ga2r8ll8h12977etbg
+   создайте сервисный account, дайте ему права admin   SERVICE_ACCOUNT_ID=ajeb5ab25igcdquppgpu
+   имя файла в котором записаны секретные ключи 
+   SA_KEY_FILE=service_account_key_file.json
 
  Эти данные Вы можете взять из окна свойств Вашей базы данных
 
 ![картинка с примером данных из asserts](./asserts/2021-12-09_16-14-46.png)
 
-6. следуйте инструкциям в deploy/deploy.md для deploy функции
-7. вызовите функцию и Вы увидите json с описанием полей таблицы series
+Для создания авторизованного ключа для сервисного аккаунта воспользуйтесь документацией: [Ссылка](https://cloud.yandex.ru/docs/iam/operations/authorized-key/create)
+
+Настройте профиль yc и запустите команду:
+```
+yc iam key create --service-account-name my-robot -o service_account_key_file.json
+```
+
+my-robot - это имя Вашего сервисного аккаунта, который должен иметь полный доступ к базе.
+
+Файл service_account_key_file.json должен лежать в корне проекта.
+
+
+4. следуйте инструкциям в deploy/deploy.md для deploy функции
+5. вызовите функцию передав ей параметр api_key - имя таблицы, которая будет создана
+
+Обратите внимание что данный шаблон подразумевает отладку кода на локальном компьютере. Для этого для старта программы используйте файл index-local.ts и проведите отладку Вашего кода.
 
 
 Пример на python
