@@ -37,7 +37,7 @@ resource "yandex_vpc_security_group" "security-group" {
   network_id  = yandex_vpc_network.network.id
 
   ingress {
-    description    = "Allow connections to cluster from the Internet"
+    description    = "Allow connections to the cluster from the Internet"
     protocol       = "TCP"
     port           = local.source_port
     v4_cidr_blocks = ["0.0.0.0/0"]

@@ -13,7 +13,7 @@ locals {
   target_password      = "" # Set the target cluster password.
   # (Optional) Virtual Machine.
   vm_image_id   = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list.
-  vm_username   = "" # Set a username for VM. Images with Ubuntu Linux use username `ubuntu` by default.
+  vm_username   = "" # Set a username for VM. Images with Ubuntu Linux use the username `ubuntu` by default.
   vm_public_key = "" # Set a full path to SSH public key.
 }
 
@@ -35,14 +35,14 @@ resource "yandex_vpc_security_group" "security-group-mysql" {
   network_id  = yandex_vpc_network.network.id
 
   ingress {
-    description    = "Allow connections to cluster from the Internet"
+    description    = "Allow connections to the cluster from the Internet"
     protocol       = "TCP"
     port           = 3306
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
-# If you use VM for connection to cluster, uncomment these lines.
+# If you use VM for connection to the cluster, uncomment these lines.
 #resource "yandex_vpc_security_group" "security-group-vm" {
 #  description = "Security group for VM"
 #  network_id  = yandex_vpc_network.network.id
@@ -101,7 +101,7 @@ resource "yandex_mdb_mysql_cluster" "mysql-cluster" {
   }
 }
 
-# If you use VM for connection to cluster, uncomment these lines.
+# If you use VM for connection to the cluster, uncomment these lines.
 #resource "yandex_compute_instance" "vm-linux" {
 #  description = "Virtual Machine in Yandex Compute Cloud"
 #  name        = "vm-linux"
