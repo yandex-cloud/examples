@@ -1,4 +1,4 @@
-# Set source and target cluster settings
+# Configure source and target clusters
 locals {
   # Source cluster settings
   mdb-cluster-id = "" # Set the Managed Service for MySQL cluster ID
