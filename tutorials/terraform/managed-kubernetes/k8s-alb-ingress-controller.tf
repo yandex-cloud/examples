@@ -15,7 +15,6 @@ locals {
   zone_a_v4_cidr_blocks_services = "172.16.0.0/16" # CIDR for services.
 }
 
-
 resource "yandex_vpc_network" "k8s-network" {
   description = "Network for the Managed Service for the Managed Service for Kubernetes cluster"
   name        = "k8s-network"
@@ -38,8 +37,8 @@ resource "yandex_vpc_security_group" "k8s-main-sg" {
     description       = "Allow availability checks from the load balancer's range of addresses, it is required for the operation of a fault-tolerant cluster and load balancer services"
     protocol          = "TCP"
     predefined_target = "loadbalancer_healthchecks"
-    from_port         = 0
-    to_port           = 65535
+    from_port         = 10501
+    to_port           = 10502
   }
 
   ingress {
@@ -91,27 +90,33 @@ resource "yandex_vpc_security_group" "k8s-main-sg" {
   }
 }
 
+variable "k8s-sa-roles" {
+  description = "Required roles for the Managed Service for Kubernetes service account"
+  type        = set(string)
+  default = [
+    "alb.editor",
+    "certificate-manager.certificates.downloader",
+    "compute.viewer",
+    "container-registry.images.puller",
+    "editor",
+    "vpc.publicAdmin"
+  ]
+}
+
 resource "yandex_iam_service_account" "k8s-sa" {
   description = "Service account for the Managed Service for Kubernetes cluster and node group"
   name        = local.k8s_cluster_sa_name
 }
 
-# Assign "editor" role to the service account.
-resource "yandex_resourcemanager_folder_iam_binding" "editor" {
+resource "yandex_resourcemanager_folder_iam_binding" "k8s-sa-roles" {
   folder_id = local.folder_id
-  role      = "editor"
   members = [
     "serviceAccount:${yandex_iam_service_account.k8s-sa.id}"
   ]
-}
 
-# Assign "container-registry.images.puller" role to the service account.
-resource "yandex_resourcemanager_folder_iam_binding" "images-puller" {
-  folder_id = local.folder_id
-  role      = "container-registry.images.puller"
-  members = [
-    "serviceAccount:${yandex_iam_service_account.k8s-sa.id}"
-  ]
+  # Assing with cycle all required roles to service account.
+  for_each = var.k8s-sa-roles
+  role     = each.value
 }
 
 resource "yandex_kubernetes_cluster" "k8s-cluster" {
@@ -121,6 +126,8 @@ resource "yandex_kubernetes_cluster" "k8s-cluster" {
   cluster_ipv4_range       = local.zone_a_v4_cidr_blocks_cluster
   service_ipv4_range       = local.zone_a_v4_cidr_blocks_services
   node_ipv4_cidr_mask_size = 24
+  service_account_id       = yandex_iam_service_account.k8s-sa.id
+  node_service_account_id  = yandex_iam_service_account.k8s-sa.id
 
   master {
     version = local.k8s_version_cluster
@@ -133,11 +140,9 @@ resource "yandex_kubernetes_cluster" "k8s-cluster" {
 
     security_group_ids = [yandex_vpc_security_group.k8s-main-sg.id]
   }
-  service_account_id      = yandex_iam_service_account.k8s-sa.id
-  node_service_account_id = yandex_iam_service_account.k8s-sa.id
+
   depends_on = [
-    yandex_resourcemanager_folder_iam_binding.editor,
-    yandex_resourcemanager_folder_iam_binding.images-puller
+    yandex_resourcemanager_folder_iam_binding.k8s-sa-roles
   ]
 }
 
@@ -177,4 +182,9 @@ resource "yandex_kubernetes_node_group" "k8s-node-group" {
       size = 64 # GB
     }
   }
+
+  depends_on = [
+    yandex_kubernetes_cluster.k8s-cluster,
+    yandex_resourcemanager_folder_iam_binding.k8s-sa-roles
+  ]
 }
