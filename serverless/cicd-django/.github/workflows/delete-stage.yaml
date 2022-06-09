@@ -1,0 +1,58 @@
+name: Deploy feature branch
+on:
+  workflow_call:
+    inputs:
+      stage_name:
+        type: string
+        required: true
+        description: Имя удаляемого стенда
+      environment:
+        type: string
+        required: true
+        description: Окружение, в котором размещен удаляемый стенд
+    secrets:
+      SA_DEPLOYER_PRIVATE_KEY:
+        required: true
+        description: Статический ключ сервисного аккаунта, имеющий права на удаление ресурсов в каталоге стенда
+
+jobs:
+  read-env-config:
+    # Читаем конфигурационный файл окружения чтобы знать, из какого каталога удалять ресурсы
+    runs-on: ubuntu-latest
+    outputs:
+      data: ${{ steps.read-yaml.outputs.data }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up yq
+        uses: frenck/action-setup-yq@v1
+      - name: Read yaml
+        id: read-yaml
+        run: |
+          echo -n '::set-output name=data::'
+          yq -o=json -I=0 '.' "config/${{inputs.environment}}.yaml"
+  delete:
+    needs: read-env-config
+    env:
+      workdir: ./actions/delete-stage/
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+          working-directory: ${{ env.workdir }}
+      - name: deps
+        working-directory: ${{ env.workdir }}
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: run
+        working-directory: ${{ env.workdir }}
+        env:
+          STAGE_NAME: ${{ inputs.stage_name }}
+          FOLDER_ID: ${{ fromJson(needs.read-env-config.outputs.data).folder-id }}
+          SA_KEY: ${{ secrets.SA_DEPLOYER_PRIVATE_KEY }}
+        run: |
+          python index.py
