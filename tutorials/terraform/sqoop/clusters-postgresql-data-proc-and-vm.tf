@@ -7,7 +7,7 @@ locals {
   folder_id           = ""      # Your folder ID.
   network_id          = ""      # Network ID for Managed Service for PostgreSQL cluster, Data Proc cluster and VM.
   subnet_id           = ""      # Subnet ID (enable NAT for this subnet).
-  data_proc_sa        = ""      # Set a Data Proc service accaunt name. It must be unique in folder.
+  data_proc_sa        = ""      # Set a Data Proc service account name. It must be unique in folder.
   pg_cluster_version  = "14"    # Set the PostgreSQL version. See full list of supported versions here: https://cloud.yandex.com/en/docs/managed-postgresql/.
   pg_cluster_db       = "db1"   # Set a database name.
   pg_cluster_username = "user1" # Set a database owner.

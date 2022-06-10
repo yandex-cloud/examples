@@ -7,7 +7,7 @@ locals {
   folder_id           = ""      # Your folder ID.
   network_id          = ""      # Network ID for Managed Service for MySQL cluster, Data Proc cluster and VM.
   subnet_id           = ""      # Subnet ID (enable NAT for this subnet).
-  data_proc_sa        = ""      # Set a Data Proc service accaunt name. It must be unique in folder.
+  data_proc_sa        = ""      # Set a Data Proc service account name. It must be unique in folder.
   my_cluster_version  = "8.0"   # Set the MySQL version: 5.7 or 8.0.
   my_cluster_db       = "db1"   # Set a database name.
   my_cluster_username = "user1" # Set a database owner name.
