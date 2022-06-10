@@ -14,12 +14,12 @@ locals {
 }
 
 resource "yandex_vpc_network" "network-data-proc" {
-  description = "Network for DataProc cluster and NAT instance"
+  description = "Network for Data Proc cluster and NAT instance"
   name        = "network-data-proc"
 }
 
 resource "yandex_vpc_subnet" "subnet-cluster" {
-  description    = "Subnet for the Data Proc cluster."
+  description    = "Subnet for the Data Proc cluster"
   name           = "subnet-cluster"
   network_id     = yandex_vpc_network.network-data-proc.id
   v4_cidr_blocks = ["192.168.1.0/24"]
@@ -28,7 +28,7 @@ resource "yandex_vpc_subnet" "subnet-cluster" {
 }
 
 resource "yandex_vpc_subnet" "subnet-nat" {
-  description    = "Subnet for NAT instance."
+  description    = "Subnet for NAT instance"
   name           = "subnet-nat"
   network_id     = yandex_vpc_network.network-data-proc.id
   v4_cidr_blocks = ["192.168.100.0/24"]
@@ -132,7 +132,7 @@ resource "yandex_dataproc_cluster" "dataproc-cluster" {
       hosts_count = 1 # For MASTERNODE only one hosts assigned.
 
       resources {
-        resource_preset_id = "s2.micro"    # 4 vCPU Intel Cascade, 16 GB RAM/
+        resource_preset_id = "s2.micro"    # 4 vCPU Intel Cascade, 16 GB RAM.
         disk_type_id       = "network-ssd" # Fast network SSD storage.
         disk_size          = 20            # GB
       }
@@ -145,16 +145,16 @@ resource "yandex_dataproc_cluster" "dataproc-cluster" {
       hosts_count = 2
 
       resources {
-        resource_preset_id = "s2.micro" # 4 vCPU, 16 GB RAM.
-        disk_type_id       = "network-hdd"
-        disk_size          = 20 # GB
+        resource_preset_id = "s2.micro"    # 4 vCPU, 16 GB RAM.
+        disk_type_id       = "network-hdd" # Standard network HDD storage.
+        disk_size          = 20            # GB
       }
     }
   }
 }
 
 resource "yandex_compute_instance" "nat-instance-vm" {
-  description = "NAT instance VM."
+  description = "NAT instance VM"
   name        = "nat-instance-vm"
   platform_id = "standard-v3" # Intel Ice Lake
   zone        = "ru-central1-b"
