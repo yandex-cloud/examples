@@ -6,15 +6,15 @@
 
 # Set the following settings:
 locals {
-  folder_id              = ""                     # Yout folder ID. Required for binding roles to service account.
-  path_to_ssh_public_key = ""                     # Set a full path to SSH public key. NAT instance use username `ubuntu` by default.
-  data_proc_sa_name      = ""                     # Set name for service account for the Data Proc cluster.
-  nat_instance_image_id  = "fd82fnsvr0bgt1fid7cl" # Image ID for NAT instance. See https://cloud.yandex.ru/marketplace/products/yc/nat-instance-ubuntu-18-04-lts for details.
+  folder_id              = ""                     # Yout folder ID. Required for binding roles to the service account.
+  path_to_ssh_public_key = ""                     # Set a full path to an SSH public key. NAT instance uses the username `ubuntu` by default.
+  data_proc_sa_name      = ""                     # Set name for the service account for the Data Proc cluster.
+  nat_instance_image_id  = "fd82fnsvr0bgt1fid7cl" # An image ID for a NAT instance. See https://cloud.yandex.ru/marketplace/products/yc/nat-instance-ubuntu-18-04-lts for details.
   cidr_internet          = "0.0.0.0/0"            # All IPv4 addresses.
 }
 
 resource "yandex_vpc_network" "network-data-proc" {
-  description = "Network for Data Proc cluster and NAT instance"
+  description = "Network for the Data Proc cluster and NAT instance"
   name        = "network-data-proc"
 }
 
@@ -28,7 +28,7 @@ resource "yandex_vpc_subnet" "subnet-cluster" {
 }
 
 resource "yandex_vpc_subnet" "subnet-nat" {
-  description    = "Subnet for NAT instance"
+  description    = "Subnet for the NAT instance"
   name           = "subnet-nat"
   network_id     = yandex_vpc_network.network-data-proc.id
   v4_cidr_blocks = ["192.168.100.0/24"]
@@ -77,14 +77,14 @@ resource "yandex_vpc_security_group" "sg-nat-instance" {
   }
 
   ingress {
-    description    = "Allow SSH connections to NAT instance"
+    description    = "Allow SSH connections to the NAT instance"
     protocol       = "TCP"
     port           = 22
     v4_cidr_blocks = [local.cidr_internet]
   }
 
   ingress {
-    description       = "Allow connections from Data Proc cluster"
+    description       = "Allow connections from the Data Proc cluster"
     protocol          = "ANY"
     from_port         = 0
     to_port           = 65535
@@ -114,7 +114,7 @@ resource "yandex_dataproc_cluster" "dataproc-cluster" {
 
   security_group_ids = [
     yandex_vpc_security_group.sg-internet.id,         # Allow any outgoing traffic to the Internet.
-    yandex_vpc_security_group.sg-data-proc-cluster.id # Allow connections from VM and inside security group.
+    yandex_vpc_security_group.sg-data-proc-cluster.id # Allow connections from VM and inside the security group.
   ]
 
   cluster_config {
@@ -176,7 +176,7 @@ resource "yandex_compute_instance" "nat-instance-vm" {
 
     security_group_ids = [
       yandex_vpc_security_group.sg-internet.id,    # Allow any outgoing traffic to Internet.
-      yandex_vpc_security_group.sg-nat-instance.id # Allow connections to and from Data Proc cluster.
+      yandex_vpc_security_group.sg-nat-instance.id # Allow connections to and from the Data Proc cluster.
     ]
   }
 
