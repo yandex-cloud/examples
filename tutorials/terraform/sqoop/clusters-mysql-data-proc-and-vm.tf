@@ -7,6 +7,7 @@ locals {
   folder_id           = ""      # Your folder ID.
   network_id          = ""      # Network ID for Managed Service for MySQL cluster, Data Proc cluster and VM.
   subnet_id           = ""      # Subnet ID (enable NAT for this subnet).
+  storage_sa_id       = ""      # Service account ID for creating a bucket in Object Storage.
   data_proc_sa        = ""      # Set a Data Proc service account name. It must be unique in folder.
   my_cluster_version  = "8.0"   # Set the MySQL version: 5.7 or 8.0.
   my_cluster_db       = "db1"   # Set a database name.
@@ -32,7 +33,7 @@ resource "yandex_vpc_security_group" "cluster-security-group" {
 }
 
 resource "yandex_vpc_security_group" "vm-security-group" {
-  description = "Security group for the Managed Service for ClickHouse cluster and VM"
+  description = "Security group for the VM"
   network_id  = local.network_id
 
   ingress {
@@ -56,7 +57,7 @@ resource "yandex_vpc_security_group" "data-proc-security-group" {
   network_id  = local.network_id
 
   ingress {
-    description       = "Inbound internal traffic rules"
+    description       = "Allow any incoming traffic within security group"
     protocol          = "ANY"
     from_port         = 0
     to_port           = 65535
@@ -64,7 +65,7 @@ resource "yandex_vpc_security_group" "data-proc-security-group" {
   }
 
   egress {
-    description       = "Outbound internal traffic rules"
+    description       = "Allow any outgoing traffic within security group"
     protocol          = "ANY"
     from_port         = 0
     to_port           = 65535
@@ -111,10 +112,19 @@ resource "yandex_resourcemanager_folder_iam_binding" "monitoring-viewer" {
   ]
 }
 
-# Assign role `storage.editor` to the service account.
-resource "yandex_resourcemanager_folder_iam_binding" "bucket-creator" {
+# Assign role `storage.viewer` to the service account.
+resource "yandex_resourcemanager_folder_iam_binding" "bucket-viewer" {
   folder_id = local.folder_id
-  role      = "storage.editor"
+  role      = "storage.viewer"
+  members = [
+    "serviceAccount:${yandex_iam_service_account.data-proc-sa.id}",
+  ]
+}
+
+# Assign role `storage.uploader` to the service account.
+resource "yandex_resourcemanager_folder_iam_binding" "bucket-uploader" {
+  folder_id = local.folder_id
+  role      = "storage.uploader"
   members = [
     "serviceAccount:${yandex_iam_service_account.data-proc-sa.id}",
   ]
@@ -174,7 +184,8 @@ resource "yandex_compute_instance" "vm-linux" {
     subnet_id = local.subnet_id
     nat       = true # Required for connection from the Internet.
 
-    security_group_ids = [yandex_vpc_security_group.vm-security-group.id,
+    security_group_ids = [
+      yandex_vpc_security_group.vm-security-group.id,
       yandex_vpc_security_group.cluster-security-group.id
     ]
   }
@@ -186,15 +197,11 @@ resource "yandex_compute_instance" "vm-linux" {
 
 resource "yandex_iam_service_account_static_access_key" "bucket-key" {
   description        = "Object Storage bucket static key"
-  service_account_id = yandex_iam_service_account.data-proc-sa.id
+  service_account_id = local.storage_sa_id
 }
 
 # Object Storage bucket
 resource "yandex_storage_bucket" "storage-bucket" {
-  depends_on = [
-    yandex_resourcemanager_folder_iam_binding.bucket-creator
-  ]
-
   bucket     = local.bucket_name
   access_key = yandex_iam_service_account_static_access_key.bucket-key.access_key
   secret_key = yandex_iam_service_account_static_access_key.bucket-key.secret_key
