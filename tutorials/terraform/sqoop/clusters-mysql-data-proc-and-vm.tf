@@ -1,27 +1,27 @@
-# Infrastructure for Yandex Cloud Managed Service for MySQL cluster.
+# Infrastructure for the Yandex Cloud Managed Service for MySQL® cluster.
 #
 # RU: https://cloud.yandex.ru/docs/managed-mysql/tutorials/sqoop
 #
-# Set the configuration of the Managed Service for MySQL cluster, Managed Service for Data Proc cluster and Virtual machine:
+# Set the configuration of the Managed Service for MySQL® cluster, Managed Service for Data Proc cluster and Virtual machine:
 locals {
   folder_id           = ""      # Your folder ID.
-  network_id          = ""      # Network ID for Managed Service for MySQL cluster, Data Proc cluster and VM.
+  network_id          = ""      # Network ID for Managed Service for MySQL® cluster, Data Proc cluster and VM.
   subnet_id           = ""      # Subnet ID (enable NAT for this subnet).
   storage_sa_id       = ""      # Service account ID for creating a bucket in Object Storage.
   data_proc_sa        = ""      # Set a Data Proc service account name. It must be unique in folder.
-  my_cluster_version  = "8.0"   # Set the MySQL version: 5.7 or 8.0.
+  my_cluster_version  = "8.0"   # Set the MySQL® version: 5.7 or 8.0.
   my_cluster_db       = "db1"   # Set a database name.
   my_cluster_username = "user1" # Set a database owner name.
   my_cluster_password = ""      # Set a database owner password.
   vm_image_id         = ""      # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list.
   vm_username         = ""      # Set a username for VM. Images with Ubuntu Linux use the username `ubuntu` by default.
   vm_public_key       = ""      # Set a full path to SSH public key for VM.
-  bucket_name         = ""      # Set a Object Storage bucket name. It must be unique throughout Object Storage.
+  bucket_name         = ""      # Set an Object Storage bucket name. It must be unique throughout Object Storage.
   dp_public_key       = ""      # Set a full path to SSH public key for the Data Proc Cluster.
 }
 
 resource "yandex_vpc_security_group" "cluster-security-group" {
-  description = "Security group for the Managed Service for MySQL cluster"
+  description = "Security group for the Managed Service for MySQL® cluster"
   network_id  = local.network_id
 
   ingress {
@@ -131,7 +131,7 @@ resource "yandex_resourcemanager_folder_iam_binding" "bucket-uploader" {
 }
 
 resource "yandex_mdb_mysql_cluster" "mysql-cluster" {
-  description        = "Managed Service for MySQL cluster"
+  description        = "Managed Service for MySQL® cluster"
   name               = "mysql-cluster"
   environment        = "PRODUCTION"
   network_id         = local.network_id
