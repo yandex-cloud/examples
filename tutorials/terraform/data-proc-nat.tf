@@ -6,7 +6,7 @@
 
 # Set the following settings:
 locals {
-  folder_id              = ""                     # Yout folder ID. Required for binding roles to the service account.
+  folder_id              = ""                     # Your folder ID. Required for binding roles to the service account.
   path_to_ssh_public_key = ""                     # Set a full path to an SSH public key. NAT instance uses the username `ubuntu` by default.
   data_proc_sa_name      = ""                     # Set name for the service account for the Data Proc cluster.
   nat_instance_image_id  = "fd82fnsvr0bgt1fid7cl" # An image ID for a NAT instance. See https://cloud.yandex.ru/marketplace/products/yc/nat-instance-ubuntu-18-04-lts for details.
