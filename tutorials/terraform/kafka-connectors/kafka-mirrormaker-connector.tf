@@ -8,26 +8,21 @@
 # Network
 
 locals {
-  source_admin             = ""                          # source cluster admin account name.
-  source_password          = ""                          # source cluster admin account password.
+  source_user             = ""                          # Source cluster user account name.
+  source_password          = ""                          # Source cluster user account password.
   source_alias             = "source"                    # Specify prefix for the source cluster.
   source_bootstrap_servers = "<FQDN1>:9091,<FQDN2>:9091" # Specify bootstrap servers to connect to cluster.
-  target_admin             = ""                          # target cluster admin account name.
-  target_password          = ""                          # target cluster admin account password.
+  target_user             = ""                          # Target cluster user account name.
+  target_password          = ""                          # Target cluster user account password.
   target_alias             = "target"                    # Specify prefix for the target cluster.
   topics_prefix            = "data.*"                    # Specify topics that must be migrated.
-
-}
-
-variable "kafka_version" {
-  default = "2.8"
+  kafka_version = "2.8" # Specify version of Managed Service for Apache Kafka®
 }
 
 resource "yandex_vpc_network" "network" {
   description = "Network for the Managed Service for Apache Kafka® cluster and VM"
   name        = "network"
 }
-
 
 resource "yandex_vpc_subnet" "subnet-a" {
   description    = "Subnet in ru-central1-a availability zone"
@@ -58,7 +53,7 @@ resource "yandex_vpc_default_security_group" "security-group" {
   network_id  = yandex_vpc_network.network.id
 
   ingress {
-    description    = "Allow connections to Kafka cluster from the Internet"
+    description    = "Allow connections to the Managed Service for Apache Kafka® cluster from the Internet"
     protocol       = "TCP"
     from_port      = 9091
     to_port        = 9092
@@ -75,7 +70,7 @@ resource "yandex_vpc_default_security_group" "security-group" {
 }
 
 resource "yandex_mdb_kafka_cluster" "kafka-cluster" {
-  description        = "Yandex Managed Service for the Managed Service for Apache Kafka® cluster"
+  description        = "Managed Service for the Managed Service for Apache Kafka® cluster"
   name               = "kafka-cluster"
   environment        = "PRODUCTION"
   network_id         = yandex_vpc_network.network.id
@@ -99,7 +94,7 @@ resource "yandex_mdb_kafka_cluster" "kafka-cluster" {
   }
 
   user {
-    name     = local.target_admin
+    name     = local.target_user
     password = local.target_password
     permission {
       topic_name = "*"
@@ -113,8 +108,6 @@ resource "yandex_mdb_kafka_connector" "connector" {
   cluster_id  = yandex_mdb_kafka_cluster.kafka-cluster.id
   name        = "replication"
   tasks_max   = 3
-  properties = {
-  }
   connector_config_mirrormaker {
     topics             = local.topics_prefix
     replication_factor = 1
@@ -122,7 +115,7 @@ resource "yandex_mdb_kafka_connector" "connector" {
       alias = local.source_alias
       external_cluster {
         bootstrap_servers = local.source_bootstrap_servers
-        sasl_username     = local.source_admin
+        sasl_username     = local.source_user
         sasl_password     = local.source_password
         sasl_mechanism    = "SCRAM-SHA-512" # Specify encryption algorythm for username and password.
         security_protocol = "SASL_SSL"      # Specify connection protocol for the MirrorMaker connector.
