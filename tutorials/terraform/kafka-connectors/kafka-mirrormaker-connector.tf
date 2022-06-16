@@ -3,20 +3,18 @@
 # RU: https://cloud.yandex.ru/docs/managed-kafka/tutorials/mirrormaker-unmanaged-topics
 # EN: https://cloud.yandex.com/en/docs/managed-kafka/tutorials/mirrormaker-unmanaged-topics
 #
-# Set the configuration:
-
-# Network
+# Set the following settings:
 
 locals {
-  source_user             = ""                          # Source cluster user account name.
-  source_password          = ""                          # Source cluster user account password.
+  source_user              = ""                          # Source cluster user name.
+  source_password          = ""                          # Source cluster user password.
   source_alias             = "source"                    # Specify prefix for the source cluster.
   source_bootstrap_servers = "<FQDN1>:9091,<FQDN2>:9091" # Specify bootstrap servers to connect to cluster.
-  target_user             = ""                          # Target cluster user account name.
-  target_password          = ""                          # Target cluster user account password.
+  target_user              = ""                          # Target cluster user name.
+  target_password          = ""                          # Target cluster user password.
   target_alias             = "target"                    # Specify prefix for the target cluster.
   topics_prefix            = "data.*"                    # Specify topics that must be migrated.
-  kafka_version = "2.8" # Specify version of Managed Service for Apache Kafka®
+  kafka_version            = "2.8"                       # Specify version of Apache Kafka® for the cluster.
 }
 
 resource "yandex_vpc_network" "network" {
@@ -49,7 +47,7 @@ resource "yandex_vpc_subnet" "subnet-c" {
 }
 
 resource "yandex_vpc_default_security_group" "security-group" {
-  description = "Security group for Managed Service for the Managed Service for Apache Kafka® cluster"
+  description = "Security group for the Managed Service for Apache Kafka® cluster"
   network_id  = yandex_vpc_network.network.id
 
   ingress {
@@ -70,7 +68,7 @@ resource "yandex_vpc_default_security_group" "security-group" {
 }
 
 resource "yandex_mdb_kafka_cluster" "kafka-cluster" {
-  description        = "Managed Service for the Managed Service for Apache Kafka® cluster"
+  description        = "Managed Service for Apache Kafka® cluster"
   name               = "kafka-cluster"
   environment        = "PRODUCTION"
   network_id         = yandex_vpc_network.network.id
