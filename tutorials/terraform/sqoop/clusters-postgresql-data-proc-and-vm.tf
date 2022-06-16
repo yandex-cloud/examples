@@ -1,22 +1,22 @@
-# Infrastructure for Yandex Cloud Managed Service for PostgreSQL cluster.
+# Infrastructure for the Yandex Cloud Managed Service for PostgreSQL cluster.
 #
 # RU: https://cloud.yandex.ru/docs/managed-postgresql/tutorials/sqoop
 #
-# Set the configuration of the Managed Service for PostgreSQL cluster, Managed Service for Data Proc cluster and Virtual machine:
+# Set the configuration of the Managed Service for PostgreSQL cluster, Managed Service for Data Proc cluster, and Virtual machine:
 locals {
   folder_id           = ""      # Your folder ID.
-  network_id          = ""      # Network ID for Managed Service for PostgreSQL cluster, Data Proc cluster and VM.
+  network_id          = ""      # Network ID for the Managed Service for PostgreSQL cluster, Data Proc cluster, and VM.
   subnet_id           = ""      # Subnet ID (enable NAT for this subnet).
   storage_sa_id       = ""      # Service account ID for creating a bucket in Object Storage.
-  data_proc_sa        = ""      # Set a Data Proc service account name. It must be unique in folder.
-  pg_cluster_version  = "14"    # Set the PostgreSQL version. See full list of supported versions here: https://cloud.yandex.com/en/docs/managed-postgresql/.
+  data_proc_sa        = ""      # Set a Data Proc service account name. It must be unique in the folder.
+  pg_cluster_version  = "14"    # Set the PostgreSQL version.See the complete list of supported versions in https://cloud.yandex.com/en/docs/managed-postgresql/.
   pg_cluster_db       = "db1"   # Set a database name.
-  pg_cluster_username = "user1" # Set a database owner.
+  pg_cluster_username = "user1" # Set a database owner name.
   pg_cluster_password = ""      # Set a database owner password.
   vm_image_id         = ""      # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list.
   vm_username         = ""      # Set a username for VM. Images with Ubuntu Linux use the username `ubuntu` by default.
-  vm_public_key       = ""      # Set a full path to SSH public key for VM.
-  bucket_name         = ""      # Set a Object Storage bucket name. It must be unique throughout Object Storage.
+  vm_public_key       = ""      # Set a full path to the SSH public key for VM.
+  bucket_name         = ""      # Set an Object Storage bucket name. It must be unique throughout Object Storage.
   dp_public_key       = ""      # Set a full path to SSH public key for the Data Proc Cluster.
 }
 
@@ -57,7 +57,7 @@ resource "yandex_vpc_security_group" "data-proc-security-group" {
   network_id  = local.network_id
 
   ingress {
-    description       = "Allow any incoming traffic within security group"
+    description       = "Allow any incoming traffic within the security group"
     protocol          = "ANY"
     from_port         = 0
     to_port           = 65535
@@ -65,7 +65,7 @@ resource "yandex_vpc_security_group" "data-proc-security-group" {
   }
 
   egress {
-    description       = "Allow any outgoing traffic within security group"
+    description       = "Allow any outgoing traffic within the security group"
     protocol          = "ANY"
     from_port         = 0
     to_port           = 65535
@@ -85,7 +85,7 @@ resource "yandex_iam_service_account" "data-proc-sa" {
   name        = local.data_proc_sa
 }
 
-# Assign role `dataproc.agent` to the service account.
+# Assign the `dataproc.agent` role to the service account.
 resource "yandex_resourcemanager_folder_iam_binding" "dataproc-agent" {
   folder_id = local.folder_id
   role      = "dataproc.agent"
@@ -94,7 +94,7 @@ resource "yandex_resourcemanager_folder_iam_binding" "dataproc-agent" {
   ]
 }
 
-# Assign role `dataproc.provisioner` to the service account.
+# Assign the `dataproc.provisioner` role to the service account.
 resource "yandex_resourcemanager_folder_iam_binding" "dataproc-provisioner" {
   folder_id = local.folder_id
   role      = "dataproc.provisioner"
@@ -103,7 +103,7 @@ resource "yandex_resourcemanager_folder_iam_binding" "dataproc-provisioner" {
   ]
 }
 
-# Assign role `monitoring-viewer` to the service account.
+# Assign the `monitoring-viewer` role to the service account.
 resource "yandex_resourcemanager_folder_iam_binding" "monitoring-viewer" {
   folder_id = local.folder_id
   role      = "monitoring.viewer"
@@ -112,7 +112,7 @@ resource "yandex_resourcemanager_folder_iam_binding" "monitoring-viewer" {
   ]
 }
 
-# Assign role `storage.viewer` to the service account.
+# Assign the `storage.viewer` role to the service account.
 resource "yandex_resourcemanager_folder_iam_binding" "bucket-viewer" {
   folder_id = local.folder_id
   role      = "storage.viewer"
@@ -121,7 +121,7 @@ resource "yandex_resourcemanager_folder_iam_binding" "bucket-viewer" {
   ]
 }
 
-# Assign role `storage.uploader` to the service account.
+# Assign the `storage.uploader` role to the service account.
 resource "yandex_resourcemanager_folder_iam_binding" "bucket-uploader" {
   folder_id = local.folder_id
   role      = "storage.uploader"
