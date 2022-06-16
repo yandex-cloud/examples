@@ -59,8 +59,8 @@ resource "yandex_mdb_postgresql_cluster" "postgresql-cluster" {
 
     # Uncomment, multiply this block and аdd the same PostgreSQL extensions as in Amazon RDS.
     #extension {
-    #  name    = "" # Set a name of the PostgreSQL extensions.
-    #  version = "" # Set a version of the PostgreSQL extensions.
+    #  name    = "" # Set a name of the PostgreSQL extension.
+    #  version = "" # Set a version of the PostgreSQL extension.
     #}
   }
 
