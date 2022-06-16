@@ -5,10 +5,10 @@
 #
 # Set the configuration of the Managed Service for PostgreSQL cluster:
 locals {
-  pg_cluster_version  = "14" # Set the PostgreSQL version. It must be the same or higher than the version in the Amazon RDS. See the complete list of supported versions in https://cloud.yandex.com/en/docs/managed-postgresql/.
-  pg_cluster_db_name  = ""   # Set a database name. It must be the same as in the Amazon RDS.
-  pg_cluster_username = ""   # Set a database owner name.
-  pg_cluster_password = ""   # Set a database owner password.
+  pg_version = "14" # Set the PostgreSQL version. It must be the same or higher than the version in the Amazon RDS. See the complete list of supported versions in https://cloud.yandex.com/en/docs/managed-postgresql/.
+  db_name    = ""   # Set a database name. It must be the same as in the Amazon RDS.
+  username   = ""   # Set a database owner name.
+  password   = ""   # Set a database owner password.
 }
 # Add the same PostgreSQL extensions as in Amazon RDS. Look line 61.
 
@@ -45,7 +45,7 @@ resource "yandex_mdb_postgresql_cluster" "postgresql-cluster" {
   security_group_ids = [yandex_vpc_security_group.cluster-security-group.id]
 
   config {
-    version = local.pg_cluster_version
+    version = local.pg_version
     resources {
       resource_preset_id = "s2.micro" # 2 vCPU, 8 GB RAM
       disk_type_id       = "network-hdd"
@@ -54,8 +54,8 @@ resource "yandex_mdb_postgresql_cluster" "postgresql-cluster" {
   }
 
   database {
-    name  = local.pg_cluster_db_name
-    owner = local.pg_cluster_username
+    name  = local.db_name
+    owner = local.username
 
     # Uncomment, multiply this block and аdd the same PostgreSQL extensions as in Amazon RDS.
     #extension {
@@ -65,11 +65,11 @@ resource "yandex_mdb_postgresql_cluster" "postgresql-cluster" {
   }
 
   user {
-    name     = local.pg_cluster_username
-    password = local.pg_cluster_password
+    name     = local.username
+    password = local.password
 
     permission {
-      database_name = local.pg_cluster_db_name
+      database_name = local.db_name
     }
   }
 
