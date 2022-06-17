@@ -10,7 +10,6 @@ locals {
   username   = ""   # Set a database owner name.
   password   = ""   # Set a database owner password.
 }
-# Add the same PostgreSQL extensions as in Amazon RDS. Look line 61.
 
 resource "yandex_vpc_network" "network" {
   description = "Network for the Managed Service for PostgreSQL cluster"
@@ -37,6 +36,25 @@ resource "yandex_vpc_security_group" "cluster-security-group" {
   }
 }
 
+# User of the Managed Service for PostgreSQL cluster
+resource "yandex_mdb_postgresql_user" "user" {
+  cluster_id = yandex_mdb_postgresql_cluster.postgresql-cluster.id
+  name       = local.username
+  password   = local.password
+}
+
+# Database of the Managed Service for PostgreSQL cluster
+resource "yandex_mdb_postgresql_database" "database" {
+  cluster_id = yandex_mdb_postgresql_cluster.postgresql-cluster.id
+  name       = local.db_name
+  owner      = yandex_mdb_postgresql_user.user.name
+
+  # Uncomment, multiply this block and аdd the same PostgreSQL extensions as in Amazon RDS.
+  #extension {
+  #  name = "" # Set a name of the PostgreSQL extension.
+  #}
+}
+
 resource "yandex_mdb_postgresql_cluster" "postgresql-cluster" {
   description        = "Managed Service for PostgreSQL cluster"
   name               = "postgresql-cluster"
@@ -50,26 +68,6 @@ resource "yandex_mdb_postgresql_cluster" "postgresql-cluster" {
       resource_preset_id = "s2.micro" # 2 vCPU, 8 GB RAM
       disk_type_id       = "network-hdd"
       disk_size          = "10" # GB
-    }
-  }
-
-  database {
-    name  = local.db_name
-    owner = local.username
-
-    # Uncomment, multiply this block and аdd the same PostgreSQL extensions as in Amazon RDS.
-    #extension {
-    #  name    = "" # Set a name of the PostgreSQL extension.
-    #  version = "" # Set a version of the PostgreSQL extension.
-    #}
-  }
-
-  user {
-    name     = local.username
-    password = local.password
-
-    permission {
-      database_name = local.db_name
     }
   }
 
