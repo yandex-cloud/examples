@@ -6,14 +6,16 @@
 
 # Specify the pre-installation parameters:
 locals {
-  folder_id          = ""                                                # Your Folder ID.
-  network_id         = ""                                                # Network ID for Managed Service for ClickHouse cluster, Data Proc cluster and VM.
-  subnet_id          = ""                                                # Subnet ID (enable NAT for this subnet).
-  ch_password        = ""                                                # Set user password for ClickHouse cluster.
-  vm_ssh_keys        = "<username>:${file("<path to public key file>")}" # Set username and SSH public key path for VM.
-  vm_image_id        = "fd8ciuqfa001h8s9sa7i"                            # Ubuntu 20.04. See this page to list all available images: https://cloud.yandex.ru/docs/compute/operations/images-with-pre-installed-software/get-list.
-  dp_ssh_public_keys = [file("<path to public key file>")]               # Set SSH public key path for Data Proc Cluster.
-  bucket_name        = ""                                                # Name for the Object Storage bucket. Should be unique in Cloud.
+  folder_id          = ""                              # Your folder ID.
+  network_id         = ""                              # Network ID for Managed Service for ClickHouse cluster, Data Proc cluster and VM.
+  subnet_id          = ""                              # Subnet ID (enable NAT for this subnet).
+  ch_password        = ""                              # Set user password for ClickHouse cluster.
+  vm_username        = "<username>"                    # Set username for VM.
+  vm_ssh_key         = "<path to public key file>"     # Set SSH public key path for VM.
+  vm_image_id        = "fd8ciuqfa001h8s9sa7i"          # Ubuntu 20.04. See this page to list all available images: https://cloud.yandex.ru/docs/compute/operations/images-with-pre-installed-software/get-list.
+  dp_ssh_public_key  = "<path to public key file>"     # Set SSH public key path for Data Proc Cluster.
+  dp_account         = "<account name>"                # Name of the Data Proc cluster service account. 
+  bucket_name        = ""                              # Name for the Object Storage bucket. Should be unique in Cloud.
 }
 
 resource "yandex_vpc_security_group" "clickhouse-and-vm-security-group" {
@@ -79,17 +81,13 @@ resource "yandex_vpc_security_group" "data-proc-security-group" {
 }
 
 resource "yandex_iam_service_account" "dataproc" {
-  description = "Service account to manage the Dataproc cluster."
-  name        = "dataproc"
-}
-
-data "yandex_resourcemanager_folder" "my-folder" {
-  folder_id = local.folder_id
+  description = "Service account to manage the Data Proc cluster."
+  name        = local.dp_account
 }
 
 # Roles to create Data Proc cluster.
 resource "yandex_resourcemanager_folder_iam_binding" "dataproc-agent" {
-  folder_id = data.yandex_resourcemanager_folder.my-folder.id
+  folder_id = local.folder_id
   role      = "dataproc.agent"
   members = [
     "serviceAccount:${yandex_iam_service_account.dataproc.id}",
@@ -97,7 +95,7 @@ resource "yandex_resourcemanager_folder_iam_binding" "dataproc-agent" {
 }
 
 resource "yandex_resourcemanager_folder_iam_binding" "dataproc-provisioner" {
-  folder_id = data.yandex_resourcemanager_folder.my-folder.id
+  folder_id = local.folder_id
   role      = "dataproc.provisioner"
   members = [
     "serviceAccount:${yandex_iam_service_account.dataproc.id}",
@@ -105,7 +103,7 @@ resource "yandex_resourcemanager_folder_iam_binding" "dataproc-provisioner" {
 }
 
 resource "yandex_resourcemanager_folder_iam_binding" "monitoring-viewer" {
-  folder_id = data.yandex_resourcemanager_folder.my-folder.id
+  folder_id = local.folder_id
   role      = "monitoring.viewer"
   members = [
     "serviceAccount:${yandex_iam_service_account.dataproc.id}",
@@ -114,7 +112,7 @@ resource "yandex_resourcemanager_folder_iam_binding" "monitoring-viewer" {
 
 # Role to create Object Storage Bucket
 resource "yandex_resourcemanager_folder_iam_binding" "bucket-creator" {
-  folder_id = data.yandex_resourcemanager_folder.my-folder.id
+  folder_id = local.folder_id
   role      = "storage.editor"
   members = [
     "serviceAccount:${yandex_iam_service_account.dataproc.id}",
@@ -180,7 +178,7 @@ resource "yandex_compute_instance" "vm-1" {
   }
 
   metadata = {
-    ssh-keys = local.vm_ssh_keys
+    ssh-keys = "${local.vm_username}:${file(${local.vm_ssh_key})}"
   }
 }
 
@@ -201,7 +199,7 @@ resource "yandex_storage_bucket" "my-bucket" {
 }
 
 resource "yandex_dataproc_cluster" "my-dp-cluster" {
-  description = "Dataproc cluster."
+  description = "Data Proc cluster."
   depends_on  = [yandex_resourcemanager_folder_iam_binding.dataproc-agent]
   bucket      = yandex_storage_bucket.my-bucket.bucket
   name        = "my-dp-cluster"
@@ -216,11 +214,11 @@ resource "yandex_dataproc_cluster" "my-dp-cluster" {
     version_id = "2.0"
 
     hadoop {
-      services = ["HBASE", "HDFS", "YARN", "SPARK", "TEZ", "MAPREDUCE", "HIVE", "ZEPPELIN", "ZOOKEEPER"]
+      services = ["HBASE", "HDFS", "HIVE", "MAPREDUCE", "SPARK", "TEZ", "YARN", "ZEPPELIN", "ZOOKEEPER"]
       properties = {
         "yarn:yarn.resourcemanager.am.max-attempts" = 5
       }
-      ssh_public_keys = local.dp_ssh_public_keys
+      ssh_public_keys = [file(${local.dp_ssh_public_key})]
     }
 
     subcluster_spec {
