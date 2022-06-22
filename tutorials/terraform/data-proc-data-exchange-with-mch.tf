@@ -9,6 +9,7 @@ locals {
   folder_id          = ""                              # Your folder ID.
   network_id         = ""                              # Network ID for Managed Service for ClickHouse cluster, Data Proc cluster and VM.
   subnet_id          = ""                              # Subnet ID (enable NAT for this subnet).
+  zone_id            = ""                              # Availability zone for resources.
   ch_password        = ""                              # Set user password for ClickHouse cluster.
   vm_username        = "<username>"                    # Set username for VM.
   vm_ssh_key         = "<path to public key file>"     # Set SSH public key path for VM.
@@ -136,7 +137,7 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster" {
 
   host {
     type             = "CLICKHOUSE"
-    zone             = "ru-central1-a"
+    zone             = local.zone_id
     subnet_id        = local.subnet_id
     assign_public_ip = true # Required for connection from the Internet
   }
@@ -158,7 +159,7 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster" {
 resource "yandex_compute_instance" "vm-1" {
   name        = "linux-vm"
   platform_id = "standard-v3" # Intel Ice Lake
-  zone        = "ru-central1-a"
+  zone        = local.zone_id
 
   resources {
     cores  = 2
@@ -207,7 +208,7 @@ resource "yandex_dataproc_cluster" "my-dp-cluster" {
     created_by = "terraform"
   }
   service_account_id = yandex_iam_service_account.dataproc.id
-  zone_id            = "ru-central1-a"
+  zone_id            = local.zone_id
   ui_proxy           = true
 
   cluster_config {
