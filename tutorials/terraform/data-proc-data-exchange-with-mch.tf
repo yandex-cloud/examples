@@ -156,8 +156,8 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster" {
 }
 
 resource "yandex_compute_instance" "vm-1" {
-  name        = "linux-vm"
   description = "VM in Yandex Compute Cloud"
+  name        = "linux-vm"
   platform_id = "standard-v3" # Intel Ice Lake
   zone        = local.zone_id
 
