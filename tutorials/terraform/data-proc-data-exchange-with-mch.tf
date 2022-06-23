@@ -20,32 +20,32 @@ locals {
 }
 
 resource "yandex_vpc_security_group" "clickhouse-and-vm-security-group" {
-  description = "Security group for the Managed Service for ClickHouse cluster and VM."
+  description = "Security group for the Managed Service for ClickHouse cluster and VM"
   network_id  = local.network_id
 
   ingress {
-    description    = "Allow SSL connections to the Managed Service for ClickHouse cluster with clickhouse-client."
+    description    = "Allow SSL connections to the Managed Service for ClickHouse cluster with clickhouse-client"
     protocol       = "TCP"
     port           = 9440
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
-    description    = "Allow HTTPS connections to the Managed Service for ClickHouse cluster."
+    description    = "Allow HTTPS connections to the Managed Service for ClickHouse cluster"
     protocol       = "TCP"
     port           = 8443
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
-    description    = "Allow SSH connections to VM from the Internet."
+    description    = "Allow SSH connections to VM from the Internet"
     protocol       = "TCP"
     port           = 22
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
-    description    = "Allow outgoing connections to any required resource."
+    description    = "Allow outgoing connections to any required resource"
     protocol       = "ANY"
     from_port      = 0
     to_port        = 65535
@@ -54,11 +54,11 @@ resource "yandex_vpc_security_group" "clickhouse-and-vm-security-group" {
 }
 
 resource "yandex_vpc_security_group" "data-proc-security-group" {
-  description = "Security group for the Data Proc cluster."
+  description = "Security group for the Data Proc cluster"
   network_id  = local.network_id
 
   ingress {
-    description       = "Inbound internal traffic rules."
+    description       = "Allow any traffic within the security group"
     protocol          = "ANY"
     from_port         = 0
     to_port           = 65535
@@ -66,7 +66,7 @@ resource "yandex_vpc_security_group" "data-proc-security-group" {
   }
 
   egress {
-    description       = "Outbound internal traffic rules."
+    description       = "Allow any traffic within the security group"
     protocol          = "ANY"
     from_port         = 0
     to_port           = 65535
@@ -74,7 +74,7 @@ resource "yandex_vpc_security_group" "data-proc-security-group" {
   }
 
   egress {
-    description    = "Allow connections to the HTTPS port."
+    description    = "Allow connections to the HTTPS port"
     protocol       = "TCP"
     port           = 443
     v4_cidr_blocks = ["0.0.0.0/0"]
@@ -82,11 +82,11 @@ resource "yandex_vpc_security_group" "data-proc-security-group" {
 }
 
 resource "yandex_iam_service_account" "dataproc" {
-  description = "Service account to manage the Data Proc cluster."
+  description = "Service account to manage the Data Proc cluster"
   name        = local.dp_account
 }
 
-# Roles to create Data Proc cluster.
+# Assign role to the Data Proc cluster service account.
 resource "yandex_resourcemanager_folder_iam_binding" "dataproc-agent" {
   folder_id = local.folder_id
   role      = "dataproc.agent"
@@ -111,7 +111,7 @@ resource "yandex_resourcemanager_folder_iam_binding" "monitoring-viewer" {
   ]
 }
 
-# Role to create Object Storage Bucket
+# Assign role to create Object Storage Bucket
 resource "yandex_resourcemanager_folder_iam_binding" "bucket-creator" {
   folder_id = local.folder_id
   role      = "storage.editor"
@@ -155,9 +155,9 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster" {
   }
 }
 
-# VM in Yandex Compute Cloud
 resource "yandex_compute_instance" "vm-1" {
   name        = "linux-vm"
+  description = "VM in Yandex Compute Cloud"
   platform_id = "standard-v3" # Intel Ice Lake
   zone        = local.zone_id
 
@@ -175,7 +175,7 @@ resource "yandex_compute_instance" "vm-1" {
   network_interface {
     subnet_id          = local.subnet_id
     security_group_ids = [yandex_vpc_security_group.clickhouse-and-vm-security-group.id]
-    nat                = true # Required for connection from the Internet
+    nat                = true # Required for connection from the Internet.
   }
 
   metadata = {
@@ -200,13 +200,10 @@ resource "yandex_storage_bucket" "my-bucket" {
 }
 
 resource "yandex_dataproc_cluster" "my-dp-cluster" {
-  description = "Data Proc cluster."
-  depends_on  = [yandex_resourcemanager_folder_iam_binding.dataproc-agent]
-  bucket      = yandex_storage_bucket.my-bucket.bucket
-  name        = "my-dp-cluster"
-  labels = {
-    created_by = "terraform"
-  }
+  description        = "Data Proc cluster"
+  depends_on         = [yandex_resourcemanager_folder_iam_binding.dataproc-agent]
+  bucket             = yandex_storage_bucket.my-bucket.bucket
+  name               = "my-dp-cluster"
   service_account_id = yandex_iam_service_account.dataproc.id
   zone_id            = local.zone_id
   ui_proxy           = true
