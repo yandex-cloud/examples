@@ -6,17 +6,17 @@
 
 # Specify the pre-installation parameters:
 locals {
-  folder_id          = ""                              # Your folder ID.
-  network_id         = ""                              # Network ID for Managed Service for ClickHouse cluster, Data Proc cluster and VM.
-  subnet_id          = ""                              # Subnet ID (enable NAT for this subnet).
-  zone_id            = ""                              # Availability zone for resources.
-  ch_password        = ""                              # Set user password for ClickHouse cluster.
-  vm_username        = "<username>"                    # Set username for VM.
-  vm_ssh_key         = "<path to public key file>"     # Set SSH public key path for VM.
-  vm_image_id        = "fd8ciuqfa001h8s9sa7i"          # Ubuntu 20.04. See this page to list all available images: https://cloud.yandex.ru/docs/compute/operations/images-with-pre-installed-software/get-list.
-  dp_ssh_public_key  = "<path to public key file>"     # Set SSH public key path for Data Proc Cluster.
-  dp_account         = "<account name>"                # Name of the Data Proc cluster service account. 
-  bucket_name        = ""                              # Name for the Object Storage bucket. Should be unique in Cloud.
+  folder_id         = ""                          # Your folder ID.
+  network_id        = ""                          # Network ID for Managed Service for ClickHouse cluster, Data Proc cluster and VM.
+  subnet_id         = ""                          # Subnet ID (enable NAT for this subnet).
+  zone_id           = ""                          # Availability zone for resources.
+  ch_password       = ""                          # Set user password for ClickHouse cluster.
+  vm_username       = ""                          # Set username for VM.
+  vm_ssh_key        = "<path to public key file>" # Set SSH public key path for VM.
+  vm_image_id       = "fd8ciuqfa001h8s9sa7i"      # Ubuntu 20.04. See this page to list all available images: https://cloud.yandex.ru/docs/compute/operations/images-with-pre-installed-software/get-list.
+  dp_ssh_public_key = ""                          # Set SSH public key path for Data Proc Cluster.
+  dp_account        = "<account name>"            # Name of the Data Proc cluster service account. 
+  bucket_name       = ""                          # Name for the Object Storage bucket. Should be unique in Cloud.
 }
 
 resource "yandex_vpc_security_group" "clickhouse-and-vm-security-group" {
@@ -179,7 +179,7 @@ resource "yandex_compute_instance" "vm-1" {
   }
 
   metadata = {
-    ssh-keys = "${local.vm_username}:${file(${local.vm_ssh_key})}"
+    ssh-keys = "${local.vm_username}:file(local.vm_ssh_key)"
   }
 }
 
@@ -219,7 +219,7 @@ resource "yandex_dataproc_cluster" "my-dp-cluster" {
       properties = {
         "yarn:yarn.resourcemanager.am.max-attempts" = 5
       }
-      ssh_public_keys = [file(${local.dp_ssh_public_key})]
+      ssh_public_keys = [file(local.dp_ssh_public_key)]
     }
 
     subcluster_spec {
