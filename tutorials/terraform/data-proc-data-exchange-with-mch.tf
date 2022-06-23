@@ -6,17 +6,25 @@
 
 # Specify the pre-installation parameters:
 locals {
-  folder_id         = ""                          # Your folder ID.
-  network_id        = ""                          # Network ID for Managed Service for ClickHouse cluster, Data Proc cluster and VM.
-  subnet_id         = ""                          # Subnet ID (enable NAT for this subnet).
-  zone_id           = ""                          # Availability zone for resources.
-  ch_password       = ""                          # Set user password for ClickHouse cluster.
-  vm_username       = ""                          # Set username for VM.
-  vm_ssh_key        = "<path to public key file>" # Set SSH public key path for VM.
-  vm_image_id       = "fd8ciuqfa001h8s9sa7i"      # Ubuntu 20.04. See this page to list all available images: https://cloud.yandex.ru/docs/compute/operations/images-with-pre-installed-software/get-list.
-  dp_ssh_public_key = ""                          # Set SSH public key path for Data Proc Cluster.
-  dp_account        = "<account name>"            # Name of the Data Proc cluster service account. 
-  bucket_name       = ""                          # Name for the Object Storage bucket. Should be unique in Cloud.
+  # Base settings
+  folder_id  = ""              # Your folder ID.
+  network_id = ""              # Network ID for the Managed Service for ClickHouse cluster, the Data Proc cluster and VM.
+  subnet_id  = ""              # Subnet ID (enable NAT for this subnet).
+  zone_id    = "ru-central1-a" # Availability zone for resources.
+
+  # Managed Service for ClickHouse cluster.
+  ch_user_name     = "user1" # Set user name for the ClickHouse cluster.
+  ch_user_password = ""      # Set user password for the ClickHouse cluster.
+
+  # Data Proc cluster.
+  dp_ssh_key  = "" # Set absolute path to SSH public key for the Data Proc cluster.
+  dp_account  = "" # Name of the Data Proc cluster service account.
+  bucket_name = "" # Name for the Object Storage bucket. Should be unique in Cloud.
+
+  # VM
+  vm_username = ""                     # Set username for VM.
+  vm_ssh_key  = ""                     # Set absolute path to SSH public key for VM.
+  vm_image_id = "fd8ciuqfa001h8s9sa7i" # Ubuntu 20.04. See this page to list all available images: https://cloud.yandex.ru/docs/compute/operations/images-with-pre-installed-software/get-list.
 }
 
 resource "yandex_vpc_security_group" "clickhouse-and-vm-security-group" {
@@ -58,7 +66,7 @@ resource "yandex_vpc_security_group" "data-proc-security-group" {
   network_id  = local.network_id
 
   ingress {
-    description       = "Allow any traffic within the security group"
+    description       = "Allow any incoming traffic within the security group"
     protocol          = "ANY"
     from_port         = 0
     to_port           = 65535
@@ -66,7 +74,7 @@ resource "yandex_vpc_security_group" "data-proc-security-group" {
   }
 
   egress {
-    description       = "Allow any traffic within the security group"
+    description       = "Allow any outgoing traffic within the security group"
     protocol          = "ANY"
     from_port         = 0
     to_port           = 65535
@@ -74,7 +82,7 @@ resource "yandex_vpc_security_group" "data-proc-security-group" {
   }
 
   egress {
-    description    = "Allow connections to the HTTPS port"
+    description    = "Allow connections to the HTTPS port from any IP address"
     protocol       = "TCP"
     port           = 443
     v4_cidr_blocks = ["0.0.0.0/0"]
@@ -86,7 +94,7 @@ resource "yandex_iam_service_account" "dataproc" {
   name        = local.dp_account
 }
 
-# Assign role to the Data Proc cluster service account.
+# Assign role `dataproc.agent` to the Data Proc cluster service account.
 resource "yandex_resourcemanager_folder_iam_binding" "dataproc-agent" {
   folder_id = local.folder_id
   role      = "dataproc.agent"
@@ -95,6 +103,7 @@ resource "yandex_resourcemanager_folder_iam_binding" "dataproc-agent" {
   ]
 }
 
+# Assign role `dataprov.provisioner` to the Data Proc cluster service account.
 resource "yandex_resourcemanager_folder_iam_binding" "dataproc-provisioner" {
   folder_id = local.folder_id
   role      = "dataproc.provisioner"
@@ -103,6 +112,7 @@ resource "yandex_resourcemanager_folder_iam_binding" "dataproc-provisioner" {
   ]
 }
 
+# Assign role `monitoring.viewer` to the Data Proc cluster service account.
 resource "yandex_resourcemanager_folder_iam_binding" "monitoring-viewer" {
   folder_id = local.folder_id
   role      = "monitoring.viewer"
@@ -111,7 +121,7 @@ resource "yandex_resourcemanager_folder_iam_binding" "monitoring-viewer" {
   ]
 }
 
-# Assign role to create Object Storage Bucket.
+# Assign role `storage.editor` to the Data Proc cluster service account.
 resource "yandex_resourcemanager_folder_iam_binding" "bucket-creator" {
   folder_id = local.folder_id
   role      = "storage.editor"
@@ -147,8 +157,8 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster" {
   }
 
   user {
-    name     = "user1"
-    password = local.ch_password
+    name     = local.ch_user_name
+    password = local.ch_user_password
     permission {
       database_name = "db1"
     }
@@ -216,7 +226,7 @@ resource "yandex_dataproc_cluster" "my-dp-cluster" {
       properties = {
         "yarn:yarn.resourcemanager.am.max-attempts" = 5
       }
-      ssh_public_keys = [file(local.dp_ssh_public_key)]
+      ssh_public_keys = [file(local.dp_ssh_key)]
     }
 
     subcluster_spec {
