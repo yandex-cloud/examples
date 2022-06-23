@@ -111,7 +111,7 @@ resource "yandex_resourcemanager_folder_iam_binding" "monitoring-viewer" {
   ]
 }
 
-# Assign role to create Object Storage Bucket
+# Assign role to create Object Storage Bucket.
 resource "yandex_resourcemanager_folder_iam_binding" "bucket-creator" {
   folder_id = local.folder_id
   role      = "storage.editor"
@@ -139,7 +139,7 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster" {
     type             = "CLICKHOUSE"
     zone             = local.zone_id
     subnet_id        = local.subnet_id
-    assign_public_ip = true # Required for connection from the Internet
+    assign_public_ip = true # Required for connection from the Internet.
   }
 
   database {
@@ -179,11 +179,11 @@ resource "yandex_compute_instance" "vm-1" {
   }
 
   metadata = {
-    ssh-keys = "${local.vm_username}:file(local.vm_ssh_key)"
+    ssh-keys = "${local.vm_username}:${file(local.vm_ssh_key)}"
   }
 }
 
-# Object Storage bucket static key
+# Object Storage bucket static key.
 resource "yandex_iam_service_account_static_access_key" "my-bucket-key" {
   service_account_id = yandex_iam_service_account.dataproc.id
 }
