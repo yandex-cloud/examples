@@ -7,7 +7,7 @@
 # Specify the pre-installation parameters:
 locals {
   folder_id          = ""                              # Your folder ID.
-  network_id         = ""                              # Network ID for Managed Service for ClickHouse cluster, Data Proc cluster and VM.
+  network_id         = ""                              # Network ID for the Managed Service for ClickHouse cluster, the Data Proc cluster and VM.
   subnet_id          = ""                              # Subnet ID (enable NAT for this subnet).
   zone_id            = ""                              # Availability zone for resources.
   ch_password        = ""                              # Set user password for ClickHouse cluster.
