@@ -7,10 +7,10 @@ locals {
   k8s_node_group_version = "1.21"        # Set the version of Kubernetes for the node group.
   k8s_cluster_version    = "1.21"        # Set the version of Kubernetes for the master host.
   zone_a_v4_cidr_blocks  = "10.1.0.0/16" # Set the CIDR block for subnet.
-  sa_name                = ""            # Set the name for the Managed Kubernetes service account
-  lg_period              = "5h"          # Set the retention period for the logging group
-  fb_sa_name             = ""            # Set the name for the Fluent Bit service account
   lg_name                = ""            # Set the logging group name
+  sa_name                = ""            # Set the name for the Managed Kubernetes service account
+  fb_sa_name             = ""            # Set the name for the Fluent Bit service account
+  lg_period              = "5h"          # Set the retention period for the logging group
 }
 
 resource "yandex_vpc_network" "k8s-network" {
