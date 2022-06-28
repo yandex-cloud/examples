@@ -1,4 +1,4 @@
-# Infrastructure for Yandex Cloud Managed Service for Kubernetes cluster and the Yandex Cloud Logging group.
+# Infrastructure for Yandex Cloud Managed Service for Kubernetes cluster and the Yandex Cloud logging group.
 #
 # Set the configuration of the Managed Service for Kubernetes cluster.
 
