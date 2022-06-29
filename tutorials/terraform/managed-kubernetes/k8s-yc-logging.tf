@@ -1,16 +1,15 @@
-# Infrastructure for Yandex Cloud Managed Service for Kubernetes cluster and the Yandex Cloud logging group.
-#
+# Infrastructure for Yandex Cloud Managed Service for Kubernetes cluster with Fluent Bit extension.
+# https://cloud.yandex.ru/docs/managed-kubernetes/tutorials/fluent-bit-logging
 # Set the configuration of the Managed Service for Kubernetes cluster.
 
 locals {
-  folder_id              = ""            # Set your cloud folder ID.
-  k8s_node_group_version = "1.21"        # Set the version of Kubernetes for the node group.
-  k8s_cluster_version    = "1.21"        # Set the version of Kubernetes for the master host.
-  zone_a_v4_cidr_blocks  = "10.1.0.0/16" # Set the CIDR block for subnet.
-  lg_name                = ""            # Set the logging group name
-  sa_name                = ""            # Set the name for the Managed Kubernetes service account
-  fb_sa_name             = ""            # Set the name for the Fluent Bit service account
-  lg_period              = "5h"          # Set the retention period for the logging group
+  folder_id             = ""            # Set your cloud folder ID.
+  k8s_version           = "1.21"        # Set the version of Kubernetes for the cluster and node group.
+  zone_a_v4_cidr_blocks = "10.1.0.0/16" # Set the CIDR block for subnet.
+  lg_name               = ""            # Set the logging group name
+  sa_name               = ""            # Set the name for the Managed Kubernetes service account
+  fb_sa_name            = ""            # Set the name for the Fluent Bit service account
+  lg_period             = "5h"          # Set the retention period for the logging group
 }
 
 resource "yandex_vpc_network" "k8s-network" {
@@ -98,7 +97,7 @@ data "yandex_resourcemanager_folder" "cloud-folder" {
   folder_id = local.folder_id # Folder ID required for binding roles to service account.
 }
 
-# Assign "editor" role to service account.
+# Assign "editor" role the cluster service account.
 resource "yandex_resourcemanager_folder_iam_binding" "editor" {
   folder_id = data.yandex_resourcemanager_folder.cloud-folder.id
   role      = "editor"
@@ -107,7 +106,7 @@ resource "yandex_resourcemanager_folder_iam_binding" "editor" {
   ]
 }
 
-# Assign "container-registry.images.puller" role to service account.
+# Assign "container-registry.images.puller" role to cluster service account.
 resource "yandex_resourcemanager_folder_iam_binding" "images-puller" {
   folder_id = data.yandex_resourcemanager_folder.cloud-folder.id
   role      = "container-registry.images.puller"
@@ -116,7 +115,7 @@ resource "yandex_resourcemanager_folder_iam_binding" "images-puller" {
   ]
 }
 
-# Assign "logging.writer" role to service account.
+# Assign "logging.writer" role to Fluent Bit service account.
 resource "yandex_resourcemanager_folder_iam_binding" "logging-writer" {
   folder_id = data.yandex_resourcemanager_folder.cloud-folder.id
   role      = "logging.writer"
@@ -131,7 +130,7 @@ resource "yandex_kubernetes_cluster" "k8s-cluster" {
   network_id  = yandex_vpc_network.k8s-network.id
 
   master {
-    version = local.k8s_cluster_version
+    version = local.k8s_version
     zonal {
       zone      = yandex_vpc_subnet.subnet-a.zone
       subnet_id = yandex_vpc_subnet.subnet-a.id
@@ -153,7 +152,7 @@ resource "yandex_kubernetes_node_group" "k8s-node-group" {
   description = "Node group for the Managed Service for Kubernetes cluster"
   name        = "k8s-node-group"
   cluster_id  = yandex_kubernetes_cluster.k8s-cluster.id
-  version     = local.k8s_node_group_version
+  version     = local.k8s_version
 
   scale_policy {
     fixed_scale {
