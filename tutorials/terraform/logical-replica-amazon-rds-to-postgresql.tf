@@ -36,25 +36,6 @@ resource "yandex_vpc_security_group" "cluster-security-group" {
   }
 }
 
-# User of the Managed Service for PostgreSQL cluster
-resource "yandex_mdb_postgresql_user" "user" {
-  cluster_id = yandex_mdb_postgresql_cluster.postgresql-cluster.id
-  name       = local.username
-  password   = local.password
-}
-
-# Database of the Managed Service for PostgreSQL cluster
-resource "yandex_mdb_postgresql_database" "database" {
-  cluster_id = yandex_mdb_postgresql_cluster.postgresql-cluster.id
-  name       = local.db_name
-  owner      = yandex_mdb_postgresql_user.user.name
-
-  # Uncomment, multiply this block and аdd the same PostgreSQL extensions as in Amazon RDS.
-  #extension {
-  #  name = "" # Set a name of the PostgreSQL extension.
-  #}
-}
-
 resource "yandex_mdb_postgresql_cluster" "postgresql-cluster" {
   description        = "Managed Service for PostgreSQL cluster"
   name               = "postgresql-cluster"
@@ -76,4 +57,23 @@ resource "yandex_mdb_postgresql_cluster" "postgresql-cluster" {
     subnet_id        = yandex_vpc_subnet.subnet-a.id
     assign_public_ip = true # Required for connection from the Internet
   }
+}
+
+# User of the Managed Service for PostgreSQL cluster.
+resource "yandex_mdb_postgresql_user" "user" {
+  cluster_id = yandex_mdb_postgresql_cluster.postgresql-cluster.id
+  name       = local.username
+  password   = local.password
+}
+
+# Database of the Managed Service for PostgreSQL cluster.
+resource "yandex_mdb_postgresql_database" "database" {
+  cluster_id = yandex_mdb_postgresql_cluster.postgresql-cluster.id
+  name       = local.db_name
+  owner      = yandex_mdb_postgresql_user.user.name
+
+  # Uncomment, multiply this block and аdd the same PostgreSQL extensions as in Amazon RDS.
+  #extension {
+  #  name = "" # Set a name of the PostgreSQL extension.
+  #}
 }
