@@ -1,28 +1,28 @@
-# Infrastructure for Yandex Cloud Managed Service for ClickHouse cluster, Data Proc cluster and virtual machine.
+# Infrastructure for Yandex Cloud Managed Service for the ClickHouse cluster, Data Proc cluster, and virtual machine.
 #
 # RU: https://cloud.yandex.ru/docs/data-proc/tutorials/exchange-data-with-mch
 #
-# Set the configuration of the Managed Service for ClickHouse cluster, Data Proc cluster and Virtual Machine.
+# Set the configuration of the Managed Service for ClickHouse cluster, Data Proc cluster, and Virtual Machine.
 
 # Specify the pre-installation parameters:
 locals {
   # Base settings
   folder_id  = ""              # Your folder ID.
-  network_id = ""              # Network ID for the Managed Service for ClickHouse cluster, the Data Proc cluster and VM.
+  network_id = ""              # Network ID for the Managed Service for ClickHouse cluster, the Data Proc cluster, and VM.
   subnet_id  = ""              # Subnet ID (enable NAT for this subnet).
   zone_id    = "ru-central1-a" # Availability zone for resources.
 
   # Managed Service for ClickHouse cluster.
-  ch_user_name     = "user1" # Set user name for the ClickHouse cluster.
-  ch_user_password = ""      # Set user password for the ClickHouse cluster.
+  ch_user_name     = "user1" # Set a username for the ClickHouse cluster.
+  ch_user_password = ""      # Set a user password for the ClickHouse cluster.
 
   # Data Proc cluster.
-  dp_ssh_key  = "" # Set absolute path to SSH public key for the Data Proc cluster.
+  dp_ssh_key  = "" # Set an absolute path to the SSH public key for the Data Proc cluster.
   dp_account  = "" # Name of the Data Proc cluster service account.
   bucket_name = "" # Name for the Object Storage bucket. Should be unique in Cloud.
 
   # VM
-  vm_username = ""                     # Set username for VM.
+  vm_username = ""                     # Set a username for VM.
   vm_ssh_key  = ""                     # Set absolute path to SSH public key for VM.
   vm_image_id = "fd8ciuqfa001h8s9sa7i" # Ubuntu 20.04. See this page to list all available images: https://cloud.yandex.ru/docs/compute/operations/images-with-pre-installed-software/get-list.
 }
@@ -94,7 +94,7 @@ resource "yandex_iam_service_account" "dataproc" {
   name        = local.dp_account
 }
 
-# Assign role `dataproc.agent` to the Data Proc cluster service account.
+# Assign the `dataproc.agent` role to the Data Proc cluster service account.
 resource "yandex_resourcemanager_folder_iam_binding" "dataproc-agent" {
   folder_id = local.folder_id
   role      = "dataproc.agent"
@@ -103,7 +103,7 @@ resource "yandex_resourcemanager_folder_iam_binding" "dataproc-agent" {
   ]
 }
 
-# Assign role `dataprov.provisioner` to the Data Proc cluster service account.
+# Assign the `dataprov.provisioner` role to the Data Proc cluster service account.
 resource "yandex_resourcemanager_folder_iam_binding" "dataproc-provisioner" {
   folder_id = local.folder_id
   role      = "dataproc.provisioner"
@@ -112,7 +112,7 @@ resource "yandex_resourcemanager_folder_iam_binding" "dataproc-provisioner" {
   ]
 }
 
-# Assign role `monitoring.viewer` to the Data Proc cluster service account.
+# Assign the `monitoring.viewer` role to the Data Proc cluster service account.
 resource "yandex_resourcemanager_folder_iam_binding" "monitoring-viewer" {
   folder_id = local.folder_id
   role      = "monitoring.viewer"
@@ -121,7 +121,7 @@ resource "yandex_resourcemanager_folder_iam_binding" "monitoring-viewer" {
   ]
 }
 
-# Assign role `storage.editor` to the Data Proc cluster service account.
+# Assign the `storage.editor` role to the Data Proc cluster service account.
 resource "yandex_resourcemanager_folder_iam_binding" "bucket-creator" {
   folder_id = local.folder_id
   role      = "storage.editor"
