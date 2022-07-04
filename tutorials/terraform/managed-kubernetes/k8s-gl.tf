@@ -1,4 +1,4 @@
-# Infrastructure for Yandex Cloud Managed Service for Kubernetes cluster with Yandex Container Regisry
+# Infrastructure for Yandex Cloud Managed Service for Kubernetes cluster with Yandex Container Regisry.
 #
 # Set the configuration of the Managed Service for Kubernetes cluster.
 
@@ -6,8 +6,8 @@ locals {
   folder_id             = ""            # Set your cloud folder ID.
   k8s_version           = "1.21"        # Set the version of Kubernetes for the master node and node group.
   zone_a_v4_cidr_blocks = "10.1.0.0/16" # Set the CIDR block for subnet.
-  sa_name               = ""            # Set the service account name
-  registry_name         = ""            # Set then name of Yandex Container Registry
+  sa_name               = ""            # Set the service account name.
+  registry_name         = ""            # Set the name of Yandex Container Registry.
 }
 
 resource "yandex_vpc_network" "k8s-network" {
@@ -113,6 +113,15 @@ resource "yandex_resourcemanager_folder_iam_binding" "editor" {
 resource "yandex_resourcemanager_folder_iam_binding" "images-puller" {
   folder_id = local.folder_id
   role      = "container-registry.images.puller"
+  members = [
+    "serviceAccount:${yandex_iam_service_account.k8s-sa.id}"
+  ]
+}
+
+# Assign "container-registry.images.pusher" role to service account.
+resource "yandex_resourcemanager_folder_iam_binding" "images-pusher" {
+  folder_id = local.folder_id
+  role      = "container-registry.images.pusher"
   members = [
     "serviceAccount:${yandex_iam_service_account.k8s-sa.id}"
   ]
