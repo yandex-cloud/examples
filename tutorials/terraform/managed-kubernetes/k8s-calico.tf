@@ -6,7 +6,7 @@ locals {
   folder_id             = ""            # Set your cloud folder ID.
   k8s_version           = "1.20"        # Set the version of Kubernetes for the master node and node group.
   zone_a_v4_cidr_blocks = "10.1.0.0/16" # Set the CIDR block for subnet.
-  sa_name               = ""
+  sa_name               = ""            # Set the service account name
 }
 
 resource "yandex_vpc_network" "k8s-network" {
@@ -29,69 +29,69 @@ resource "yandex_vpc_security_group" "k8s-main-sg" {
 }
 
 resource "yandex_vpc_security_group_rule" "loadbalancer" {
-  description       = "The rule allows availability checks from the load balancer's range of addresses"
-  direction         = "ingress"
+  description            = "The rule allows availability checks from the load balancer's range of addresses"
+  direction              = "ingress"
   security_group_binding = yandex_vpc_security_group.k8s-main-sg.id
-  protocol          = "TCP"
-  predefined_target = "loadbalancer_healthchecks" # The load balancer's address range.
-  from_port         = 0
-  to_port           = 65535
+  protocol               = "TCP"
+  predefined_target      = "loadbalancer_healthchecks" # The load balancer's address range.
+  from_port              = 0
+  to_port                = 65535
 }
 
 resource "yandex_vpc_security_group_rule" "node-interaction" {
-  description       = "The rule allows the master-node and node-node interaction within the security group"
-  direction         = "ingress"
+  description            = "The rule allows the master-node and node-node interaction within the security group"
+  direction              = "ingress"
   security_group_binding = yandex_vpc_security_group.k8s-main-sg.id
-  protocol          = "ANY"
-  predefined_target = "self_security_group"
-  from_port         = 0
-  to_port           = 65535
+  protocol               = "ANY"
+  predefined_target      = "self_security_group"
+  from_port              = 0
+  to_port                = 65535
 }
 
 resource "yandex_vpc_security_group_rule" "pod-service-interaction" {
-  description    = "The rule allows the pod-pod and service-service interaction"
-  direction      = "ingress"
+  description            = "The rule allows the pod-pod and service-service interaction"
+  direction              = "ingress"
   security_group_binding = yandex_vpc_security_group.k8s-main-sg.id
-  protocol       = "ANY"
-  v4_cidr_blocks = [local.zone_a_v4_cidr_blocks]
-  from_port      = 0
-  to_port        = 65535
+  protocol               = "ANY"
+  v4_cidr_blocks         = [local.zone_a_v4_cidr_blocks]
+  from_port              = 0
+  to_port                = 65535
 }
 
 resource "yandex_vpc_security_group_rule" "ICMP-debug" {
-  description    = "The rule allows receipt of debugging ICMP packets from internal subnets"
-  direction      = "ingress"
+  description            = "The rule allows receipt of debugging ICMP packets from internal subnets"
+  direction              = "ingress"
   security_group_binding = yandex_vpc_security_group.k8s-main-sg.id
-  protocol       = "ICMP"
-  v4_cidr_blocks = [local.zone_a_v4_cidr_blocks]
+  protocol               = "ICMP"
+  v4_cidr_blocks         = [local.zone_a_v4_cidr_blocks]
 }
 
 resource "yandex_vpc_security_group_rule" "port-6443" {
-  description    = "The rule allows connection to Kubernetes API on 6443 port from the Internet"
-  direction      = "ingress"
+  description            = "The rule allows connection to Kubernetes API on 6443 port from the Internet"
+  direction              = "ingress"
   security_group_binding = yandex_vpc_security_group.k8s-main-sg.id
-  protocol       = "TCP"
-  v4_cidr_blocks = ["0.0.0.0/0"]
-  port           = 6443
+  protocol               = "TCP"
+  v4_cidr_blocks         = ["0.0.0.0/0"]
+  port                   = 6443
 }
 
 resource "yandex_vpc_security_group_rule" "port-443" {
-  description    = "The rule allows connection to Kubernetes API on 443 port from the Internet"
-  direction      = "ingress"
+  description            = "The rule allows connection to Kubernetes API on 443 port from the Internet"
+  direction              = "ingress"
   security_group_binding = yandex_vpc_security_group.k8s-main-sg.id
-  protocol       = "TCP"
-  v4_cidr_blocks = ["0.0.0.0/0"]
-  port           = 443
+  protocol               = "TCP"
+  v4_cidr_blocks         = ["0.0.0.0/0"]
+  port                   = 443
 }
 
 resource "yandex_vpc_security_group_rule" "outgoing-traffic" {
-  description    = "The rule allows all outgoing traffic"
-  direction      = "egress"
+  description            = "The rule allows all outgoing traffic"
+  direction              = "egress"
   security_group_binding = yandex_vpc_security_group.k8s-main-sg.id
-  protocol       = "ANY"
-  v4_cidr_blocks = ["0.0.0.0/0"]
-  from_port      = 0
-  to_port        = 65535
+  protocol               = "ANY"
+  v4_cidr_blocks         = ["0.0.0.0/0"]
+  from_port              = 0
+  to_port                = 65535
 }
 
 resource "yandex_iam_service_account" "k8s-sa" {
