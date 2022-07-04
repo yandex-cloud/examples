@@ -7,7 +7,7 @@
 locals {
   folder_id          = "" # Your Folder ID.
   mes_admin_password = "" # Administrator password for Managed Service for Elasticsearch cluster.
-  mes_edition        = "" # Managed Service for Elasticsearch destination cluster edition, Basic, Gold or Platinum. See https://cloud.yandex.ru/docs/managed-elasticsearch/concepts/es-editions.
+  mes_edition        = "" # Managed Service for Elasticsearch destination cluster edition, Basic or Platinum. See https://cloud.yandex.ru/docs/managed-elasticsearch/concepts/es-editions.
   mes_version        = "" # Managed Service for Elasticsearch destination cluster version, should be equal or newer than source cluster version.
   bucket_name        = "" # Object Storage bucket name. Should be unique in Cloud.
 }
