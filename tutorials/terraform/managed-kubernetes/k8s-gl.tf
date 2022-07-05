@@ -173,8 +173,9 @@ resource "yandex_kubernetes_node_group" "k8s-node-group" {
     platform_id = "standard-v2" # Intel Cascade Lake
 
     network_interface {
-      nat        = true
-      subnet_ids = [yandex_vpc_subnet.subnet-a.id]
+      nat                = true
+      subnet_ids         = [yandex_vpc_subnet.subnet-a.id]
+      security_group_ids = [yandex_vpc_security_group.k8s-main-sg.id]
     }
 
     resources {
