@@ -95,6 +95,32 @@ resource "yandex_vpc_security_group_rule" "outgoing-traffic" {
   to_port                = 65535
 }
 
+resource "yandex_vpc_security_group_rule" "SSH" {
+  description            = "The rule allows connection to Git repository by SSH on 22 port from the Internet"
+  direction              = "ingress"
+  security_group_binding = yandex_vpc_security_group.k8s-main-sg.id
+  protocol               = "TCP"
+  v4_cidr_blocks         = ["0.0.0.0/0"]
+  port                   = 22
+}
+
+resource "yandex_vpc_security_group_rule" "HTTP" {
+  description            = "The rule allows HTTP traffic"
+  direction              = "ingress"
+  security_group_binding = yandex_vpc_security_group.k8s-main-sg.id
+  protocol               = "TCP"
+  v4_cidr_blocks         = ["0.0.0.0/0"]
+  port                   = 80
+}
+
+resource "yandex_vpc_security_group_rule" "5050" {
+  description            = "The rule allows connection to Yandex Container Registry on 5050 port"
+  direction              = "ingress"
+  security_group_binding = yandex_vpc_security_group.k8s-main-sg.id
+  protocol               = "TCP"
+  v4_cidr_blocks         = ["0.0.0.0/0"]
+  port                   = 5050
+
 resource "yandex_iam_service_account" "k8s-sa" {
   description = "Service account for the Managed Service for Kubernetes cluster and node group"
   name        = local.sa_name
