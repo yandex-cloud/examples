@@ -120,6 +120,7 @@ resource "yandex_vpc_security_group_rule" "5050" {
   protocol               = "TCP"
   v4_cidr_blocks         = ["0.0.0.0/0"]
   port                   = 5050
+}
 
 resource "yandex_iam_service_account" "k8s-sa" {
   description = "Service account for the Managed Service for Kubernetes cluster and node group"
