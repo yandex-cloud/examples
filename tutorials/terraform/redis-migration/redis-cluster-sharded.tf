@@ -3,15 +3,15 @@
 # RU: https://cloud.yandex.ru/docs/managed-redis/tutorials/redis-as-php-sessions-storage
 # EN: https://cloud.yandex.com/en/docs/managed-redis/tutorials/redis-as-php-sessions-storage
 #
-# Set the following settings:
+# Specify the following settings:
 locals {
   # Managed Service for Redis cluster.
   redis_version = "6.2" # Set the Redis version.
   password      = ""    # Set the cluster password.
-  # (Optional) Virtual Machine.
-  vm_image_id   = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list.
-  vm_username   = "" # Set a username for VM. Images with Ubuntu Linux use the username `ubuntu` by default.
-  vm_public_key = "" # Set a full path to SSH public key.
+  # (Optional) Virtual Machine. If you use VM for connection to the cluster, uncomment these lines.
+  # vm_image_id   = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list.
+  # vm_username   = "" # Set a username for VM. Images with Ubuntu Linux use the username `ubuntu` by default.
+  # vm_public_key = "" # Set a full path to SSH public key.
 }
 
 resource "yandex_vpc_network" "network" {

@@ -1,9 +1,9 @@
-# Infrastructure for the Yandex Cloud Managed Service for Redis non sharded cluster and Virtual Machine
+# Infrastructure for the Yandex Cloud Managed Service for Redis non-sharded cluster and Virtual Machine
 #
 # RU: https://cloud.yandex.ru/docs/managed-redis/tutorials/redis-as-php-sessions-storage
 # EN: https://cloud.yandex.com/en/docs/managed-redis/tutorials/redis-as-php-sessions-storage
 #
-# Set the following settings:
+# Specify the following settings:
 locals {
   # Managed Service for Redis cluster.
   redis_version = "6.2" # Set the Redis version.
