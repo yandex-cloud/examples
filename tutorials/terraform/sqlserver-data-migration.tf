@@ -5,10 +5,11 @@
 #
 # Set the configuration of the Managed Service for SQL Server cluster:
 locals {
-  sql_server_version = "" # Set the SQL Server version. It must be the same or higher than the version in the source cluster.
-  db_name            = "" # Set a database name.
-  username           = "" # Set a user name.
-  password           = "" # Set a user password.
+  sql_server_version   = ""                       # Set the SQL Server version. It must be the same or higher than the version in the source cluster.
+  sql_server_collation = "Cyrillic_General_CI_AS" # SQL Collation cluster. Cannot be changed when cluster is created!
+  db_name              = ""                       # Set a database name.
+  username             = ""                       # Set a user name.
+  password             = ""                       # Set a user password.
 }
 # For Migration using Logical import add users who are in the source database and use SQL Server Authentication, with the same names and passwords. Look line 74.
 
@@ -43,6 +44,7 @@ resource "yandex_mdb_sqlserver_cluster" "sqlserver-cluster" {
   environment        = "PRODUCTION"
   network_id         = yandex_vpc_network.network.id
   version            = local.sql_server_version
+  sqlcollation       = local.sql_server_collation
   security_group_ids = [yandex_vpc_security_group.security-group.id]
 
   resources {
