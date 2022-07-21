@@ -3,7 +3,7 @@
 # RU: https://cloud.yandex.ru/docs/managed-postgresql/tutorials/data-migration
 # EN: https://cloud.yandex.com/en/docs/managed-postgresql/tutorials/data-migration
 
-# Set source and target clusters settings.
+# Specify the source and target clusters settings.
 locals {
   # Source cluster settings:
   source_user    = ""   # Set the source cluster username.
@@ -22,7 +22,7 @@ variable "pg-extensions" {
   description = "List of extensions for the Managed Service for PostgreSQL cluster"
   type        = set(string)
   default = [
-    # Put the list of names of source database PostgreSQL extensions
+    # Put the list of the source database PostgreSQL extensions.
     # Example:
     # "pg_qualstats",
     # "dblink"
@@ -83,7 +83,7 @@ resource "yandex_mdb_postgresql_database" "mpg-db" {
   cluster_id = yandex_mdb_postgresql_cluster.mpg-cluster.id
   name       = local.source_db_name
 
-  # Set the names of PostgreSQL extensions with cycle.
+  # Set the names of PostgreSQL extensions using a cycle.
   dynamic "extension" {
     for_each = var.pg-extensions
     content {
