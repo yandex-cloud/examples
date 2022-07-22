@@ -2,17 +2,17 @@
 #
 # RU: https://cloud.yandex.ru/docs/managed-sqlserver/tutorials/migration-with-bucket
 # EN: https://cloud.yandex.com/en/docs/managed-sqlserver/tutorials/migration-with-bucket
-#
+
 # Set the configuration of the Managed Service for SQL Server cluster:
 locals {
   folder_id          = "" # Your folder ID.
   sql_server_version = "" # Set the SQL Server version. It must be the same or higher than the version in the source cluster.
-  db_name            = "" # Set a database name.
-  username           = "" # Set a user name.
-  password           = "" # Set a user password.
-  storage_sa_id      = "" # Service account ID for creating a bucket in Object Storage.
-  cluster_sa         = "" # Set a cluster service account name. It must be unique in folder.
-  bucket_name        = "" # Set a Object Storage bucket name. It must be unique throughout Object Storage.
+  db_name            = "" # Set the database name.
+  username           = "" # Set the user name.
+  password           = "" # Set the user password.
+  storage_sa_id      = "" # Service account ID for creating the bucket in Object Storage.
+  cluster_sa         = "" # Set the cluster service account name. It must be unique in folder.
+  bucket_name        = "" # Set the Object Storage bucket name. It must be unique throughout Object Storage.
 }
 
 resource "yandex_vpc_network" "network" {
@@ -75,7 +75,7 @@ resource "yandex_mdb_sqlserver_cluster" "sqlserver-cluster" {
 }
 
 resource "yandex_iam_service_account" "cluster-sa" {
-  description = "Service account to manage the Data Proc cluster"
+  description = "Service account to manage the SQL Server cluster"
   name        = local.cluster_sa
 }
 
