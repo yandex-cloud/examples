@@ -3,60 +3,64 @@
 # RU: https://cloud.yandex.ru/docs/managed-clickhouse/tutorials/sharding
 # EN: https://cloud.yandex.com/en/docs/managed-clickhouse/tutorials/sharding
 #
-# Set the user name and password for Managed Service for ClickHouse cluster
+# Set the following settings:
 
-
-resource "yandex_vpc_network" "clickhouse_sharding_network" {
-  name        = "clickhouse_sharding_network"
-  description = "Network for the Managed Service for ClickHouse cluster with sharding."
+locals {
+  db_username = "" # Set database username
+  db_password = "" # Set database user password
 }
 
-# Subnet in ru-central1-a availability zone
+resource "yandex_vpc_network" "clickhouse_sharding_network" {
+  description = "Network for the Managed Service for ClickHouse cluster with sharding"
+  name        = "clickhouse_sharding_network"
+}
+
 resource "yandex_vpc_subnet" "subnet-a" {
+  description    = "Subnet in the ru-central1-a availability zone"
   name           = "clickhouse-subnet-a"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.clickhouse_sharding_network.id
   v4_cidr_blocks = ["10.1.0.0/24"]
 }
 
-# Subnet in ru-central1-b availability zone
 resource "yandex_vpc_subnet" "subnet-b" {
+  description    = "Subnet in the ru-central1-b availability zone"
   name           = "clickhouse-subnet-b"
   zone           = "ru-central1-b"
   network_id     = yandex_vpc_network.clickhouse_sharding_network.id
   v4_cidr_blocks = ["10.2.0.0/24"]
 }
 
-# Subnet in ru-central1-c availability zone
 resource "yandex_vpc_subnet" "subnet-c" {
+  description    = "Subnet in the ru-central1-c availability zone"
   name           = "clickhouse-subnet-c"
   zone           = "ru-central1-c"
   network_id     = yandex_vpc_network.clickhouse_sharding_network.id
   v4_cidr_blocks = ["10.3.0.0/24"]
 }
 
-# Security group for the Managed Service for ClickHouse cluster
 resource "yandex_vpc_default_security_group" "clickhouse-security-group" {
-  network_id = yandex_vpc_network.clickhouse_sharding_network.id
+  description = "Security group for the Managed Service for ClickHouse cluster"
+  network_id  = yandex_vpc_network.clickhouse_sharding_network.id
 
   ingress {
-    protocol       = "TCP"
     description    = "Allow incoming SSL-connections with clickhouse-client from Internet"
+    protocol       = "TCP"
     port           = 9440
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
-    protocol       = "ANY"
     description    = "Allow outgoing connections to any required resource"
+    protocol       = "ANY"
     from_port      = 0
     to_port        = 65535
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
-# Managed Service for ClickHouse cluster with advanced sharding
 resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster-sharded" {
+  description        = "Managed Service for ClickHouse cluster with advanced sharding"
   name               = "clickhouse-cluster-sharded"
   environment        = "PRODUCTION"
   network_id         = yandex_vpc_network.clickhouse_sharding_network.id
@@ -121,8 +125,8 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster-sharded" {
   }
 
   shard_group {
-    name        = "sgroup"
     description = "Shard group with two shards"
+    name        = "sgroup"
     shard_names = [
       "shard1",
       "shard2"
@@ -130,8 +134,8 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster-sharded" {
   }
 
   shard_group {
-    name        = "sgroup_data"
     description = "Shard group with one shard"
+    name        = "sgroup_data"
     shard_names = [
       "shard3"
     ]
@@ -142,8 +146,8 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster-sharded" {
   }
 
   user {
-    name     = "" # Set username
-    password = "" # Set user password
+    name     = local.db_username
+    password = local.db_password
     permission {
       database_name = "tutorial"
     }
