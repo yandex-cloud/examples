@@ -3,29 +3,30 @@
 # RU: https://cloud.yandex.ru/docs/managed-kafka/tutorials/kafka-connect
 # EN: https://cloud.yandex.com/en/docs/managed-kafka/tutorials/kafka-connect
 #
-# Specify the following settings:
-# * Virtual Machine
-#     * Image ID: https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list
-#     * OpenSSH public key
-# * Managed Service for Apache Kafka® cluster:
-#     * password for `user` account
+# Set the following settings:
 
-resource "yandex_vpc_network" "kafka-connect-network" {
-  name        = "kafka-connect-network"
-  description = "Network for the Managed Service for Apache Kafka® cluster."
+locals {
+  image_id        = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list.
+  vm_username     = "" # Set the username to connect to the routing VM via SSH. For Ubuntu images `ubuntu` username is used by default.
+  vm_ssh_key_path = "" # Set the path to the public SSH public key for the routing VM. Example: "~/.ssh/key.pub".
+  password        = "" # Set the password for the username "user".
 }
 
-# Subnet in ru-central1-a availability zone
+resource "yandex_vpc_network" "kafka-connect-network" {
+  description = "Network for the Managed Service for Apache Kafka® cluster"
+  name        = "kafka-connect-network"
+}
+
 resource "yandex_vpc_subnet" "subnet-a" {
+  description    = "Subnet in the ru-central1-a availability zone"
   name           = "kafka-subnet-a"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.kafka-connect-network.id
   v4_cidr_blocks = ["10.1.0.0/24"]
 }
 
-# Virtual machine with Ubuntu 20.04
 resource "yandex_compute_instance" "vm-ubuntu-20-04" {
-
+  description = "Virtual machine with Ubuntu 20.04"
   name        = "vm-ubuntu-20-04"
   platform_id = "standard-v1"
   zone        = "ru-central1-a"
@@ -37,7 +38,7 @@ resource "yandex_compute_instance" "vm-ubuntu-20-04" {
 
   boot_disk {
     initialize_params {
-      image_id = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list
+      image_id = local.image_id
     }
   }
 
@@ -50,7 +51,7 @@ resource "yandex_compute_instance" "vm-ubuntu-20-04" {
   metadata = {
     # Set username and path for SSH public key
     # For Ubuntu images used `ubuntu` username by default
-    ssh-keys = "<username>:${file("path for SSH public key")}"
+    ssh-keys = "local.vm_username:${file(local.vm_ssh_key_path)}"
   }
 }
 
@@ -59,37 +60,37 @@ resource "yandex_vpc_default_security_group" "kafka-connect-security-group" {
   network_id = yandex_vpc_network.kafka-connect-network.id
 
   ingress {
-    protocol       = "TCP"
     description    = "Allow connections to the Managed Service for Apache Kafka® broker hosts from the Internet"
+    protocol       = "TCP"
     port           = 9091
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
-    protocol       = "TCP"
     description    = "Allow connections to the Managed Service for Apache Kafka® schema registry from the Internet"
+    protocol       = "TCP"
     port           = 9440
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
-    protocol       = "TCP"
     description    = "Allow SSH connections to VM from the Internet"
+    protocol       = "TCP"
     port           = 22
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
-    protocol       = "ANY"
     description    = "Allow outgoing connections to any required resource"
+    protocol       = "ANY"
     from_port      = 0
     to_port        = 65535
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
-# Managed Service for Apache Kafka® cluster
 resource "yandex_mdb_kafka_cluster" "kafka-connect-cluster" {
+  description        = "Managed Service for Apache Kafka® cluster"
   environment        = "PRODUCTION"
   name               = "kafka-connect-cluster"
   network_id         = yandex_vpc_network.kafka-connect-network.id
@@ -114,7 +115,7 @@ resource "yandex_mdb_kafka_cluster" "kafka-connect-cluster" {
 
   user {
     name     = "user"
-    password = "" # Set the password
+    password = local.password
     permission {
       topic_name = "messages"
       role       = "ACCESS_ROLE_CONSUMER"

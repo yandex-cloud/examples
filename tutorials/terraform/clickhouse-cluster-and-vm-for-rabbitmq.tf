@@ -19,7 +19,7 @@ resource "yandex_vpc_network" "clickhouse-and-vm-network" {
 }
 
 resource "yandex_vpc_subnet" "subnet-a" {
-  description    = "Subnet in the ru-central1-a availability zone"
+
   name           = "subnet-a"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.clickhouse-and-vm-network.id
