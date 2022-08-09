@@ -3,58 +3,65 @@
 # RU: https://cloud.yandex.ru/docs/managed-clickhouse/tutorials/fetch-data-from-rabbitmq
 # EN: https://cloud.yandex.com/en/docs/managed-clickhouse/tutorials/fetch-data-from-rabbitmq
 #
-# Set the configuration of the Managed Service for ClickHouse cluster and Virtual Machine
+# Set the following settings:
 
-
-resource "yandex_vpc_network" "clickhouse-and-vm-network" {
-  name        = "clickhouse-and-vm-network"
-  description = "Network for the Managed Service for ClickHouse cluster and VM."
+locals {
+  db_username     = "" # Set database username
+  db_password     = "" # Set database user password
+  image_id        = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list
+  vm_username     = "" # Set the username to connect to the routing VM via SSH. For Ubuntu images `ubuntu` username is used by default
+  vm_ssh_key_path = "" # Set the path to the public SSH public key for the routing VM. Example: "~/.ssh/key.pub"
 }
 
-# Subnet in ru-central1-a availability zone
+resource "yandex_vpc_network" "clickhouse-and-vm-network" {
+  description = "Network for the Managed Service for ClickHouse cluster and VM"
+  name        = "clickhouse-and-vm-network"
+}
+
 resource "yandex_vpc_subnet" "subnet-a" {
+  description    = "Subnet in the ru-central1-a availability zone"
   name           = "subnet-a"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.clickhouse-and-vm-network.id
   v4_cidr_blocks = ["10.1.0.0/16"]
 }
 
-# Security group for the Managed Service for ClickHouse cluster and VM
 resource "yandex_vpc_default_security_group" "clickhouse-and-vm-security-group" {
-  network_id = yandex_vpc_network.clickhouse-and-vm-network.id
+  description = "Security group for the Managed Service for ClickHouse cluster and VM"
+  network_id  = yandex_vpc_network.clickhouse-and-vm-network.id
 
   ingress {
-    protocol       = "TCP"
     description    = "Allow incoming connections to cluster from any network"
+    protocol       = "TCP"
     port           = 9440
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
-    protocol       = "TCP"
     description    = "Allow incoming connections to RabbitMQ from any network"
+    protocol       = "TCP"
     port           = 5672
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
-    protocol       = "TCP"
     description    = "Allow incoming SSH connections to VM from the Internet"
+    protocol       = "TCP"
     port           = 22
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
-    protocol       = "ANY"
     description    = "Allow outgoing connections to any required resource"
+    protocol       = "ANY"
     from_port      = 0
     to_port        = 65535
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
-# Managed Service for ClickHouse cluster
 resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster" {
+  description        = "Managed Service for ClickHouse cluster"
   name               = "clickhouse-cluster"
   environment        = "PRODUCTION"
   network_id         = yandex_vpc_network.clickhouse-and-vm-network.id
@@ -80,8 +87,8 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster" {
   }
 
   user {
-    name     = "" # Set the username
-    password = "" # Set the user password
+    name     = local.db_username
+    password = local.db_password
     permission {
       database_name = "db1"
     }
@@ -101,7 +108,7 @@ resource "yandex_compute_instance" "vm-1" {
 
   boot_disk {
     initialize_params {
-      image_id = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list
+      image_id = local.image_id
     }
   }
 
@@ -111,6 +118,6 @@ resource "yandex_compute_instance" "vm-1" {
   }
 
   metadata = {
-    ssh-keys = "<username>:${file("path for SSH public key")}" # Set username and path for SSH public key
+    ssh-keys = "local.vm_username:${file(local.vm_ssh_key_path)}"
   }
 }
