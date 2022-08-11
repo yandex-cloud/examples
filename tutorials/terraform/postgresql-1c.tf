@@ -3,52 +3,69 @@
 # RU: https://cloud.yandex.ru/docs/managed-postgresql/tutorials/1c-postgresql
 # EN: https://cloud.yandex.com/en/docs/managed-postgresql/tutorials/1c-postgresql
 #
-# Set the user password for Managed Service for PostgreSQL 1C cluster
+# Set the following settings:
+
+locals {
+  db_password = "" # Set database user password
+}
 
 
 resource "yandex_vpc_network" "postgresql-1c-network" {
+  description = "Network for the Managed Service for PostgreSQL 1C cluster"
   name        = "postgresql-1c-network"
-  description = "Network for the Managed Service for PostgreSQL 1C cluster."
 }
 
-# Subnet in ru-central1-a availability zone
 resource "yandex_vpc_subnet" "subnet-a" {
+  description    = "Subnet in the ru-central1-a availability zone"
   name           = "postgresql-subnet-a"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.postgresql-1c-network.id
   v4_cidr_blocks = ["10.1.0.0/16"]
 }
 
-# Subnet in ru-central1-b availability zone
 resource "yandex_vpc_subnet" "subnet-b" {
+  description    = "Subnet in the ru-central1-b availability zone"
   name           = "postgresql-subnet-b"
   zone           = "ru-central1-b"
   network_id     = yandex_vpc_network.postgresql-1c-network.id
   v4_cidr_blocks = ["10.2.0.0/16"]
 }
 
-# Subnet in ru-central1-c availability zone
 resource "yandex_vpc_subnet" "subnet-c" {
+  description    = "Subnet in the ru-central1-c availability zone"
   name           = "postgresql-subnet-c"
   zone           = "ru-central1-c"
   network_id     = yandex_vpc_network.postgresql-1c-network.id
   v4_cidr_blocks = ["10.3.0.0/16"]
 }
 
-# Security group for the Managed Service for PostgreSQL 1C cluster
 resource "yandex_vpc_default_security_group" "postgresql-security-group" {
-  network_id = yandex_vpc_network.postgresql-1c-network.id
+  description = "Security group for the Managed Service for PostgreSQL 1C cluster"
+  network_id  = yandex_vpc_network.postgresql-1c-network.id
 
   ingress {
-    protocol       = "TCP"
     description    = "Allow incoming connections to cluster from the Internet"
+    protocol       = "TCP"
     port           = 6432
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
-# Managed Service for PostgreSQL 1C cluster
+resource "yandex_mdb_postgresql_database" "postgresql-1c" {
+  cluster_id = yandex_mdb_postgresql_cluster.postgresql-1c.id
+  name       = "postgresql-1c"
+  owner      = yandex_mdb_postgresql_user.user.name # Base owner name
+}
+
+resource "yandex_mdb_postgresql_user" "user" {
+  cluster_id = yandex_mdb_postgresql_cluster.postgresql-1c.id
+  name       = "user-1c" # Username
+  password   = local.db_password
+
+}
+
 resource "yandex_mdb_postgresql_cluster" "postgresql-1c" {
+  description        = "Managed Service for PostgreSQL 1C cluster"
   name               = "postgresql-1c"
   environment        = "PRODUCTION"
   network_id         = yandex_vpc_network.postgresql-1c-network.id
@@ -62,20 +79,6 @@ resource "yandex_mdb_postgresql_cluster" "postgresql-1c" {
       disk_size          = "10" # GB
     }
   }
-
-  database {
-    name  = "postgresql-1c"
-    owner = "user-1c" # Base owner name
-  }
-
-  user {
-    name     = "user-1c" # Username
-    password = ""        # Set user password
-    permission {
-      database_name = "postgresql-1c"
-    }
-  }
-
   host {
     zone             = "ru-central1-a"
     subnet_id        = yandex_vpc_subnet.subnet-a.id
