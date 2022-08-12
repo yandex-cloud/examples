@@ -6,11 +6,11 @@
 # Set the following settings:
 
 locals {
-  password        = ""    # Set the password for the Managed Service for Redis cluster
-  version         = "6.2" # Set the version of the Redis
-  image_id        = ""    # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list
-  vm_username     = ""    # Set the username to connect to the routing VM via SSH. For Ubuntu images `ubuntu` username is used by default
-  vm_ssh_key_path = ""    # Set the path to the public SSH public key for the routing VM. Example: "~/.ssh/key.pub"
+  password        = ""    # Set the password for the Managed Service for Redis cluster.
+  version         = "6.2" # Set the version of the Redis.
+  image_id        = ""    # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list.
+  vm_username     = ""    # Set the username to connect to the routing VM via SSH. For Ubuntu images `ubuntu` username is used by default.
+  vm_ssh_key_path = ""    # Set the path to the public SSH public key for the routing VM. Example: "~/.ssh/key.pub".
 }
 resource "yandex_vpc_network" "redis-and-vm-network" {
   description = "Network for the Managed Service for Redis cluster and VM"

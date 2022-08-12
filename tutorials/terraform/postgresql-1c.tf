@@ -6,7 +6,7 @@
 # Set the following settings:
 
 locals {
-  db_password = "" # Set database user password
+  db_password = "" # Set database user password.
 }
 
 

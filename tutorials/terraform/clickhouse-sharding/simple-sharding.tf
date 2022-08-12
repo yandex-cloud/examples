@@ -6,8 +6,8 @@
 # Set the following settings:
 
 locals {
-  db_username = "" # Set database username
-  db_password = "" # Set database user password
+  db_username = "" # Set database username.
+  db_password = "" # Set database user password.
 }
 
 resource "yandex_vpc_network" "clickhouse_sharding_network" {

@@ -6,11 +6,11 @@
 # Set the following settings:
 
 locals {
-  db_username     = "" # Set database username
-  db_password     = "" # Set database user password
-  image_id        = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list
-  vm_username     = "" # Set the username to connect to the routing VM via SSH. For Ubuntu images `ubuntu` username is used by default
-  vm_ssh_key_path = "" # Set the path to the public SSH public key for the routing VM. Example: "~/.ssh/key.pub"
+  db_username     = "" # Set database username.
+  db_password     = "" # Set database user password.
+  image_id        = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list.
+  vm_username     = "" # Set the username to connect to the routing VM via SSH. For Ubuntu images `ubuntu` username is used by default.
+  vm_ssh_key_path = "" # Set the path to the public SSH public key for the routing VM. Example: "~/.ssh/key.pub".
 }
 
 resource "yandex_vpc_network" "clickhouse-and-vm-network" {
@@ -19,7 +19,7 @@ resource "yandex_vpc_network" "clickhouse-and-vm-network" {
 }
 
 resource "yandex_vpc_subnet" "subnet-a" {
-
+  description = "Subnet in the ru-central1-a availability zone"
   name           = "subnet-a"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.clickhouse-and-vm-network.id
