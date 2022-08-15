@@ -5,10 +5,11 @@
 #
 # Set the configuration of the Managed Service for PostgreSQL cluster:
 locals {
-  pg_version = "14" # Set the PostgreSQL version. It must be the same or higher than the version in the Amazon RDS. See the complete list of the supported versions in https://cloud.yandex.com/en/docs/managed-postgresql/.
-  db_name    = ""   # Set a database name. It must be the same as in the Amazon RDS.
-  username   = ""   # Set a database owner name.
-  password   = ""   # Set a database owner password.
+  zone_a_v4_cidr_blocks = "10.1.0.0/16" # Set the CIDR block for subnet in the ru-central1-a availability zone.
+  pg_version            = "14"          # Set the PostgreSQL version. It must be the same or higher than the version in the Amazon RDS. See the complete list of the supported versions in https://cloud.yandex.com/en/docs/managed-postgresql/.
+  db_name               = ""            # Set a database name. It must be the same as in the Amazon RDS.
+  username              = ""            # Set a database owner name.
+  password              = ""            # Set a database owner password.
 }
 
 resource "yandex_vpc_network" "network" {
@@ -21,7 +22,7 @@ resource "yandex_vpc_subnet" "subnet-a" {
   name           = "subnet-a"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.network.id
-  v4_cidr_blocks = ["10.1.0.0/16"]
+  v4_cidr_blocks = [local.zone_a_v4_cidr_blocks]
 }
 
 resource "yandex_vpc_security_group" "cluster-security-group" {

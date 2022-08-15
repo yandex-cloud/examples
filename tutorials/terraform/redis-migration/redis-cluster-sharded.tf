@@ -5,9 +5,15 @@
 #
 # Specify the following settings:
 locals {
+  zone_a_v4_cidr_blocks = "10.1.0.0/16" # Set the CIDR block for subnet in the ru-central1-a availability zone.
+  zone_b_v4_cidr_blocks = "10.2.0.0/16" # Set the CIDR block for subnet in the ru-central1-b availability zone.
+  zone_c_v4_cidr_blocks = "10.3.0.0/16" # Set the CIDR block for subnet in the ru-central1-c availability zone.
   # Managed Service for Redis cluster.
-  redis_version = "6.2" # Set the Redis version.
-  password      = ""    # Set the cluster password.
+  redis_version = "6.2"    # Set the Redis version.
+  password      = ""       # Set the cluster password.
+  shard_name1   = "shard1" # Set the name for the first shard.
+  shard_name2   = "shard2" # Set the name for the first shard.
+  shard_name3   = "shard3" # Set the name for the first shard.
   # (Optional) Virtual Machine. If you use VM for connection to the cluster, uncomment these lines.
   # vm_image_id   = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list.
   # vm_username   = "" # Set a username for VM. Images with Ubuntu Linux use the username `ubuntu` by default.
@@ -24,7 +30,7 @@ resource "yandex_vpc_subnet" "subnet-a" {
   name           = "subnet-a"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.network.id
-  v4_cidr_blocks = ["10.1.0.0/16"]
+  v4_cidr_blocks = [local.zone_a_v4_cidr_blocks]
 }
 
 resource "yandex_vpc_subnet" "subnet-b" {
@@ -32,7 +38,7 @@ resource "yandex_vpc_subnet" "subnet-b" {
   name           = "subnet-b"
   zone           = "ru-central1-b"
   network_id     = yandex_vpc_network.network.id
-  v4_cidr_blocks = ["10.2.0.0/16"]
+  v4_cidr_blocks = [local.zone_b_v4_cidr_blocks]
 }
 
 resource "yandex_vpc_subnet" "subnet-c" {
@@ -40,7 +46,7 @@ resource "yandex_vpc_subnet" "subnet-c" {
   name           = "subnet-c"
   zone           = "ru-central1-c"
   network_id     = yandex_vpc_network.network.id
-  v4_cidr_blocks = ["10.3.0.0/16"]
+  v4_cidr_blocks = [local.zone_c_v4_cidr_blocks]
 }
 
 resource "yandex_vpc_security_group" "security-group-redis" {
@@ -115,21 +121,21 @@ resource "yandex_mdb_redis_cluster" "redis-cluster" {
   host {
     zone             = "ru-central1-a"
     subnet_id        = yandex_vpc_subnet.subnet-a.id
-    shard_name       = "shard1"
+    shard_name       = local.shard_name1
     assign_public_ip = true # Required for connection from the Internet. For a method without VM.
   }
 
   host {
     zone             = "ru-central1-b"
     subnet_id        = yandex_vpc_subnet.subnet-b.id
-    shard_name       = "shard2"
+    shard_name       = local.shard_name2
     assign_public_ip = true # Required for connection from the Internet. For a method without VM.
   }
 
   host {
     zone             = "ru-central1-c"
     subnet_id        = yandex_vpc_subnet.subnet-c.id
-    shard_name       = "shard3"
+    shard_name       = local.shard_name3
     assign_public_ip = true # Required for connection from the Internet. For a method without VM.
   }
 }

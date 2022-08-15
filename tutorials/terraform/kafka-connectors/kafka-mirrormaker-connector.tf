@@ -6,6 +6,9 @@
 # Set the following settings:
 
 locals {
+  zone_a_v4_cidr_blocks    = "10.1.0.0/16"               # Set the CIDR block for subnet in the ru-central1-a availability zone.
+  zone_b_v4_cidr_blocks    = "10.2.0.0/16"               # Set the CIDR block for subnet in the ru-central1-b availability zone.
+  zone_c_v4_cidr_blocks    = "10.3.0.0/16"               # Set the CIDR block for subnet in the ru-central1-c availability zone.
   source_user              = ""                          # Source cluster user name.
   source_password          = ""                          # Source cluster user password.
   source_alias             = "source"                    # Specify prefix for the source cluster.
@@ -15,6 +18,8 @@ locals {
   target_alias             = "target"                    # Specify prefix for the target cluster.
   topics_prefix            = "data.*"                    # Specify topics that must be migrated.
   kafka_version            = "2.8"                       # Specify version of Apache Kafka® for the cluster.
+  sasl_mechanism           = "SCRAM-SHA-512"             # Specify encryption algorythm for username and password.
+  security_protocol        = "SASL_SSL"                  # Specify connection protocol for the MirrorMaker connector.
 }
 
 resource "yandex_vpc_network" "network" {
@@ -27,7 +32,7 @@ resource "yandex_vpc_subnet" "subnet-a" {
   name           = "subnet-a"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.network.id
-  v4_cidr_blocks = ["10.1.0.0/16"]
+  v4_cidr_blocks = [local.zone_a_v4_cidr_blocks]
 }
 
 resource "yandex_vpc_subnet" "subnet-b" {
@@ -35,7 +40,7 @@ resource "yandex_vpc_subnet" "subnet-b" {
   name           = "subnet-b"
   zone           = "ru-central1-b"
   network_id     = yandex_vpc_network.network.id
-  v4_cidr_blocks = ["10.2.0.0/16"]
+  v4_cidr_blocks = [local.zone_b_v4_cidr_blocks]
 }
 
 resource "yandex_vpc_subnet" "subnet-c" {
@@ -43,7 +48,7 @@ resource "yandex_vpc_subnet" "subnet-c" {
   name           = "subnet-c"
   zone           = "ru-central1-c"
   network_id     = yandex_vpc_network.network.id
-  v4_cidr_blocks = ["10.3.0.0/16"]
+  v4_cidr_blocks = [local.zone_c_v4_cidr_blocks]
 }
 
 resource "yandex_vpc_default_security_group" "security-group" {
@@ -115,8 +120,8 @@ resource "yandex_mdb_kafka_connector" "connector" {
         bootstrap_servers = local.source_bootstrap_servers
         sasl_username     = local.source_user
         sasl_password     = local.source_password
-        sasl_mechanism    = "SCRAM-SHA-512" # Specify encryption algorythm for username and password.
-        security_protocol = "SASL_SSL"      # Specify connection protocol for the MirrorMaker connector.
+        sasl_mechanism    = local.sasl_mechanism
+        security_protocol = local.security_protocol
       }
     }
     target_cluster {

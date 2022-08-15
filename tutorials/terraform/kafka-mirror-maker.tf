@@ -6,18 +6,18 @@
 # Set the following settings:
 
 locals {
-  username        = "" # Set the admin username.
-  password        = "" # Set the admin password.
-  image_id        = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list.
-  vm_username     = "" # Set the username to connect to the routing VM via SSH. For Ubuntu images `ubuntu` username is used by default.
-  vm_ssh_key_path = "" # Set the path to the public SSH public key for the routing VM. Example: "~/.ssh/key.pub".
+  zone_a_v4_cidr_blocks = "10.1.0.0/16" # Set the CIDR block for subnet in the ru-central1-a availability zone.
+  username              = ""            # Set the admin username.
+  password              = ""            # Set the admin password.
+  image_id              = ""            # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list.
+  vm_username           = ""            # Set the username to connect to the routing VM via SSH. For Ubuntu images `ubuntu` username is used by default.
+  vm_ssh_key_path       = ""            # Set the path to the public SSH public key for the routing VM. Example: "~/.ssh/key.pub".
 }
 
 
 resource "yandex_vpc_network" "network" {
   description = "Network for the Managed Service for Apache Kafka® cluster and VM"
   name        = "network"
-
 }
 
 # Subnet in ru-central1-a availability zone
@@ -26,7 +26,7 @@ resource "yandex_vpc_subnet" "subnet-a" {
   name           = "subnet-a"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.network.id
-  v4_cidr_blocks = ["10.1.0.0/16"]
+  v4_cidr_blocks = [local.zone_a_v4_cidr_blocks]
 }
 
 # Security group for the Managed Service for Apache Kafka® cluster and VM

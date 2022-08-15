@@ -6,8 +6,10 @@
 # Set the following settings:
 
 locals {
-  db_username = "" # Set database username
-  db_password = "" # Set database user password
+  zone_a_v4_cidr_blocks = "10.1.0.0/16" # Set the CIDR block for subnet in the ru-central1-a availability zone.
+  db_username           = ""            # Set database username
+  db_password           = ""            # Set database user password
+  db_name               = "tutorial"    # Set database name.
 }
 
 resource "yandex_vpc_network" "clickhouse_hybrid_storage_network" {
@@ -20,7 +22,7 @@ resource "yandex_vpc_subnet" "subnet-a" {
   name           = "clickhouse-subnet-a"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.clickhouse_hybrid_storage_network.id
-  v4_cidr_blocks = ["10.1.0.0/16"]
+  v4_cidr_blocks = [local.zone_a_v4_cidr_blocks]
 }
 
 resource "yandex_vpc_default_security_group" "clickhouse-security-group" {
@@ -66,14 +68,14 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster" {
   }
 
   database {
-    name = "tutorial"
+    name = local.db_name
   }
 
   user {
     name     = local.db_username
     password = local.db_password
     permission {
-      database_name = "tutorial"
+      database_name = local.db_name
     }
   }
 

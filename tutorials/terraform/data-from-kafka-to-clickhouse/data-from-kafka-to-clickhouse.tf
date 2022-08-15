@@ -8,15 +8,17 @@
 # Set the following settings:
 
 locals {
-  producer_name     = "" # Set name of the producer.
-  producer_password = "" # Set the password of the producer.
-  topic_name        = "" # Set the Kafka topic name. Each Managed Service for Apache Kafka® cluster must have its unique topic name.
-  consumer_name     = "" # Set name of the consumer.
-  consumer_password = "" # Set the password of the consumer.
-  db_user_name      = "" # Set database username.
-  db_user_password  = "" # Set database user password.
+  producer_name           = ""                   # Set name of the producer.
+  producer_password       = ""                   # Set the password of the producer.
+  topic_name              = ""                   # Set the Kafka topic name. Each Managed Service for Apache Kafka® cluster must have its unique topic name.
+  consumer_name           = ""                   # Set name of the consumer.
+  consumer_password       = ""                   # Set the password of the consumer.
+  db_user_name            = ""                   # Set database username.
+  db_user_password        = ""                   # Set database user password.
+  zone_a_v4_cidr_blocks   = "10.1.0.0/16"        # Set the CIDR block for subnet in the ru-central1-a availability zone.
+  kafka_cluster_name      = "kafka-cluster"      # Set the Managed Service for Apache Kafka® cluster name
+  clickhouse_cluster_name = "clickhouse-cluster" # Set the Managed Service for ClickHouse cluster name
 }
-
 
 resource "yandex_vpc_network" "network" {
   description = "Network for the Managed Service for Apache Kafka® and ClickHouse clusters"
@@ -28,7 +30,7 @@ resource "yandex_vpc_subnet" "subnet-a" {
   name           = "subnet-a"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.network.id
-  v4_cidr_blocks = ["10.1.0.0/16"]
+  v4_cidr_blocks = [local.zone_a_v4_cidr_blocks]
 }
 
 
@@ -61,7 +63,7 @@ resource "yandex_vpc_default_security_group" "security-group" {
 
 resource "yandex_mdb_kafka_cluster" "kafka-cluster" {
   description        = "Managed Service for Apache Kafka® cluster"
-  name               = "kafka-cluster"
+  name               = local.kafka_cluster_name
   environment        = "PRODUCTION"
   network_id         = yandex_vpc_network.network.id
   security_group_ids = [yandex_vpc_default_security_group.security-group.id]
@@ -108,7 +110,7 @@ resource "yandex_mdb_kafka_topic" "events" {
 
 resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster" {
   description        = "Managed Service for ClickHouse cluster"
-  name               = "clickhouse-cluster"
+  name               = local.clickhouse_cluster_name
   environment        = "PRODUCTION"
   network_id         = yandex_vpc_network.network.id
   security_group_ids = [yandex_vpc_default_security_group.security-group.id]

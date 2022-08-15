@@ -5,6 +5,7 @@
 #
 # Specify the following settings:
 locals {
+  zone_a_v4_cidr_blocks = "10.1.0.0/16" # Set the CIDR block for subnet in the ru-central1-a availability zone.
   # Managed Service for Redis cluster.
   redis_version = "6.2" # Set the Redis version.
   password      = ""    # Set the cluster password.
@@ -24,7 +25,7 @@ resource "yandex_vpc_subnet" "subnet-a" {
   name           = "subnet-a"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.network.id
-  v4_cidr_blocks = ["10.1.0.0/16"]
+  v4_cidr_blocks = [local.zone_a_v4_cidr_blocks]
 }
 
 resource "yandex_vpc_security_group" "security-group-redis" {

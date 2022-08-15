@@ -6,6 +6,9 @@
 # Set the following settings:
 
 locals {
+  zone_a_v4_cidr_blocks    = "10.1.0.0/16"                # Set the CIDR block for subnet in the ru-central1-a availability zone.
+  zone_b_v4_cidr_blocks    = "10.2.0.0/16"                # Set the CIDR block for subnet in the ru-central1-b availability zone.
+  zone_c_v4_cidr_blocks    = "10.3.0.0/16"                # Set the CIDR block for subnet in the ru-central1-c availability zone.
   db_password = "" # Set database user password.
 }
 
@@ -20,7 +23,7 @@ resource "yandex_vpc_subnet" "subnet-a" {
   name           = "postgresql-subnet-a"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.postgresql-1c-network.id
-  v4_cidr_blocks = ["10.1.0.0/16"]
+  v4_cidr_blocks = [local.zone_a_v4_cidr_blocks]
 }
 
 resource "yandex_vpc_subnet" "subnet-b" {
@@ -28,7 +31,7 @@ resource "yandex_vpc_subnet" "subnet-b" {
   name           = "postgresql-subnet-b"
   zone           = "ru-central1-b"
   network_id     = yandex_vpc_network.postgresql-1c-network.id
-  v4_cidr_blocks = ["10.2.0.0/16"]
+  v4_cidr_blocks = [local.zone_b_v4_cidr_blocks]
 }
 
 resource "yandex_vpc_subnet" "subnet-c" {
@@ -36,7 +39,7 @@ resource "yandex_vpc_subnet" "subnet-c" {
   name           = "postgresql-subnet-c"
   zone           = "ru-central1-c"
   network_id     = yandex_vpc_network.postgresql-1c-network.id
-  v4_cidr_blocks = ["10.3.0.0/16"]
+  v4_cidr_blocks = [local.zone_c_v4_cidr_blocks]
 }
 
 resource "yandex_vpc_default_security_group" "postgresql-security-group" {
