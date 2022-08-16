@@ -9,7 +9,7 @@ locals {
   image_id        = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list.
   vm_username     = "" # Set the username to connect to the routing VM via SSH. For Ubuntu images `ubuntu` username is used by default.
   vm_ssh_key_path = "" # Set the path to the public SSH public key for the routing VM. Example: "~/.ssh/key.pub".
-  password        = "" # Set the password for the username "user".
+  password        = "" # Set the password for the username "user" in Managed Service for Apache Kafka® cluster.
 }
 
 resource "yandex_vpc_network" "kafka-connect-network" {

@@ -7,8 +7,8 @@
 
 locals {
   zone_a_v4_cidr_blocks = "10.1.0.0/16" # Set the CIDR block for subnet in the ru-central1-a availability zone.
-  username              = ""            # Set the admin username.
-  password              = ""            # Set the admin password.
+  username              = ""            # Set the admin username in Managed Service for Apache Kafka® cluster.
+  password              = ""            # Set the admin password Managed Service for Apache Kafka® cluster.
   image_id              = ""            # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list.
   vm_username           = ""            # Set the username to connect to the routing VM via SSH. For Ubuntu images `ubuntu` username is used by default.
   vm_ssh_key_path       = ""            # Set the path to the public SSH public key for the routing VM. Example: "~/.ssh/key.pub".

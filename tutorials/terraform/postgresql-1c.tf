@@ -6,12 +6,13 @@
 # Set the following settings:
 
 locals {
-  zone_a_v4_cidr_blocks    = "10.1.0.0/16"                # Set the CIDR block for subnet in the ru-central1-a availability zone.
-  zone_b_v4_cidr_blocks    = "10.2.0.0/16"                # Set the CIDR block for subnet in the ru-central1-b availability zone.
-  zone_c_v4_cidr_blocks    = "10.3.0.0/16"                # Set the CIDR block for subnet in the ru-central1-c availability zone.
-  db_password = "" # Set database user password.
+  zone_a_v4_cidr_blocks = "10.1.0.0/16"   # Set the CIDR block for subnet in the ru-central1-a availability zone.
+  zone_b_v4_cidr_blocks = "10.2.0.0/16"   # Set the CIDR block for subnet in the ru-central1-b availability zone.
+  zone_c_v4_cidr_blocks = "10.3.0.0/16"   # Set the CIDR block for subnet in the ru-central1-c availability zone.
+  cluster_name          = "postgresql-1c" # Set the Managed Service for PostgreSQL cluster name
+  db_username           = "user-1c"       # Set database username.
+  db_password           = ""              # Set database user password.
 }
-
 
 resource "yandex_vpc_network" "postgresql-1c-network" {
   description = "Network for the Managed Service for PostgreSQL 1C cluster"
@@ -62,7 +63,7 @@ resource "yandex_mdb_postgresql_database" "postgresql-1c" {
 
 resource "yandex_mdb_postgresql_user" "user" {
   cluster_id = yandex_mdb_postgresql_cluster.postgresql-1c.id
-  name       = "user-1c" # Username
+  name       = local.db_username
   password   = local.db_password
 
 }
@@ -85,18 +86,18 @@ resource "yandex_mdb_postgresql_cluster" "postgresql-1c" {
   host {
     zone             = "ru-central1-a"
     subnet_id        = yandex_vpc_subnet.subnet-a.id
-    assign_public_ip = true # Required for connection from the Internet
+    assign_public_ip = true # Required for connection from the Internet.
   }
 
   host {
     zone             = "ru-central1-b"
     subnet_id        = yandex_vpc_subnet.subnet-b.id
-    assign_public_ip = true # Required for connection from the Internet
+    assign_public_ip = true # Required for connection from the Internet.
   }
 
   host {
     zone             = "ru-central1-c"
     subnet_id        = yandex_vpc_subnet.subnet-c.id
-    assign_public_ip = true # Required for connection from the Internet
+    assign_public_ip = true # Required for connection from the Internet.
   }
 }

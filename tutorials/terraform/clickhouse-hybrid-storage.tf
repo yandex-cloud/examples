@@ -7,8 +7,8 @@
 
 locals {
   zone_a_v4_cidr_blocks = "10.1.0.0/16" # Set the CIDR block for subnet in the ru-central1-a availability zone.
-  db_username           = ""            # Set database username
-  db_password           = ""            # Set database user password
+  db_username           = ""            # Set database username.
+  db_password           = ""            # Set database user password.
   db_name               = "tutorial"    # Set database name.
 }
 
@@ -64,7 +64,7 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster" {
     type             = "CLICKHOUSE"
     zone             = "ru-central1-a"
     subnet_id        = yandex_vpc_subnet.subnet-a.id
-    assign_public_ip = true # Required for connection from Internet
+    assign_public_ip = true # Required for connection from Internet.
   }
 
   database {

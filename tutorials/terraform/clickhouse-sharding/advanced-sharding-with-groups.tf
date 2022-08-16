@@ -6,17 +6,17 @@
 # Set the following settings:
 
 locals {
-  db_username              = "user1"                      # Set database username.
-  db_password              = "11111111"                   # Set database user password.
+  db_username              = ""                           # Set database username.
+  db_password              = ""                           # Set database user password.
   db_name                  = "tutorial"                   # Set database name.
   zone_a_v4_cidr_blocks    = "10.1.0.0/24"                # Set the CIDR block for subnet in the ru-central1-a availability zone.
   zone_b_v4_cidr_blocks    = "10.2.0.0/24"                # Set the CIDR block for subnet in the ru-central1-b availability zone.
   zone_c_v4_cidr_blocks    = "10.3.0.0/24"                # Set the CIDR block for subnet in the ru-central1-c availability zone.
-  cluster_name             = "clickhouse-cluster-sharded" # Set the Managed Service for ClickHouse cluster name
+  cluster_name             = "clickhouse-cluster-sharded" # Set the Managed Service for ClickHouse cluster name.
   mch_master_host_class    = "s2.micro"                   # Set the host class for the Managed Service for ClickHouse cluster master host.
   mch_zk_host_class        = "s2.micro"                   # Set the host class for the Managed Service for ClickHouse cluster Zookeeper host.
-  shard_group_2shards_name = "sgroup"                     # Set the shard group with two shards name
-  shard_group_data_name    = "sgroup_data"                # Set the shard group with one shard name
+  shard_group_2shards_name = "sgroup"                     # Set the shard group with two shards name.
+  shard_group_data_name    = "sgroup_data"                # Set the shard group with one shard name.
   shard_name1              = "shard1"                     # Set the name for the first shard.
   shard_name2              = "shard2"                     # Set the name for the first shard.
   shard_name3              = "shard3"                     # Set the name for the first shard.
@@ -98,7 +98,7 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster-sharded" {
     type             = "CLICKHOUSE"
     zone             = "ru-central1-a"
     subnet_id        = yandex_vpc_subnet.subnet-a.id
-    assign_public_ip = true # Required for connection from the Internet
+    assign_public_ip = true # Required for connection from the Internet.
     shard_name       = local.shard_name1
   }
 
@@ -106,7 +106,7 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster-sharded" {
     type             = "CLICKHOUSE"
     zone             = "ru-central1-b"
     subnet_id        = yandex_vpc_subnet.subnet-b.id
-    assign_public_ip = true # Required for connection from the Internet
+    assign_public_ip = true # Required for connection from the Internet.
     shard_name       = local.shard_name2
   }
 
@@ -114,7 +114,7 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster-sharded" {
     type             = "CLICKHOUSE"
     zone             = "ru-central1-c"
     subnet_id        = yandex_vpc_subnet.subnet-c.id
-    assign_public_ip = true # Required for connection from the Internet
+    assign_public_ip = true # Required for connection from the Internet.
     shard_name       = local.shard_name3
   }
 
