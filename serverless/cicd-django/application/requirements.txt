@@ -1,0 +1,6 @@
+Django>=3.0,<4.0
+dynamorm
+marshmallow
+cryptography>=3.3.1
+yandexcloud
+pyyaml

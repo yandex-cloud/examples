@@ -1,0 +1,75 @@
+name: Build and push docker image
+on:
+  workflow_call:
+    inputs:
+      build_kind:
+        type: string
+        required: true
+        description: Тип сборки. Используется в имени docker-образа, позволяет хранить релизные сборки и pr-сборки отдельно
+      build_name:
+        type: string
+        required: true
+        description: Имя сборки, используется в имени docker-образа
+    outputs:
+      docker_image:
+        description: Полное имя (тег) собранного docker-образа
+        value: ${{ jobs.build.outputs.docker_image }}
+    secrets:
+      SA_BUILDER_PRIVATE_KEY:
+        description: Ключ сервисного аккаунта Yandex Cloud, имеющий права на запись в реестр docker-образов
+        required: true
+
+jobs:
+  # Читаем конфигурационный файл config/infra.yaml для получения адреса реестра
+  read-infra-config:
+    runs-on: ubuntu-latest
+    outputs:
+      data: ${{ steps.read-yaml.outputs.data }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up yq
+        uses: frenck/action-setup-yq@v1
+      - name: Read yaml
+        id: read-yaml
+        run: |
+          echo -n '::set-output name=data::'
+          yq -o=json -I=0 '.' "config/infra.yaml"
+  # Сборка и публикация docker-образа
+  build:
+    needs: read-infra-config
+    runs-on: ubuntu-latest
+    outputs:
+      docker_image: ${{ steps.check-image.outputs.docker_image }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Yandex Cloud CR "Login" Action for GitHub Actions
+        uses: yc-actions/yc-cr-login@v1.0.0
+        with:
+          yc-sa-json-credentials: ${{ secrets.SA_BUILDER_PRIVATE_KEY }}
+      # Вычислим имя образа и проверим, нет ли уже готового образа с этим именем в реестре
+      - name: Compute image name and test if it already exists
+        id: check-image
+        env:
+          CR_REGISTRY: ${{ fromJson(needs.read-infra-config.outputs.data).registry.id }}
+          CR_REPOSITORY: ${{ inputs.build_kind }}/${{ inputs.build_name }}/helloworld-app
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          export IMAGE_URI="cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG"
+          echo "::set-output name=docker_image::$IMAGE_URI"
+          if docker manifest inspect "$IMAGE_URI" > /dev/null; then
+            echo "::set-output name=exists::true"
+            echo "Image already exists: $IMAGE_URI"
+          else
+            echo "::set-output name=exists::false"
+          fi
+      - name: Build, tag, and push image to Yandex Cloud Container Registry
+        id: push
+        working-directory: application
+        # Если образ уже существует - то пропускаем сборку.
+        # В версии образа используется номер коммита, значит собранный ранее образ нам подходит для переиспользования
+        if: "!fromJson(steps.check-image.outputs.exists)"
+        env:
+          IMAGE_URI: ${{ steps.check-image.outputs.docker_image }}
+        run: |
+          docker build -t $IMAGE_URI .
+          docker push $IMAGE_URI
