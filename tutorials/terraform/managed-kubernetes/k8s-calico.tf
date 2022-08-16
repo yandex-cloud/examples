@@ -171,7 +171,7 @@ resource "yandex_kubernetes_node_group" "k8s-node-group" {
 
     resources {
       memory = 4 # GB
-      cores  = 4 # Number of CPU cores.
+      cores  = 4 # Number of CPU cores
     }
 
     boot_disk {
