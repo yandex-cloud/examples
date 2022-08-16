@@ -4,8 +4,8 @@
 
 locals {
   zone_a_v4_cidr_blocks = "10.1.0.0/16" # Set the CIDR block for subnet in the ru-central1-a availability zone.
-  folder_id             = ""            # Set your cloud folder ID
-  k8s_version           = "1.21"        # Set the version of Kubernetes for node group
+  folder_id             = ""            # Set your cloud folder ID.
+  k8s_version           = "1.21"        # Set the version of Kubernetes.
 }
 
 resource "yandex_vpc_network" "k8s-network" {
