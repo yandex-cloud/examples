@@ -70,7 +70,7 @@ resource "yandex_mdb_postgresql_user" "user" {
 
 resource "yandex_mdb_postgresql_cluster" "postgresql-1c" {
   description        = "Managed Service for PostgreSQL 1C cluster"
-  name               = "postgresql-1c"
+  name               = local.cluster_name
   environment        = "PRODUCTION"
   network_id         = yandex_vpc_network.postgresql-1c-network.id
   security_group_ids = [yandex_vpc_default_security_group.postgresql-security-group.id]
