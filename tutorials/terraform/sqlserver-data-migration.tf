@@ -6,7 +6,7 @@
 # Set the configuration of the Managed Service for SQL Server cluster:
 locals {
   sql_server_version   = ""                       # Set the SQL Server version. It must be the same or higher than the version in the source cluster.
-  sql_server_collation = "Cyrillic_General_CI_AS" # SQL Collation cluster. Cannot be changed when cluster is created!
+  sql_server_collation = "Cyrillic_General_CI_AS" # SQL Collation option for the target cluster. Cannot be changed when cluster is created!
   db_name              = ""                       # Set a database name.
   username             = ""                       # Set a user name.
   password             = ""                       # Set a user password.
