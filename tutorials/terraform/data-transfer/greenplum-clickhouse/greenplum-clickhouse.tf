@@ -5,8 +5,8 @@
 
 # Specify the following settings
 locals {
-  gp_password        = "" # Set a password for the Greenplum® admin user
-  ch_password        = "" # Set a password for the ClickHouse admin user
+  gp_password = "" # Set a password for the Greenplum® admin user
+  ch_password = "" # Set a password for the ClickHouse admin user
 }
 
 resource "yandex_vpc_network" "mgp_network" {
@@ -20,7 +20,7 @@ resource "yandex_vpc_network" "mch_network" {
 }
 
 resource "yandex_vpc_subnet" "mgp_subnet-a" {
-  description = "Subnet in ru-central1-a availability zone for Greenplum®"
+  description    = "Subnet in ru-central1-a availability zone for Greenplum®"
   name           = "mgp_subnet-a"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.mgp_network.id
@@ -28,7 +28,7 @@ resource "yandex_vpc_subnet" "mgp_subnet-a" {
 }
 
 resource "yandex_vpc_subnet" "mch_subnet-a" {
-  description = "Subnet ru-central1-a availability zone for ClickHouse"
+  description    = "Subnet ru-central1-a availability zone for ClickHouse"
   name           = "mch_subnet-a"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.mch_network.id
@@ -36,12 +36,12 @@ resource "yandex_vpc_subnet" "mch_subnet-a" {
 }
 
 resource "yandex_vpc_security_group" "mgp_security_group" {
-  network_id = yandex_vpc_network.mgp_network.id
-  name       = "Managed Greenplum® security group"
   description = "Security group for Managed Service for Greenplum®"
+  network_id  = yandex_vpc_network.mgp_network.id
+  name        = "Managed Greenplum® security group"
 
   ingress {
-    description    = "Allow incoming traffic from members of the same security group"
+    description    = "Allow incoming traffic from the Internet"
     protocol       = "ANY"
     from_port      = 0
     to_port        = 65535
@@ -49,7 +49,7 @@ resource "yandex_vpc_security_group" "mgp_security_group" {
   }
 
   egress {
-    description    = "Allow outgoing traffic to members of the same security group"
+    description    = "Allow outgoing traffic to the Internet"
     protocol       = "ANY"
     from_port      = 0
     to_port        = 65535
@@ -58,26 +58,26 @@ resource "yandex_vpc_security_group" "mgp_security_group" {
 }
 
 resource "yandex_vpc_security_group" "mch_security_group" {
-  network_id = yandex_vpc_network.mch_network.id
-  name       = "Managed ClickHouse security group"
   description = "Security group for Managed Service for ClickHouse"
+  network_id  = yandex_vpc_network.mch_network.id
+  name        = "Managed ClickHouse security group"
 
   ingress {
     description    = "Allow incoming traffic from the port 8443"
     protocol       = "TCP"
-    port      = 8443
+    port           = 8443
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
     description    = "Allow incoming traffic from the port 9440"
     protocol       = "TCP"
-    port      = 9440
+    port           = 9440
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
-    description    = "Allow outgoing traffic to members of the same security group"
+    description    = "Allow outgoing traffic to the Internet"
     protocol       = "ANY"
     from_port      = 0
     to_port        = 65535
@@ -107,7 +107,7 @@ resource "yandex_mdb_greenplum_cluster" "mgp-cluster" {
   segment_subcluster {
     resources {
       resource_preset_id = "s2.medium" # 8 vCPU, 32 GB RAM
-      disk_size          = 100         #GB
+      disk_size          = 100         # GB
       disk_type_id       = "local-ssd"
     }
   }
