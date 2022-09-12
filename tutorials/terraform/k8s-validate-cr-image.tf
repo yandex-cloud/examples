@@ -1,4 +1,3 @@
-
 # Infrastructure for Yandex Cloud Managed Service for Kubernetes cluster and Container Registry
 #
 # RU: https://cloud.yandex.ru/docs/container-registry/tutorials/sign-with-cosign
@@ -86,7 +85,8 @@ resource "yandex_vpc_security_group" "k8s-main-sg" {
 }
 
 resource "yandex_iam_service_account" "k8s-sa" {
-  name = local.sa_name
+  description = "Service account to manage the Kubernetes cluster and node group"
+  name        = local.sa_name
 }
 
 # Assign "editor" role to service account.
