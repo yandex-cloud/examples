@@ -6,7 +6,7 @@
 # Set the configuration of Managed Service for Kubernetes cluster and Container Registry
 locals {
   folder_id             = "" # Set your cloud folder ID.
-  k8s_version           = "" # Set the version of Kubernetes.
+  k8s_version           = "" # Set the Kubernetes cluster and node group version.
   zone_a_v4_cidr_blocks = "" # Set the CIDR block for subnet in the ru-central1-a availability zone.
   sa_name               = "" # Set a service account name. It must be unique in folder.
   registry_name         = "" # Set the Container Registry name.
@@ -196,6 +196,7 @@ resource "yandex_kubernetes_node_group" "k8s-node-group" {
   }
 }
 
+# Container Registry.
 resource "yandex_container_registry" "check-registry" {
   name      = "check-registry"
   folder_id = local.folder_id
