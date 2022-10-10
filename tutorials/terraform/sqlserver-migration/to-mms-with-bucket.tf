@@ -5,7 +5,7 @@
 
 # Set the configuration of the Managed Service for SQL Server cluster:
 locals {
-  folder_id          = "" # Your folder ID.
+  folder_id          = "" # Your Folder ID.
   sql_server_version = "" # Set an SQL Server version. It must be the same or higher than the version in the source cluster.
   db_name            = "" # Set a database name.
   username           = "" # Set a user name.
