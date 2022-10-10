@@ -7,9 +7,9 @@
 locals {
   # Source cluster settings:
   source_mysql_version = ""   # Set MySQL version.
-  source_db_name       = ""   # Set the target cluster database name.
-  source_user          = ""   # Set the target cluster username.
-  source_password      = ""   # Set the target cluster password.
+  source_db_name       = ""   # Set the source cluster database name.
+  source_user          = ""   # Set the source cluster username.
+  source_password      = ""   # Set the source cluster password.
   source_port          = 3306 # Set the source cluster port number that Data Transfer will use for connections.
   # Target database settings:
   target_db_name = "" # Set the source cluster database name.
@@ -70,17 +70,17 @@ resource "yandex_mdb_mysql_cluster" "mysql-cluster" {
   }
 }
 
-resource "yandex_mdb_mysql_database" "db1" {
+resource "yandex_mdb_mysql_database" "source-db" {
   cluster_id = yandex_mdb_mysql_cluster.mysql-cluster.id
   name       = local.source_db_name
 }
 
-resource "yandex_mdb_mysql_user" "user1" {
+resource "yandex_mdb_mysql_user" "source-user" {
   cluster_id = yandex_mdb_mysql_cluster.mysql-cluster.id
   name       = local.source_user
   password   = local.source_password
   permission {
-    database_name = yandex_mdb_mysql_database.db1.name
+    database_name = yandex_mdb_mysql_database.source-db.name
     roles         = ["ALL"]
   }
 
