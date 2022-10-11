@@ -12,7 +12,7 @@ locals {
   source_password      = ""   # Set the source cluster password.
   source_port          = 3306 # Set the source cluster port number that Data Transfer will use for connections.
   # Target database settings:
-  target_db_name = "" # Set the source cluster database name.
+  target_db_name = "" # Set the target database name.
   # target_endpoint_id = "" # Set the target endpoint id.
 }
 
