@@ -86,7 +86,7 @@ resource "yandex_vpc_security_group" "mch_security_group" {
 }
 
 resource "yandex_mdb_greenplum_cluster" "mgp-cluster" {
-  description        = "Managed Greenplum® cluster"
+  description        = "Managed Service for Greenplum® cluster"
   name               = "mgp-cluster"
   environment        = "PRODUCTION"
   network_id         = yandex_vpc_network.mgp_network.id
@@ -119,7 +119,7 @@ resource "yandex_mdb_greenplum_cluster" "mgp-cluster" {
 }
 
 resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster" {
-  description        = "Managed ClickHouse cluster"
+  description        = "Managed Service for ClickHouse cluster"
   name               = "mch-cluster"
   environment        = "PRODUCTION"
   network_id         = yandex_vpc_network.mch_network.id
