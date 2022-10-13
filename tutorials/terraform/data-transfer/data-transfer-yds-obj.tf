@@ -7,9 +7,11 @@
 locals {
   folder_id = "" # Your Folder ID.
   sa_name   = "" # Set a service account name. It must be unique in folder.
+
   # Source database settings:
   source_db_name = "" # Set the source database name.
   #source_endpoint_id = "" # Set the source endpoint id.
+
   # Target bucket settings:
   bucket_name = "" # Set a Object Storage bucket name. It must be unique throughout Object Storage.
   #target_endpoint_id = "" # Set the target endpoint id.
