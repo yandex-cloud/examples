@@ -149,8 +149,8 @@ resource "yandex_mdb_kafka_cluster" "mkf-cluster" {
   }
 }
 
+# Managed Service for Apache Kafka® topic
 resource "yandex_mdb_kafka_topic" "sensors" {
-  description        = "Managed Service for Apache Kafka® topic"
   cluster_id         = yandex_mdb_kafka_cluster.mkf-cluster.id
   name               = "sensors"
   partitions         = 1
