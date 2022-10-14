@@ -8,7 +8,7 @@ locals {
   folder_id = "" # Your Folder ID.
 
   # Source Managed Service for Apache Kafka cluster settings:
-  source_kf_version    = "" # Set Apache Kafka version in Managed Service for Apache Kafka cluster
+  source_kf_version    = "" # Set Managed Service for Apache Kafka cluster version
   source_user_name     = "" # Set a user name in Managed Service for Apache Kafka cluster
   source_user_password = "" # Set a password for the user in Managed Service for Apache Kafka cluster
   #source_endpoint_id = "" # Set the source endpoint id.
@@ -20,7 +20,7 @@ locals {
 
 resource "yandex_vpc_network" "network" {
   name        = "network"
-  description = "Network for the Managed Service for Apache Kafka® and ClickHouse clusters."
+  description = "Network for the Managed Service for Apache Kafka® and ClickHouse clusters"
 }
 
 # Subnet in ru-central1-a availability zone
