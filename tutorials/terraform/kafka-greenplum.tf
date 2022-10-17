@@ -93,7 +93,7 @@ resource "yandex_mdb_greenplum_cluster" "mgp-cluster" {
   master_subcluster {
     resources {
       resource_preset_id = "s2.medium" # 8 vCPU, 32 GB RAM
-      disk_size          = 100         #GB
+      disk_size          = 100         # GB
       disk_type_id       = "local-ssd"
     }
   }
