@@ -13,7 +13,6 @@ locals {
   source_db_name       = ""   # Set the source MySQL database name.
   source_user          = ""   # Set the source cluster username.
   source_password      = ""   # Set the source cluster password.
-  source_port          = 3306 # Set the source cluster port number that Data Transfer will use for connections.
 
   # Target bucket settings:
   bucket_name = "" # Set a Object Storage bucket name. It must be unique throughout Object Storage.
@@ -40,7 +39,7 @@ resource "yandex_vpc_security_group" "security-group" {
   ingress {
     description    = "Allow connections to the cluster from the Internet"
     protocol       = "TCP"
-    port           = local.source_port
+    port           = 3306 # MySQL port number
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
