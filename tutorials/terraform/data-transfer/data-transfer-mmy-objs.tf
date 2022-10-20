@@ -147,6 +147,8 @@ resource "yandex_storage_bucket" "storage-bucket" {
 #      password {
 #        raw = local.source_password
 #      }
+#      include_tables_regex = [""]
+#      exclude_tables_regex = [""]
 #    }
 #  }
 #}
