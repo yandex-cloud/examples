@@ -5,8 +5,6 @@
 #
 # Set source cluster and target database settings.
 locals {
-  folder_id = "" # Your Folder ID.
-
   # Source Managed Service for Apache Kafka cluster settings:
   source_kf_version    = "" # Set Managed Service for Apache Kafka cluster version.
   source_user_name     = "" # Set a username in the Managed Service for Apache Kafka cluster.
