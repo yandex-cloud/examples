@@ -8,14 +8,17 @@ locals {
   folder_id = "" # Your Folder ID.
 
   # Source Managed Service for Apache Kafka cluster settings:
-  source_kf_version    = "" # Set Managed Service for Apache Kafka cluster version
-  source_user_name     = "" # Set a user name in Managed Service for Apache Kafka cluster
-  source_user_password = "" # Set a password for the user in Managed Service for Apache Kafka cluster
-  #source_endpoint_id = "" # Set the source endpoint id.
+  source_kf_version    = "" # Set Managed Service for Apache Kafka cluster version.
+  source_user_name     = "" # Set a username in the Managed Service for Apache Kafka cluster.
+  source_user_password = "" # Set a password for the user in the Managed Service for Apache Kafka cluster.
+  source_endpoint_id   = "" # Set the source endpoint id.
 
   # Target YDB settings:
-  target_db_name = "" # Set a YDB database name.
-  #target_endpoint_id = "" # Set the target endpoint id.
+  target_db_name     = "" # Set a YDB database name.
+  target_endpoint_id = "" # Set the target endpoint id.
+
+  # Transfer settings:
+  transfer_enable = 0 # Set to 1 to enable Transfer.
 }
 
 resource "yandex_vpc_network" "network" {
@@ -94,13 +97,14 @@ resource "yandex_mdb_kafka_topic" "sensors" {
 }
 
 resource "yandex_ydb_database_serverless" "ydb" {
-   name = local.target_db_name
- }
+  name = local.target_db_name
+}
 
-#resource "yandex_datatransfer_transfer" "mkf-ydb-transfer" {
-#  description = "Transfer from the Managed Service for Apache Kafka to the YDB database"
-#  name        = "transfer-from-mkf-to-ydb"
-#  source_id   = local.source_endpoint_id
-#  target_id   = local.target_endpoint_id
-#  type        = "INCREMENT_ONLY" # Replication data from the source Data Stream.
-#}
+resource "yandex_datatransfer_transfer" "mkf-ydb-transfer" {
+  count       = local.transfer_enable
+  description = "Transfer from the Managed Service for Apache Kafka to the YDB database"
+  name        = "transfer-from-mkf-to-ydb"
+  source_id   = local.source_endpoint_id
+  target_id   = local.target_endpoint_id
+  type        = "INCREMENT_ONLY" # Replication data from the source Data Stream.
+}
