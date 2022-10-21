@@ -1,22 +1,25 @@
-# Infrastructure for the Yandex Cloud Data Streams, Object Storage and Data Transfer.
+# Infrastructure for the Yandex Cloud Data Streams, Object Storage, and Data Transfer.
 #
 # RU: https://cloud.yandex.ru/docs/data-transfer/tutorials/mmy-objs-migration
 # EN: https://cloud.yandex.com/en/docs/data-transfer/tutorials/mmy-objs-migration
 #
-# Set source Managed Service for MySQL cluster and target Object Storage bucket settings.
+# Set the source Managed Service for MySQL cluster and target Object Storage bucket settings.
 locals {
   folder_id = "" # Your Folder ID.
-  sa_name   = "" # Set a service account name. It must be unique in folder.
+  sa_name   = "" # Set a service account name. It must be unique in the folder.
 
   # Source MySQL database settings:
-  source_mysql_version = ""   # Set MySQL version.
-  source_db_name       = ""   # Set the source MySQL database name.
-  source_user          = ""   # Set the source cluster username.
-  source_password      = ""   # Set the source cluster password.
+  source_mysql_version = "" # Set the MySQL version.
+  source_db_name       = "" # Set the source MySQL database name.
+  source_user          = "" # Set the source cluster username.
+  source_password      = "" # Set the source cluster password.
 
   # Target bucket settings:
-  bucket_name = "" # Set a Object Storage bucket name. It must be unique throughout Object Storage.
-  #target_endpoint_id = "" # Set the target endpoint id.
+  bucket_name        = "" # Set an Object Storage bucket name. It must be unique throughout Object Storage.
+  target_endpoint_id = "" # Set the target endpoint id.
+
+  # Transfer settings:
+  transfer_enable = 0 # Set to 1 to enable transfer.
 }
 
 resource "yandex_vpc_network" "network" {
@@ -70,6 +73,10 @@ resource "yandex_mdb_mysql_cluster" "mysql-cluster" {
     zone             = "ru-central1-a"
     subnet_id        = yandex_vpc_subnet.subnet-a.id
     assign_public_ip = true # Required for connection from Internet
+  }
+
+  mysql_config = {
+    binlog_row_image = "FULL"
   }
 }
 
@@ -134,29 +141,30 @@ resource "yandex_storage_bucket" "storage-bucket" {
   secret_key = yandex_iam_service_account_static_access_key.bucket-key.secret_key
 }
 
-#resource "yandex_datatransfer_endpoint" "managed-mysql-source" {
-#  description = "Source endpoint for MySQL cluster"
-#  name        = "managed-mysql-source"
-#  settings {
-#    mysql_source {
-#      connection {
-#        mdb_cluster_id = yandex_mdb_mysql_cluster.mysql-cluster.id
-#      }
-#      database = local.source_db_name
-#      user     = local.source_user
-#      password {
-#        raw = local.source_password
-#      }
-#      include_tables_regex = [""]
-#      exclude_tables_regex = [""]
-#    }
-#  }
-#}
+resource "yandex_datatransfer_endpoint" "managed-mysql-source" {
+  description = "Source endpoint for MySQL cluster"
+  name        = "managed-mysql-source"
+  settings {
+    mysql_source {
+      connection {
+        mdb_cluster_id = yandex_mdb_mysql_cluster.mysql-cluster.id
+      }
+      database = local.source_db_name
+      user     = local.source_user
+      password {
+        raw = local.source_password
+      }
+      #include_tables_regex = [""]
+      #exclude_tables_regex = [""]
+    }
+  }
+}
 
-#resource "yandex_datatransfer_transfer" "mmy-objs-transfer" {
-#  description = "Transfer from the Managed Service for MySQL to the Object Storage"
-#  name        = "transfer-from-mmy-to-objstorage"
-#  source_id   = local.source_endpoint_id
-#  target_id   = local.target_endpoint_id
-#  type        = "SNAPSHOT_ONLY" # Copying data from the source Managed Service for MySQL database.
-#}
+resource "yandex_datatransfer_transfer" "mmy-objs-transfer" {
+  count       = local.transfer_enable
+  description = "Transfer from the Managed Service for MySQL to the Object Storage"
+  name        = "transfer-from-mmy-to-objstorage"
+  source_id   = yandex_datatransfer_endpoint.managed-mysql-source.id
+  target_id   = local.target_endpoint_id
+  type        = "SNAPSHOT_ONLY" # Copying data from the source Managed Service for MySQL database.
+}
