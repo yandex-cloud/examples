@@ -11,7 +11,7 @@ locals {
   # Specify these settings ONLY AFTER the clusters are created. Then run "terraform apply" command again
   # You should set up the source endpoint using the GUI to obtain its ID
   gp_source_endpoint_id = "" # Set the source endpoint ID
-  transfer_enabled = 0 # Set to 1 to enable transfer
+  transfer_enabled = 0 # Value '0' disables creating transfer before the source endpoint is created by hands. After that, set to 1 to enable transfer
 }
 
 resource "yandex_vpc_network" "mgp_network" {
