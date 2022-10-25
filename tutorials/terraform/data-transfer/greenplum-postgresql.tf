@@ -11,7 +11,7 @@ locals {
   # Specify these settings ONLY AFTER the clusters are created. Then run "terraform apply" command again
   # You should set up the source endpoint using the GUI to obtain its ID
   gp_source_endpoint_id = "" # Set the source endpoint ID
-  transfer_enabled = 0 # Value '0' disables creating transfer before the source endpoint is created by hands. After that, set to 1 to enable transfer
+  transfer_enabled      = 0  # Value '0' disables creating of transfer before the source endpoint is created manually. After that, set to '1' to enable transfer
 }
 
 resource "yandex_vpc_network" "mgp_network" {
@@ -105,7 +105,7 @@ resource "yandex_mdb_greenplum_cluster" "mgp-cluster" {
   segment_subcluster {
     resources {
       resource_preset_id = "s3-c8-m32" # 8 vCPU, 32 GB RAM
-      disk_size          = 93        # GB
+      disk_size          = 93          # GB
       disk_type_id       = "network-ssd-nonreplicated"
     }
   }
@@ -146,22 +146,22 @@ resource "yandex_mdb_postgresql_cluster" "mpg-cluster" {
   }
 
   host {
-    zone      = "ru-central1-a"
-    subnet_id = yandex_vpc_subnet.mpg_subnet-a.id
-    assign_public_ip   = true
+    zone             = "ru-central1-a"
+    subnet_id        = yandex_vpc_subnet.mpg_subnet-a.id
+    assign_public_ip = true
   }
 }
 
 resource "yandex_datatransfer_endpoint" "pg_target" {
   description = "Target endpoint for PostgreSQL cluster"
-  name = "pg-target-tf"
+  name        = "pg-target-tf"
   settings {
     postgres_target {
       connection {
         mdb_cluster_id = yandex_mdb_postgresql_cluster.mpg-cluster.id
       }
       database = "db1"
-      user = "pg-user"
+      user     = "pg-user"
       password {
         raw = local.pg_password
       }
