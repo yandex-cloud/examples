@@ -10,12 +10,16 @@ locals {
 
   # Source database settings:
   source_db_name = "" # Set the source YDB database name.
-  #source_endpoint_id = "" # Set the source endpoint id.
 
   # Target cluster settings:
   target_db_name  = "" # Set the target ClickHouse database name
   target_user     = "" # Set the user name for Managed Service for ClickHouse cluster
   target_password = "" # Set the user password for Managed Service for ClickHouse cluster
+
+  # Specify these settings ONLY AFTER the cluster and YDB database are created. Then run "terraform apply" command again.
+  # You should set up the source endpoint using the GUI to obtain its ID.
+  source_endpoint_id = "" # Set the source endpoint id.
+  transfer_enabled   = 0  # Value '0' disables creating of transfer before the source endpoint is created manually. After that, set to '1' to enable transfer.
 }
 
 resource "yandex_iam_service_account" "sa-yds-obj" {
@@ -131,10 +135,11 @@ resource "yandex_datatransfer_endpoint" "mch-target" {
   }
 }
 
-#resource "yandex_datatransfer_transfer" "yds-mch-transfer" {
-#  description = "Transfer from the Data Streams to the Managed Service for ClickHouse cluster"
-#  name        = "transfer-from-yds-to-mch"
-#  source_id   = local.source_endpoint_id
-#  target_id   = yandex_datatransfer_endpoint.mch-target.id
-#  type        = "INCREMENT_ONLY" # Replication data from the source Data Stream.
-#}
+resource "yandex_datatransfer_transfer" "yds-mch-transfer" {
+  count       = local.transfer_enabled
+  description = "Transfer from the Data Streams to the Managed Service for ClickHouse cluster"
+  name        = "transfer-from-yds-to-mch"
+  source_id   = local.source_endpoint_id
+  target_id   = yandex_datatransfer_endpoint.mch-target.id
+  type        = "INCREMENT_ONLY" # Replication data from the source Data Stream.
+}
