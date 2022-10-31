@@ -12,8 +12,11 @@ locals {
   source_password      = ""    # Set the source cluster password.
 
   # Target database settings:
-  target_user     = "" # Set the username for ClickHouse cluster.
-  target_password = "" # Set the user password for ClickHouse cluster.
+  target_user     = "" # Set the username for ClickHouse database.
+  target_password = "" # Set the user password for ClickHouse database.
+
+  # Transfer settings:
+  transfer_enable = 0 # Set to 1 to enable Transfer.
 }
 
 resource "yandex_vpc_network" "network" {
@@ -185,47 +188,48 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster" {
   }
 }
 
-#resource "yandex_datatransfer_endpoint" "mmy-source" {
-#  description = "Source endpoint for MySQL cluster"
-#  name        = "mmy-source"
-#  settings {
-#    mysql_source {
-#      connection {
-#        mdb_cluster_id = yandex_mdb_mysql_cluster.mysql-cluster.id
-#      }
-#      database = local.source_db_name
-#      user     = local.source_user
-#      password {
-#        raw = local.source_password
-#      }
-#    }
-#  }
-#}
-#
-#resource "yandex_datatransfer_endpoint" "mch-target" {
-#  description = "Target endpoint for ClickHouse cluster"
-#  name        = "mch-target"
-#  settings {
-#    clickhouse_target {
-#      connection {
-#        connection_options {
-#          mdb_cluster_id = yandex_mdb_clickhouse_cluster.clickhouse-cluster.id
-#          database       = local.source_db_name
-#          user           = local.target_user
-#          password {
-#            raw = local.target_password
-#          }
-#        }
-#      }
-#      cleanup_policy = "CLICKHOUSE_CLEANUP_POLICY_DROP"
-#    }
-#  }
-#}
-#
-#resource "yandex_datatransfer_transfer" "mysql-transfer" {
-#  description = "Transfer from the Managed Service for MySQL to the Managed Service for ClickHouse"
-#  name        = "transfer-from-mmy-to-mch"
-#  source_id   = yandex_datatransfer_endpoint.mmy-source.id
-#  target_id   = yandex_datatransfer_endpoint.mch-target.id
-#  type        = "SNAPSHOT_AND_INCREMENT" # Copy all data from the source cluster and start replication.
-#}
+resource "yandex_datatransfer_endpoint" "mmy-source" {
+  description = "Source endpoint for MySQL cluster"
+  name        = "mmy-source"
+  settings {
+    mysql_source {
+      connection {
+        mdb_cluster_id = yandex_mdb_mysql_cluster.mysql-cluster.id
+      }
+      database = local.source_db_name
+      user     = local.source_user
+      password {
+        raw = local.source_password
+      }
+    }
+  }
+}
+
+resource "yandex_datatransfer_endpoint" "mch-target" {
+  description = "Target endpoint for ClickHouse cluster"
+  name        = "mch-target"
+  settings {
+    clickhouse_target {
+      connection {
+        connection_options {
+          mdb_cluster_id = yandex_mdb_clickhouse_cluster.clickhouse-cluster.id
+          database       = local.source_db_name
+          user           = local.target_user
+          password {
+            raw = local.target_password
+          }
+        }
+      }
+      cleanup_policy = "CLICKHOUSE_CLEANUP_POLICY_DROP"
+    }
+  }
+}
+
+resource "yandex_datatransfer_transfer" "mysql-transfer" {
+  count       = local.transfer_enable
+  description = "Transfer from the Managed Service for MySQL to the Managed Service for ClickHouse"
+  name        = "transfer-from-mmy-to-mch"
+  source_id   = yandex_datatransfer_endpoint.mmy-source.id
+  target_id   = yandex_datatransfer_endpoint.mch-target.id
+  type        = "SNAPSHOT_AND_INCREMENT" # Copy all data from the source cluster and start replication.
+}
