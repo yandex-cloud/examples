@@ -12,7 +12,7 @@ locals {
   source_host    = ""   # Set the source ClickHouse server IP address or FQDN.
   source_port    = 9000 # Set the source ClickHouse server port number that Data Transfer will use for connections.
   # Target cluster settings:
-  target_clickhouse_version = "" # Set ClickHouse version.
+  target_clickhouse_version = "" # Set the ClickHouse version.
   target_user               = "" # Set the target cluster username.
   target_password           = "" # Set the target cluster password.
 }
