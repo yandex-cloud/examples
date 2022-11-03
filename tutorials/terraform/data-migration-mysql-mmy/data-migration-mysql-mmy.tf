@@ -1,13 +1,16 @@
-# Infrastructure for the Yandex Cloud Managed Service for Redis non-sharded cluster and Virtual Machine
+# Infrastructure for Yandex Cloud Managed Service for MySQL cluster and Virtual Machine.
 #
-# RU: https://cloud.yandex.ru/docs/managed-redis/tutorials/redis-as-php-sessions-storage
-# EN: https://cloud.yandex.com/en/docs/managed-redis/tutorials/redis-as-php-sessions-storage
+# RU: https://cloud.yandex.ru/docs/managed-mysql/tutorials/data-migration
+# EN: https://cloud.yandex.com/en/docs/managed-mysql/tutorials/data-migration
 #
-# Specify the following settings:
+# Set the following settings:
 locals {
-  # Managed Service for Redis cluster.
-  redis_version = "6.2" # Set the Redis version.
-  password      = ""    # Set the cluster password.
+  # Managed Service for MySQL cluster.
+  target_mysql_version = "" # Set the MySQL version. It must be the same or higher than the version in the source cluster.
+  target_sql_mode      = "" # Set the MySQL SQL mode. It must be the same as in the source cluster.
+  target_db_name       = "" # Set the target cluster database name.
+  target_user          = "" # Set the target cluster username.
+  target_password      = "" # Set the target cluster password.
   # (Optional) Virtual Machine.
   vm_image_id   = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list.
   vm_username   = "" # Set a username for VM. Images with Ubuntu Linux use the username `ubuntu` by default.
@@ -15,7 +18,7 @@ locals {
 }
 
 resource "yandex_vpc_network" "network" {
-  description = "Network for the Managed Service for Redis cluster and VM"
+  description = "Network for the Managed Service for MySQL cluster and VM"
   name        = "network"
 }
 
@@ -24,33 +27,17 @@ resource "yandex_vpc_subnet" "subnet-a" {
   name           = "subnet-a"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.network.id
-  v4_cidr_blocks = ["10.1.0.0/16"]
+  v4_cidr_blocks = ["10.1.0.0/24"]
 }
 
-resource "yandex_vpc_security_group" "security-group-redis" {
-  description = "Security group for the Managed Service for Redis cluster"
+resource "yandex_vpc_security_group" "security-group-mysql" {
+  description = "Security group for the Managed Service for MySQL cluster"
   network_id  = yandex_vpc_network.network.id
 
-  # Required for clusters created with TLS
   ingress {
-    description    = "Allow direct connections to the master with SSL"
+    description    = "Allow connections to the cluster from the Internet"
     protocol       = "TCP"
-    port           = 6380
-    v4_cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  # Required for clusters created without TLS
-  #ingress {
-  #  description    = "Allow direct connections to the master without SSL"
-  #  protocol       = "TCP"
-  #  port           = 6379
-  #  v4_cidr_blocks = ["0.0.0.0/0"]
-  #}
-
-  ingress {
-    protocol       = "TCP"
-    description    = "Allow connections to the Redis Sentinel"
-    port           = 26379
+    port           = 3306
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 }
@@ -76,29 +63,41 @@ resource "yandex_vpc_security_group" "security-group-redis" {
 #  }
 #}
 
-resource "yandex_mdb_redis_cluster" "redis-cluster" {
-  description        = "Security group for the Managed Service for Redis cluster"
-  name               = "redis-cluster"
+resource "yandex_mdb_mysql_cluster" "mysql-cluster" {
+  description        = "Managed Service for MySQL cluster"
+  name               = "mysql-cluster"
   environment        = "PRODUCTION"
   network_id         = yandex_vpc_network.network.id
-  security_group_ids = [yandex_vpc_security_group.security-group-redis.id]
-  tls_enabled        = true # TLS support mode. Must be enabled for public access to the cluster host. For a method without VM.
-
-  config {
-    password = local.password
-    version  = local.redis_version
-  }
+  version            = local.target_mysql_version
+  security_group_ids = [yandex_vpc_security_group.security-group-mysql.id]
 
   resources {
-    resource_preset_id = "hm2.nano" # 2 vCPU, 8 GB RAM
-    disk_type_id       = "network-ssd"
-    disk_size          = 16 # GB
+    resource_preset_id = "s2.micro" # 2 vCPU, 8 GB RAM
+    disk_type_id       = "network-hdd"
+    disk_size          = 10 # GB
+  }
+
+  mysql_config = {
+    sql_mode = local.target_sql_mode
   }
 
   host {
     zone             = "ru-central1-a"
     subnet_id        = yandex_vpc_subnet.subnet-a.id
-    assign_public_ip = true # Required for connection from the Internet. For a method without VM.
+    assign_public_ip = true # Required for connection from the Internet. For a method without intermediate VM.
+  }
+
+  database {
+    name = local.target_db_name
+  }
+
+  user {
+    name     = local.target_user
+    password = local.target_password
+    permission {
+      database_name = local.target_db_name
+      roles         = ["ALL"]
+    }
   }
 }
 
@@ -124,7 +123,7 @@ resource "yandex_mdb_redis_cluster" "redis-cluster" {
 #    nat       = true # Required for connection from the Internet.
 #
 #    security_group_ids = [
-#      yandex_vpc_security_group.security-group-redis.id,
+#      yandex_vpc_security_group.security-group-mysql.id,
 #      yandex_vpc_security_group.security-group-vm.id
 #    ]
 #  }
