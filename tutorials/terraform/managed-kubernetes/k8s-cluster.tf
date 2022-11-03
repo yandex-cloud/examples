@@ -5,7 +5,8 @@
 locals {
   zone_a_v4_cidr_blocks = "10.1.0.0/16" # Set the CIDR block for subnet in the ru-central1-a availability zone.
   folder_id             = ""            # Set your cloud folder ID.
-  k8s_version           = "1.21"        # Set the version of Kubernetes.
+  k8s_version           = "1.22"        # Set the Kubernetes version.
+  sa_name               = ""            # Set a service account name. It must be unique in folder.
 }
 
 resource "yandex_vpc_network" "k8s-network" {
@@ -21,7 +22,6 @@ resource "yandex_vpc_subnet" "subnet-a" {
   v4_cidr_blocks = [local.zone_a_v4_cidr_blocks]
 }
 
-# Security group for Managed Service for Kubernetes cluster
 resource "yandex_vpc_security_group" "k8s-main-sg" {
   description = "Group rules ensure the basic performance of the cluster. Apply it to the cluster and node groups."
   name        = "k8s-main-sg"
@@ -76,8 +76,22 @@ resource "yandex_vpc_security_group" "k8s-main-sg" {
   }
 }
 
+resource "yandex_vpc_security_group" "k8s-public-services" {
+  name        = "k8s-public-services"
+  description = "Group rules allow connections to services from the internet. Apply the rules only for node groups."
+  network_id  = yandex_vpc_network.k8s-network.id
+
+  ingress {
+    protocol       = "TCP"
+    description    = "Rule allows incoming traffic from the internet to the NodePort port range. Add ports or change existing ones to the required ports."
+    v4_cidr_blocks = ["0.0.0.0/0"]
+    from_port      = 30000
+    to_port        = 32767
+  }
+}
+
 resource "yandex_iam_service_account" "k8s-sa" {
-  name = "k8s-sa"
+  name = local.sa_name
 }
 
 resource "yandex_resourcemanager_folder_iam_binding" "editor" {
@@ -105,7 +119,7 @@ resource "yandex_kubernetes_cluster" "k8s-cluster" {
   network_id  = yandex_vpc_network.k8s-network.id
 
   master {
-    version = "1.21"
+    version = local.k8s_version
     zonal {
       zone      = yandex_vpc_subnet.subnet-a.zone
       subnet_id = yandex_vpc_subnet.subnet-a.id
@@ -147,7 +161,7 @@ resource "yandex_kubernetes_node_group" "k8s-node-group" {
     network_interface {
       nat                = true
       subnet_ids         = [yandex_vpc_subnet.subnet-a.id]
-      security_group_ids = [yandex_vpc_security_group.k8s-main-sg.id]
+      security_group_ids = [yandex_vpc_security_group.k8s-main-sg.id, yandex_vpc_security_group.k8s-public-services.id]
     }
 
     resources {
