@@ -6,9 +6,8 @@
 # Specify the following settings
 locals {
   pg_password = "" # Set a password for the PostgreSQL admin user
-
-  folder_id = "" # Set your cloud folder ID, same as for provider
-  bucket    = "" # Set a unique bucket name
+  folder_id   = "" # Set your cloud folder ID, same as for provider
+  bucket      = "" # Set a unique bucket name
 
   # Specify these settings ONLY AFTER the clusters are created. Then run "terraform apply" command again
   # You should set up the target endpoint using the GUI to obtain its ID
@@ -77,9 +76,9 @@ resource "yandex_mdb_postgresql_cluster" "mpg-cluster" {
   config {
     version = 14
     resources {
-      resource_preset_id = "s2.micro"
+      resource_preset_id = "s2.micro" # 2 vCPU, 8 GB RAM
       disk_type_id       = "network-ssd"
-      disk_size          = "20"
+      disk_size          = "20" # GB
     }
   }
 
@@ -121,7 +120,7 @@ resource "yandex_storage_bucket" "obj-storage-bucket" {
 
 resource "yandex_datatransfer_endpoint" "mpg-source" {
   description = "Source endpoint for PostgreSQL cluster"
-  name        = "mpg-source2"
+  name        = "mpg-source"
   settings {
     postgres_source {
       connection {
