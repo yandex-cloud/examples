@@ -6,7 +6,7 @@
 # Set source cluster and target database settings.
 locals {
   folder_id = "" # Your Folder ID.
-  sa_name   = "" # Set a service account name. It must be unique in folder.
+  sa_name   = "" # Set a service account name. It must be unique in a cloud.
 
   # Source database settings:
   source_db_name = "" # Set the source database name.
@@ -22,10 +22,10 @@ resource "yandex_iam_service_account" "sa-yds-obj" {
   name        = local.sa_name
 }
 
-# Assign role `editor` to the service account.
-resource "yandex_resourcemanager_folder_iam_binding" "editor" {
+# Assign role `yds.editor` to the service account.
+resource "yandex_resourcemanager_folder_iam_binding" "yds_editor" {
   folder_id = local.folder_id
-  role      = "editor"
+  role      = "yds.editor"
   members = [
     "serviceAccount:${yandex_iam_service_account.sa-yds-obj.id}",
   ]
