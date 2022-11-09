@@ -1,7 +1,7 @@
-# Infrastructure for the Yandex Cloud YDB, Managed Service for Apache Kafka and Data Transfer.
+# Infrastructure for the Yandex Cloud YDB, Managed Service for PostgreSQL and Data Transfer.
 #
-# RU: https://cloud.yandex.ru/docs/data-transfer/tutorials/data-transfer-mkf-ydb
-# EN: https://cloud.yandex.com/en/docs/data-transfer/tutorials/data-transfer-mkf-ydb
+# RU: https://cloud.yandex.ru/docs/data-transfer/tutorials/data-transfer-mpg-ydb
+# EN: https://cloud.yandex.com/en/docs/data-transfer/tutorials/data-transfer-mpg-ydb
 #
 # Set source cluster and target database settings.
 locals {
@@ -10,10 +10,10 @@ locals {
   source_db_name       = ""   # Set a PostgreSQL database name.
   source_user_name     = ""   # Set a username in the Managed Service for PostgreSQL cluster.
   source_user_password = ""   # Set a password for the user in the Managed Service for PostgreSQL cluster.
-  source_port          = 5432 # Set the source cluster port number that Data Transfer will use for connections.
+  source_port          = 6432 # Set the source cluster port number that Data Transfer will use for connections.
 
   # Target YDB settings:
-  target_db_name = "test" # Set a YDB database name.
+  target_db_name = "" # Set a YDB database name.
 
   # Specify these settings ONLY AFTER the YDB database is created. Then run "terraform apply" command again.
   # You should set up the target endpoint using the GUI to obtain its ID.
