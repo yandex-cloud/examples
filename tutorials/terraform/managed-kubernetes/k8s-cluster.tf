@@ -5,7 +5,6 @@
 locals {
   zone_a_v4_cidr_blocks = "10.1.0.0/16" # Set the CIDR block for subnet in the ru-central1-a availability zone.
   folder_id             = ""            # Set your cloud folder ID.
-  k8s_version           = "1.22"        # Set the Kubernetes version.
   sa_name               = ""            # Set a service account name. It must be unique in a cloud.
 }
 
@@ -119,7 +118,6 @@ resource "yandex_kubernetes_cluster" "k8s-cluster" {
   network_id  = yandex_vpc_network.k8s-network.id
 
   master {
-    version = local.k8s_version
     zonal {
       zone      = yandex_vpc_subnet.subnet-a.zone
       subnet_id = yandex_vpc_subnet.subnet-a.id
@@ -142,7 +140,6 @@ resource "yandex_kubernetes_node_group" "k8s-node-group" {
   description = "Node group for Managed Service for Kubernetes cluster"
   name        = "k8s-node-group"
   cluster_id  = yandex_kubernetes_cluster.k8s-cluster.id
-  version     = local.k8s_version
   scale_policy {
     fixed_scale {
       size = 1 # Number of hosts
