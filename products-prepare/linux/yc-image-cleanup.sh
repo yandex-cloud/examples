@@ -70,7 +70,7 @@ function preCheck {
             ;;
         "AlmaLinux")
             case "$2" in
-                8.*)
+                8.*|9.*)
                     echo "OK"
                     ;;
                 *)
@@ -80,7 +80,7 @@ function preCheck {
             ;;
         "Ubuntu")
             case "$2" in
-                "14.04"|"16.04"|"18.04"|"20.04")
+                "14.04"|"16.04"|"18.04"|"20.04"|"22.04")
                     echo "OK"
                     ;;
                 *)
@@ -110,7 +110,7 @@ function preCheck {
             ;;
         "openSUSE Leap")
             case "$2" in
-                "15.1"|"15.2"|"15.3"|"42.3")
+                "15.1"|"15.2"|"15.3"|"15.4"|"42.3")
                     echo "OK"
                     ;;
                 *)

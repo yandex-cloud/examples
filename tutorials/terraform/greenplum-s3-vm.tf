@@ -5,10 +5,10 @@
 
 # Specify the following settings
 locals {
-  folder_id       = "" # Set your cloud folder ID, same as for provider
-  password        = "" # Set password for Greenplum® user
+  folder_id       = "" # Set your cloud folder ID the same as for the provider
+  password        = "" # Set the password for the Greenplum® user
   image_id        = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list
-  vm_username     = "" # Set the username to connect to the routing VM via SSH. For Ubuntu images `ubuntu` username is used by default
+  vm_username     = "" # Set the username to connect to the routing VM via SSH. For Ubuntu images, the `ubuntu` username is used by default
   vm_ssh_key_path = "" # Set the path to the public SSH public key for the routing VM. Example: "~/.ssh/key.pub"
   bucket          = "" # Set a unique bucket name
 }
@@ -18,7 +18,7 @@ resource "yandex_vpc_network" "mgp_network" {
   name        = "mgp_network"
 }
 
-# Subnet in ru-central1-a availability zone
+# Subnet in the ru-central1-a availability zone
 resource "yandex_vpc_subnet" "subnet-a" {
   name           = "subnet-a"
   zone           = "ru-central1-a"

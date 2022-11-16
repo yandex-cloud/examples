@@ -5,11 +5,11 @@
 
 # Specify the pre-installation parameters
 locals {
-  folder_id          = "" # Your folder ID.
-  mes_admin_password = "" # Administrator password for the Managed Service for Elasticsearch cluster.
-  mes_edition        = "" # The Managed Service for Elasticsearch destination cluster edition, Basic or Platinum. See https://cloud.yandex.ru/docs/managed-elasticsearch/concepts/es-editions.
-  mes_version        = "" # The Managed Service for Elasticsearch destination cluster version, should be equal or newer than the source cluster version.
-  bucket_name        = "" # The Object Storage bucket name. Should be unique in the Cloud.
+  folder_id          = "" # Your Folder ID.
+  mes_admin_password = "" # Administrator password for Managed Service for Elasticsearch cluster.
+  mes_edition        = "" # Managed Service for Elasticsearch destination cluster edition, Basic or Platinum. See https://cloud.yandex.ru/docs/managed-elasticsearch/concepts/es-editions.
+  mes_version        = "" # Managed Service for Elasticsearch destination cluster version, should be equal or newer than source cluster version.
+  bucket_name        = "" # Object Storage bucket name. Should be unique in Cloud.
 }
 
 resource "yandex_vpc_network" "my-network" {
