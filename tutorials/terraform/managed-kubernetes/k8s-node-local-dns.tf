@@ -6,10 +6,9 @@
 # Set the configuration of the Managed Service for Kubernetes cluster.
 
 locals {
-  folder_id              = ""            # Set your cloud folder ID.
-  k8s_version            = "1.20"        # Set a Kubernetes version for the cluster and the node group.
-  zone_a_v4_cidr_blocks  = "10.1.0.0/16" # Set the CIDR block for subnet.
-  sa_name                = ""            # Set the service account name
+  folder_id             = ""            # Set your cloud folder ID.
+  zone_a_v4_cidr_blocks = "10.1.0.0/16" # Set the CIDR block for subnet.
+  sa_name               = ""            # Set the service account name
 }
 
 resource "yandex_vpc_network" "k8s-network" {
@@ -112,7 +111,6 @@ resource "yandex_kubernetes_cluster" "k8s-cluster" {
   network_id  = yandex_vpc_network.k8s-network.id
 
   master {
-    version = local.k8s_version
     zonal {
       zone      = yandex_vpc_subnet.subnet-a.zone
       subnet_id = yandex_vpc_subnet.subnet-a.id
@@ -134,7 +132,6 @@ resource "yandex_kubernetes_node_group" "k8s-node-group" {
   description = "Node group for the Managed Service for Kubernetes cluster"
   name        = "k8s-node-group"
   cluster_id  = yandex_kubernetes_cluster.k8s-cluster.id
-  version     = local.k8s_version
 
   scale_policy {
     fixed_scale {
@@ -152,8 +149,8 @@ resource "yandex_kubernetes_node_group" "k8s-node-group" {
     platform_id = "standard-v2" # Intel Cascade Lake
 
     network_interface {
-      nat        = true
-      subnet_ids = [yandex_vpc_subnet.subnet-a.id]
+      nat                = true
+      subnet_ids         = [yandex_vpc_subnet.subnet-a.id]
       security_group_ids = [yandex_vpc_security_group.k8s-main-sg.id]
     }
 
