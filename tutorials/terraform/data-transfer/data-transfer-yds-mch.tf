@@ -1,4 +1,4 @@
-# Infrastructure for the Yandex Cloud Data Streams, Managed Service for ClickHouse cluster and Data Transfer.
+# Infrastructure for the Yandex Cloud Data Streams, Managed Service for ClickHouse cluster, and Data Transfer.
 #
 # RU: https://cloud.yandex.ru/docs/data-transfer/tutorials/yds-to-clickhouse
 # EN: https://cloud.yandex.com/en/docs/data-transfer/tutorials/yds-to-clickhouse
