@@ -1,4 +1,4 @@
-# Infrastructure for the Yandex Cloud YDB, Managed Service for PostgreSQL and Data Transfer.
+# Infrastructure for the Yandex Cloud YDB, Managed Service for PostgreSQL, and Data Transfer.
 #
 # RU: https://cloud.yandex.ru/docs/data-transfer/tutorials/data-transfer-mpg-ydb
 # EN: https://cloud.yandex.com/en/docs/data-transfer/tutorials/data-transfer-mpg-ydb
@@ -66,7 +66,7 @@ resource "yandex_mdb_postgresql_cluster" "pgsql-cluster" {
   config {
     version = local.source_pg_version
     resources {
-      resource_preset_id = "s2.micro"
+      resource_preset_id = "s2.micro" # 2 vCPU, 8 GB RAM
       disk_type_id       = "network-hdd"
       disk_size          = 10 # GB
     }
