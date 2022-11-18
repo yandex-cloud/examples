@@ -10,12 +10,11 @@ locals {
   source_db_name       = ""   # Set a PostgreSQL database name.
   source_user_name     = ""   # Set a username in the Managed Service for PostgreSQL cluster.
   source_user_password = ""   # Set a password for the user in the Managed Service for PostgreSQL cluster.
-  source_port          = 6432 # Set the source cluster port number that Data Transfer will use for connections.
 
   # Target YDB settings:
   target_db_name = "" # Set a YDB database name.
 
-  # Specify these settings ONLY AFTER the YDB database is created. Then run "terraform apply" command again.
+# Specify these settings ONLY AFTER the YDB database is created. Then run "terraform apply" command again.  
   # You should set up the target endpoint using the GUI to obtain its ID.
   target_endpoint_id = "" # Set the target endpoint id.
 
@@ -43,7 +42,7 @@ resource "yandex_vpc_default_security_group" "security-group" {
   ingress {
     protocol       = "TCP"
     description    = "Allow connections to the Managed Service for PostgreSQL cluster from the Internet"
-    port           = local.source_port
+    port           = 6432
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
