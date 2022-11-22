@@ -9,7 +9,6 @@ locals {
   source_kf_version    = ""   # Set the Apache Kafka® version.
   source_user_name     = ""   # Set a username in the Managed Service for Apache Kafka® cluster.
   source_user_password = ""   # Set a password for the user in the Managed Service for Apache Kafka® cluster.
-  source_port          = 9091 # Set the source cluster port number that Data Transfer will use for connections.
 
   # Target Managed Service for Apache Kafka® cluster settings:
   target_kf_version = "" # Set the Apache Kafka® version.
@@ -44,7 +43,7 @@ resource "yandex_vpc_security_group" "mkf_security_group" {
   ingress {
     description    = "Allow incoming traffic from the port 9091"
     protocol       = "TCP"
-    port           = local.source_port
+    port           = 9091
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
