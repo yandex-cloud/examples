@@ -98,7 +98,7 @@ resource "yandex_mdb_kafka_cluster" "mkf-cluster-source" {
 resource "yandex_mdb_kafka_topic" "sensors-source" {
   cluster_id         = yandex_mdb_kafka_cluster.mkf-cluster-source.id
   name               = "sensors"
-  partitions         = 1
+  partitions         = 3
   replication_factor = 1
 }
 
@@ -110,7 +110,6 @@ resource "yandex_mdb_kafka_cluster" "mkf-cluster-target" {
   security_group_ids = [yandex_vpc_security_group.mkf_security_group.id]
 
   config {
-    assign_public_ip = true
     brokers_count    = 1
     version          = local.target_kf_version
     kafka {
