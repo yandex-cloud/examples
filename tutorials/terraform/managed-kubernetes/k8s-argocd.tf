@@ -14,9 +14,9 @@ resource "yandex_vpc_network" "k8s-network" {
   name        = "k8s-network"
 }
 
-resource "yandex_vpc_subnet" "subnet-b" {
+resource "yandex_vpc_subnet" "subnet-a" {
   description    = "Subnet in ru-central1-a availability zone"
-  name           = "subnet-b"
+  name           = "subnet-a"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.k8s-network.id
   v4_cidr_blocks = [local.zone_a_v4_cidr_blocks]
@@ -160,8 +160,8 @@ resource "yandex_kubernetes_cluster" "k8s-cluster" {
 
   master {
     zonal {
-      zone      = yandex_vpc_subnet.subnet-b.zone
-      subnet_id = yandex_vpc_subnet.subnet-b.id
+      zone      = yandex_vpc_subnet.subnet-a.zone
+      subnet_id = yandex_vpc_subnet.subnet-a.id
     }
 
     public_ip = true
@@ -191,7 +191,7 @@ resource "yandex_kubernetes_node_group" "k8s-node-group" {
 
   allocation_policy {
     location {
-      zone = yandex_vpc_subnet.subnet-b.zone
+      zone = yandex_vpc_subnet.subnet-a.zone
     }
   }
 
@@ -200,7 +200,7 @@ resource "yandex_kubernetes_node_group" "k8s-node-group" {
 
     network_interface {
       nat                = true
-      subnet_ids         = [yandex_vpc_subnet.subnet-b.id]
+      subnet_ids         = [yandex_vpc_subnet.subnet-a.id]
       security_group_ids = [yandex_vpc_security_group.k8s-main-sg.id]
     }
 
