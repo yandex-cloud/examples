@@ -168,9 +168,19 @@ function preCheck {
                     ;;
             esac
             ;;
-         "Astra Linux")
+        "Astra Linux")
             case "$2" in
                 1.*)
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
+                    ;;
+            esac
+            ;;
+        "ALT Server")
+            case "$2" in
+                10.*)
                     echo "OK"
                     ;;
                 *)
