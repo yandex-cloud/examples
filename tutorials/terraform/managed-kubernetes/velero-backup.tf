@@ -129,8 +129,7 @@ resource "yandex_kubernetes_cluster" "k8s-cluster-1" {
       subnet_id = yandex_vpc_subnet.subnet-a.id
     }
 
-    public_ip = true
-
+    public_ip          = true
     security_group_ids = [yandex_vpc_security_group.k8s-main-sg.id]
 
   }
@@ -168,12 +167,12 @@ resource "yandex_kubernetes_node_group" "k8s-node-group-1" {
     }
 
     resources {
-      memory = 2 # RAM quantity in GB
-      cores  = 2 # Number of CPU cores
+      memory = 4 # RAM quantity in GB
+      cores  = 4 # Number of CPU cores
     }
 
     boot_disk {
-      type = "network-ssd"
+      type = "network-hdd"
       size = 64 # Disk size in GB
     }
   }
@@ -233,13 +232,13 @@ resource "yandex_kubernetes_node_group" "k8s-node-group-2" {
     }
 
     resources {
-      memory = 2 # RAM quantity in GB
-      cores  = 2 # Number of CPU cores
+      memory = 4 # RAM quantity in GB
+      cores  = 4 # Number of CPU cores
     }
 
     boot_disk {
-      type = "network-ssd-nonreplicated"
-      size = 93 # Disk size in GB
+      type = "network-hdd"
+      size = 64 # Disk size in GB
     }
   }
 }
@@ -247,6 +246,15 @@ resource "yandex_kubernetes_node_group" "k8s-node-group-2" {
 resource "yandex_iam_service_account" "velero-sa" {
   description = "Service account for Velero"
   name        = local.sa_name_velero
+}
+
+resource "yandex_resourcemanager_folder_iam_binding" "compute.admin" {
+  # Assign "compute.admin" role to Velero service account.
+  folder_id = local.folder_id
+  role      = "compute.admin"
+  members = [
+    "serviceAccount:${yandex_iam_service_account.velero-sa.id}"
+  ]
 }
 
 resource "yandex_iam_service_account_static_access_key" "sa-static-key-k8s" {
@@ -268,7 +276,7 @@ resource "yandex_storage_bucket" "storage-bucket" {
 }
 
 resource "yandex_iam_service_account_static_access_key" "sa-static-key-velero" {
-  description        = "Static key for Velero service accaunt"
+  description        = "Static key for Velero service account"
   service_account_id = yandex_iam_service_account.velero-sa.id
 }
 
