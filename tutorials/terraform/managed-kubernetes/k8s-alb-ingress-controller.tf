@@ -8,7 +8,10 @@
 locals {
   folder_id                      = ""              # Set your cloud folder ID.
   k8s_cluster_sa_name            = "k8s-sa"        # Set the name for Managed Service for Kubernetes cluster service account.
+<<<<<<< HEAD
   k8s_version                    = ""              # Set the Kubernetes version.
+=======
+>>>>>>> 19cdd013a5a68b063490958cb4c6ab6282246bcb
   zone_a_v4_cidr_blocks_subnet   = "10.101.0.0/24" # Subnet in the ru-central1-a availability zone
   zone_a_v4_cidr_blocks_cluster  = "10.1.0.0/16"   # CIDR for the cluster.
   zone_a_v4_cidr_blocks_services = "172.16.0.0/16" # CIDR for services.
@@ -129,7 +132,6 @@ resource "yandex_kubernetes_cluster" "k8s-cluster" {
   node_service_account_id  = yandex_iam_service_account.k8s-sa.id
 
   master {
-    version = local.k8s_version
     zonal {
       zone      = yandex_vpc_subnet.subnet-a.zone
       subnet_id = yandex_vpc_subnet.subnet-a.id
@@ -149,7 +151,6 @@ resource "yandex_kubernetes_node_group" "k8s-node-group" {
   description = "Node group for the Managed Service for Kubernetes cluster"
   cluster_id  = yandex_kubernetes_cluster.k8s-cluster.id
   name        = "k8s-node-group"
-  version     = local.k8s_version
 
   scale_policy {
     fixed_scale {
