@@ -129,6 +129,7 @@ resource "yandex_kubernetes_cluster" "k8s-cluster" {
   node_service_account_id  = yandex_iam_service_account.k8s-sa.id
 
   master {
+    version = local.k8s_version
     zonal {
       zone      = yandex_vpc_subnet.subnet-a.zone
       subnet_id = yandex_vpc_subnet.subnet-a.id
@@ -148,6 +149,7 @@ resource "yandex_kubernetes_node_group" "k8s-node-group" {
   description = "Node group for the Managed Service for Kubernetes cluster"
   cluster_id  = yandex_kubernetes_cluster.k8s-cluster.id
   name        = "k8s-node-group"
+  version     = local.k8s_version
 
   scale_policy {
     fixed_scale {
