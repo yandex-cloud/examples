@@ -1,4 +1,4 @@
-# Examples of code and configuration files for Yandex.Cloud
+# Examples of code and configuration files for Yandex Cloud
 
 Available examples:
 
