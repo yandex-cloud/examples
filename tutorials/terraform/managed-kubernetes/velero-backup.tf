@@ -4,6 +4,7 @@
 
 locals {
   folder_id             = ""            # Set your cloud folder ID.
+  k8s_version           = ""            # Set the Kubernetes version 1.22 or higher.
   zone_a_v4_cidr_blocks = "10.1.0.0/16" # Set the CIDR block for subnet in the ru-central1-a availability zone.
   sa_name_k8s           = ""            # Set a service account name for k8s clusters. It must be unique in a cloud.
   sa_name_velero        = ""            # Set a service account name for Velero. It must be unique in a cloud.
@@ -123,7 +124,7 @@ resource "yandex_kubernetes_cluster" "k8s-cluster-1" {
   network_id         = yandex_vpc_network.k8s-network.id
 
   master {
-    version = "1.22"
+    version = local.k8s_version
     zonal {
       zone      = yandex_vpc_subnet.subnet-a.zone
       subnet_id = yandex_vpc_subnet.subnet-a.id
@@ -145,6 +146,8 @@ resource "yandex_kubernetes_node_group" "k8s-node-group-1" {
   description = "Node group for Managed Service for Kubernetes cluster"
   name        = "k8s-node-group-1"
   cluster_id  = yandex_kubernetes_cluster.k8s-cluster-1.id
+  version     = local.k8s_version
+
   scale_policy {
     fixed_scale {
       size = 1 # Number of hosts
@@ -187,7 +190,7 @@ resource "yandex_kubernetes_cluster" "k8s-cluster-2" {
   network_id         = yandex_vpc_network.k8s-network.id
 
   master {
-    version = "1.22"
+    version = local.k8s_version
     zonal {
       zone      = yandex_vpc_subnet.subnet-a.zone
       subnet_id = yandex_vpc_subnet.subnet-a.id
@@ -210,6 +213,8 @@ resource "yandex_kubernetes_node_group" "k8s-node-group-2" {
   description = "Node group for Managed Service for Kubernetes cluster"
   name        = "k8s-node-group-2"
   cluster_id  = yandex_kubernetes_cluster.k8s-cluster-2.id
+  version     = local.k8s_version
+
   scale_policy {
     fixed_scale {
       size = 1 # Number of hosts
