@@ -8,10 +8,7 @@
 locals {
   folder_id                      = ""              # Set your cloud folder ID.
   k8s_cluster_sa_name            = "k8s-sa"        # Set the name for Managed Service for Kubernetes cluster service account.
-<<<<<<< HEAD
   k8s_version                    = ""              # Set the Kubernetes version.
-=======
->>>>>>> 19cdd013a5a68b063490958cb4c6ab6282246bcb
   zone_a_v4_cidr_blocks_subnet   = "10.101.0.0/24" # Subnet in the ru-central1-a availability zone
   zone_a_v4_cidr_blocks_cluster  = "10.1.0.0/16"   # CIDR for the cluster.
   zone_a_v4_cidr_blocks_services = "172.16.0.0/16" # CIDR for services.
