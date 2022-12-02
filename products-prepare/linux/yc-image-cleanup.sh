@@ -427,6 +427,16 @@ function getStringsNumInVar {
 }
 
 
+function getStringsWithoutCommentsNumInVar {
+    VAR="$1"
+    if [ "$VAR" == "" ]; then
+        echo 0
+    else
+        echo "$VAR" | grep -v '#' | wc -l
+    fi
+}
+
+
 function getNonLockedUsers {
     SYSDB_DELIMITER=":"
     NOPASSWORD_VALUES=$(printf '!\n!!\n*\n!*\n*!\n')
@@ -552,7 +562,7 @@ function noOneUserHaveMoreThanOneAuthKeys {
         MORE1AUTHKEY_USERS_SINGLE_STRING=$(echo $MORE1AUTHKEY_USERS)
         DETAILS=" Details: $MORE1AUTHKEY_USERS_SINGLE_STRING"
     fi
-    USERS_COUNT=$(getStringsNumInVar "$MORE1AUTHKEY_USERS")
+    USERS_COUNT=$(getStringsWithoutCommentsNumInVar "$MORE1AUTHKEY_USERS")
     if [ "$USERS_COUNT" == "0" ]; then
         echo "PASS;"
     else
