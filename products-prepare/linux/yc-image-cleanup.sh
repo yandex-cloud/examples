@@ -432,7 +432,7 @@ function getStringsWithoutCommentsNumInVar {
     if [ "$VAR" == "" ]; then
         echo 0
     else
-        echo "$VAR" | grep -v '#' | wc -l
+        echo "$VAR" | grep -v -e '^#' | wc -l
     fi
 }
 
