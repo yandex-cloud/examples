@@ -15,7 +15,7 @@ locals {
   target_db_name = "" # Set a YDB database name.
 
 # Specify these settings ONLY AFTER the YDB database is created. Then run "terraform apply" command again.  
-  # You should set up the target endpoint using the GUI to obtain its ID.
+  # You should set up the target endpoint using the management console to obtain its ID.
   target_endpoint_id = "" # Set the target endpoint id.
 
   # Transfer settings:
@@ -97,6 +97,7 @@ resource "yandex_ydb_database_serverless" "ydb" {
 }
 
 resource "yandex_datatransfer_endpoint" "pg_source" {
+  count       = local.transfer_enabled
   name        = "mpg-source"
   description = "Endpoint for the Managed Service for PostgreSQL source cluster"
   settings {
