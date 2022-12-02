@@ -1,4 +1,4 @@
-# Infrastructure for the Yandex Cloud Data Streams, Object Storage and Data Transfer.
+# Infrastructure for the Yandex Cloud Data Streams, Object Storage, and Data Transfer.
 #
 # RU: https://cloud.yandex.ru/docs/data-transfer/tutorials/yds-to-objstorage
 # EN: https://cloud.yandex.com/en/docs/data-transfer/tutorials/yds-to-objstorage
@@ -13,7 +13,7 @@ locals {
   #source_endpoint_id = "" # Set the source endpoint id.
 
   # Target bucket settings:
-  bucket_name = "" # Set a Object Storage bucket name. It must be unique throughout Object Storage.
+  bucket_name = "" # Set an Object Storage bucket name. It must be unique throughout Object Storage.
   #target_endpoint_id = "" # Set the target endpoint id.
 }
 
@@ -22,7 +22,7 @@ resource "yandex_iam_service_account" "sa-yds-obj" {
   name        = local.sa_name
 }
 
-# Assign role `yds.editor` to the service account.
+# Assign the `yds.editor` role to the service account.
 resource "yandex_resourcemanager_folder_iam_binding" "yds_editor" {
   folder_id = local.folder_id
   role      = "yds.editor"
@@ -31,7 +31,7 @@ resource "yandex_resourcemanager_folder_iam_binding" "yds_editor" {
   ]
 }
 
-# Assign role `storage.editor` to the service account.
+# Assign the `storage.editor` role to the service account.
 resource "yandex_resourcemanager_folder_iam_binding" "storage_editor" {
   folder_id = local.folder_id
   role      = "storage.editor"
@@ -40,7 +40,7 @@ resource "yandex_resourcemanager_folder_iam_binding" "storage_editor" {
   ]
 }
 
-# Assign role `storage.uploader` to the service account.
+# Assign the `storage.uploader` role to the service account.
 resource "yandex_resourcemanager_folder_iam_binding" "storage_uploader" {
   folder_id = local.folder_id
   role      = "storage.uploader"
