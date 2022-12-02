@@ -1,0 +1,3 @@
+is_global = true
+build_property.RootNamespace = YandexIoTCoreExample
+build_property.ProjectDir = /Users/nikthespirit/Documents/cloud/examples/iot/Samples/c#/
