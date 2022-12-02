@@ -1,4 +1,4 @@
-# Infrastructure for the Yandex Cloud Managed Service for Apache Kafka®, and Data Transfer.
+# Infrastructure for the Yandex Cloud Managed Service for Apache Kafka® and Data Transfer.
 #
 # RU: https://cloud.yandex.ru/docs/data-transfer/tutorials/mkf-to-mkf
 # EN: https://cloud.yandex.com/en/docs/data-transfer/tutorials/mkf-to-mkf
@@ -14,7 +14,7 @@ locals {
   target_kf_version = "" # Set the Apache Kafka® version.
 
   # Specify these settings ONLY AFTER the YDB database is created. Then run "terraform apply" command again.
-  # You should set up the target endpoint using the GUI to obtain its ID.
+  # You should set up the target endpoint using the management console to obtain its ID.
   source_endpoint_id = "" # Set the source endpoint id.
   target_endpoint_id = "" # Set the target endpoint id.
 
