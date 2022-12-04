@@ -412,6 +412,12 @@ function getNonLockedUsers {
     NOPASSWORD_VALUES=$(printf '!\n!!\n*\n!*\n*!\n')
     for USER in $(cat /etc/passwd | getColumn "$SYSDB_DELIMITER" 1); do
         USERPW=$(cat /etc/shadow | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($2)}')
+        if [ "$USERPW" == "" ]; then
+            OS_TYPE=$(getOS)
+            if [ "$OS_TYPE" == "ALT Server" ]; then
+                USERPW=$(cat /etc/tcb/"$USER"/shadow | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($2)}')
+            fi
+        fi
         if notIn "$USERPW" "$NOPASSWORD_VALUES"; then
             echo "$USER"
         fi
