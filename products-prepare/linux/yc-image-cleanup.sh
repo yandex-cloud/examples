@@ -48,6 +48,16 @@ function getOSVersion {
 function preCheck {
     echo "$1" > /tmp/aa
     case "$1" in
+        "ALT Server")
+            case "$2" in
+                10*)
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
+                    ;;
+            esac
+            ;;
         "CentOS Linux")
             case "$2" in
                 "6"|"7"|"8")
@@ -167,6 +177,14 @@ function preCheck {
 
 function definePMSType {
     case "$1" in
+        "ALT Server")
+            case "$2" in
+                10*)
+                    echo "deb"
+                    ;;
+            esac
+            ;;
+
         "CentOS Linux")
             case "$2" in
                 "6"|"7")
