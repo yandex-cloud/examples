@@ -48,6 +48,16 @@ function getOSVersion {
 function preCheck {
     echo "$1" > /tmp/aa
     case "$1" in
+        "ALT Server")
+            case "$2" in
+                10*)
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
+                    ;;
+            esac
+            ;;
         "CentOS Linux")
             case "$2" in
                 "6"|"7"|"8")
@@ -167,6 +177,14 @@ function preCheck {
 
 function definePMSType {
     case "$1" in
+        "ALT Server")
+            case "$2" in
+                10*)
+                    echo "deb"
+                    ;;
+            esac
+            ;;
+
         "CentOS Linux")
             case "$2" in
                 "6"|"7")
@@ -394,6 +412,12 @@ function getNonLockedUsers {
     NOPASSWORD_VALUES=$(printf '!\n!!\n*\n!*\n*!\n')
     for USER in $(cat /etc/passwd | getColumn "$SYSDB_DELIMITER" 1); do
         USERPW=$(cat /etc/shadow | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($2)}')
+        if [ "$USERPW" == "" ]; then
+            OS_TYPE=$(getOS)
+            if [ "$OS_TYPE" == "ALT Server" ]; then
+                USERPW=$(cat /etc/tcb/"$USER"/shadow | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($2)}')
+            fi
+        fi
         if notIn "$USERPW" "$NOPASSWORD_VALUES"; then
             echo "$USER"
         fi
