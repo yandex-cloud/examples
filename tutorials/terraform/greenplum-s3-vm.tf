@@ -5,12 +5,13 @@
 
 # Specify the following settings
 locals {
-  folder_id       = "" # Set your cloud folder ID the same as for the provider
-  password        = "" # Set the password for the Greenplum® user
-  image_id        = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list
-  vm_username     = "" # Set the username to connect to the routing VM via SSH. For Ubuntu images, the `ubuntu` username is used by default
-  vm_ssh_key_path = "" # Set the path to the public SSH public key for the routing VM. Example: "~/.ssh/key.pub"
-  bucket          = "" # Set a unique bucket name
+  zone_a_v4_cidr_blocks = "10.1.0.0/16" # Set the CIDR block for subnet in the ru-central1-a availability zone.
+  folder_id             = ""            # Set your cloud folder ID the same as for the provider.
+  password              = ""            # Set the password for the Greenplum® user.
+  image_id              = ""            # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list.
+  vm_username           = ""            # Set the username to connect to the routing VM via SSH. For Ubuntu images, the `ubuntu` username is used by default.
+  vm_ssh_key_path       = ""            # Set the path to the public SSH public key for the routing VM. Example: "~/.ssh/key.pub".
+  bucket                = ""            # Set a unique bucket name.
 }
 
 resource "yandex_vpc_network" "mgp_network" {
@@ -18,18 +19,18 @@ resource "yandex_vpc_network" "mgp_network" {
   name        = "mgp_network"
 }
 
-# Subnet in the ru-central1-a availability zone
 resource "yandex_vpc_subnet" "subnet-a" {
+  description    = "Subnet in the ru-central1-a availability zone"
   name           = "subnet-a"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.mgp_network.id
-  v4_cidr_blocks = ["10.5.0.0/24"]
+  v4_cidr_blocks = [local.zone_a_v4_cidr_blocks]
 }
 
-# Security group for Managed Service for Greenplum®
 resource "yandex_vpc_security_group" "mgp_security_group" {
-  network_id = yandex_vpc_network.mgp_network.id
-  name       = "Managed Greenplum® security group"
+  description = "Security group for Managed Service for Greenplum®"
+  network_id  = yandex_vpc_network.mgp_network.id
+  name        = "Managed Greenplum® security group"
 
   ingress {
     description    = "Allow incoming traffic from members of the same security group"

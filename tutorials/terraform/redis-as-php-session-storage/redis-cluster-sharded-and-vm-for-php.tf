@@ -4,86 +4,90 @@
 # EN: https://cloud.yandex.com/en/docs/managed-redis/tutorials/redis-as-php-sessions-storage
 #
 # Set the following settings:
-#
-# * Password for the Yandex Managed Service for Redis cluster
-# * Virtual Machine
-#     * Image ID: https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list
-#     * Username (for Ubuntu images used `ubuntu` name)
-#     * Path to public part of SSH key
 
-
-resource "yandex_vpc_network" "redis-and-vm-network" {
-  name        = "redis-and-vm-network"
-  description = "Network for the Managed Service for Redis cluster and VM."
+locals {
+  zone_a_v4_cidr_blocks = "10.1.0.0/16" # Set the CIDR block for subnet in the ru-central1-a availability zone.
+  zone_b_v4_cidr_blocks = "10.2.0.0/16" # Set the CIDR block for subnet in the ru-central1-b availability zone.
+  zone_c_v4_cidr_blocks = "10.3.0.0/16" # Set the CIDR block for subnet in the ru-central1-c availability zone.
+  password              = ""            # Set the password for the Managed Service for Redis cluster.
+  version               = "6.2"         # Set the version of the Redis.
+  image_id              = ""            # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list.
+  vm_username           = ""            # Set the username to connect to the routing VM via SSH. For Ubuntu images `ubuntu` username is used by default.
+  vm_ssh_key_path       = ""            # Set the path to the public SSH public key for the routing VM. Example: "~/.ssh/key.pub".
 }
 
-# Subnet in ru-central1-a availability zone
+resource "yandex_vpc_network" "redis-and-vm-network" {
+  description = "Network for the Managed Service for Redis cluster and VM"
+  name        = "redis-and-vm-network"
+}
+
 resource "yandex_vpc_subnet" "subnet-a" {
+  description    = "Subnet in the ru-central1-a availability zone"
   name           = "subnet-a"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.redis-and-vm-network.id
-  v4_cidr_blocks = ["10.1.0.0/16"]
+  v4_cidr_blocks = [local.zone_a_v4_cidr_blocks]
 }
 
-# Subnet in ru-central1-b availability zone
 resource "yandex_vpc_subnet" "subnet-b" {
+  description    = "Subnet in the ru-central1-b availability zone"
   name           = "subnet-b"
   zone           = "ru-central1-b"
   network_id     = yandex_vpc_network.redis-and-vm-network.id
-  v4_cidr_blocks = ["10.2.0.0/16"]
+  v4_cidr_blocks = [local.zone_b_v4_cidr_blocks]
 }
 
-# Subnet in ru-central1-c availability zone
 resource "yandex_vpc_subnet" "subnet-c" {
+  description    = "Subnet in the ru-central1-c availability zone"
   name           = "subnet-c"
   zone           = "ru-central1-c"
   network_id     = yandex_vpc_network.redis-and-vm-network.id
-  v4_cidr_blocks = ["10.3.0.0/16"]
+  v4_cidr_blocks = [local.zone_c_v4_cidr_blocks]
 }
 
-# Security group for the Managed Service for Redis cluster and VM
 resource "yandex_vpc_default_security_group" "redis-and-vm-security-group" {
-  network_id = yandex_vpc_network.redis-and-vm-network.id
+  description = "Security group for the Managed Service for Redis cluster and VM"
+  network_id  = yandex_vpc_network.redis-and-vm-network.id
 
   ingress {
-    protocol       = "TCP"
     description    = "Allow incoming HTTP connections from the Internet"
+    protocol       = "TCP"
     port           = 80
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
-    protocol       = "TCP"
     description    = "Allow incoming HTTPS connections from the Internet"
+    protocol       = "TCP"
     port           = 443
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
-    protocol       = "TCP"
     description    = "Allow incoming connections to cluster from the Internet"
+    protocol       = "TCP"
     port           = 6379
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
-    protocol       = "TCP"
     description    = "Allow incoming SSH connections to VM from the Internet"
+    protocol       = "TCP"
     port           = 22
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
-    protocol       = "ANY"
     description    = "Allow outgoing connections to any required resource"
+    protocol       = "ANY"
     from_port      = 0
     to_port        = 65535
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
-# Managed Service for Redis cluster
 resource "yandex_mdb_redis_cluster" "redis-cluster" {
+  description        = "Managed Service for Redis cluster"
   name               = "redis-cluster"
   environment        = "PRODUCTION"
   network_id         = yandex_vpc_network.redis-and-vm-network.id
@@ -91,8 +95,8 @@ resource "yandex_mdb_redis_cluster" "redis-cluster" {
   sharded            = true
 
   config {
-    password = ""    # Set the password
-    version  = "6.2" # Version of the Redis
+    password = local.password
+    version  = local.version
   }
 
   resources {
@@ -133,7 +137,7 @@ resource "yandex_compute_instance" "lamp-vm" {
 
   boot_disk {
     initialize_params {
-      image_id = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list
+      image_id = local.image_id
     }
   }
 
@@ -143,6 +147,6 @@ resource "yandex_compute_instance" "lamp-vm" {
   }
 
   metadata = {
-    ssh-keys = "<username>:${file("<path for SSH public key>")}" # Set username and path for SSH public key
+    ssh-keys = "local.vm_username:${file(local.vm_ssh_key_path)}"
   }
 }

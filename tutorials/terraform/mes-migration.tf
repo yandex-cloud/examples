@@ -5,11 +5,12 @@
 
 # Specify the pre-installation parameters
 locals {
-  folder_id          = "" # Your Folder ID.
-  mes_admin_password = "" # Administrator password for Managed Service for Elasticsearch cluster.
-  mes_edition        = "" # Managed Service for Elasticsearch destination cluster edition, Basic or Platinum. See https://cloud.yandex.ru/docs/managed-elasticsearch/concepts/es-editions.
-  mes_version        = "" # Managed Service for Elasticsearch destination cluster version, should be equal or newer than source cluster version.
-  bucket_name        = "" # Object Storage bucket name. Should be unique in Cloud.
+  zone_a_v4_cidr_blocks = "10.1.0.0/16" # Set the CIDR block for subnet in the ru-central1-a availability zone.
+  folder_id             = ""            # Your Folder ID.
+  mes_admin_password    = ""            # Administrator password for Managed Service for Elasticsearch cluster.
+  mes_edition           = ""            # Managed Service for Elasticsearch destination cluster edition, Basic or Platinum. See https://cloud.yandex.ru/docs/managed-elasticsearch/concepts/es-editions.
+  mes_version           = ""            # Managed Service for Elasticsearch destination cluster version, should be equal or newer than source cluster version.
+  bucket_name           = ""            # Object Storage bucket name. Should be unique in Cloud.
 }
 
 resource "yandex_vpc_network" "my-network" {
@@ -19,7 +20,7 @@ resource "yandex_vpc_network" "my-network" {
 
 resource "yandex_vpc_subnet" "my-subnet" {
   description    = "Subnet for the Managed Service for Elasticsearch cluster"
-  v4_cidr_blocks = ["10.1.0.0/16"]
+  v4_cidr_blocks = [local.zone_a_v4_cidr_blocks]
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.my-network.id
 }

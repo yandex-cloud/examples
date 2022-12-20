@@ -4,25 +4,29 @@
 # EN: https://cloud.yandex.com/en/docs/managed-kafka/tutorials/mirrormaker-unmanaged-topics
 #
 # Set the following settings:
-# * Managed Service for Apache Kafka® cluster:
-#      * admin account name
-#      * admin account password
-# * Virtual Machine:
-#      * Image ID
-#      * Path to public part of SSH key
+
+locals {
+  zone_a_v4_cidr_blocks = "10.1.0.0/16" # Set the CIDR block for subnet in the ru-central1-a availability zone.
+  username              = ""            # Set the admin username in Managed Service for Apache Kafka® cluster.
+  password              = ""            # Set the admin password Managed Service for Apache Kafka® cluster.
+  image_id              = ""            # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list.
+  vm_username           = ""            # Set the username to connect to the routing VM via SSH. For Ubuntu images `ubuntu` username is used by default.
+  vm_ssh_key_path       = ""            # Set the path to the public SSH public key for the routing VM. Example: "~/.ssh/key.pub".
+}
 
 
 resource "yandex_vpc_network" "network" {
+  description = "Network for the Managed Service for Apache Kafka® cluster and VM"
   name        = "network"
-  description = "Network for the Managed Service for Apache Kafka® cluster and VM."
 }
 
 # Subnet in ru-central1-a availability zone
 resource "yandex_vpc_subnet" "subnet-a" {
+  description    = "Subnet in the ru-central1-a availability zone"
   name           = "subnet-a"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.network.id
-  v4_cidr_blocks = ["10.1.0.0/16"]
+  v4_cidr_blocks = [local.zone_a_v4_cidr_blocks]
 }
 
 # Security group for the Managed Service for Apache Kafka® cluster and VM
@@ -30,8 +34,8 @@ resource "yandex_vpc_default_security_group" "security-group" {
   network_id = yandex_vpc_network.network.id
 
   ingress {
-    protocol       = "TCP"
     description    = "Allow connections to the Managed Service for Apache Kafka® cluster from the Internet"
+    protocol       = "TCP"
     from_port      = 9091
     to_port        = 9092
     v4_cidr_blocks = ["0.0.0.0/0"]
@@ -39,23 +43,23 @@ resource "yandex_vpc_default_security_group" "security-group" {
 
   # Allow SSH connections for VM
   ingress {
-    protocol       = "TCP"
     description    = "Allow SSH connections for VM from the Internet"
+    protocol       = "TCP"
     port           = 22
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
-    protocol       = "ANY"
     description    = "Allow outgoing connections to any required resource"
+    protocol       = "ANY"
     from_port      = 0
     to_port        = 65535
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
-# Yandex Managed Service for Apache Kafka® cluster
 resource "yandex_mdb_kafka_cluster" "kafka-cluster" {
+  description        = "Yandex Managed Service for Apache Kafka® cluster"
   name               = "kafka-cluster"
   environment        = "PRODUCTION"
   network_id         = yandex_vpc_network.network.id
@@ -79,8 +83,8 @@ resource "yandex_mdb_kafka_cluster" "kafka-cluster" {
   }
 
   user {
-    name     = "" # Set admin username
-    password = "" # Set admin password
+    name     = local.username
+    password = local.password
     permission {
       topic_name = "*"
       role       = "ACCESS_ROLE_ADMIN"
@@ -88,9 +92,8 @@ resource "yandex_mdb_kafka_cluster" "kafka-cluster" {
   }
 }
 
-# VM in Yandex Compute Cloud
 resource "yandex_compute_instance" "vm-mirror-maker" {
-
+  description = "VM in Yandex Compute Cloud"
   name        = "vm-mirror-maker"
   platform_id = "standard-v3" # Intel Ice Lake
 
@@ -101,7 +104,7 @@ resource "yandex_compute_instance" "vm-mirror-maker" {
 
   boot_disk {
     initialize_params {
-      image_id = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list
+      image_id = local.image_id
     }
   }
 
@@ -111,6 +114,6 @@ resource "yandex_compute_instance" "vm-mirror-maker" {
   }
 
   metadata = {
-    ssh-keys = "<username>:${file("path for SSH public key")}" # Set username and path for SSH public key
+    ssh-keys = "local.vm_username:${file(local.vm_ssh_key_path)}"
   }
 }

@@ -5,6 +5,7 @@
 #
 # Set the following settings:
 locals {
+  zone_a_v4_cidr_blocks = "10.1.0.0/24" # Set the CIDR block for subnet in the ru-central1-a availability zone.
   # Managed Service for MySQL cluster.
   target_mysql_version = "" # Set the MySQL version. It must be the same or higher than the version in the source cluster.
   target_sql_mode      = "" # Set the MySQL SQL mode. It must be the same as in the source cluster.
@@ -27,7 +28,7 @@ resource "yandex_vpc_subnet" "subnet-a" {
   name           = "subnet-a"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.network.id
-  v4_cidr_blocks = ["10.1.0.0/24"]
+  v4_cidr_blocks = [local.zone_a_v4_cidr_blocks]
 }
 
 resource "yandex_vpc_security_group" "security-group-mysql" {

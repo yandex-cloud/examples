@@ -1,16 +1,16 @@
 # Configure source and target clusters
 locals {
   # Source cluster settings
-  mdb-cluster-id = "" # Set the Managed Service for MySQL cluster ID
-  source-user    = "" # Set the source cluster username 
-  source-db      = "" # Set the source cluster database name
-  source-pwd     = "" # Set the source cluster password
+  mdb-cluster-id = "" # Set the Managed Service for MySQL cluster ID.
+  source-user    = "" # Set the source cluster username.
+  source-db      = "" # Set the source cluster database name.
+  source-pwd     = "" # Set the source cluster password.
   # Target cluster settings
-  target-user = ""   # Set the target cluster username
-  target-db   = ""   # Set the target cluster database name
-  target-pwd  = ""   # Set the target cluster password
-  target-host = ""   # Set the target cluster master host IP address or FQDN
-  target-port = 3306 # Set the target cluster port number that Data Transfer will use for connections
+  target-user = ""   # Set the target cluster username.
+  target-db   = ""   # Set the target cluster database name.
+  target-pwd  = ""   # Set the target cluster password.
+  target-host = ""   # Set the target cluster master host IP address or FQDN.
+  target-port = 3306 # Set the target cluster port number that Data Transfer will use for connections.
 }
 
 resource "yandex_datatransfer_endpoint" "managed-mysql-source" {
