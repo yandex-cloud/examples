@@ -176,6 +176,8 @@ function preCheck {
                 *)
                     echo "FAIL"
                     ;;
+            esac
+            ;;
         *)
             echo "FAIL"
             ;;
