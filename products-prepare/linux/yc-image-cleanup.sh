@@ -6,6 +6,9 @@ function getOS {
     if [ -f /etc/os-release ]; then
         . /etc/os-release
         OS="$NAME"
+        if [[ "${NAME// */}" == "ALT" ]]; then
+            OS="ALT Linux"
+        fi
     elif type lsb_release >/dev/null 2>&1; then
         OS=$(lsb_release -si)
     elif [ -f /etc/lsb-release ]; then
@@ -48,9 +51,9 @@ function getOSVersion {
 function preCheck {
     echo "$1" > /tmp/aa
     case "$1" in
-        "ALT Server")
+        "ALT Linux")
             case "$2" in
-                10*)
+                8*|9*|10*|11*)
                     echo "OK"
                     ;;
                 *)
@@ -187,7 +190,7 @@ function preCheck {
 
 function definePMSType {
     case "$1" in
-        "ALT Server")
+        "ALT Linux")
             case "$2" in
                 10*)
                     echo "deb"
@@ -424,7 +427,7 @@ function getNonLockedUsers {
         USERPW=$(cat /etc/shadow | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($2)}')
         if [ "$USERPW" == "" ]; then
             OS_TYPE=$(getOS)
-            if [ "$OS_TYPE" == "ALT Server" ]; then
+            if [ "$OS_TYPE" == "ALT Linux" ]; then
                 USERPW=$(cat /etc/tcb/"$USER"/shadow | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($2)}')
             fi
         fi
@@ -600,7 +603,7 @@ function noPasswordAuthSSH {
 function summarize {
     INPUT=$(cat)
     echo "$INPUT"
-    FAILSNUM=$(echo -n "$INPUT" | awk '/\ FAIL;/' | wc -l)
+    FAILSNUM=$(echo -n "$INPUT" | awk '/\\ FAIL;/' | wc -l)
     if [ "$FAILSNUM" -gt 0 ]; then
         return 1
     fi
