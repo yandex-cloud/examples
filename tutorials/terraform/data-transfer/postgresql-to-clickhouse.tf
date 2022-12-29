@@ -8,7 +8,7 @@ locals {
   ch_password = "" # Set a password for the ClickHouse admin user
   pg_password = "" # Set a password for the PostgreSQL admin user
 
-  transfer_enabled = 0 # Set to 1 ONLY AFTER a table in source cluster is created. Then run "terraform apply" command again to enable the transfer
+  transfer_enabled = 0 # Set to 1 ONLY AFTER a table in the source cluster is created. Then run the "terraform apply" command again to enable the transfer
 }
 
 resource "yandex_vpc_network" "mch_network" {
