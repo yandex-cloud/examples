@@ -1,4 +1,4 @@
-# Infrastructure for the Yandex Cloud Managed Service for MySQL, Managed Service for ClickHouse and Data Transfer.
+# Infrastructure for the Yandex Cloud Managed Service for MySQL, Managed Service for ClickHouse, and Data Transfer.
 #
 # RU: https://cloud.yandex.ru/docs/data-transfer/tutorials/mysql-to-clickhouse
 # EN: https://cloud.yandex.com/en/docs/data-transfer/tutorials/mysql-to-clickhouse
@@ -60,7 +60,7 @@ resource "yandex_vpc_security_group" "security-group" {
   }
 
   ingress {
-    description    = "Allow connections with clickhouse-client to the Managed Service for ClickHouse cluster from the Internet"
+    description    = "Allow connections with a ClickHouse client to the Managed Service for ClickHouse cluster from the Internet"
     protocol       = "TCP"
     port           = 9440
     v4_cidr_blocks = ["0.0.0.0/0"]
