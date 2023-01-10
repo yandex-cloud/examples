@@ -7,6 +7,12 @@
 locals {
   gp_password = "" # Set a password for the Greenplum® admin user
   kf_password = "" # Set a password for the Apache Kafka® user
+
+  # Specify these settings ONLY AFTER the clusters are created. Then run "terraform apply" command again
+  # You should set up endpoints using the GUI to obtain their IDs
+  kf_source_endpoint_id = "" # Set the source endpoint ID
+  gp_target_endpoint_id = "" # Set the target endpoint ID
+  transfer_enabled      = 0                      # Set to 1 to enable transfer
 }
 
 resource "yandex_vpc_network" "mgp_network" {
@@ -93,7 +99,7 @@ resource "yandex_mdb_greenplum_cluster" "mgp-cluster" {
   master_subcluster {
     resources {
       resource_preset_id = "s2.medium" # 8 vCPU, 32 GB RAM
-      disk_size          = 100         # GB
+      disk_size          = 100         #GB
       disk_type_id       = "local-ssd"
     }
   }
@@ -155,4 +161,13 @@ resource "yandex_mdb_kafka_topic" "sensors" {
   name               = "sensors"
   partitions         = 1
   replication_factor = 1
+}
+
+resource "yandex_datatransfer_transfer" "mkf-mgp-transfer" {
+  count       = local.transfer_enabled
+  description = "Transfer from the Managed Service for Apache Kafka® to the Managed Service for Greenplum®"
+  name        = "mkf-mgp-transfer"
+  source_id   = local.kf_source_endpoint_id
+  target_id   = local.gp_target_endpoint_id
+  type        = "INCREMENT_ONLY" # Data replication from the source Managed Service for Apache Kafka® topic to the target Managed Service for Greenplum® cluster
 }
