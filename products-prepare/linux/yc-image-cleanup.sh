@@ -188,6 +188,16 @@ function preCheck {
                     ;;
             esac
             ;;
+        "FreeBSD")
+            case "$2" in
+                12.*)
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
+                    ;;
+            esac
+            ;;
         *)
             echo "FAIL"
             ;;
@@ -430,8 +440,13 @@ function getStringsNumInVar {
 function getNonLockedUsers {
     SYSDB_DELIMITER=":"
     NOPASSWORD_VALUES=$(printf '!\n!!\n*\n!*\n*!\n')
+    PASSWD_FILE=/etc/shadow
+    if [ "$OS_TYPE" == "FreeBSD" ]; then
+        PASSWD_FILE=/etc/master.passwd
+    fi
+
     for USER in $(cat /etc/passwd | getColumn "$SYSDB_DELIMITER" 1); do
-        USERPW=$(cat /etc/shadow | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($2)}')
+        USERPW=$(cat "$PASSWD_FILE" | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($2)}')
         if [ "$USERPW" == "" ]; then
             OS_TYPE=$(getOS)
             if [ "$OS_TYPE" == "ALT Server" ] || [ "$OS_TYPE" == "ALT SPServer" ]; then
