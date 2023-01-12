@@ -520,7 +520,12 @@ function getUsersWithAuthKeys {
 
 function onlyOneNonRootUserHasAuthKeys {
     V="$1"
-    AUTHKEY_USERS=$(getUsersWithAuthKeys | grep -v '^root$\|^operator$')
+    IGNORE_USERS='^root$\|^operator$'
+    if [ "$OS_TYPE" == "FreeBSD" ]; then
+        # all they point to `root` home dir
+        IGNORE_USERS='^root$\|^operator$\|^toor$\|^daemon$\|^admin$'
+    fi
+    AUTHKEY_USERS=$(getUsersWithAuthKeys | grep -v $IGNORE_USERS)
     if [ "$V" == "normal" ]; then
         AUTHKEY_USERS_SINGLE_STRING=$(echo $AUTHKEY_USERS)
         DETAILS=" Details: $AUTHKEY_USERS_SINGLE_STRING"
