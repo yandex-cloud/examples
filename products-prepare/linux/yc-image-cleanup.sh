@@ -168,9 +168,19 @@ function preCheck {
                     ;;
             esac
             ;;
-         "Astra Linux")
+        "Astra Linux")
             case "$2" in
                 1.*)
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
+                    ;;
+            esac
+            ;;
+        "ALT SPServer")
+            case "$2" in
+                8.*)
                     echo "OK"
                     ;;
                 *)
@@ -706,7 +716,7 @@ fi
 
 while getopts ':hv::s::tcdo' OPTION; do
     case "$OPTION" in
-        h) 
+        h)
             echo -e "$USAGE"
             exit
             ;;
