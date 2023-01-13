@@ -445,8 +445,8 @@ function getNonLockedUsers {
         PASSWD_FILE=/etc/master.passwd
     fi
 
-    for USER in $(cat /etc/passwd | getColumn "$SYSDB_DELIMITER" 1); do
-        USERPW=$(cat "$PASSWD_FILE" | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($2)}')
+    for USER in $(cat /etc/passwd | grep -v -e "^#" | getColumn "$SYSDB_DELIMITER" 1); do
+        USERPW=$(cat "$PASSWD_FILE" | grep -v -e "^#" | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($2)}')
         if [ "$USERPW" == "" ]; then
             OS_TYPE=$(getOS)
             if [ "$OS_TYPE" == "ALT Server" ] || [ "$OS_TYPE" == "ALT SPServer" ]; then
