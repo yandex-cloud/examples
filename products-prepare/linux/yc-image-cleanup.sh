@@ -445,7 +445,7 @@ function getNonLockedUsers {
         PASSWD_FILE=/etc/master.passwd
     fi
 
-    for USER in $(cat /etc/passwd | grep -v -e "^#" | getColumn "$SYSDB_DELIMITER" 1); do
+    for USER in $(cat /etc/passwd| grep -v -e "^#" | grep -v -e "^#" | getColumn "$SYSDB_DELIMITER" 1); do
         USERPW=$(cat "$PASSWD_FILE" | grep -v -e "^#" | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($2)}')
         if [ "$USERPW" == "" ]; then
             OS_TYPE=$(getOS)
@@ -478,8 +478,8 @@ function allUsersAreLocked {
 
 function getUsersWithNonEmptyBashHistory {
     SYSDB_DELIMITER=":"
-    for USER in $(cat /etc/passwd | getColumn "$SYSDB_DELIMITER" 1); do
-        USERDIR=$(cat /etc/passwd | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($6)}')
+    for USER in $(cat /etc/passwd | grep -v -e "^#" | getColumn "$SYSDB_DELIMITER" 1); do
+        USERDIR=$(cat /etc/passwd | grep -v -e "^#" | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($6)}')
         if [ -f "${USERDIR}/.bash_history" ]; then
             if [ -s "${USERDIR}/.bash_history" ]; then
                 echo "$USER"
@@ -507,8 +507,8 @@ function allUsersHaveEmptyBashHistory {
 
 function getUsersWithAuthKeys {
     SYSDB_DELIMITER=":"
-    for USER in $(cat /etc/passwd | getColumn "$SYSDB_DELIMITER" 1); do
-        USERDIR=$(cat /etc/passwd | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($6)}')
+    for USER in $(cat /etc/passwd | grep -v -e "^#" | getColumn "$SYSDB_DELIMITER" 1); do
+        USERDIR=$(cat /etc/passwd | grep -v -e "^#" | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($6)}')
         if [ -f "${USERDIR}/.ssh/authorized_keys" ]; then
             if [ -s "${USERDIR}/.ssh/authorized_keys" ]; then
                 echo "$USER"
@@ -551,8 +551,8 @@ function noOneUserHasAuthKeys {
 
 function getUsersWithMoreThanOneAuthKeys {
     SYSDB_DELIMITER=":"
-    for USER in $(cat /etc/passwd | getColumn "$SYSDB_DELIMITER" 1); do
-        USERDIR=$(cat /etc/passwd | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($6)}')
+    for USER in $(cat /etc/passwd | grep -v -e "^#" | getColumn "$SYSDB_DELIMITER" 1); do
+        USERDIR=$(cat /etc/passwd | grep -v -e "^#" | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($6)}')
         if [ -f "${USERDIR}/.ssh/authorized_keys" ]; then
             if [ -s "${USERDIR}/.ssh/authorized_keys" ]; then
                 KEYS_COUNT=$(cat "${USERDIR}/.ssh/authorized_keys" | wc -l)
@@ -583,8 +583,8 @@ function noOneUserHaveMoreThanOneAuthKeys {
 
 function getUsersWithKeyPairs {
     SYSDB_DELIMITER=":"
-    for USER in $(cat /etc/passwd | getColumn "$SYSDB_DELIMITER" 1); do
-        USERDIR=$(cat /etc/passwd | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($6)}')
+    for USER in $(cat /etc/passwd | grep -v -e "^#" | getColumn "$SYSDB_DELIMITER" 1); do
+        USERDIR=$(cat /etc/passwd | grep -v -e "^#" | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($6)}')
         if [ -d "${USERDIR}/.ssh/" ]; then
             FILES_COUNT=$(ls -a "${USERDIR}/.ssh/" | grep -v '^\.$\|^\.\.$\|^authorized_keys$' | wc -l)
             if [ "$FILES_COUNT" -gt "0" ]; then
