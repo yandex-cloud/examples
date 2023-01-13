@@ -168,9 +168,19 @@ function preCheck {
                     ;;
             esac
             ;;
-         "Astra Linux")
+        "Astra Linux")
             case "$2" in
                 1.*)
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
+                    ;;
+            esac
+            ;;
+        "ALT SPServer")
+            case "$2" in
+                8.*)
                     echo "OK"
                     ;;
                 *)
@@ -424,7 +434,7 @@ function getNonLockedUsers {
         USERPW=$(cat /etc/shadow | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($2)}')
         if [ "$USERPW" == "" ]; then
             OS_TYPE=$(getOS)
-            if [ "$OS_TYPE" == "ALT Server" ]; then
+            if [ "$OS_TYPE" == "ALT Server" ] || [ "$OS_TYPE" == "ALT SPServer" ]; then
                 USERPW=$(cat /etc/tcb/"$USER"/shadow | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($2)}')
             fi
         fi
@@ -706,7 +716,7 @@ fi
 
 while getopts ':hv::s::tcdo' OPTION; do
     case "$OPTION" in
-        h) 
+        h)
             echo -e "$USAGE"
             exit
             ;;
