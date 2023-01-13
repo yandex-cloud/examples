@@ -432,7 +432,7 @@ function getStringsNumInVar {
     if [ "$VAR" == "" ]; then
         echo 0
     else
-        echo "$VAR" | wc -l
+        echo "$VAR" | wc -l | sed -E 's/[[:space:]]+//g'
     fi
 }
 
@@ -721,7 +721,7 @@ Options (order matters!):
   -c\tclean up the image
   -d\tcheck the image just after preparing procedure, \"dry run mode\" of clean up process
   -t\tperform cleannes tests on running VM created from image
-  -o\trunning distribution overview and check whether this distribution is supported or not 
+  -o\trunning distribution overview and check whether this distribution is supported or not
 
 Results of running tests are printed to the stdout.
 In \"-d\" and \"-t\" modes exit code equals to 1 if at least one test fails, 0 otherwise.
