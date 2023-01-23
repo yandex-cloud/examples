@@ -9,7 +9,7 @@ locals {
   source_db_name = "" # Set the source cluster database name. It is also used for the target cluster database.
   # Managed Service for PostgreSQL cluster.
   target_pgsql_version = "" # Set the PostgreSQL version. It must be the same as the version of the source cluster.
-  target_user          = "" # Set the target cluster username.
+  target_user          = "" # Set the target cluster username. It must be the same as the username of the source cluster.
   target_password      = "" # Set the target cluster password.
   # (Optional) Virtual Machine.
   vm_image_id   = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list.
