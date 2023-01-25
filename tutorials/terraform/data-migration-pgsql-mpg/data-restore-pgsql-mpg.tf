@@ -5,10 +5,9 @@
 
 # Specify the following settings:
 locals {
-  # Source cluster settings:
-  source_db_name = "" # Set the source cluster database name. It is also used for the target cluster database.
   # Managed Service for PostgreSQL cluster.
   target_pgsql_version = "" # Set the PostgreSQL version. It must be the same as the version of the source cluster.
+  target_db_name       = "" # Set the target cluster database name.
   target_user          = "" # Set the target cluster username. It must be the same as the username of the source cluster.
   target_password      = "" # Set the target cluster password.
   # (Optional) Virtual Machine.
