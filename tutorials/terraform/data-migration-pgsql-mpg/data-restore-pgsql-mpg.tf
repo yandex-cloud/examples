@@ -9,7 +9,7 @@ locals {
   target_pgsql_version = "" # Set the PostgreSQL version. It must be the same as the version of the source cluster.
   target_db_name       = "" # Set the target cluster database name.
   target_user          = "" # Set the target cluster username. It must be the same as the username of the source cluster.
-  target_password      = "" # Set the target cluster password.
+  target_password      = "" # Set the target cluster user password.
   # (Optional) Virtual Machine.
   vm_image_id   = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list.
   vm_username   = "" # Set a username for VM. Images with Ubuntu Linux use the username `ubuntu` by default.
