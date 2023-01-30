@@ -1,7 +1,7 @@
 # Infrastructure for Yandex Cloud Managed Service for Kubernetes cluster and Container Registry
 #
-# RU: https://cloud.yandex.ru/docs/container-registry/tutorials/cr-scanner-with-k8s-and-gitlab
-# EN: https://cloud.yandex.com/en/docs/container-registry/tutorials/cr-scanner-with-k8s-and-gitlab
+# RU: https://cloud.yandex.ru/docs/managed-gitlab/tutorials/gitlab-containers, https://cloud.yandex.ru/docs/managed-gitlab/tutorials/cr-scanner-with-k8s-and-gitlab
+# EN: https://cloud.yandex.com/en/docs/managed-gitlab/tutorials/gitlab-containers, https://cloud.yandex.com/en/docs/managed-gitlab/tutorials/cr-scanner-with-k8s-and-gitlab
 
 # Set the configuration of Managed Service for Kubernetes cluster and Container Registry
 locals {
