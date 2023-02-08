@@ -1,5 +1,4 @@
-#!/bin/bash
-
+#!/usr/bin/env bash
 # Common functions
 
 function getOS {
@@ -335,10 +334,13 @@ function cleanSSHKeyPairs {
 
 
 function cleanMachineID {
+    OS_TYPE=$(getOS)
     rm -f /etc/machine-id
     rm -f /var/lib/dbus/machine-id
     touch /etc/machine-id
-    ln -s /etc/machine-id /var/lib/dbus/machine-id
+    if [ "$OS_TYPE" != "FreeBSD" ]; then
+      ln -s /etc/machine-id /var/lib/dbus/machine-id
+    fi
     echo "DONE"
 }
 
@@ -395,30 +397,47 @@ function cleanSudoers {
 function cleanLogFiles {
     find /var/log -type f -delete
     if [ -z "$JOURNALCTL_EXISTS" ] ; then
-        journalctl --rotate
-        journalctl --vacuum-time=1s
+        journalctl --rotate 2>/dev/null
+        journalctl --vacuum-time=1s 2>/dev/null
     fi
     echo "DONE"
 }
 
 
 function changeSSHRootLoginToDefault {
-    sed -i 's/.*PermitRootLogin.*/#PermitRootLogin No/g' /etc/ssh/sshd_config
-    echo "DONE"
+  OS_TYPE=$(getOS)
+  if [ "$OS_TYPE" == "FreeBSD" ]; then
+      sed -i.bak "s/#*.PermitRootLogin.*/PermitRootLogin no/" /etc/ssh/sshd_config
+      rm -f /etc/ssh/sshd_config.bak
+  else
+      sed -i 's/.*PermitRootLogin.*/#PermitRootLogin No/g' /etc/ssh/sshd_config
+      echo "DONE"
+  fi
+
 }
-
-
 function cleanRootPassword {
+  OS_TYPE=$(getOS)
+  if [ "$OS_TYPE" == "FreeBSD" ]; then
+    pw lock root
+    pw lock toor
+  else
     passwd -d root
     passwd -l root
+  fi
     echo "DONE"
 }
 
 
 function removeSystemUser {
-    if [ ! -z "$YCCLEANUP_SYS_USER" ]; then
-        userdel -f "$YCCLEANUP_SYS_USER"
-        rm -rf /home/"$YCCLEANUP_SYS_USER"
+    OS_TYPE=$(getOS)
+    if [ -n "$YCCLEANUP_SYS_USER" ]; then
+        if [ "$OS_TYPE" == "FreeBSD" ]; then
+          rmuser  -y "$YCCLEANUP_SYS_USER"
+          rm -rf /usr/home/"${YCCLEANUP_SYS_USER:?}"
+        else
+          userdel -f "$YCCLEANUP_SYS_USER"
+          rm -rf /home/"${YCCLEANUP_SYS_USER:?}"
+        fi
     fi
     echo "DONE"
 }
@@ -439,7 +458,7 @@ function getStringsNumInVar {
 
 function getNonLockedUsers {
     SYSDB_DELIMITER=":"
-    NOPASSWORD_VALUES=$(printf '!\n!!\n*\n!*\n*!\n')
+    NOPASSWORD_VALUES=$(printf '!\n!!\n*\n!*\n*!\n*LOCKED**\n*LOCKED*\n')
     PASSWD_FILE=/etc/shadow
     if [ "$OS_TYPE" == "FreeBSD" ]; then
         PASSWD_FILE=/etc/master.passwd
@@ -720,7 +739,7 @@ Options (order matters!):
   -s\tcomma-separated no-whitespaced list of specs for cleanup/check process
   -c\tclean up the image
   -d\tcheck the image just after preparing procedure, \"dry run mode\" of clean up process
-  -t\tperform cleannes tests on running VM created from image
+  -t\tperform cleanness tests on running VM created from image
   -o\trunning distribution overview and check whether this distribution is supported or not
 
 Results of running tests are printed to the stdout.
