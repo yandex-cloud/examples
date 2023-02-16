@@ -25,11 +25,11 @@
     "prettier": "^2.2.1",
     "ts-node": "^10.7.0",
     "tsconfig-paths": "^3.14.1",
-    "typescript": "^4.6.3"
+    "typescript": "^4.6.3",
+    "dotenv": "^16.0.0"
   },
   "dependencies": {
-    "dotenv": "^16.0.0",
     "uuid": "^8.3.2",
-    "ydb-sdk": "^3.0.0"
+    "ydb-sdk": "^3.3.2"
   }
 }
