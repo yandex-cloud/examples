@@ -73,6 +73,7 @@ resource "yandex_mdb_postgresql_cluster" "mpg-cluster" {
   }
 }
 
+# Managed PostgreSQL user settings
 resource "yandex_mdb_postgresql_user" "pg-user" {
   cluster_id = yandex_mdb_postgresql_cluster.mpg-cluster.id
   name       = "pg-user"
@@ -80,6 +81,7 @@ resource "yandex_mdb_postgresql_user" "pg-user" {
   grants     = ["mdb_replication"]
 }
 
+# Managed PostgreSQL database settings
 resource "yandex_mdb_postgresql_database" "mpg-db" {
   cluster_id = yandex_mdb_postgresql_cluster.mpg-cluster.id
   name       = "db1"
@@ -99,7 +101,7 @@ resource "yandex_resourcemanager_folder_iam_binding" "yds_editor" {
   folder_id = local.folder_id
   role      = "yds.editor"
   members = [
-    "serviceAccount:${yandex_iam_service_account.yds-sa.id}",
+    "serviceAccount:${yandex_iam_service_account.yds-sa.id}"
   ]
 }
 
