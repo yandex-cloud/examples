@@ -1,7 +1,7 @@
-# Infrastructure for the Yandex Cloud Managed Service for Apache Kafka®, and Data Transfer.
+# Infrastructure for the Yandex Database, Yandex Cloud Managed Service for Apache Kafka®, and Data Transfer.
 #
-# RU: https://cloud.yandex.ru/docs/data-transfer/tutorials/mkf-to-mkf
-# EN: https://cloud.yandex.com/en/docs/data-transfer/tutorials/mkf-to-mkf
+# RU: https://cloud.yandex.ru/docs/data-transfer/tutorials/cdc-ydb
+# EN: https://cloud.yandex.com/en/docs/data-transfer/tutorials/cdc-ydb
 
 # Set variables.
 variable "kf_topics_management" {
