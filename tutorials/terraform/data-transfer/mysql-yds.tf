@@ -54,9 +54,9 @@ resource "yandex_mdb_mysql_cluster" "mysql-cluster" {
   description        = "Managed Service for MySQL cluster"
   name               = "mysql-cluster"
   environment        = "PRODUCTION"
-  network_id         = yandex_vpc_network.network.id
-  version            = local.source_mysql_version
-  security_group_ids = [yandex_vpc_security_group.security-group.id]
+  network_id         = yandex_vpc_network.mmy_network.id
+  version            = "8.0"
+  security_group_ids = [yandex_vpc_security_group.mmy_security_group.id]
 
   resources {
     resource_preset_id = "s2.micro" # 2 vCPU, 8 GB RAM
@@ -66,7 +66,7 @@ resource "yandex_mdb_mysql_cluster" "mysql-cluster" {
 
   host {
     zone             = "ru-central1-a"
-    subnet_id        = yandex_vpc_subnet.subnet-a.id
+    subnet_id        = yandex_vpc_subnet.mmy_subnet-a.id
     assign_public_ip = true # Required for connection from Internet
   }
 }
@@ -83,7 +83,7 @@ resource "yandex_mdb_mysql_database" "source-db" {
 resource "yandex_mdb_mysql_user" "source-user" {
   cluster_id = yandex_mdb_mysql_cluster.mysql-cluster.id
   name       = "mmy-user"
-  password   = local.source_password
+  password   = local.mysql_password
   permission {
     database_name = yandex_mdb_mysql_database.source-db.name
     roles         = ["ALL"]
