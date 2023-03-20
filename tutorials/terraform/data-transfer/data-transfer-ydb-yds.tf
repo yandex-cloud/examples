@@ -1,4 +1,4 @@
-# Infrastructure for the Yandex Cloud YDB and Data Transfer.
+# Infrastructure for the Managed Service for YDB and Data Transfer.
 #
 # RU: https://cloud.yandex.ru/docs/data-transfer/tutorials/ydb-to-yds
 # EN: https://cloud.yandex.com/en/docs/data-transfer/tutorials/ydb-to-yds
