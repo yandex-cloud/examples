@@ -9,8 +9,8 @@
 locals {
   folder_id = "" # Your cloud folder ID, same as for provider
 
-  input-bucket  = "" # Name for an Object Storage bucket for input files. Must be unique in the Cloud
-  output-bucket = "" # Name for an Object Storage bucket for output files. Must be unique in the Cloud
+  input-bucket  = "" # Name of an Object Storage bucket for input files. Must be unique in the Cloud
+  output-bucket = "" # Name of an Object Storage bucket for output files. Must be unique in the Cloud
 
   dp_ssh_key = "" # Set an absolute path to the SSH public key for the Data Proc cluster
 
@@ -118,7 +118,7 @@ resource "yandex_iam_service_account" "dataproc-sa" {
 resource "yandex_resourcemanager_folder_iam_binding" "dataproc-agent" {
   folder_id = local.folder_id
   role      = "dataproc.agent"
-  members = ["serviceAccount:${yandex_iam_service_account.dataproc-sa.id}"]
+  members   = ["serviceAccount:${yandex_iam_service_account.dataproc-sa.id}"]
 }
 
 # Yandex Object Storage bucket
@@ -129,19 +129,12 @@ resource "yandex_iam_service_account" "sa-for-obj-storage" {
   name      = "sa-for-obj-storage"
 }
 
-# Grant the service account admin privileges to create storages and grant bucketACLs
+# Grant the service account storage.admin role to create storages and grant bucket ACLs
 resource "yandex_resourcemanager_folder_iam_binding" "s3-editor" {
   folder_id = local.folder_id
-  role      = "admin"
-  members = ["serviceAccount:${yandex_iam_service_account.sa-for-obj-storage.id}"]
+  role      = "storage.admin"
+  members   = ["serviceAccount:${yandex_iam_service_account.sa-for-obj-storage.id}"]
 }
-
-# Grant the service account a permission to grant ACLs
-#resource "yandex_iam_service_account_iam_binding" "sa-editor" {
-#  service_account_id = yandex_iam_service_account.dataproc-sa.id
-#  role               = "admin"
-#  members = ["serviceAccount:${yandex_iam_service_account.sa-for-obj-storage.id}"]
-#}
 
 resource "yandex_iam_service_account_static_access_key" "sa-static-key" {
   description        = "Static access key for Object Storage"
@@ -155,7 +148,7 @@ resource "yandex_storage_bucket" "input-bucket" {
   bucket     = local.input-bucket
 
   grant {
-    id = yandex_iam_service_account.dataproc-sa.id
+    id          = yandex_iam_service_account.dataproc-sa.id
     type        = "CanonicalUser"
     permissions = ["READ"]
   }
@@ -168,7 +161,7 @@ resource "yandex_storage_bucket" "output-bucket" {
   bucket     = local.output-bucket
 
   grant {
-    id = yandex_iam_service_account.dataproc-sa.id
+    id          = yandex_iam_service_account.dataproc-sa.id
     type        = "CanonicalUser"
     permissions = ["READ", "WRITE"]
   }
