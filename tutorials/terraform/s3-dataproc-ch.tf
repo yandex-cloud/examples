@@ -180,7 +180,7 @@ resource "yandex_dataproc_cluster" "dataproc-cluster" {
     version_id = "2.0"
 
     hadoop {
-      services        = ["HDFS", "SPARK", "YARN", "ZEPPELIN"]
+      services        = ["HDFS", "SPARK", "YARN"]
       ssh_public_keys = [file(local.dp_ssh_key)]
     }
 
