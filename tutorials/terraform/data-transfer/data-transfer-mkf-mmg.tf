@@ -19,7 +19,7 @@ locals {
   target_endpoint_id   = "" # Set the target endpoint id.
 
   # Transfer settings:
-  transfer_enable = 0 # Set to 1 to enable Transfer.
+  transfer_enabled = 0 # Set to 1 to enable Transfer.
 }
 
 resource "yandex_vpc_network" "network" {
@@ -142,7 +142,7 @@ resource "yandex_mdb_mongodb_cluster" "mongodb-cluster" {
 }
 
 resource "yandex_datatransfer_transfer" "mkf-mmg-transfer" {
-  count       = local.transfer_enable
+  count       = local.transfer_enabled
   description = "Transfer from the Managed Service for Apache Kafka® to the Managed Service for MongoDB"
   name        = "transfer-from-mkf-to-mmg"
   source_id   = local.source_endpoint_id
