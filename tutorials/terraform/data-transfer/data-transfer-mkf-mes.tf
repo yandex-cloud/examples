@@ -16,7 +16,7 @@ locals {
   target_endpoint_id    = "" # Set the target endpoint id.
 
   # Transfer settings:
-  transfer_enable = 0 # Set to 1 to enable Transfer.
+  transfer_enabled = 0 # Set to 1 to enable Transfer.
 }
 
 resource "yandex_vpc_network" "network" {
@@ -136,7 +136,7 @@ resource "yandex_mdb_elasticsearch_cluster" "Elasticsearch-cluster" {
 }
 
 resource "yandex_datatransfer_transfer" "mkf-mes-transfer" {
-  count       = local.transfer_enable
+  count       = local.transfer_enabled
   description = "Transfer from the Managed Service for Apache Kafka® to the Managed Service for Elasticsearch"
   name        = "transfer-from-mkf-to-mes"
   source_id   = local.source_endpoint_id
