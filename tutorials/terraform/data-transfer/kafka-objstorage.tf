@@ -5,16 +5,16 @@
 
 # Specify the following settings
 locals {
-  kf_version = "" # Set a desired version of Apache Kafka®. For available versions, see the documentation main page : https://cloud.yandex.com/en/docs/managed-kafka/
-  kf_password = ""             # Set a password for the Apache Kafka® user
+  kf_version  = "" # Set a desired version of Apache Kafka®. For available versions, see the documentation main page : https://cloud.yandex.com/en/docs/managed-kafka/
+  kf_password = "" # Set a password for the Apache Kafka® user
   folder_id   = "" # Set your cloud folder ID, same as for provider
-  bucket      = ""      # Set a unique bucket name
+  bucket      = "" # Set a unique bucket name
 
   # Specify these settings ONLY AFTER the cluster and the bucket are created. Then run "terraform apply" command again
   # You should set up endpoints using the GUI to obtain their IDs
   kf_source_endpoint_id = "" # Set the source endpoint ID
   os_target_endpoint_id = "" # Set the target endpoint ID
-  transfer_enabled      = 0                      # Set to 1 to enable transfer
+  transfer_enabled      = 0  # Set to 1 to enable transfer
 }
 
 resource "yandex_vpc_network" "mkf_network" {
