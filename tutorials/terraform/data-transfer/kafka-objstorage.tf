@@ -5,9 +5,16 @@
 
 # Specify the following settings
 locals {
-  kf_password = "" # Set a password for the Apache Kafka® user
+  kf_version = "" # Set a desired version of Apache Kafka®. For available versions, see the documentation main page : https://cloud.yandex.com/en/docs/managed-kafka/
+  kf_password = ""             # Set a password for the Apache Kafka® user
   folder_id   = "" # Set your cloud folder ID, same as for provider
-  bucket      = "" # Set a unique bucket name
+  bucket      = ""      # Set a unique bucket name
+
+  # Specify these settings ONLY AFTER the cluster and the bucket are created. Then run "terraform apply" command again
+  # You should set up endpoints using the GUI to obtain their IDs
+  kf_source_endpoint_id = "" # Set the source endpoint ID
+  os_target_endpoint_id = "" # Set the target endpoint ID
+  transfer_enabled      = 0                      # Set to 1 to enable transfer
 }
 
 resource "yandex_vpc_network" "mkf_network" {
@@ -54,7 +61,7 @@ resource "yandex_mdb_kafka_cluster" "mkf-cluster" {
   config {
     assign_public_ip = true
     brokers_count    = 1
-    version          = "2.8"
+    version          = local.kf_version
     kafka {
       resources {
         disk_size          = 10 # GB
@@ -113,4 +120,13 @@ resource "yandex_storage_bucket" "obj-storage-bucket" {
   access_key = yandex_iam_service_account_static_access_key.sa-static-key.access_key
   secret_key = yandex_iam_service_account_static_access_key.sa-static-key.secret_key
   bucket     = local.bucket
+}
+
+resource "yandex_datatransfer_transfer" "mkf-os-transfer" {
+  count       = local.transfer_enabled
+  description = "Transfer from the Managed Service for Apache Kafka® to the Yandex Object Storage bucket"
+  name        = "mkf-os-transfer"
+  source_id   = local.kf_source_endpoint_id
+  target_id   = local.os_target_endpoint_id
+  type        = "INCREMENT_ONLY" # Data replication from the source Managed Service for Apache Kafka® topic to the target Yandex Object Storage bucket
 }
