@@ -6,15 +6,12 @@
 # Set source cluster and target cluster settings.
 locals {
   # Source Managed Service for Apache Kafka® cluster settings:
-  source_kf_version    = "" # Set Managed Service for Apache Kafka® cluster version.
-  source_user_name     = "" # Set a username in the Managed Service for Apache Kafka® cluster.
+  source_kf_version    = "" # Set a desired version of Apache Kafka®. For available versions, see the documentation main page: https://cloud.yandex.com/en/docs/managed-kafka/
   source_user_password = "" # Set a password for the user in the Managed Service for Apache Kafka® cluster.
   source_endpoint_id   = "" # Set the source endpoint id.
 
   # Target Managed Service for MongoDB cluster settings:
   target_mg_version    = "" # Set Managed Service for MongoDB cluster version.
-  target_db_name       = "" # Set Managed Service for MongoDB database name.
-  target_user_name     = "" # Set a username in the Managed Service for MongoDB cluster.
   target_user_password = "" # Set a password for the user in the Managed Service for MongoDB cluster.
   target_endpoint_id   = "" # Set the target endpoint id.
 
@@ -84,7 +81,7 @@ resource "yandex_mdb_kafka_cluster" "kafka-cluster" {
   }
 
   user {
-    name     = local.source_user_name
+    name     = "mkf-user"
     password = local.source_user_password
     permission {
       topic_name = "sensors"
@@ -116,14 +113,14 @@ resource "yandex_mdb_mongodb_cluster" "mongodb-cluster" {
   }
 
   database {
-    name = local.target_db_name
+    name = "db1"
   }
 
   user {
-    name     = local.target_user_name
+    name     = "mmg-user"
     password = local.target_user_password
     permission {
-      database_name = local.target_db_name
+      database_name = "db1"
       roles         = ["readWrite"]
     }
   }
