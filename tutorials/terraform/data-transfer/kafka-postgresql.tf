@@ -168,6 +168,7 @@ resource "yandex_mdb_kafka_topic" "sensors" {
 }
 
 resource "yandex_datatransfer_endpoint" "pg_target" {
+  count       = local.transfer_enabled
   description = "Target endpoint for PostgreSQL cluster"
   name = "pg-target-tf"
   settings {
