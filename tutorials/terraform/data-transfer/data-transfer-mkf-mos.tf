@@ -6,8 +6,7 @@
 # Set source cluster and target cluster settings.
 locals {
   # Source Managed Service for Apache Kafka® cluster settings:
-  source_kf_version    = "" # Set Managed Service for Apache Kafka® cluster version.
-  source_user_name     = "" # Set a username in the Managed Service for Apache Kafka® cluster.
+  source_kf_version    = "" # Set a desired version of Apache Kafka®. For available versions, see the documentation main page: https://cloud.yandex.com/en/docs/managed-kafka/
   source_user_password = "" # Set a password for the user in the Managed Service for Apache Kafka® cluster.
   source_endpoint_id   = "" # Set the source endpoint id.
 
@@ -84,7 +83,7 @@ resource "yandex_mdb_kafka_cluster" "kafka-cluster" {
   }
 
   user {
-    name     = local.source_user_name
+    name     = "mkf-user"
     password = local.source_user_password
     permission {
       topic_name = "sensors"
@@ -110,5 +109,5 @@ resource "yandex_datatransfer_transfer" "mkf-mos-transfer" {
   name        = "transfer-from-mkf-to-mos"
   source_id   = local.source_endpoint_id
   target_id   = local.target_endpoint_id
-  type        = "INCREMENT_ONLY" # Replication data from the source Data Stream.
+  type        = "INCREMENT_ONLY" # Replication data.
 }
