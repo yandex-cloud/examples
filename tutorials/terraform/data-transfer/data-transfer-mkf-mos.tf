@@ -72,7 +72,7 @@ resource "yandex_mdb_kafka_cluster" "kafka-cluster" {
     brokers_count    = 1
     version          = local.source_kf_version
     zones            = ["ru-central1-a"]
-    assign_public_ip = true
+    assign_public_ip = true # Required for connection from the Internet
     kafka {
       resources {
         resource_preset_id = "s2.micro" # 2 vCPU, 8 GB RAM
