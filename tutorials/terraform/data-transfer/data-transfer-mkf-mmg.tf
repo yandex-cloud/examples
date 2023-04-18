@@ -94,6 +94,7 @@ resource "yandex_mdb_kafka_cluster" "kafka-cluster" {
   }
 }
 
+# Managed Service for Apache Kafka® topic
 resource "yandex_mdb_kafka_topic" "sensors" {
   cluster_id         = yandex_mdb_kafka_cluster.kafka-cluster.id
   name               = "sensors"
