@@ -5,6 +5,8 @@
 
 # Specify the following settings
 locals {
+  pg_version = "" # Set a desired version of PostgreSQL. For available versions, see the documentation main page : https://cloud.yandex.com/en/docs/managed-postgresql/
+  kf_version = "" # Set a desired version of Apache Kafka®. For available versions, see the documentation main page : https://cloud.yandex.com/en/docs/managed-kafka/
   pg_password = "" # Set a password for the PostgreSQL admin user
   kf_password = "" # Set a password for the Apache Kafka® user
 
@@ -131,7 +133,7 @@ resource "yandex_mdb_kafka_cluster" "mkf-cluster" {
   config {
     assign_public_ip = true
     brokers_count    = 1
-    version          = "2.8"
+    version          = local.kf_version
     kafka {
       resources {
         disk_size          = 10 # GB
@@ -190,6 +192,6 @@ resource "yandex_datatransfer_transfer" "mkf-mpg-transfer" {
   description = "Transfer from the Managed Service for Apache Kafka® to the Managed Service for PostgreSQL"
   name        = "mkf-mpg-transfer"
   source_id   = local.kf_source_endpoint_id
-  target_id   = yandex_datatransfer_endpoint.pg_target.id
+  target_id   = yandex_datatransfer_endpoint.pg_target[count.index].id
   type        = "INCREMENT_ONLY" # Data replication from the source Managed Service for Apache Kafka® topic to the target Managed Service for PostgreSQL cluster
 }
