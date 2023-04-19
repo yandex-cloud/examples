@@ -175,8 +175,8 @@ resource "yandex_datatransfer_endpoint" "pg_target" {
       connection {
         mdb_cluster_id = yandex_mdb_postgresql_cluster.mpg-cluster.id
       }
-      database = "db1"
-      user = "pg-user"
+      database = yandex_mdb_postgresql_database.mpg-db.name
+      user = yandex_mdb_postgresql_user.pg-user.name
       password {
         raw = local.pg_password
       }
