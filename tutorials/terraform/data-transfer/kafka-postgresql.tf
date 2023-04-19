@@ -49,9 +49,8 @@ resource "yandex_vpc_security_group" "mpg_security_group" {
 
   ingress {
     description    = "Allow incoming traffic from the Internet"
-    protocol       = "ANY"
-    from_port      = 0
-    to_port        = 65535
+    protocol       = "TCP"
+    port      = 6432
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -86,14 +85,14 @@ resource "yandex_vpc_security_group" "mkf_security_group" {
 }
 
 resource "yandex_mdb_postgresql_cluster" "mpg-cluster" {
-  description        = "Managed PostgreSQL cluster"
+  description        = "Managed Service for PostgreSQL cluster"
   name               = "mpg-cluster"
   environment        = "PRODUCTION"
   network_id         = yandex_vpc_network.mpg_network.id
   security_group_ids = [yandex_vpc_security_group.mpg_security_group.id]
 
   config {
-    version = 14
+    version = local.pg_version
     resources {
       resource_preset_id = "s2.micro" # 2 vCPU, 8 GB RAM
       disk_type_id       = "network-ssd"
@@ -104,7 +103,7 @@ resource "yandex_mdb_postgresql_cluster" "mpg-cluster" {
   host {
     zone             = "ru-central1-a"
     subnet_id        = yandex_vpc_subnet.mpg_subnet-a.id
-    assign_public_ip = true
+    assign_public_ip = true # Required for connection from the Internet
   }
 }
 
@@ -131,7 +130,7 @@ resource "yandex_mdb_kafka_cluster" "mkf-cluster" {
   security_group_ids = [yandex_vpc_security_group.mkf_security_group.id]
 
   config {
-    assign_public_ip = true
+    assign_public_ip = true # Required for connection from the Internet
     brokers_count    = 1
     version          = local.kf_version
     kafka {
@@ -142,9 +141,7 @@ resource "yandex_mdb_kafka_cluster" "mkf-cluster" {
       }
     }
 
-    zones = [
-      "ru-central1-a"
-    ]
+    zones = ["ru-central1-a"]
   }
 
   user {
