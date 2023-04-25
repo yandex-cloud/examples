@@ -1,69 +1,63 @@
-# Infrastructure for Yandex Cloud Managed Service for the ClickHouse cluster, Data Proc cluster, and virtual machine.
+# Infrastructure for the Yandex Cloud Managed Service for ClickHouse, Data Proc, and Object Storage
 #
-# RU: https://cloud.yandex.ru/docs/data-proc/tutorials/exchange-data-with-mch
+# RU: https://cloud.yandex.ru/docs/data-proc/tutorials/s3-dataproc-ch
+# EN: https://cloud.yandex.com/en/docs/data-proc/tutorials/s3-dataproc-ch
 #
-# Set the configuration of the Managed Service for ClickHouse cluster, Data Proc cluster, and Virtual Machine.
+# Set the configuration of the Managed Service for ClickHouse cluster, Data Proc cluster, and Object Storage
 
-# Specify the pre-installation parameters:
 locals {
-  # Base settings
-  folder_id  = ""              # Your folder ID.
-  network_id = ""              # Network ID for the Managed Service for ClickHouse cluster, the Data Proc cluster, and VM.
-  subnet_id  = ""              # Subnet ID (enable NAT for this subnet).
-  zone_id    = "ru-central1-a" # Availability zone for resources.
+  # Specify the following settings:
+  folder_id = "" # Your cloud folder ID, same as for provider
+  input_bucket  = "" # Name of an Object Storage bucket for input files. Must be unique in the Cloud
+  output_bucket = "" # Name of an Object Storage bucket for output files. Must be unique in the Cloud
+  dp_ssh_key = "" # Set an absolute path to the SSH public key for the Data Proc cluster
+  ch_password = "" # A user password for the ClickHouse cluster
 
-  # Managed Service for ClickHouse cluster.
-  ch_user_name     = "user1" # Set a username for the ClickHouse cluster.
-  ch_user_password = ""      # Set a user password for the ClickHouse cluster.
-
-  # Data Proc cluster.
-  dp_ssh_key  = "" # Set an absolute path to the SSH public key for the Data Proc cluster.
-  dp_account  = "" # Name of the Data Proc cluster service account.
-  bucket_name = "" # Name for the Object Storage bucket. Should be unique in Cloud.
-
-  # VM
-  vm_username = ""                     # Set a username for VM.
-  vm_ssh_key  = ""                     # Set absolute path to SSH public key for VM.
-  vm_image_id = "fd8ciuqfa001h8s9sa7i" # Ubuntu 20.04. See this page to list all available images: https://cloud.yandex.ru/docs/compute/operations/images-with-pre-installed-software/get-list.
+  # Change the following settings only if necessary
+  network_name = "dataproc-ch-network" # Name of the network
+  nat_name = "dataproc-nat" # Name of the NAT gateway
+  subnet_name = "dataproc-ch-subnet-a" # Name of the subnet
+  dp_sa_name = "dataproc-sa" # Name of the service account for DataProc
+  os_sa_name = "sa-for-obj-storage" # Name of the service account for Object Storage creating
+  dataproc_name = "dataproc-cluster" # Name of the Data Proc cluster
+  mch_name = "mch-cluster" # Name of the Managed Service for ClickHouse cluster
+  mch_db_name = "db1" # Name of the ClickHouse database
+  mch_user_name = "user1" # Name of the ClickHouse admin user
 }
 
-resource "yandex_vpc_security_group" "clickhouse-and-vm-security-group" {
-  description = "Security group for the Managed Service for ClickHouse cluster and VM"
-  network_id  = local.network_id
+resource "yandex_vpc_network" "dataproc_ch_network" {
+  description = "Network for Data Proc and Managed Service for ClickHouse"
+  name        = local.network_name
+}
 
-  ingress {
-    description    = "Allow SSL connections to the Managed Service for ClickHouse cluster with clickhouse-client"
-    protocol       = "TCP"
-    port           = 9440
-    v4_cidr_blocks = ["0.0.0.0/0"]
-  }
+# NAT gateway for Data Proc
+resource "yandex_vpc_gateway" "dataproc_nat" {
+  name = local.nat_name
+  shared_egress_gateway {}
+}
 
-  ingress {
-    description    = "Allow HTTPS connections to the Managed Service for ClickHouse cluster"
-    protocol       = "TCP"
-    port           = 8443
-    v4_cidr_blocks = ["0.0.0.0/0"]
-  }
+# Route table for Data Proc
+resource "yandex_vpc_route_table" "dataproc-rt" {
+  network_id = yandex_vpc_network.dataproc_ch_network.id
 
-  ingress {
-    description    = "Allow SSH connections to VM from the Internet"
-    protocol       = "TCP"
-    port           = 22
-    v4_cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    description    = "Allow outgoing connections to any required resource"
-    protocol       = "ANY"
-    from_port      = 0
-    to_port        = 65535
-    v4_cidr_blocks = ["0.0.0.0/0"]
+  static_route {
+    destination_prefix = "0.0.0.0/0"
+    gateway_id         = yandex_vpc_gateway.dataproc_nat.id
   }
 }
 
-resource "yandex_vpc_security_group" "data-proc-security-group" {
+resource "yandex_vpc_subnet" "dataproc_ch_subnet-a" {
+  description    = "Subnet ru-central1-a availability zone for Data Proc and Managed Service for ClickHouse"
+  name           = local.subnet_name
+  zone           = "ru-central1-a"
+  network_id     = yandex_vpc_network.dataproc_ch_network.id
+  v4_cidr_blocks = ["10.140.0.0/24"]
+  route_table_id = yandex_vpc_route_table.dataproc-rt.id
+}
+
+resource "yandex_vpc_security_group" "dataproc-security-group" {
   description = "Security group for the Data Proc cluster"
-  network_id  = local.network_id
+  network_id  = yandex_vpc_network.dataproc_ch_network.id
 
   ingress {
     description       = "Allow any incoming traffic within the security group"
@@ -87,145 +81,115 @@ resource "yandex_vpc_security_group" "data-proc-security-group" {
     port           = 443
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
+
+  egress {
+    description    = "Allow connections to the ClickHouse port from any IP address"
+    protocol       = "TCP"
+    port           = 8443
+    v4_cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
-resource "yandex_iam_service_account" "dataproc" {
+resource "yandex_vpc_security_group" "mch_security_group" {
+  description = "Security group for the Managed Service for ClickHouse cluster"
+  network_id  = yandex_vpc_network.dataproc_ch_network.id
+
+  ingress {
+    description    = "Allow SSL connections to the Managed Service for ClickHouse cluster with clickhouse-client"
+    protocol       = "TCP"
+    port           = 9440
+    v4_cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    description    = "Allow HTTPS connections to the Managed Service for ClickHouse cluster"
+    protocol       = "TCP"
+    port           = 8443
+    v4_cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    description    = "Allow outgoing connections to any required resource"
+    protocol       = "ANY"
+    from_port      = 0
+    to_port        = 65535
+    v4_cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+resource "yandex_iam_service_account" "dataproc-sa" {
   description = "Service account to manage the Data Proc cluster"
-  name        = local.dp_account
+  name        = local.dp_sa_name
 }
 
-# Assign the `dataproc.agent` role to the Data Proc cluster service account.
+# Assign the `dataproc.agent` role to the Data Proc service account
 resource "yandex_resourcemanager_folder_iam_binding" "dataproc-agent" {
   folder_id = local.folder_id
   role      = "dataproc.agent"
-  members = [
-    "serviceAccount:${yandex_iam_service_account.dataproc.id}",
-  ]
+  members   = ["serviceAccount:${yandex_iam_service_account.dataproc-sa.id}"]
 }
 
-# Assign the `dataprov.provisioner` role to the Data Proc cluster service account.
-resource "yandex_resourcemanager_folder_iam_binding" "dataproc-provisioner" {
+# Yandex Object Storage bucket
+
+# Create a service account for Object Storage creation
+resource "yandex_iam_service_account" "sa-for-obj-storage" {
   folder_id = local.folder_id
-  role      = "dataproc.provisioner"
-  members = [
-    "serviceAccount:${yandex_iam_service_account.dataproc.id}",
-  ]
+  name      = local.os_sa_name
 }
 
-# Assign the `monitoring.viewer` role to the Data Proc cluster service account.
-resource "yandex_resourcemanager_folder_iam_binding" "monitoring-viewer" {
+# Grant the service account storage.admin role to create storages and grant bucket ACLs
+resource "yandex_resourcemanager_folder_iam_binding" "s3-editor" {
   folder_id = local.folder_id
-  role      = "monitoring.viewer"
-  members = [
-    "serviceAccount:${yandex_iam_service_account.dataproc.id}",
-  ]
+  role      = "storage.admin"
+  members   = ["serviceAccount:${yandex_iam_service_account.sa-for-obj-storage.id}"]
 }
 
-# Assign the `storage.editor` role to the Data Proc cluster service account.
-resource "yandex_resourcemanager_folder_iam_binding" "bucket-creator" {
-  folder_id = local.folder_id
-  role      = "storage.editor"
-  members = [
-    "serviceAccount:${yandex_iam_service_account.dataproc.id}",
-  ]
+resource "yandex_iam_service_account_static_access_key" "sa-static-key" {
+  description        = "Static access key for Object Storage"
+  service_account_id = yandex_iam_service_account.sa-for-obj-storage.id
 }
 
-resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster" {
-  description        = "Managed Service for ClickHouse cluster"
-  name               = "clickhouse-cluster"
-  environment        = "PRODUCTION"
-  network_id         = local.network_id
-  security_group_ids = [yandex_vpc_security_group.clickhouse-and-vm-security-group.id]
+# Use keys to create an input bucket and grant permission to Data Proc service account to read from the bucket
+resource "yandex_storage_bucket" "input-bucket" {
+  access_key = yandex_iam_service_account_static_access_key.sa-static-key.access_key
+  secret_key = yandex_iam_service_account_static_access_key.sa-static-key.secret_key
+  bucket     = local.input_bucket
 
-  clickhouse {
-    resources {
-      resource_preset_id = "s2.micro" # 2 vCPU, 8 GB RAM
-      disk_type_id       = "network-ssd"
-      disk_size          = 10 # GB
-    }
-  }
-
-  host {
-    type             = "CLICKHOUSE"
-    zone             = local.zone_id
-    subnet_id        = local.subnet_id
-    assign_public_ip = true # Required for connection from the Internet.
-  }
-
-  database {
-    name = "db1"
-  }
-
-  user {
-    name     = local.ch_user_name
-    password = local.ch_user_password
-    permission {
-      database_name = "db1"
-    }
+  grant {
+    id          = yandex_iam_service_account.dataproc-sa.id
+    type        = "CanonicalUser"
+    permissions = ["READ"]
   }
 }
 
-resource "yandex_compute_instance" "vm-1" {
-  description = "VM in Yandex Compute Cloud"
-  name        = "linux-vm"
-  platform_id = "standard-v3" # Intel Ice Lake
-  zone        = local.zone_id
+# Use keys to create an output bucket and grant permission to Data Proc service account to read from the bucket and write to it
+resource "yandex_storage_bucket" "output-bucket" {
+  access_key = yandex_iam_service_account_static_access_key.sa-static-key.access_key
+  secret_key = yandex_iam_service_account_static_access_key.sa-static-key.secret_key
+  bucket     = local.output_bucket
 
-  resources {
-    cores  = 2
-    memory = 4 # GB
-  }
-
-  boot_disk {
-    initialize_params {
-      image_id = local.vm_image_id
-    }
-  }
-
-  network_interface {
-    subnet_id          = local.subnet_id
-    security_group_ids = [yandex_vpc_security_group.clickhouse-and-vm-security-group.id]
-    nat                = true # Required for connection from the Internet.
-  }
-
-  metadata = {
-    ssh-keys = "${local.vm_username}:${file(local.vm_ssh_key)}"
+  grant {
+    id          = yandex_iam_service_account.dataproc-sa.id
+    type        = "CanonicalUser"
+    permissions = ["READ", "WRITE"]
   }
 }
 
-# Object Storage bucket static key.
-resource "yandex_iam_service_account_static_access_key" "my-bucket-key" {
-  service_account_id = yandex_iam_service_account.dataproc.id
-}
-
-# Object Storage bucket
-resource "yandex_storage_bucket" "my-bucket" {
-  depends_on = [
-    yandex_resourcemanager_folder_iam_binding.bucket-creator
-  ]
-
-  bucket     = local.bucket_name
-  access_key = yandex_iam_service_account_static_access_key.my-bucket-key.access_key
-  secret_key = yandex_iam_service_account_static_access_key.my-bucket-key.secret_key
-}
-
-resource "yandex_dataproc_cluster" "my-dp-cluster" {
+resource "yandex_dataproc_cluster" "dataproc-cluster" {
   description        = "Data Proc cluster"
   depends_on         = [yandex_resourcemanager_folder_iam_binding.dataproc-agent]
-  bucket             = yandex_storage_bucket.my-bucket.bucket
-  name               = "my-dp-cluster"
-  service_account_id = yandex_iam_service_account.dataproc.id
-  zone_id            = local.zone_id
+  bucket             = yandex_storage_bucket.output-bucket.id
+  security_group_ids = [yandex_vpc_security_group.dataproc-security-group.id]
+  name               = local.dataproc_name
+  service_account_id = yandex_iam_service_account.dataproc-sa.id
+  zone_id            = "ru-central1-a"
   ui_proxy           = true
 
   cluster_config {
     version_id = "2.0"
 
     hadoop {
-      services = ["HBASE", "HDFS", "HIVE", "MAPREDUCE", "SPARK", "TEZ", "YARN", "ZEPPELIN", "ZOOKEEPER"]
-      properties = {
-        "yarn:yarn.resourcemanager.am.max-attempts" = 5
-      }
+      services        = ["HDFS", "SPARK", "YARN"]
       ssh_public_keys = [file(local.dp_ssh_key)]
     }
 
@@ -237,8 +201,9 @@ resource "yandex_dataproc_cluster" "my-dp-cluster" {
         disk_type_id       = "network-hdd"
         disk_size          = 20 # GB
       }
-      subnet_id   = local.subnet_id
+      subnet_id   = yandex_vpc_subnet.dataproc_ch_subnet-a.id
       hosts_count = 1
+      assign_public_ip = true
     }
 
     subcluster_spec {
@@ -249,40 +214,44 @@ resource "yandex_dataproc_cluster" "my-dp-cluster" {
         disk_type_id       = "network-hdd"
         disk_size          = 20 # GB
       }
-      subnet_id   = local.subnet_id
+      subnet_id   = yandex_vpc_subnet.dataproc_ch_subnet-a.id
       hosts_count = 1
+      assign_public_ip = true
     }
+  }
+}
 
-    subcluster_spec {
-      name = "compute_static"
-      role = "COMPUTENODE"
-      resources {
-        resource_preset_id = "s2.micro" # 2 vCPU, 8 GB RAM
-        disk_type_id       = "network-hdd"
-        disk_size          = 20 # GB
-      }
-      subnet_id   = local.subnet_id
-      hosts_count = 1
+resource "yandex_mdb_clickhouse_cluster" "mch-cluster" {
+  description        = "Managed Service for ClickHouse cluster"
+  name               = local.mch_name
+  environment        = "PRODUCTION"
+  network_id         = yandex_vpc_network.dataproc_ch_network.id
+  security_group_ids = [yandex_vpc_security_group.mch_security_group.id]
+
+  clickhouse {
+    resources {
+      resource_preset_id = "s2.micro" # 2 vCPU, 8 GB RAM
+      disk_type_id       = "network-ssd"
+      disk_size          = 10 # GB
     }
+  }
 
-    subcluster_spec {
-      name = "compute_autoscaling"
-      role = "COMPUTENODE"
-      resources {
-        resource_preset_id = "s2.micro" # 2 vCPU, 8 GB RAM
-        disk_type_id       = "network-hdd"
-        disk_size          = 20 # GB
-      }
-      subnet_id   = local.subnet_id
-      hosts_count = 1
-      autoscaling_config { # All settings in seconds
-        max_hosts_count        = 10
-        measurement_duration   = 60
-        warmup_duration        = 60
-        stabilization_duration = 120
-        preemptible            = false
-        decommission_timeout   = 60
-      }
+  host {
+    type             = "CLICKHOUSE"
+    zone             = "ru-central1-a"
+    subnet_id        = yandex_vpc_subnet.dataproc_ch_subnet-a.id
+    assign_public_ip = true # Required for connection from the Internet
+  }
+
+  database {
+    name = local.mch_db_name
+  }
+
+  user {
+    name     = local.mch_user_name
+    password = local.ch_password
+    permission {
+      database_name = local.mch_db_name
     }
   }
 }
