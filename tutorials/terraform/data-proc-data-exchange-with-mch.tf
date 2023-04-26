@@ -203,7 +203,6 @@ resource "yandex_dataproc_cluster" "dataproc-cluster" {
       }
       subnet_id   = yandex_vpc_subnet.dataproc_ch_subnet-a.id
       hosts_count = 1
-      assign_public_ip = true
     }
 
     subcluster_spec {
@@ -216,7 +215,6 @@ resource "yandex_dataproc_cluster" "dataproc-cluster" {
       }
       subnet_id   = yandex_vpc_subnet.dataproc_ch_subnet-a.id
       hosts_count = 1
-      assign_public_ip = true
     }
   }
 }
