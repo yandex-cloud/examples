@@ -5,24 +5,31 @@
 #
 # Set the configuration of the Data Proc clusters and Object Storage buckets
 
-# Specify the following settings
+# Specify the following settings:
 locals {
   folder_id = "" # Your cloud folder ID, same as for provider
+  input_bucket  = "" # Name of an Object Storage bucket for input files. Must be unique in the Cloud.
+  output_bucket = "" # Name of an Object Storage bucket for output files. Must be unique in the Cloud.
+  dp_ssh_key = "" # Аn absolute path to the SSH public key for the Data Proc cluster
 
-  input-bucket  = "" # Name of an Object Storage bucket for input files. Must be unique in the Cloud
-  output-bucket = "" # Name of an Object Storage bucket for output files. Must be unique in the Cloud
-
-  dp_ssh_key = "" # Set an absolute path to the SSH public key for the Data Proc cluster
+  # The following settings are predefined. Change them only if necessary.
+  network_name = "dataproc-network" # Name of the network
+  nat_name = "dataproc-nat" # Name of the NAT gateway
+  subnet_name = "dataproc-subnet-a" # Name of the subnet
+  dp_sa_name = "dataproc-sa" # Name of the service account for DataProc
+  os_sa_name = "sa-for-obj-storage" # Name of the service account for Object Storage creating
+  dataproc_source_name = "dataproc-source-cluster" # Name of the Data Proc source cluster
+  dataproc_target_name = "dataproc-target-cluster" # Name of the Data Proc target cluster
 }
 
 resource "yandex_vpc_network" "dataproc_network" {
   description = "Network for Data Proc"
-  name        = "dataproc-network"
+  name        = local.network_name
 }
 
 # NAT gateway for Data Proc
 resource "yandex_vpc_gateway" "dataproc_nat" {
-  name = "dataproc-nat"
+  name = local.nat_name
   shared_egress_gateway {}
 }
 
@@ -38,7 +45,7 @@ resource "yandex_vpc_route_table" "dataproc_rt" {
 
 resource "yandex_vpc_subnet" "dataproc_subnet-a" {
   description    = "Subnet ru-central1-a availability zone for Data Proc and Managed Service for ClickHouse"
-  name           = "dataproc-subnet-a"
+  name           = local.subnet_name
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.dataproc_network.id
   v4_cidr_blocks = ["10.140.0.0/24"]
@@ -82,7 +89,7 @@ resource "yandex_vpc_security_group" "dataproc-security-group" {
 
 resource "yandex_iam_service_account" "dataproc-sa" {
   description = "Service account to manage the Data Proc cluster"
-  name        = "dataproc-sa"
+  name        = local.dp_sa_name
 }
 
 # Assign the `dataproc.agent` role to the Data Proc service account
@@ -97,7 +104,7 @@ resource "yandex_resourcemanager_folder_iam_binding" "dataproc-agent" {
 # Create a service account for Object Storage creating
 resource "yandex_iam_service_account" "sa-for-obj-storage" {
   folder_id = local.folder_id
-  name      = "sa-for-obj-storage"
+  name      = local.os_sa_name
 }
 
 # Grant the service account storage.admin role to create storages and grant bucket ACLs
@@ -142,7 +149,8 @@ resource "yandex_dataproc_cluster" "dataproc-source-cluster" {
   description        = "Data Proc source cluster"
   depends_on         = [yandex_resourcemanager_folder_iam_binding.dataproc-agent]
   bucket             = yandex_storage_bucket.output-bucket.id
-  name               = "dataproc-source-cluster"
+  security_group_ids = [yandex_vpc_security_group.dataproc-security-group.id]
+  name               = local.dataproc_source_name
   service_account_id = yandex_iam_service_account.dataproc-sa.id
   zone_id            = "ru-central1-a"
   ui_proxy           = true
@@ -185,7 +193,8 @@ resource "yandex_dataproc_cluster" "dataproc-target-cluster" {
   description        = "Data Proc target cluster"
   depends_on         = [yandex_resourcemanager_folder_iam_binding.dataproc-agent]
   bucket             = yandex_storage_bucket.output-bucket.id
-  name               = "dataproc-target-cluster"
+  security_group_ids = [yandex_vpc_security_group.dataproc-security-group.id]
+  name               = local.dataproc_target_name
   service_account_id = yandex_iam_service_account.dataproc-sa.id
   zone_id            = "ru-central1-a"
   ui_proxy           = true
