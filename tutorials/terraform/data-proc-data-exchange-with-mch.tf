@@ -1,7 +1,7 @@
 # Infrastructure for the Yandex Cloud Managed Service for ClickHouse, Data Proc, and Object Storage
 #
-# RU: https://cloud.yandex.ru/docs/data-proc/tutorials/s3-dataproc-ch
-# EN: https://cloud.yandex.com/en/docs/data-proc/tutorials/s3-dataproc-ch
+# RU: https://cloud.yandex.ru/docs/data-proc/tutorials/exchange-data-with-mch
+# EN: https://cloud.yandex.com/en/docs/data-proc/tutorials/exchange-data-with-mch
 #
 # Set the configuration of the Managed Service for ClickHouse cluster, Data Proc cluster, and Object Storage
 
@@ -10,10 +10,10 @@ locals {
   folder_id = "" # Your cloud folder ID, same as for provider
   input_bucket  = "" # Name of an Object Storage bucket for input files. Must be unique in the Cloud
   output_bucket = "" # Name of an Object Storage bucket for output files. Must be unique in the Cloud
-  dp_ssh_key = "" # Set an absolute path to the SSH public key for the Data Proc cluster
-  ch_password = "" # A user password for the ClickHouse cluster
+  dp_ssh_key = "" # An absolute path to the SSH public key for the Data Proc cluster
+  mch_password = "" # A user password for the ClickHouse cluster
 
-  # Change the following settings only if necessary
+  # The following settings are predefined. Change them only if necessary.
   network_name = "dataproc-ch-network" # Name of the network
   nat_name = "dataproc-nat" # Name of the NAT gateway
   subnet_name = "dataproc-ch-subnet-a" # Name of the subnet
@@ -122,7 +122,7 @@ resource "yandex_iam_service_account" "dataproc-sa" {
   name        = local.dp_sa_name
 }
 
-# Assign the `dataproc.agent` role to the Data Proc service account
+# Assign the `dataproc.agent` role to the Data Proc service account.
 resource "yandex_resourcemanager_folder_iam_binding" "dataproc-agent" {
   folder_id = local.folder_id
   role      = "dataproc.agent"
@@ -131,13 +131,13 @@ resource "yandex_resourcemanager_folder_iam_binding" "dataproc-agent" {
 
 # Yandex Object Storage bucket
 
-# Create a service account for Object Storage creation
+# Create a service account for Object Storage creation.
 resource "yandex_iam_service_account" "sa-for-obj-storage" {
   folder_id = local.folder_id
   name      = local.os_sa_name
 }
 
-# Grant the service account storage.admin role to create storages and grant bucket ACLs
+# Grant the service account storage.admin role to create storages and grant bucket ACLs.
 resource "yandex_resourcemanager_folder_iam_binding" "s3-editor" {
   folder_id = local.folder_id
   role      = "storage.admin"
@@ -149,7 +149,7 @@ resource "yandex_iam_service_account_static_access_key" "sa-static-key" {
   service_account_id = yandex_iam_service_account.sa-for-obj-storage.id
 }
 
-# Use keys to create an input bucket and grant permission to Data Proc service account to read from the bucket
+# Use keys to create an input bucket and grant permission to Data Proc service account to read from the bucket.
 resource "yandex_storage_bucket" "input-bucket" {
   access_key = yandex_iam_service_account_static_access_key.sa-static-key.access_key
   secret_key = yandex_iam_service_account_static_access_key.sa-static-key.secret_key
@@ -162,7 +162,7 @@ resource "yandex_storage_bucket" "input-bucket" {
   }
 }
 
-# Use keys to create an output bucket and grant permission to Data Proc service account to read from the bucket and write to it
+# Use keys to create an output bucket and grant permission to Data Proc service account to read from the bucket and write to it.
 resource "yandex_storage_bucket" "output-bucket" {
   access_key = yandex_iam_service_account_static_access_key.sa-static-key.access_key
   secret_key = yandex_iam_service_account_static_access_key.sa-static-key.secret_key
@@ -247,7 +247,7 @@ resource "yandex_mdb_clickhouse_cluster" "mch-cluster" {
 
   user {
     name     = local.mch_user_name
-    password = local.ch_password
+    password = local.mch_password
     permission {
       database_name = local.mch_db_name
     }
