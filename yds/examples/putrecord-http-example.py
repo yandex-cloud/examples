@@ -25,16 +25,15 @@ def get_signature_key(key, date_stamp, region_name, service_name):
 
 
 def send_message2(access_key, secret_key, region, folder_id, database_id, stream_name, message):
-    stream_full_name = f'/{region}/{folder_id}/{database_id}/{stream_name}'
-    return send_message(access_key, secret_key, stream_full_name, message)
+    stream_full_name = f'/{folder_id}/{database_id}/{stream_name}'
+    return send_message(access_key, secret_key, region, stream_full_name, message)
 
 
-def send_message(access_key, secret_key, stream_full_name, message):
+def send_message(access_key, secret_key, region, stream_full_name, message):
     method = 'POST'
     service = 'kinesis'
     content_type = 'application/x-amz-json-1.1'
     amz_target = 'Kinesis_20131202.PutRecord'
-    region = stream_full_name.split("/")[1]
 
     encoded_message = message.encode()
     data = base64.b64encode(bytearray(encoded_message)).decode()
@@ -51,7 +50,7 @@ def send_message(access_key, secret_key, stream_full_name, message):
     amz_date = t.strftime('%Y%m%dT%H%M%SZ')
     date_stamp = t.strftime('%Y%m%d')  # Date w/o time, used in credential scope
 
-    host = 'yds.serverless.yandexcloud.net'
+    host = 'yds.serverless.cloud-preprod.yandex.net'
     canonical_uri = '/'
     canonical_querystring = ''
     canonical_headers = 'content-type:' + content_type + '\n' + \
@@ -99,7 +98,7 @@ def send_message(access_key, secret_key, stream_full_name, message):
     print(f'Request URL = {endpoint}')
     print(f'Headers:\n{headers}')
     print(f'Request:\n{request_parameters}')
-    r = requests.post(endpoint, json=request_parameters, headers=headers)
+    r = requests.post(endpoint, json=request_parameters, headers=headers, verify=False)
     print('\nRESPONSE++++++++++++++++++++++++++++++++++++')
     print(f'Response code: {r.status_code}')
     print(f'{r.text}')
@@ -113,6 +112,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--full-stream-name', type=str, required=True,
                         help='Full stream name')
+    parser.add_argument('--region', type=str, default="ru-central1",
+                        help="Region, like ru-central1")
     parser.add_argument('--message', type=str, required=True,
                         help='Message to send')
 
@@ -121,14 +122,15 @@ def main():
     stream_regex = re.compile('^/.+/\\w{15,}/\\w{20,}/\\w{3,}$', re.IGNORECASE)
     if not stream_regex.match(args.full_stream_name):
         print('Check your stream name. \n' \
-              'It must be like /ru-central1/b2g6ad43m6he1ooql98r/etn01eh5rn074ncm9cbb/your_stream_name.\n'
-              '/region/folder_id/database_id/your_stream_name'
+              'It must be like /b2g6ad43m6he1ooql98r/etn01eh5rn074ncm9cbb/your_stream_name.\n'
+              '/folder_id/database_id/your_stream_name'
               )
         exit(-1)
 
     # replace with your own stream name and provide environment keys
     send_message(access_key=os.environ["AWS_ACCESS_KEY_ID"],
                  secret_key=os.environ["AWS_SECRET_ACCESS_KEY"],
+                 region=args.region,
                  stream_full_name=args.full_stream_name,
                  message=args.message)
 
