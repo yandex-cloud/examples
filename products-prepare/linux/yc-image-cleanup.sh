@@ -1,5 +1,4 @@
-#!/bin/bash
-
+#!/usr/bin/env bash
 # Common functions
 
 function getOS {
@@ -188,6 +187,16 @@ function preCheck {
                     ;;
             esac
             ;;
+        "FreeBSD")
+            case "$2" in
+                12.*|13.*)
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
+                    ;;
+            esac
+            ;;
         *)
             echo "FAIL"
             ;;
@@ -325,10 +334,13 @@ function cleanSSHKeyPairs {
 
 
 function cleanMachineID {
+    OS_TYPE=$(getOS)
     rm -f /etc/machine-id
     rm -f /var/lib/dbus/machine-id
     touch /etc/machine-id
-    ln -s /etc/machine-id /var/lib/dbus/machine-id
+    if [ "$OS_TYPE" != "FreeBSD" ]; then
+      ln -s /etc/machine-id /var/lib/dbus/machine-id
+    fi
     echo "DONE"
 }
 
@@ -385,30 +397,47 @@ function cleanSudoers {
 function cleanLogFiles {
     find /var/log -type f -delete
     if [ -z "$JOURNALCTL_EXISTS" ] ; then
-        journalctl --rotate
-        journalctl --vacuum-time=1s
+        journalctl --rotate 2>/dev/null
+        journalctl --vacuum-time=1s 2>/dev/null
     fi
     echo "DONE"
 }
 
 
 function changeSSHRootLoginToDefault {
-    sed -i 's/.*PermitRootLogin.*/#PermitRootLogin No/g' /etc/ssh/sshd_config
-    echo "DONE"
+  OS_TYPE=$(getOS)
+  if [ "$OS_TYPE" == "FreeBSD" ]; then
+      sed -i.bak "s/#*.PermitRootLogin.*/PermitRootLogin no/" /etc/ssh/sshd_config
+      rm -f /etc/ssh/sshd_config.bak
+  else
+      sed -i 's/.*PermitRootLogin.*/#PermitRootLogin No/g' /etc/ssh/sshd_config
+      echo "DONE"
+  fi
+
 }
-
-
 function cleanRootPassword {
+  OS_TYPE=$(getOS)
+  if [ "$OS_TYPE" == "FreeBSD" ]; then
+    pw lock root
+    pw lock toor
+  else
     passwd -d root
     passwd -l root
+  fi
     echo "DONE"
 }
 
 
 function removeSystemUser {
-    if [ ! -z "$YCCLEANUP_SYS_USER" ]; then
-        userdel -f "$YCCLEANUP_SYS_USER"
-        rm -rf /home/"$YCCLEANUP_SYS_USER"
+    OS_TYPE=$(getOS)
+    if [ -n "$YCCLEANUP_SYS_USER" ]; then
+        if [ "$OS_TYPE" == "FreeBSD" ]; then
+          rmuser  -y "$YCCLEANUP_SYS_USER"
+          rm -rf /usr/home/"${YCCLEANUP_SYS_USER:?}"
+        else
+          userdel -f "$YCCLEANUP_SYS_USER"
+          rm -rf /home/"${YCCLEANUP_SYS_USER:?}"
+        fi
     fi
     echo "DONE"
 }
@@ -422,16 +451,21 @@ function getStringsNumInVar {
     if [ "$VAR" == "" ]; then
         echo 0
     else
-        echo "$VAR" | wc -l
+        echo "$VAR" | wc -l | sed -E 's/[[:space:]]+//g'
     fi
 }
 
 
 function getNonLockedUsers {
     SYSDB_DELIMITER=":"
-    NOPASSWORD_VALUES=$(printf '!\n!!\n*\n!*\n*!\n')
-    for USER in $(cat /etc/passwd | getColumn "$SYSDB_DELIMITER" 1); do
-        USERPW=$(cat /etc/shadow | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($2)}')
+    NOPASSWORD_VALUES=$(printf '!\n!!\n*\n!*\n*!\n*LOCKED**\n*LOCKED*\n')
+    PASSWD_FILE=/etc/shadow
+    if [ "$OS_TYPE" == "FreeBSD" ]; then
+        PASSWD_FILE=/etc/master.passwd
+    fi
+
+    for USER in $(cat /etc/passwd| grep -v -e "^#" | grep -v -e "^#" | getColumn "$SYSDB_DELIMITER" 1); do
+        USERPW=$(cat "$PASSWD_FILE" | grep -v -e "^#" | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($2)}')
         if [ "$USERPW" == "" ]; then
             OS_TYPE=$(getOS)
             if [ "$OS_TYPE" == "ALT Server" ] || [ "$OS_TYPE" == "ALT SPServer" ]; then
@@ -463,8 +497,8 @@ function allUsersAreLocked {
 
 function getUsersWithNonEmptyBashHistory {
     SYSDB_DELIMITER=":"
-    for USER in $(cat /etc/passwd | getColumn "$SYSDB_DELIMITER" 1); do
-        USERDIR=$(cat /etc/passwd | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($6)}')
+    for USER in $(cat /etc/passwd | grep -v -e "^#" | getColumn "$SYSDB_DELIMITER" 1); do
+        USERDIR=$(cat /etc/passwd | grep -v -e "^#" | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($6)}')
         if [ -f "${USERDIR}/.bash_history" ]; then
             if [ -s "${USERDIR}/.bash_history" ]; then
                 echo "$USER"
@@ -492,8 +526,8 @@ function allUsersHaveEmptyBashHistory {
 
 function getUsersWithAuthKeys {
     SYSDB_DELIMITER=":"
-    for USER in $(cat /etc/passwd | getColumn "$SYSDB_DELIMITER" 1); do
-        USERDIR=$(cat /etc/passwd | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($6)}')
+    for USER in $(cat /etc/passwd | grep -v -e "^#" | getColumn "$SYSDB_DELIMITER" 1); do
+        USERDIR=$(cat /etc/passwd | grep -v -e "^#" | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($6)}')
         if [ -f "${USERDIR}/.ssh/authorized_keys" ]; then
             if [ -s "${USERDIR}/.ssh/authorized_keys" ]; then
                 echo "$USER"
@@ -505,7 +539,12 @@ function getUsersWithAuthKeys {
 
 function onlyOneNonRootUserHasAuthKeys {
     V="$1"
-    AUTHKEY_USERS=$(getUsersWithAuthKeys | grep -v '^root$\|^operator$')
+    IGNORE_USERS='^root$\|^operator$'
+    if [ "$OS_TYPE" == "FreeBSD" ]; then
+        # all they point to `root` home dir
+        IGNORE_USERS='^root$\|^operator$\|^toor$\|^daemon$\|^admin$'
+    fi
+    AUTHKEY_USERS=$(getUsersWithAuthKeys | grep -v $IGNORE_USERS)
     if [ "$V" == "normal" ]; then
         AUTHKEY_USERS_SINGLE_STRING=$(echo $AUTHKEY_USERS)
         DETAILS=" Details: $AUTHKEY_USERS_SINGLE_STRING"
@@ -531,8 +570,8 @@ function noOneUserHasAuthKeys {
 
 function getUsersWithMoreThanOneAuthKeys {
     SYSDB_DELIMITER=":"
-    for USER in $(cat /etc/passwd | getColumn "$SYSDB_DELIMITER" 1); do
-        USERDIR=$(cat /etc/passwd | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($6)}')
+    for USER in $(cat /etc/passwd | grep -v -e "^#" | getColumn "$SYSDB_DELIMITER" 1); do
+        USERDIR=$(cat /etc/passwd | grep -v -e "^#" | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($6)}')
         if [ -f "${USERDIR}/.ssh/authorized_keys" ]; then
             if [ -s "${USERDIR}/.ssh/authorized_keys" ]; then
                 KEYS_COUNT=$(cat "${USERDIR}/.ssh/authorized_keys" | wc -l)
@@ -563,8 +602,8 @@ function noOneUserHaveMoreThanOneAuthKeys {
 
 function getUsersWithKeyPairs {
     SYSDB_DELIMITER=":"
-    for USER in $(cat /etc/passwd | getColumn "$SYSDB_DELIMITER" 1); do
-        USERDIR=$(cat /etc/passwd | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($6)}')
+    for USER in $(cat /etc/passwd | grep -v -e "^#" | getColumn "$SYSDB_DELIMITER" 1); do
+        USERDIR=$(cat /etc/passwd | grep -v -e "^#" | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($6)}')
         if [ -d "${USERDIR}/.ssh/" ]; then
             FILES_COUNT=$(ls -a "${USERDIR}/.ssh/" | grep -v '^\.$\|^\.\.$\|^authorized_keys$' | wc -l)
             if [ "$FILES_COUNT" -gt "0" ]; then
@@ -700,8 +739,8 @@ Options (order matters!):
   -s\tcomma-separated no-whitespaced list of specs for cleanup/check process
   -c\tclean up the image
   -d\tcheck the image just after preparing procedure, \"dry run mode\" of clean up process
-  -t\tperform cleannes tests on running VM created from image
-  -o\trunning distribution overview and check whether this distribution is supported or not 
+  -t\tperform cleanness tests on running VM created from image
+  -o\trunning distribution overview and check whether this distribution is supported or not
 
 Results of running tests are printed to the stdout.
 In \"-d\" and \"-t\" modes exit code equals to 1 if at least one test fails, 0 otherwise.
