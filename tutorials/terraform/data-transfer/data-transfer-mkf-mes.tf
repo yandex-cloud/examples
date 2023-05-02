@@ -14,8 +14,8 @@ locals {
 
   # Specify these settings ONLY AFTER the clusters are created. Then run "terraform apply" command again.
   # You should set up endpoints using the GUI to obtain their IDs.
-  target_endpoint_id = "" # Set the target endpoint ID.
   source_endpoint_id = "" # Set the source endpoint ID.
+  target_endpoint_id = "" # Set the target endpoint ID.
   transfer_enabled   = 0  # Set to 1 to enable Transfer.
 }
 
