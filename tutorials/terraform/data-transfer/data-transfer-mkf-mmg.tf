@@ -1,22 +1,23 @@
-# Infrastructure for the Yandex Cloud Managed Service for Apache Kafka®, Managed Service for MongoDB and Data Transfer.
+# Infrastructure for the Yandex Cloud Managed Service for Apache Kafka®, Managed Service for MongoDB and Data Transfer
 #
 # RU: https://cloud.yandex.ru/docs/data-transfer/tutorials/data-transfer-mkf-mmg
 # EN: https://cloud.yandex.com/en/docs/data-transfer/tutorials/data-transfer-mkf-mmg
 #
-# Set source cluster and target cluster settings.
+# Specify the following settings:
 locals {
   # Source Managed Service for Apache Kafka® cluster settings:
   source_kf_version    = "" # Set a desired version of Apache Kafka®. For available versions, see the documentation main page: https://cloud.yandex.com/en/docs/managed-kafka/
-  source_user_password = "" # Set a password for the user in the Managed Service for Apache Kafka® cluster.
-  source_endpoint_id   = "" # Set the source endpoint id.
+  source_user_password = "" # Set a password for the Apache Kafka® user.
 
   # Target Managed Service for MongoDB cluster settings:
-  target_mg_version    = "" # Set Managed Service for MongoDB cluster version.
-  target_user_password = "" # Set a password for the user in the Managed Service for MongoDB cluster.
-  target_endpoint_id   = "" # Set the target endpoint id.
+  target_mg_version    = "" # Set a desired version of MongoDB. For available versions, see the documentation main page: https://cloud.yandex.com/en/docs/managed-mongodb/
+  target_user_password = "" # Set a password for the MongoDB user.
 
-  # Transfer settings:
-  transfer_enabled = 0 # Set to 1 to enable Transfer.
+  # Specify these settings ONLY AFTER the clusters are created. Then run "terraform apply" command again.
+  # You should set up endpoints using the GUI to obtain their IDs.
+  source_endpoint_id = "" # Set the source endpoint ID.
+  target_endpoint_id = "" # Set the target endpoint ID.
+  transfer_enabled   = 0  # Set to 1 to enable Transfer.
 }
 
 resource "yandex_vpc_network" "network" {
@@ -94,7 +95,7 @@ resource "yandex_mdb_kafka_cluster" "kafka-cluster" {
   }
 }
 
-# Managed Service for Apache Kafka® topic
+# Managed Service for Apache Kafka® topic.
 resource "yandex_mdb_kafka_topic" "sensors" {
   cluster_id         = yandex_mdb_kafka_cluster.kafka-cluster.id
   name               = "sensors"
@@ -145,5 +146,5 @@ resource "yandex_datatransfer_transfer" "mkf-mmg-transfer" {
   name        = "transfer-from-mkf-to-mmg"
   source_id   = local.source_endpoint_id
   target_id   = local.target_endpoint_id
-  type        = "INCREMENT_ONLY" # Replication data from the source Data Stream.
+  type        = "INCREMENT_ONLY" # Replication data.
 }
