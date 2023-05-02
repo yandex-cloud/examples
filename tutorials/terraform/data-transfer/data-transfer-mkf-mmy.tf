@@ -1,21 +1,22 @@
-# Infrastructure for the Yandex Cloud Managed Service for Apache Kafka®, Managed Service for MySQL and Data Transfer.
+# Infrastructure for the Yandex Cloud Managed Service for Apache Kafka®, Managed Service for MySQL and Data Transfer
 #
 # RU: https://cloud.yandex.ru/docs/data-transfer/tutorials/data-transfer-mkf-mmy
 # EN: https://cloud.yandex.com/en/docs/data-transfer/tutorials/data-transfer-mkf-mmy
 #
-# Set source cluster and target cluster settings.
+# Specify the following settings:
 locals {
   # Source Managed Service for Apache Kafka® cluster settings:
   source_kf_version    = "" # Set a desired version of Apache Kafka®. For available versions, see the documentation main page: https://cloud.yandex.com/en/docs/managed-kafka/
-  source_user_password = "" # Set a password for the user in the Managed Service for Apache Kafka® cluster.
-  source_endpoint_id   = "" # Set the source endpoint id.
+  source_user_password = "" # Set a password for the Apache Kafka® user.
 
   # Target Managed Service for MySQL cluster settings:
   target_mysql_version = "" # Set a desired version of MySQL.  For available versions, see the documentation main page: https://cloud.yandex.com/en/docs/managed-mysql/
-  target_user_password = "" # Set a password for the user in the Managed Service for MySQL cluster.
+  target_user_password = "" # Set a password for the MySQL user.
 
-  # Transfer settings:
-  transfer_enabled = 0 # Set to 1 to enable Transfer.
+  # Specify these settings ONLY AFTER the clusters are created. Then run "terraform apply" command again.
+  # You should set up endpoints using the GUI to obtain their IDs.
+  source_endpoint_id = "" # Set the source endpoint ID.
+  transfer_enabled   = 0  # Set to 1 to enable Transfer.
 }
 
 resource "yandex_vpc_network" "network" {
@@ -69,7 +70,7 @@ resource "yandex_mdb_kafka_cluster" "kafka-cluster" {
     brokers_count    = 1
     version          = local.source_kf_version
     zones            = ["ru-central1-a"]
-    assign_public_ip = true # Required for connection from Internet
+    assign_public_ip = true # Required for connection from the Internet
     kafka {
       resources {
         resource_preset_id = "s2.micro" # 2 vCPU, 8 GB RAM
@@ -93,7 +94,7 @@ resource "yandex_mdb_kafka_cluster" "kafka-cluster" {
   }
 }
 
-# Managed Service for Apache Kafka® topic
+# Managed Service for Apache Kafka® topic.
 resource "yandex_mdb_kafka_topic" "sensors" {
   cluster_id         = yandex_mdb_kafka_cluster.kafka-cluster.id
   name               = "sensors"
