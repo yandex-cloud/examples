@@ -1,21 +1,22 @@
-# Infrastructure for the Yandex Cloud Managed Service for Apache Kafka®, Managed Service for Elasticsearch and Data Transfer.
+# Infrastructure for the Yandex Cloud Managed Service for Apache Kafka®, Managed Service for Elasticsearch and Data Transfer
 #
 # RU: https://cloud.yandex.ru/docs/data-transfer/tutorials/data-transfer-mkf-mes
 # EN: https://cloud.yandex.com/en/docs/data-transfer/tutorials/data-transfer-mkf-mes
 #
-# Set source cluster and target cluster settings.
+# Specify the following settings:
 locals {
   # Source Managed Service for Apache Kafka® cluster settings:
   source_kf_version    = "" # Set a desired version of Apache Kafka®. For available versions, see the documentation main page: https://cloud.yandex.com/en/docs/managed-kafka/
-  source_user_password = "" # Set a password for the user in the Managed Service for Apache Kafka® cluster.
-  source_endpoint_id   = "" # Set the source endpoint id.
+  source_user_password = "" # Set a password for the Apache Kafka® user.
 
   # Target Managed Service for Elasticsearch cluster settings:
-  target_admin_password = "" # Set a password for the admin in the Managed Service for Elasticsearch cluster.
-  target_endpoint_id    = "" # Set the target endpoint id.
+  target_admin_password = "" # Set a password for the Elasticsearch admin.
 
-  # Transfer settings:
-  transfer_enabled = 0 # Set to 1 to enable Transfer.
+  # Specify these settings ONLY AFTER the clusters are created. Then run "terraform apply" command again.
+  # You should set up endpoints using the GUI to obtain their IDs.
+  target_endpoint_id = "" # Set the target endpoint ID.
+  source_endpoint_id = "" # Set the source endpoint ID.
+  transfer_enabled   = 0  # Set to 1 to enable Transfer.
 }
 
 resource "yandex_vpc_network" "network" {
@@ -100,7 +101,7 @@ resource "yandex_mdb_kafka_cluster" "kafka-cluster" {
   }
 }
 
-# Managed Service for Apache Kafka® topic
+# Managed Service for Apache Kafka® topic.
 resource "yandex_mdb_kafka_topic" "sensors" {
   cluster_id         = yandex_mdb_kafka_cluster.kafka-cluster.id
   name               = "sensors"
