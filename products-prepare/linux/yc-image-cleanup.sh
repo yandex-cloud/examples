@@ -187,6 +187,16 @@ function preCheck {
                     ;;
             esac
             ;;
+        "ROSA Chrome Desktop")
+            case "$2" in
+                2021.*)
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
+                    ;;
+            esac
+            ;;
         "ALT SPServer")
             case "$2" in
                 8.*)
