@@ -159,7 +159,7 @@ resource "yandex_dataproc_cluster" "dataproc-source-cluster" {
     version_id = "2.0"
 
     hadoop {
-      services        = ["HDFS", "SPARK", "YARN"]
+      services        = ["HIVE", "SPARK", "YARN"]
       ssh_public_keys = [file(local.dp_ssh_key)]
     }
 
@@ -203,7 +203,7 @@ resource "yandex_dataproc_cluster" "dataproc-target-cluster" {
     version_id = "2.0"
 
     hadoop {
-      services        = ["HDFS", "SPARK", "YARN"]
+      services        = ["HIVE", "SPARK", "YARN"]
       ssh_public_keys = [file(local.dp_ssh_key)]
     }
 
