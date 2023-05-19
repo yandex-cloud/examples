@@ -35,7 +35,7 @@ resource "yandex_vpc_security_group" "gitlab-security-group" {
   }
   ingress {
     protocol          = "ANY"
-    description       = "The rule allows master-node and node-node communication inside the security group."
+    description       = "The rule allows master-node and node-node communication within the security group."
     predefined_target = "self_security_group"
     from_port         = 0
     to_port           = 65535
@@ -49,7 +49,7 @@ resource "yandex_vpc_security_group" "gitlab-security-group" {
   }
   ingress {
     protocol          = "ICMP"
-    description       = "Rule allows debugging ICMP packets from internal subnets."
+    description       = "The rule allows debugging ICMP packets from internal subnets."
     v4_cidr_blocks    = ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
   }
   ingress {
@@ -172,6 +172,6 @@ resource "yandex_resourcemanager_folder_iam_member" "images-puller" {
   member    = "serviceAccount:${yandex_iam_service_account.my-account-for-gitlab.id}"
 }
 
-resource "yandex_container_registry" "my-reg" {
+resource "yandex_container_registry" "my-registry" {
   name = "my-registry"
 }
