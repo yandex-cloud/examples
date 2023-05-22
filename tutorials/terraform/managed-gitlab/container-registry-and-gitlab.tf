@@ -5,7 +5,6 @@
 #
 # Specify the following settings:
 locals {
-  cloud_id    = "" # Set your cloud ID.
   folder_id   = "" # Set your folder ID.
   k8s_version = "" # Set a Kubernetes version.
 }
@@ -84,7 +83,6 @@ resource "yandex_kubernetes_cluster" "k8s-cluster" {
   node_service_account_id = yandex_iam_service_account.my-account-for-gitlab.id
   depends_on = [
     yandex_resourcemanager_folder_iam_member.editor,
-    yandex_resourcemanager_folder_iam_member.lockbox-payloadViewer,
     yandex_resourcemanager_folder_iam_member.images-pusher,
     yandex_resourcemanager_folder_iam_member.images-puller
   ]
@@ -148,13 +146,6 @@ resource "yandex_resourcemanager_folder_iam_member" "editor" {
   # The editor role is assigned to the service account.
   folder_id = local.folder_id
   role      = "editor"
-  member    = "serviceAccount:${yandex_iam_service_account.my-account-for-gitlab.id}"
-}
-
-resource "yandex_resourcemanager_folder_iam_member" "lockbox-payloadViewer" {
-  # The lockbox.payloadViewer role is assigned to the service account.
-  folder_id = local.folder_id
-  role      = "lockbox.payloadViewer"
   member    = "serviceAccount:${yandex_iam_service_account.my-account-for-gitlab.id}"
 }
 
