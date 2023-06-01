@@ -77,6 +77,7 @@ resource "yandex_kubernetes_cluster" "k8s-cluster" {
       zone      = yandex_vpc_subnet.my-subnet-for-gitlab.zone
       subnet_id = yandex_vpc_subnet.my-subnet-for-gitlab.id
     }
+    public_ip = true
     security_group_ids = [yandex_vpc_security_group.gitlab-security-group.id]
   }
   service_account_id      = yandex_iam_service_account.my-account-for-gitlab.id
