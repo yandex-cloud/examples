@@ -6,7 +6,7 @@
 # Specify the following settings
 locals {
   mysql_password = "" # Set a password for the MySQL admin user
-  folder_id   = "" # Set your cloud folder ID, same as for provider
+  folder_id      = "" # Set your cloud folder ID, same as for provider
 
   # Specify these settings ONLY AFTER the clusters are created. Then run "terraform apply" command again
   # You should set up the target endpoint using the GUI to obtain its ID
@@ -134,5 +134,5 @@ resource "yandex_datatransfer_transfer" "mmy-to-yds-transfer" {
   name        = "mmy-to-yds-transfer"
   source_id   = yandex_datatransfer_endpoint.mmy-source.id
   target_id   = local.yds_endpoint_id
-  type        = "SNAPSHOT_AND_INCREMENT" # Copy all data from the source cluster and start replication
+  type        = "INCREMENT_ONLY" # Replication data
 }
