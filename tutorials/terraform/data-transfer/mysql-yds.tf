@@ -134,5 +134,5 @@ resource "yandex_datatransfer_transfer" "mmy-to-yds-transfer" {
   name        = "mmy-to-yds-transfer"
   source_id   = yandex_datatransfer_endpoint.mmy-source.id
   target_id   = local.yds_endpoint_id
-  type        = "INCREMENT_ONLY" # Replication data
+  type        = "INCREMENT_ONLY" # Replicate data
 }
