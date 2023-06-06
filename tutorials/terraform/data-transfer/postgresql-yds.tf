@@ -134,5 +134,5 @@ resource "yandex_datatransfer_transfer" "mpg-to-yds-transfer" {
   name        = "mpg-to-yds-transfer"
   source_id   = yandex_datatransfer_endpoint.mpg-source.id
   target_id   = local.yds_endpoint_id
-  type        = "SNAPSHOT_AND_INCREMENT" # Copy all data from the source cluster and start replication
+  type        = "INCREMENT_ONLY" # Replicate data
 }
