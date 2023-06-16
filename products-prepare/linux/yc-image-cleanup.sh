@@ -47,36 +47,6 @@ function getOSVersion {
 function preCheck {
     echo "$1" > /tmp/aa
     case "$1" in
-        "ALT Server")
-            case "$2" in
-                10*)
-                    echo "OK"
-                    ;;
-                *)
-                    echo "FAIL"
-                    ;;
-            esac
-            ;;
-        "CentOS Linux")
-            case "$2" in
-                "6"|"7"|"8")
-                    echo "OK"
-                    ;;
-                *)
-                    echo "FAIL"
-                    ;;
-            esac
-            ;;
-        "CentOS Stream")
-            case "$2" in
-                "8")
-                    echo "OK"
-                    ;;
-                *)
-                    echo "FAIL"
-                    ;;
-            esac
-            ;;
         "AlmaLinux")
             case "$2" in
                 8.*|9.*)
@@ -87,9 +57,10 @@ function preCheck {
                     ;;
             esac
             ;;
-        "Ubuntu")
+
+        "ALT Server")
             case "$2" in
-                "14.04"|"16.04"|"18.04"|"20.04"|"22.04")
+                10*)
                     echo "OK"
                     ;;
                 *)
@@ -97,6 +68,62 @@ function preCheck {
                     ;;
             esac
             ;;
+
+        "ALT SPServer")
+            case "$2" in
+                8.*)
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
+                    ;;
+            esac
+            ;;
+
+        "ALT Workstation")
+            case "$2" in
+                10*)
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
+                    ;;
+            esac
+            ;;
+
+        "Astra Linux")
+            case "$2" in
+                1.*)
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
+                    ;;
+            esac
+            ;;
+
+        "CentOS Linux")
+            case "$2" in
+                "6"|"7"|"8")
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
+                    ;;
+            esac
+            ;;
+
+        "CentOS Stream")
+            case "$2" in
+                "8")
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
+                    ;;
+            esac
+            ;;
+
         "Debian GNU/Linux")
             case "$2" in
                 "8"|"9"|"10"|"11")
@@ -107,36 +134,7 @@ function preCheck {
                     ;;
             esac
             ;;
-        "RED OS")
-            case "$2" in
-                "7.3")
-                    echo "OK"
-                    ;;
-                *)
-                    echo "FAIL"
-                    ;;
-            esac
-            ;;
-        "openSUSE Leap")
-            case "$2" in
-                "15.1"|"15.2"|"15.3"|"15.4"|"42.3")
-                    echo "OK"
-                    ;;
-                *)
-                    echo "FAIL"
-                    ;;
-            esac
-            ;;
-        "SLES")
-            case "$2" in
-                "15.2")
-                    echo "OK"
-                    ;;
-                *)
-                    echo "FAIL"
-                    ;;
-            esac
-            ;;
+
         "Fedora"|"Fedora Linux")
             case "$2" in
                 "28"|"29"|"30"|"31"|"32"|"33"|"34"|"35")
@@ -147,6 +145,29 @@ function preCheck {
                     ;;
             esac
             ;;
+
+        "FreeBSD")
+            case "$2" in
+                12.*|13.*)
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
+                    ;;
+            esac
+            ;;
+
+        "openSUSE Leap")
+            case "$2" in
+                "15.1"|"15.2"|"15.3"|"15.4"|"42.3")
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
+                    ;;
+            esac
+            ;;
+
         "Red Hat Enterprise Linux Server")
             case "$2" in
                 "7.8")
@@ -167,9 +188,10 @@ function preCheck {
                     ;;
             esac
             ;;
-        "Astra Linux")
+
+        "RED OS")
             case "$2" in
-                1.*)
+                "7.3")
                     echo "OK"
                     ;;
                 *)
@@ -177,6 +199,7 @@ function preCheck {
                     ;;
             esac
             ;;
+
         "ROSA Chrome Server")
             case "$2" in
                 2021.*)
@@ -187,6 +210,7 @@ function preCheck {
                     ;;
             esac
             ;;
+
         "ROSA Chrome Desktop")
             case "$2" in
                 2021.*)
@@ -197,9 +221,10 @@ function preCheck {
                     ;;
             esac
             ;;
-        "ALT SPServer")
+
+        "SLES")
             case "$2" in
-                8.*)
+                "15.2")
                     echo "OK"
                     ;;
                 *)
@@ -207,9 +232,10 @@ function preCheck {
                     ;;
             esac
             ;;
-        "FreeBSD")
+
+        "Ubuntu")
             case "$2" in
-                12.*|13.*)
+                "14.04"|"16.04"|"18.04"|"20.04"|"22.04")
                     echo "OK"
                     ;;
                 *)
@@ -226,10 +252,29 @@ function preCheck {
 
 function definePMSType {
     case "$1" in
+        "AlmaLinux")
+            case "$2" in
+                8.*)
+                    echo "dnf"
+                    ;;
+            esac
+            ;;
+
         "ALT Server")
             case "$2" in
                 10*)
                     echo "deb"
+                    ;;
+            esac
+            ;;
+
+        "ALT Workstation")
+            case "$2" in
+                10*)
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
                     ;;
             esac
             ;;
@@ -244,6 +289,7 @@ function definePMSType {
                     ;;
             esac
             ;;
+
         "CentOS Stream")
             case "$2" in
                 "8")
@@ -251,20 +297,7 @@ function definePMSType {
                     ;;
             esac
             ;;
-        "AlmaLinux")
-            case "$2" in
-                8.*)
-                    echo "dnf"
-                    ;;
-            esac
-            ;;
-        "Ubuntu")
-            case "$2" in
-                "14.04"|"16.04"|"18.04"|"20.04")
-                    echo "deb"
-                    ;;
-            esac
-            ;;
+
         "Debian GNU/Linux")
             case "$2" in
                 "8"|"9"|"10"|"11")
@@ -272,27 +305,7 @@ function definePMSType {
                     ;;
             esac
             ;;
-        "RED OS")
-            case "$2" in
-                "7.3")
-                    echo "rpm"
-                    ;;
-            esac
-            ;;
-        "openSUSE Leap")
-            case "$2" in
-                "15.1"|"15.2"|"15.3"|"42.3")
-                    echo "rpm"
-                    ;;
-            esac
-            ;;
-        "SLES")
-            case "$2" in
-                "15.2")
-                    echo "rpm"
-                    ;;
-            esac
-            ;;
+
         "Fedora"|"Fedora Linux")
             case "$2" in
                 "28"|"29"|"30"|"31"|"32"|"33"|"34"|"35")
@@ -300,6 +313,15 @@ function definePMSType {
                     ;;
             esac
             ;;
+
+        "openSUSE Leap")
+            case "$2" in
+                "15.1"|"15.2"|"15.3"|"42.3")
+                    echo "rpm"
+                    ;;
+            esac
+            ;;
+
         "Red Hat Enterprise Linux Server")
             case "$2" in
                 "7.8")
@@ -307,10 +329,35 @@ function definePMSType {
                     ;;
             esac
             ;;
+
         "Red Hat Enterprise Linux")
             case "$2" in
                 "8.2")
                     echo "dnf"
+                    ;;
+            esac
+            ;;
+
+        "RED OS")
+            case "$2" in
+                "7.3")
+                    echo "rpm"
+                    ;;
+            esac
+            ;;
+
+        "SLES")
+            case "$2" in
+                "15.2")
+                    echo "rpm"
+                    ;;
+            esac
+            ;;
+
+        "Ubuntu")
+            case "$2" in
+                "14.04"|"16.04"|"18.04"|"20.04")
+                    echo "deb"
                     ;;
             esac
             ;;
