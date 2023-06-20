@@ -135,7 +135,7 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster" {
     #  }
     #}
 
-    # Uncomment the next block if you are going to use multiple (N) Managed Service for Apache Kafka® clusters. Duplicate the block N times. Specify topic name and consumer credentials for every block.
+    # Uncomment the next block if you are going to use multiple Managed Service for Apache Kafka® clusters. Specify topic name and consumer credentials.
 
     #config {
     #  kafka_topic {
