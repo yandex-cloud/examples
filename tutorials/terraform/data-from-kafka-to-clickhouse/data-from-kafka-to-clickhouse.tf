@@ -5,20 +5,24 @@
 #
 # Set the configuration of the Managed Service for Apache Kafka® and ClickHouse clusters.
 
+# Specify the following settings:
+
 locals {
-  # Specify the following settings:
+  # Settings for Managed Service for Apache Kafka® cluster:
   producer_name     = "" # Name of a user with the producer role
-  producer_password = "" # Password of user with the producer role
+  producer_password = "" # Password of the user with the producer role
   topic_name        = "" # Apache Kafka® topic name. Each Managed Service for Apache Kafka® cluster must have its unique topic name.
   consumer_name     = "" # Name of a user with the consumer role
-  consumer_password = "" # Password of user with the consumer role
-  db_user_name      = "" # Name of the database user
-  db_user_password  = "" # Password of the database user
+  consumer_password = "" # Password of the user with the consumer role
 
-  # Change the following settings only if necessary
+  # Settings for Managed Service for ClickHouse cluster:
+  db_user_name      = "" # Name of the ClickHouse database user
+  db_user_password  = "" # Password of the ClickHouse database user
+
+  # The following settings are predefined. Change them only if necessary.
 
   zone_a_v4_cidr_blocks   = "10.1.0.0/16"        # CIDR block for subnet in the ru-central1-a availability zone
-  kafka_cluster_name      = "kafka-cluster"      # Managed Service for Apache Kafka® cluster name. If you are going to create multiple clusters, then duplicate, rename, and edit this variable
+  kafka_cluster_name      = "kafka-cluster"      # Managed Service for Apache Kafka® cluster name. If you are going to create multiple clusters, then duplicate, rename, and edit this variable.
   clickhouse_cluster_name = "clickhouse-cluster" # Managed Service for ClickHouse cluster name
 }
 
