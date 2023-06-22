@@ -3,7 +3,7 @@
 # RU: https://cloud.yandex.ru/docs/managed-clickhouse/tutorials/fetch-data-from-mkf
 # EN: https://cloud.yandex.com/en/docs/managed-clickhouse/tutorials/fetch-data-from-mkf
 #
-# Set the configuration of the Managed Service for Apache Kafka® and ClickHouse clusters.
+# Set the configuration of the Managed Service for Apache Kafka® and ClickHouse clusters
 
 # Specify the following settings:
 
@@ -45,21 +45,21 @@ resource "yandex_vpc_default_security_group" "security-group" {
   network_id  = yandex_vpc_network.network.id
 
   ingress {
-    description    = "Allows connections to the Managed Service for Apache Kafka® cluster from the Internet."
+    description    = "Allows connections to the Managed Service for Apache Kafka® cluster from the Internet"
     protocol       = "TCP"
     port           = 9091
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
-    description    = "Allows connections to the Managed Service for ClickHouse cluster from the Internet."
+    description    = "Allows connections to the Managed Service for ClickHouse cluster from the Internet"
     protocol       = "TCP"
     port           = 9440
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
-    description    = "Allows outgoing connections to any required resource."
+    description    = "Allows outgoing connections to any required resource"
     protocol       = "ANY"
     from_port      = 0
     to_port        = 65535
@@ -128,7 +128,7 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster" {
       disk_size          = 10 # GB
     }
 
-    # Uncomment the next block if you are going to use only one Managed Service for Apache Kafka® cluster.
+    # Uncomment the next block if you are going to use only one Managed Service for Apache Kafka® cluster
 
     #config {
     #  kafka {
