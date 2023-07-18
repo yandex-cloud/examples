@@ -535,7 +535,7 @@ function getNonLockedUsers {
         USERPW=$(cat "$PASSWD_FILE" | grep -v -e "^#" | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($2)}')
         if [ "$USERPW" == "" ]; then
             OS_TYPE=$(getOS)
-            if [ "$OS_TYPE" == "ALT Server" ] || [ "$OS_TYPE" == "ALT SPServer" ]; then
+            if [ "$OS_TYPE" == "ALT Server" ] || [ "$OS_TYPE" == "ALT SPServer" ] || [ "$OS_TYPE" == "ALT Workstation" ]; then
                 USERPW=$(cat /etc/tcb/"$USER"/shadow | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($2)}')
             fi
         fi
