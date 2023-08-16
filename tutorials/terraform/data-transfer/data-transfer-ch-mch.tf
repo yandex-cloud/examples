@@ -40,6 +40,20 @@ resource "yandex_vpc_security_group" "security-group" {
     port           = local.source_port
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
+
+  ingress {
+    description    = "Allow incoming traffic on port 8443 from any IP address"
+    protocol       = "TCP"
+    port           = "8443"
+    v4_cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    description    = "Allow incoming traffic on port 9440 from any IP address"
+    protocol       = "TCP"
+    port           = "9440"
+    v4_cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster" {
