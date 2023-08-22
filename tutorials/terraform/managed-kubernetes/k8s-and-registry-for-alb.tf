@@ -3,13 +3,14 @@
 # RU: https://cloud.yandex.ru/docs/managed-kubernetes/tutorials/alb-ingress-controller-log-options
 # EN: https://cloud.yandex.com/en/docs/managed-kubernetes/tutorials/alb-ingress-controller-log-options
 
-# Set the configuration of Managed Service for Kubernetes cluster and Container Registry
+# Set the configuration of Managed Service for Kubernetes cluster, Container Registry, and Cloud Logging
 locals {
   folder_id     = "" # Your cloud folder ID, same as for provider
   k8s_version   = "" # Desired version of Kubernetes. For available versions, see the documentation main page: https://cloud.yandex.com/en/docs/managed-kubernetes/concepts/release-channels-and-updates.
   sa_k8s        = "" # Service account name for Kubernetes cluster. It must be unique in a cloud.
   sa_alb        = "" # Service account name for the ALB ingress controller. It must be unique in a cloud.
   registry_name = "" # Container Registry name.
+  loggroup_name = "" # Log group name for Cloud Logging.
 
   # The following settings are predefined. Change them only if necessary.
   network_name             = "k8s-network"         # Name of the network
@@ -218,7 +219,7 @@ resource "yandex_container_registry" "container-registry" {
 
 resource "yandex_logging_group" "logging-group" {
   description = "Cloud Logging group"
-  name        = "alb-demo"
+  name        = local.loggroup_name
   folder_id   = local.folder_id
 }
 
