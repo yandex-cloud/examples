@@ -9,7 +9,6 @@ locals {
   k8s_version   = "" # Desired version of Kubernetes. For available versions, see the documentation main page: https://cloud.yandex.com/en/docs/managed-kubernetes/concepts/release-channels-and-updates.
   sa_k8s        = "" # Service account name for Kubernetes cluster. It must be unique in a cloud.
   sa_alb        = "" # Service account name for the ALB ingress controller. It must be unique in a cloud.
-  registry_name = "" # Container Registry name.
   loggroup_name = "" # Log group name for Cloud Logging.
 
   # The following settings are predefined. Change them only if necessary.
@@ -137,15 +136,6 @@ resource "yandex_resourcemanager_folder_iam_binding" "images-puller" {
   ]
 }
 
-# Assign "container-registry.images.pusher" role to Kubernetes service account
-resource "yandex_resourcemanager_folder_iam_binding" "images-pusher" {
-  folder_id = local.folder_id
-  role      = "container-registry.images.pusher"
-  members = [
-    "serviceAccount:${yandex_iam_service_account.k8s-sa.id}"
-  ]
-}
-
 resource "yandex_kubernetes_cluster" "k8s-cluster" {
   description = "Managed Service for Kubernetes cluster"
   name        = local.k8s_cluster_name
@@ -167,8 +157,7 @@ resource "yandex_kubernetes_cluster" "k8s-cluster" {
   node_service_account_id = yandex_iam_service_account.k8s-sa.id # Node group service account ID
   depends_on = [
     yandex_resourcemanager_folder_iam_binding.editor,
-    yandex_resourcemanager_folder_iam_binding.images-puller,
-    yandex_resourcemanager_folder_iam_binding.images-pusher
+    yandex_resourcemanager_folder_iam_binding.images-puller
   ]
 }
 
@@ -209,12 +198,6 @@ resource "yandex_kubernetes_node_group" "k8s-node-group" {
       size = 64 # Disk size in GB
     }
   }
-}
-
-# Container Registry
-resource "yandex_container_registry" "container-registry" {
-  name      = local.registry_name
-  folder_id = local.folder_id
 }
 
 resource "yandex_logging_group" "logging-group" {
