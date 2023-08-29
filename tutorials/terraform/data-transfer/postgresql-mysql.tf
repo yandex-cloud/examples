@@ -1,21 +1,21 @@
 # Infrastructure for the Yandex Cloud Managed Service for MySQL, Managed Service for PostgreSQL, and Data Transfer
 #
-# RU: https://cloud.yandex.ru/docs/data-transfer/tutorials/mmy-to-mpg
-# EN: https://cloud.yandex.com/en/docs/data-transfer/tutorials/mmy-to-mpg
+# RU: https://cloud.yandex.ru/docs/data-transfer/tutorials/mpg-to-mmy
+# EN: https://cloud.yandex.com/en/docs/data-transfer/tutorials/mpg-to-mmy
 #
 # Specify the following settings:
 
 locals {
   # Settings for Managed Service for PostgreSQL cluster:
-  pg_version       = "" # Desired version of PostgreSQL. For available versions, see the documentation main page: https://cloud.yandex.com/en/docs/managed-postgresql/.
+  pg_version       = ""       # Desired version of PostgreSQL. For available versions, see the documentation main page: https://cloud.yandex.com/en/docs/managed-postgresql/.
   pg_user_password = "" # User password
 
   # Settings for Managed Service for MySQL cluster:
-  mysql_version       = "" # Desired version of MySQL. For available versions, see the documentation main page: https://cloud.yandex.com/en/docs/managed-mysql/.
+  mysql_version       = ""      # Desired version of MySQL. For available versions, see the documentation main page: https://cloud.yandex.com/en/docs/managed-mysql/.
   mysql_user_password = "" # User password
 
   # Change this setting ONLY AFTER the clusters are created. Then run "terraform apply" command again.
-  transfer_enabled = 0 # Set to 1 to enable Transfer
+  transfer_enabled = 1 # Set to 1 to enable Transfer
 
   # The following settings are predefined. Change them only if necessary.
   network_name          = "mmy-mpg-network"    # Name of the network
@@ -28,9 +28,9 @@ locals {
   mysql_cluster_name    = "mysql-cluster"      # Name of the MySQL cluster
   mysql_db_name         = "mmy-db"             # Name of the MySQL cluster database
   mysql_username        = "mmy-user"           # Name of the MySQL cluster username
-  source_endpoint_name  = "mmy_source"         # Name of the source endpoint for MySQL cluster
-  target_endpoint_name  = "mpg_target"         # Name of the target endpoint for PostgreSQL cluster
-  transfer_name         = "mmy-mpg-transfer"   # Name of the transfer from the Managed Service for MySQL to the Managed Service for PostgreSQL
+  source_endpoint_name  = "mpg_source"         # Name of the source endpoint for PostgreSQL cluster
+  target_endpoint_name  = "mmy_target"         # Name of the target endpoint for MySQL cluster
+  transfer_name         = "mpg-mmy-transfer"   # Name of the transfer from the Managed Service for PostgreSQL to the Managed Service for MySQL
 }
 
 # Network resources
@@ -106,6 +106,7 @@ resource "yandex_mdb_postgresql_user" "pg-user" {
   cluster_id = yandex_mdb_postgresql_cluster.mpg-cluster.id
   name       = local.pg_username
   password   = local.pg_user_password
+  grants     = ["mdb_replication"]
 }
 
 # Database of the Managed Service for PostgreSQL cluster
@@ -160,33 +161,16 @@ resource "yandex_mdb_mysql_user" "mmy-user" {
 
 # Transfer
 
-resource "yandex_datatransfer_endpoint" "mmy-source" {
-  description = "Source endpoint for MySQL cluster"
-  name        = "mmy-source"
+resource "yandex_datatransfer_endpoint" "mpg-source" {
+  description = "Source endpoint for PostgreSQL cluster"
+  name        = "mpg-source"
   settings {
-    mysql_source {
-      connection {
-        mdb_cluster_id = yandex_mdb_mysql_cluster.mysql-cluster.id
-      }
-      database = local.mysql_db_name
-      user     = local.mysql_username
-      password {
-        raw = local.mysql_user_password
-      }
-    }
-  }
-}
-
-resource "yandex_datatransfer_endpoint" "mpg-target" {
-  description = "Target endpoint for PostgreSQL cluster"
-  name        = "mpg-target"
-  settings {
-    postgres_target {
+    postgres_source {
       connection {
         mdb_cluster_id = yandex_mdb_postgresql_cluster.mpg-cluster.id
       }
-      database = yandex_mdb_postgresql_database.mpg-db.name
-      user     = yandex_mdb_postgresql_user.pg-user.name
+      database = local.pg_db_name
+      user     = local.pg_username
       password {
         raw = local.pg_user_password
       }
@@ -194,11 +178,28 @@ resource "yandex_datatransfer_endpoint" "mpg-target" {
   }
 }
 
-resource "yandex_datatransfer_transfer" "mysql-pg-transfer" {
+resource "yandex_datatransfer_endpoint" "mmy-target" {
+  description = "Target endpoint for MySQL cluster"
+  name        = "mmy-target"
+  settings {
+    mysql_target {
+      connection {
+        mdb_cluster_id = yandex_mdb_mysql_cluster.mysql-cluster.id
+      }
+      database = yandex_mdb_mysql_database.mmy-db.name
+      user     = yandex_mdb_mysql_user.mmy-user.name
+      password {
+        raw = local.mysql_user_password
+      }
+    }
+  }
+}
+
+resource "yandex_datatransfer_transfer" "pg-mysql-transfer" {
   count       = local.transfer_enabled
-  description = "Transfer from the Managed Service for MySQL to the Managed Service for PostgreSQL"
-  name        = "transfer-from-mmy-to-mpg"
-  source_id   = yandex_datatransfer_endpoint.mmy-source.id
-  target_id   = yandex_datatransfer_endpoint.mpg-target.id
+  description = "Transfer from the Managed Service for PostgreSQL to the Managed Service for MySQL"
+  name        = "transfer-from-mpg-to-mmy"
+  source_id   = yandex_datatransfer_endpoint.mpg-source.id
+  target_id   = yandex_datatransfer_endpoint.mmy-target.id
   type        = "SNAPSHOT_AND_INCREMENT" # Copy all data from the source cluster and start replication.
 }
