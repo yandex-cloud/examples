@@ -126,7 +126,7 @@ function preCheck {
 
         "Debian GNU/Linux")
             case "$2" in
-                "8"|"9"|"10"|"11")
+                "8"|"9"|"10"|"11"|"12")
                     echo "OK"
                     ;;
                 *)
@@ -300,7 +300,7 @@ function definePMSType {
 
         "Debian GNU/Linux")
             case "$2" in
-                "8"|"9"|"10"|"11")
+                "8"|"9"|"10"|"11"|"12")
                     echo "deb"
                     ;;
             esac
