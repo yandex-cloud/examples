@@ -207,5 +207,5 @@ resource "yandex_lockbox_secret_version" "my_version" {
 }
 
 output "lockbox_secret_id" {
-  value = yandex_iam_service_account.my_secret.id
+  value = yandex_lockbox_secret.my_secret.id
 }
