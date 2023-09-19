@@ -641,7 +641,7 @@ function getUsersWithMoreThanOneAuthKeys {
         USERDIR=$(cat /etc/passwd | grep -v -e "^#" | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($6)}')
         if [ -f "${USERDIR}/.ssh/authorized_keys" ]; then
             if [ -s "${USERDIR}/.ssh/authorized_keys" ]; then
-                KEYS_COUNT=$(cat "${USERDIR}/.ssh/authorized_keys" | wc -l)
+                KEYS_COUNT=$(cat "${USERDIR}/.ssh/authorized_keys" | grep -v -e "^#" | sort | uniq | wc -l)
                 if [ "$KEYS_COUNT" -gt "1" ]; then
                     echo "$USER"
                 fi
