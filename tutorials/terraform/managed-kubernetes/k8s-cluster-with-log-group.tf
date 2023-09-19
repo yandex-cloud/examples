@@ -26,7 +26,7 @@ resource "yandex_vpc_network" "k8s-network" {
 }
 
 resource "yandex_vpc_subnet" "subnet-a" {
-  description    = "Subnet in ru-central1-a availability zone"
+  description    = "Subnet in the ru-central1-a availability zone"
   name           = local.subnet_name
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.k8s-network.id
@@ -34,7 +34,7 @@ resource "yandex_vpc_subnet" "subnet-a" {
 }
 
 resource "yandex_vpc_security_group" "k8s-main-sg" {
-  description = "Security group ensure the basic performance of the cluster. Apply it to the cluster and node groups."
+  description = "The security group ensures the basic performance of the cluster. Apply it to the cluster and node groups."
   name        = local.main_security_group_name
   network_id  = yandex_vpc_network.k8s-network.id
 
@@ -55,7 +55,7 @@ resource "yandex_vpc_security_group" "k8s-main-sg" {
   }
 
   ingress {
-    description    = "The rule allows the pod-pod and service-service interaction. Specify the subnets of your cluster and services."
+    description    = "The rule allows the pod-pod and service-service interaction"
     protocol       = "ANY"
     v4_cidr_blocks = [local.zone_a_v4_cidr_blocks]
     from_port      = 0
@@ -63,13 +63,13 @@ resource "yandex_vpc_security_group" "k8s-main-sg" {
   }
 
   ingress {
-    description    = "The rule allows receipt of debugging ICMP packets from internal subnets"
+    description    = "The rule allows receiving debug ICMP packets from internal subnets"
     protocol       = "ICMP"
     v4_cidr_blocks = [local.zone_a_v4_cidr_blocks]
   }
 
   ingress {
-    description    = "The rule allows connection to Kubernetes API on 6443 port from specified network"
+    description    = "The rule allows connection to Kubernetes API on port 6443 from the specified network"
     protocol       = "TCP"
     v4_cidr_blocks = ["0.0.0.0/0"]
     port           = 6443
@@ -92,7 +92,7 @@ resource "yandex_vpc_security_group" "k8s-main-sg" {
 }
 
 resource "yandex_vpc_security_group" "k8s-public-services" {
-  description = "Security group allows connections to services from the internet. Apply the rules only for node groups."
+  description = "The security group allows connections to services from the internet. Apply the rules only for your node groups."
   name        = local.public_services_sg_name
   network_id  = yandex_vpc_network.k8s-network.id
 
@@ -106,11 +106,11 @@ resource "yandex_vpc_security_group" "k8s-public-services" {
 }
 
 resource "yandex_iam_service_account" "k8s-sa" {
-  description = "Service account for Kubernetes cluster"
+  description = "Service account for the Kubernetes cluster"
   name        = local.sa_name
 }
 
-# Assign "editor" role to Kubernetes service account
+# Assign role "editor" to the Kubernetes service account
 resource "yandex_resourcemanager_folder_iam_binding" "editor" {
   folder_id = local.folder_id
   role      = "editor"
@@ -119,7 +119,7 @@ resource "yandex_resourcemanager_folder_iam_binding" "editor" {
   ]
 }
 
-# Assign "container-registry.images.puller" role to Kubernetes service account
+# Assign role "container-registry.images.puller" to the Kubernetes service account
 resource "yandex_resourcemanager_folder_iam_binding" "images-puller" {
   folder_id = local.folder_id
   role      = "container-registry.images.puller"
@@ -145,8 +145,8 @@ resource "yandex_kubernetes_cluster" "k8s-cluster" {
     security_group_ids = [yandex_vpc_security_group.k8s-main-sg.id]
 
   }
-  service_account_id      = yandex_iam_service_account.k8s-sa.id # Cluster service account ID
-  node_service_account_id = yandex_iam_service_account.k8s-sa.id # Node group service account ID
+  service_account_id      = yandex_iam_service_account.k8s-sa.id # ID of the service account for the cluster
+  node_service_account_id = yandex_iam_service_account.k8s-sa.id # ID of the service account for the node group
   depends_on = [
     yandex_resourcemanager_folder_iam_binding.editor,
     yandex_resourcemanager_folder_iam_binding.images-puller
@@ -154,7 +154,7 @@ resource "yandex_kubernetes_cluster" "k8s-cluster" {
 }
 
 resource "yandex_kubernetes_node_group" "k8s-node-group" {
-  description = "Node group for Managed Service for Kubernetes cluster"
+  description = "Node group for the Managed Service for Kubernetes cluster"
   name        = local.k8s_node_group_name
   cluster_id  = yandex_kubernetes_cluster.k8s-cluster.id
   version     = local.k8s_version
