@@ -76,7 +76,7 @@ resource "yandex_vpc_security_group" "k8s-main-sg" {
   }
 
   ingress {
-    description    = "The rule allows connection to Kubernetes API on 443 port from specified network"
+    description    = "The rule allows connection to Kubernetes API on port 443 from the specified network"
     protocol       = "TCP"
     v4_cidr_blocks = ["0.0.0.0/0"]
     port           = 443
@@ -97,7 +97,7 @@ resource "yandex_vpc_security_group" "k8s-public-services" {
   network_id  = yandex_vpc_network.k8s-network.id
 
   ingress {
-    description    = "The rule allows incoming traffic from the internet to the NodePort port range. Add ports or change existing ones to the required ports."
+    description    = "The rule allows incoming traffic from the internet to the NodePort port range"
     protocol       = "TCP"
     v4_cidr_blocks = ["0.0.0.0/0"]
     from_port      = 30000
