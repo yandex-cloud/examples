@@ -159,6 +159,7 @@ resource "yandex_kubernetes_cluster" "k8s-cluster" {
       kube_apiserver_enabled     = true
       cluster_autoscaler_enabled = true
       events_enabled             = true
+      audit_enabled              = true
     }
 
   }
