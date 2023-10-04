@@ -4,9 +4,11 @@
 locals {
   folder_id   = "" # Your cloud folder ID, same as for the Yandex Cloud provider
   k8s_version = "" # Desired version of Kubernetes. For available versions, see the documentation main page: https://cloud.yandex.com/en/docs/managed-kubernetes/concepts/release-channels-and-updates.
-  sa_name     = "" # Service account name. It must be unique in a cloud.
 
   # The following settings are predefined. Change them only if necessary.
+  sa_name_k8s               = "k8s-sa" # Service account name for a Kubernetes cluster
+  sa_name_thumbor           = "thumbor-sa" # Service account name for Thumbor
+  sa_name_storage           = "storage-sa" # Service account name for a Yandex Object Storage bucket
   network_name              = "k8s-network" # Name of the network
   subnet_name               = "subnet-a" # Name of the subnet
   zone_a_v4_cidr_blocks     = "10.1.0.0/16" # CIDR block for the subnet in the ru-central1-a availability zone
@@ -102,11 +104,21 @@ resource "yandex_vpc_security_group" "k8s-public-services" {
 }
 
 resource "yandex_iam_service_account" "k8s-sa" {
-  description = "Service account for Kubernetes cluster"
-  name        = local.sa_name
+  description = "Service account for the Kubernetes cluster"
+  name        = local.sa_name_k8s
 }
 
-# Assign "editor" role to Kubernetes service account
+resource "yandex_iam_service_account" "thumbor-sa" {
+  description = "Service account for Thumbor"
+  name        = local.sa_name_thumbor
+}
+
+resource "yandex_iam_service_account" "storage-sa" {
+  description = "Service account for a Yandex Object Storage bucket"
+  name        = local.sa_name_storage
+}
+
+# Assign role "editor" to the Kubernetes service account
 resource "yandex_resourcemanager_folder_iam_binding" "editor" {
   folder_id = local.folder_id
   role      = "editor"
@@ -115,12 +127,21 @@ resource "yandex_resourcemanager_folder_iam_binding" "editor" {
   ]
 }
 
-# Assign "container-registry.images.puller" role to Kubernetes service account
+# Assign role "container-registry.images.puller" to the Kubernetes service account
 resource "yandex_resourcemanager_folder_iam_binding" "images-puller" {
   folder_id = local.folder_id
   role      = "container-registry.images.puller"
   members = [
     "serviceAccount:${yandex_iam_service_account.k8s-sa.id}"
+  ]
+}
+
+# Assign role "storage.editor" to the Object Storage service account
+resource "yandex_resourcemanager_folder_iam_binding" "storage-editor" {
+  folder_id = local.folder_id
+  role      = "storage.editor"
+  members = [
+    "serviceAccount:${yandex_iam_service_account.storage-sa.id}"
   ]
 }
 
@@ -141,8 +162,8 @@ resource "yandex_kubernetes_cluster" "k8s-cluster" {
     security_group_ids = [yandex_vpc_security_group.k8s-main-sg.id]
 
   }
-  service_account_id      = yandex_iam_service_account.k8s-sa.id # Cluster service account ID
-  node_service_account_id = yandex_iam_service_account.k8s-sa.id # Node group service account ID
+  service_account_id      = yandex_iam_service_account.k8s-sa.id # ID of the service account for the cluster
+  node_service_account_id = yandex_iam_service_account.k8s-sa.id # ID of the service account for the node group
   depends_on = [
     yandex_resourcemanager_folder_iam_binding.editor,
     yandex_resourcemanager_folder_iam_binding.images-puller
@@ -186,4 +207,16 @@ resource "yandex_kubernetes_node_group" "k8s-node-group" {
       size = 64 # Disk size in GB
     }
   }
+}
+
+resource "yandex_iam_service_account_static_access_key" "sa-static-key" {
+  description        = "Static access key for a bucket"
+  service_account_id = yandex_iam_service_account.storage-sa.id
+}
+
+// Create a bucket
+resource "yandex_storage_bucket" "test" {
+  access_key = yandex_iam_service_account_static_access_key.sa-static-key.access_key
+  secret_key = yandex_iam_service_account_static_access_key.sa-static-key.secret_key
+  bucket     = "images-for-thumbor"
 }
