@@ -16,6 +16,10 @@ locals {
   public_services_sg_name   = "k8s-public-services" # Name of the public services security group for node groups
   k8s_cluster_name          = "k8s-cluster" # Name of the Kubernetes cluster
   k8s_node_group_name       = "k8s-node-group" # Name of the Kubernetes node group
+  bucket_name               = "images-for-thumbor" # Name of the Object Storage bucket
+  rodents_path              = "poster_rodents_bunnysize.jpg" # Relative path to the poster_rodents_bunnysize.jpg image
+  bunny_path                = "poster_bunny_bunnysize.jpg" # Relative path to the poster_bunny_bunnysize.jpg image
+  cc_path                   = "cc.xlarge.png" # Relative path to the cc.xlarge.png image
 }
 
 resource "yandex_vpc_network" "k8s-network" {
@@ -136,10 +140,10 @@ resource "yandex_resourcemanager_folder_iam_binding" "images-puller" {
   ]
 }
 
-# Assign role "storage.editor" to the Object Storage service account
-resource "yandex_resourcemanager_folder_iam_binding" "storage-editor" {
+# Assign role "storage.admin" to the Object Storage service account
+resource "yandex_resourcemanager_folder_iam_binding" "storage-admin" {
   folder_id = local.folder_id
-  role      = "storage.editor"
+  role      = "storage.admin"
   members = [
     "serviceAccount:${yandex_iam_service_account.storage-sa.id}"
   ]
@@ -215,8 +219,13 @@ resource "yandex_iam_service_account_static_access_key" "sa-static-key" {
 }
 
 # Create a bucket
-resource "yandex_storage_bucket" "test" {
+resource "yandex_storage_bucket" "image-bucket" {
   access_key = yandex_iam_service_account_static_access_key.sa-static-key.access_key
   secret_key = yandex_iam_service_account_static_access_key.sa-static-key.secret_key
-  bucket     = "images-for-thumbor"
+  bucket     = local.bucket_name
+  grant {
+    id          = yandex_iam_service_account.k8s-sa.id
+    type        = "CanonicalUser"
+    permissions = ["READ"]
+  }
 }
