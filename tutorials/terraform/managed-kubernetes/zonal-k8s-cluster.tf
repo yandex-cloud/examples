@@ -29,14 +29,6 @@ resource "yandex_vpc_subnet" "my-subnet" {
   v4_cidr_blocks = [local.zone_a_v4_cidr_blocks]
 }
 
-resource "yandex_vpc_subnet" "my-subnet-b" {
-  description    = "Subnet in the ru-central1-b availability zone"
-  name           = "my-subnet-b"
-  zone           = "ru-central1-b"
-  network_id     = yandex_vpc_network.k8s-network.id
-  v4_cidr_blocks = [local.zone_a_v4_cidr_blocks]
-}
-
 resource "yandex_vpc_security_group" "k8s-main-sg" {
   description = "Security group ensure the basic performance of the cluster. Apply it to the cluster and node groups."
   name        = local.main_security_group_name
@@ -140,8 +132,8 @@ resource "yandex_kubernetes_cluster" "k8s-cluster" {
   master {
     version = local.k8s_version
     zonal {
-      zone      = yandex_vpc_subnet.my-subnet-b.zone
-      subnet_id = yandex_vpc_subnet.my-subnet-b.id
+      zone      = yandex_vpc_subnet.my-subnet.zone
+      subnet_id = yandex_vpc_subnet.my-subnet.id
     }
 
     public_ip = true
