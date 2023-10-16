@@ -6,10 +6,14 @@ locals {
   k8s_version = "" # Desired version of Kubernetes. For available versions, see the documentation main page: https://cloud.yandex.com/en/docs/managed-kubernetes/concepts/release-channels-and-updates.
 
   # The following settings are predefined. Change them only if necessary.
-  sa_name_k8s               = "k8s-sa" # Service account name for a Kubernetes cluster
+  sa_name_k8s               = "k8s-sa-reg-mig" # Service account name for a Kubernetes cluster
   network_name              = "k8s-network" # Name of the network
-  subnet_name               = "my-subnet-100" # Name of the subnet
-  zone_a_v4_cidr_blocks     = "10.1.0.0/16" # CIDR block for the subnet in the ru-central1-a availability zone
+  subnet_name-a             = "my-subnet-a" # Name of the subnet in the ru-central1-a availability zone
+  subnet_name-b             = "my-subnet-b" # Name of the subnet in the ru-central1-b availability zone
+  subnet_name-c             = "my-subnet-c" # Name of the subnet in the ru-central1-c availability zone
+  zone_a_v4_cidr_blocks_a   = "10.1.0.0/16" # CIDR block for the subnet in the ru-central1-a availability zone
+  zone_a_v4_cidr_blocks_b   = "172.16.0.0/24" # CIDR block for the subnet in the ru-central1-b availability zone
+  zone_a_v4_cidr_blocks_c   = "192.168.0.0/24" # CIDR block for the subnet in the ru-central1-c availability zone
   main_security_group_name  = "k8s-main-sg" # Name of the main security group of the cluster
   public_services_sg_name   = "k8s-public-services" # Name of the public services security group for node groups
   k8s_cluster_name          = "k8s-cluster" # Name of the Kubernetes cluster
@@ -21,12 +25,28 @@ resource "yandex_vpc_network" "k8s-network" {
   name        = local.network_name
 }
 
-resource "yandex_vpc_subnet" "my-subnet" {
+resource "yandex_vpc_subnet" "my-subnet-a" {
   description    = "Subnet in the ru-central1-a availability zone"
-  name           = local.subnet_name
+  name           = local.subnet_name-a
+  v4_cidr_blocks = [local.zone_a_v4_cidr_blocks_a]
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.k8s-network.id
-  v4_cidr_blocks = [local.zone_a_v4_cidr_blocks]
+}
+
+resource "yandex_vpc_subnet" "my-subnet-b" {
+  description    = "Subnet in the ru-central1-b availability zone"
+  name           = local.subnet_name-b
+  v4_cidr_blocks = [local.zone_a_v4_cidr_blocks_b]
+  zone           = "ru-central1-b"
+  network_id     = yandex_vpc_network.k8s-network.id
+}
+
+resource "yandex_vpc_subnet" "my-subnet-c" {
+  description    = "Subnet in the ru-central1-c availability zone"
+  name           = local.subnet_name-c
+  v4_cidr_blocks = [local.zone_a_v4_cidr_blocks_c]
+  zone           = "ru-central1-c"
+  network_id     = yandex_vpc_network.k8s-network.id
 }
 
 resource "yandex_vpc_security_group" "k8s-main-sg" {
@@ -53,7 +73,7 @@ resource "yandex_vpc_security_group" "k8s-main-sg" {
   ingress {
     description    = "The rule allows the pod-pod and service-service interaction. Specify the subnets of your cluster and services."
     protocol       = "ANY"
-    v4_cidr_blocks = [local.zone_a_v4_cidr_blocks]
+    v4_cidr_blocks = [local.zone_a_v4_cidr_blocks_a]
     from_port      = 0
     to_port        = 65535
   }
@@ -61,7 +81,7 @@ resource "yandex_vpc_security_group" "k8s-main-sg" {
   ingress {
     description    = "The rule allows receipt of debugging ICMP packets from internal subnets"
     protocol       = "ICMP"
-    v4_cidr_blocks = [local.zone_a_v4_cidr_blocks]
+    v4_cidr_blocks = [local.zone_a_v4_cidr_blocks_a]
   }
 
   ingress {
@@ -131,16 +151,25 @@ resource "yandex_kubernetes_cluster" "k8s-cluster" {
 
   master {
     version = local.k8s_version
-    zonal {
-      zone      = yandex_vpc_subnet.my-subnet.zone
-      subnet_id = yandex_vpc_subnet.my-subnet.id
-    }
-
     public_ip = true
-
+    regional {
+      region = "ru-central1"
+      location {
+        zone      = yandex_vpc_subnet.my-subnet-a.zone
+        subnet_id = yandex_vpc_subnet.my-subnet-a.id
+      }
+      location {
+        zone      = yandex_vpc_subnet.my-subnet-b.zone
+        subnet_id = yandex_vpc_subnet.my-subnet-b.id
+      }
+      location {
+        zone      = yandex_vpc_subnet.my-subnet-c.zone
+        subnet_id = yandex_vpc_subnet.my-subnet-c.id
+      }
+    }
     security_group_ids = [yandex_vpc_security_group.k8s-main-sg.id]
-
   }
+
   service_account_id      = yandex_iam_service_account.k8s-sa.id # ID of the service account for the cluster
   node_service_account_id = yandex_iam_service_account.k8s-sa.id # ID of the service account for the node group
   depends_on = [
@@ -172,7 +201,7 @@ resource "yandex_kubernetes_node_group" "k8s-node-group" {
 
     network_interface {
       nat                = true
-      subnet_ids         = [yandex_vpc_subnet.my-subnet.id]
+      subnet_ids         = [yandex_vpc_subnet.my-subnet-a.id]
       security_group_ids = [yandex_vpc_security_group.k8s-main-sg.id, yandex_vpc_security_group.k8s-public-services.id]
     }
 
