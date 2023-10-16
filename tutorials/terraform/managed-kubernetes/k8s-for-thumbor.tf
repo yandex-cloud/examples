@@ -17,9 +17,6 @@ locals {
   k8s_cluster_name          = "k8s-cluster" # Name of the Kubernetes cluster
   k8s_node_group_name       = "k8s-node-group" # Name of the Kubernetes node group
   bucket_name               = "images-for-thumbor" # Name of the Object Storage bucket
-  rodents_path              = "poster_rodents_bunnysize.jpg" # Relative path to the poster_rodents_bunnysize.jpg image
-  bunny_path                = "poster_bunny_bunnysize.jpg" # Relative path to the poster_bunny_bunnysize.jpg image
-  cc_path                   = "cc.xlarge.png" # Relative path to the cc.xlarge.png image
 }
 
 resource "yandex_vpc_network" "k8s-network" {
