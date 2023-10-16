@@ -21,8 +21,8 @@ resource "yandex_vpc_network" "k8s-network" {
   name        = local.network_name
 }
 
-resource "yandex_vpc_subnet" "subnet-a" {
-  description    = "Subnet in ru-central1-a availability zone"
+resource "yandex_vpc_subnet" "my-subnet" {
+  description    = "Subnet in the ru-central1-a availability zone"
   name           = local.subnet_name
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.k8s-network.id
@@ -106,16 +106,6 @@ resource "yandex_iam_service_account" "k8s-sa" {
   name        = local.sa_name_k8s
 }
 
-resource "yandex_iam_service_account" "thumbor-sa" {
-  description = "Service account for Thumbor"
-  name        = local.sa_name_thumbor
-}
-
-resource "yandex_iam_service_account" "storage-sa" {
-  description = "Service account for a Yandex Object Storage bucket"
-  name        = local.sa_name_storage
-}
-
 # Assign role "editor" to the Kubernetes service account
 resource "yandex_resourcemanager_folder_iam_binding" "editor" {
   folder_id = local.folder_id
@@ -134,15 +124,6 @@ resource "yandex_resourcemanager_folder_iam_binding" "images-puller" {
   ]
 }
 
-# Assign role "storage.admin" to the Object Storage service account
-resource "yandex_resourcemanager_folder_iam_binding" "storage-admin" {
-  folder_id = local.folder_id
-  role      = "storage.admin"
-  members = [
-    "serviceAccount:${yandex_iam_service_account.storage-sa.id}"
-  ]
-}
-
 resource "yandex_kubernetes_cluster" "k8s-cluster" {
   description = "Managed Service for Kubernetes cluster"
   name        = local.k8s_cluster_name
@@ -151,8 +132,8 @@ resource "yandex_kubernetes_cluster" "k8s-cluster" {
   master {
     version = local.k8s_version
     zonal {
-      zone      = yandex_vpc_subnet.subnet-a.zone
-      subnet_id = yandex_vpc_subnet.subnet-a.id
+      zone      = yandex_vpc_subnet.my-subnet.zone
+      subnet_id = yandex_vpc_subnet.my-subnet.id
     }
 
     public_ip = true
@@ -191,7 +172,7 @@ resource "yandex_kubernetes_node_group" "k8s-node-group" {
 
     network_interface {
       nat                = true
-      subnet_ids         = [yandex_vpc_subnet.subnet-a.id]
+      subnet_ids         = [yandex_vpc_subnet.my-subnet.id]
       security_group_ids = [yandex_vpc_security_group.k8s-main-sg.id, yandex_vpc_security_group.k8s-public-services.id]
     }
 
@@ -204,22 +185,5 @@ resource "yandex_kubernetes_node_group" "k8s-node-group" {
       type = "network-hdd"
       size = 64 # Disk size in GB
     }
-  }
-}
-
-resource "yandex_iam_service_account_static_access_key" "sa-static-key" {
-  description        = "Static access key for a bucket"
-  service_account_id = yandex_iam_service_account.storage-sa.id
-}
-
-# Create a bucket
-resource "yandex_storage_bucket" "image-bucket" {
-  access_key = yandex_iam_service_account_static_access_key.sa-static-key.access_key
-  secret_key = yandex_iam_service_account_static_access_key.sa-static-key.secret_key
-  bucket     = local.bucket_name
-  grant {
-    id          = yandex_iam_service_account.k8s-sa.id
-    type        = "CanonicalUser"
-    permissions = ["READ"]
   }
 }
