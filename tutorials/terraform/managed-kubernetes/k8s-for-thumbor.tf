@@ -25,7 +25,7 @@ resource "yandex_vpc_network" "k8s-network" {
 }
 
 resource "yandex_vpc_subnet" "subnet-a" {
-  description    = "Subnet in ru-central1-a availability zone"
+  description    = "Subnet in the ru-central1-a availability zone"
   name           = local.subnet_name
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.k8s-network.id
