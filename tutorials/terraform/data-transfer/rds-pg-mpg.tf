@@ -13,7 +13,7 @@ locals {
   aws_certificate      = file("") # Path to a certificate .pem file
 
   # Settings for Managed Service for PostgreSQL cluster:
-  mpg_version       = "" # Desired version of PostgreSQL. For available versions, see the documentation main page: https://cloud.yandex.com/en/docs/managed-postgresql/.
+  mpg_version       = "" # Desired version of PostgreSQL. Must not be older than rds_pg_version. For available versions, see the documentation main page: https://cloud.yandex.com/en/docs/managed-postgresql/.
   mpg_user_password = "" # User password
 
   # The following settings are predefined. Change them only if necessary.
