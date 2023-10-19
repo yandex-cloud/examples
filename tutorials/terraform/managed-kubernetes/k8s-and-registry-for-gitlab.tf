@@ -33,6 +33,46 @@ resource "yandex_vpc_subnet" "subnet-a" {
   v4_cidr_blocks = [local.zone_a_v4_cidr_blocks]
 }
 
+resource "yandex_vpc_default_security_group" "default-sg" {
+  description = "Default security group allows connections to Managed Service for GitLab"
+  network_id  = yandex_vpc_network.k8s-network.id
+
+  ingress {
+    description    = "The rule allows connection to Git repository by SSH on 22 port from the Internet"
+    protocol       = "TCP"
+    v4_cidr_blocks = ["0.0.0.0/0"]
+    port           = 22
+  }
+
+  ingress {
+    description    = "The rule allows connection to Git repository by SSH on 2222 port from the Internet"
+    protocol       = "TCP"
+    v4_cidr_blocks = ["0.0.0.0/0"]
+    port           = 2222
+  }
+
+  ingress {
+    description    = "The rule allows HTTP connections from the Internet"
+    protocol       = "TCP"
+    v4_cidr_blocks = ["0.0.0.0/0"]
+    port           = 80
+  }
+
+  ingress {
+    description    = "The rule allows HTTPS connections from the Internet"
+    protocol       = "TCP"
+    v4_cidr_blocks = ["0.0.0.0/0"]
+    port           = 443
+  }
+
+  ingress {
+    description    = "The rule allows connection to Yandex Container Registry on 5050 port"
+    protocol       = "TCP"
+    v4_cidr_blocks = ["0.0.0.0/0"]
+    port           = 5050
+  }
+}
+
 resource "yandex_vpc_security_group" "k8s-main-sg" {
   description = "Security group ensure the basic performance of the cluster. Apply it to the cluster and node groups."
   name        = local.main_security_group_name
