@@ -1,18 +1,4 @@
-terraform {
-  required_providers {
-    yandex = {
-      source = "yandex-cloud/yandex"
-    }
-  }
-}
-
-provider "yandex" {
-  service_account_key_file = "./key.json"
-  cloud_id                 = "b1gkgm9daf9605njnmn8"
-  folder_id                = "b1g2sltbfj36tqt7p9ug"
-}
-
-# Infrastructure for Yandex Data Proc cluster with DNS for the master host permanent FQDN
+# Infrastructure for Yandex Data Proc cluster with DNS for the master host FQDN
 #
 # RU: https://cloud.yandex.ru/docs/data-proc/tutorials/reconnect-network
 # EN: https://cloud.yandex.com/en-ru/docs/data-proc/tutorials/reconnect-network
@@ -20,13 +6,13 @@ provider "yandex" {
 
 # Specify the following settings:
 locals {
-  folder_id              = "b1g2sltbfj36tqt7p9ug" # Set your cloud folder ID, same as for provider
-  path_to_ssh_public_key = "~/.ssh/id_rsa_YCVM.pub" # Set a full path to an SSH public key. Example: "~/.ssh/key.pub"
-  bucket                 = "dataproc-fqdn-test" # Set a unique bucket name
+  folder_id              = "" # Set your cloud folder ID, same as for provider
+  path_to_ssh_public_key = "" # Set a full path to an SSH public key. Example: "~/.ssh/key.pub"
+  bucket                 = "" # Set a unique bucket name
 
   # Specify these settings ONLY AFTER the cluster is created. Then run "terraform apply" command again
   # You should set up the Data Proc master node FQDN using the GUI/CLI/API to obtain the FQDN
-  dataproc_fqdn = "rc1a-dataproc-m-6ijqng07vul2mu8j.mdb.yandexcloud.net" # Substitute "test" with the Data Proc master node FQDN
+  dataproc_fqdn = "test" # Substitute "test" with the Data Proc master node FQDN
 }
 
 resource "yandex_vpc_network" "data-proc-network" {
@@ -89,28 +75,28 @@ resource "yandex_vpc_security_group" "data-proc-security-group" {
 }
 
 # Create a service account
-resource "yandex_iam_service_account" "dataproc-sa-md" {
+resource "yandex_iam_service_account" "dataproc-sa-user" {
   folder_id = local.folder_id
-  name      = "data-proc-sa-mdarkh"
+  name      = "data-proc-sa-user"
 }
 
 # Grant permissions to the service account
 resource "yandex_resourcemanager_folder_iam_member" "sa-editor" {
   folder_id = local.folder_id
   role      = "storage.editor"
-  member    = "serviceAccount:${yandex_iam_service_account.dataproc-sa-md.id}"
+  member    = "serviceAccount:${yandex_iam_service_account.dataproc-sa-user.id}"
 }
 
 resource "yandex_resourcemanager_folder_iam_member" "dataproc-sa-role-dataproc-agent" {
   folder_id = local.folder_id
   role      = "dataproc.agent"
-  member    = "serviceAccount:${yandex_iam_service_account.dataproc-sa-md.id}"
+  member    = "serviceAccount:${yandex_iam_service_account.dataproc-sa-user.id}"
 }
 
 # Create an access key for the service account
 resource "yandex_iam_service_account_static_access_key" "sa-static-key" {
   description        = "Static access key for Object Storage"
-  service_account_id = yandex_iam_service_account.dataproc-sa-md.id
+  service_account_id = yandex_iam_service_account.dataproc-sa-user.id
 }
 
 # Use keys to create a bucket
@@ -123,7 +109,7 @@ resource "yandex_storage_bucket" "obj-storage-bucket" {
 resource "yandex_dataproc_cluster" "dataproc-cluster" {
   description        = "Yandex Data Proc cluster"
   name               = "dataproc-cluster"
-  service_account_id = yandex_iam_service_account.dataproc-sa-md.id
+  service_account_id = yandex_iam_service_account.dataproc-sa-user.id
   zone_id            = "ru-central1-a"
   bucket             = local.bucket
 
