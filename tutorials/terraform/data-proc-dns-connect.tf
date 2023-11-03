@@ -6,13 +6,13 @@
 
 # Specify the following settings:
 locals {
-  folder_id              = "" # Set your cloud folder ID, same as for provider
-  path_to_ssh_public_key = "" # Set a full path to an SSH public key. Example: "~/.ssh/key.pub"
-  bucket                 = "" # Set a unique bucket name
+  folder_id              = "" # Your cloud folder ID, same as for provider
+  path_to_ssh_public_key = "" # Absolute path to the SSH public key for the Data Proc cluster
+  bucket                 = "" # Name of an Object Storage bucket for input files. Must be unique in the Cloud.
 
   # Specify these settings ONLY AFTER the cluster is created. Then run "terraform apply" command again
   # You should set up the Data Proc master node FQDN using the GUI/CLI/API to obtain the FQDN
-  dataproc_fqdn = "test" # Substitute "test" with the Data Proc master node FQDN
+  dataproc_fqdn = "test" # Substitute "test" with the Data Proc cluster master node FQDN
 }
 
 resource "yandex_vpc_network" "data-proc-network" {
@@ -161,6 +161,7 @@ resource "yandex_dns_zone" "data-proc-zone" {
   private_networks = [yandex_vpc_network.data-proc-network.id]
 }
 
+# DNS record for the Data Proc cluster master node FQDN
 resource "yandex_dns_recordset" "data-proc-record" {
   zone_id = yandex_dns_zone.data-proc-zone.id
   name    = "data-proc-test-user.org."
