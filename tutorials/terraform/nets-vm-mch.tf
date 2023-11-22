@@ -6,15 +6,15 @@
 # Specify the following settings.
 locals {
   # Cluster settings:
-  ch_dbname         = "" # Set the ClickHouse cluster database name.
-  ch_user           = "" # Set the username for ClickHouse database.
-  ch_password       = ""    # Set the user password for ClickHouse database.
+  ch_dbname   = "" # Set the ClickHouse cluster database name.
+  ch_user     = "" # Set the username for ClickHouse database.
+  ch_password = "" # Set the user password for ClickHouse database.
 
   # VM settings
-  image_id              = ""            # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list.
-  vm_username           = ""            # Set the username to connect to the routing VM via SSH. For Ubuntu images `ubuntu` username is used by default.
-  vm_ssh_key_path       = ""            # Set the path to the public SSH public key for the routing VM. Example: "~/.ssh/key.pub".
-  create_optional_vm = 0 # Set to 1 to create optional VM.
+  image_id           = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list.
+  vm_username        = "" # Set the username to connect to the routing VM via SSH. For Ubuntu images `ubuntu` username is used by default.
+  vm_ssh_key_path    = "" # Set the path to the public SSH public key for the routing VM. Example: "~/.ssh/key.pub".
+  create_optional_vm = 0  # Set to 1 to create optional VM.
 
   # DNS zone settings:
   create_zone = 0 # Set to 1 to create DNS zone.
@@ -131,7 +131,7 @@ resource "yandex_mdb_clickhouse_cluster" "clickhouse-cluster" {
 # VM in Yandex Compute Cloud located in mch-net
 resource "yandex_compute_instance" "mch-net-vm" {
 
-  count = local.create_optional_vm
+  count       = local.create_optional_vm
   name        = "linux-vm-internal"
   platform_id = "standard-v3" # Intel Ice Lake
 
@@ -184,7 +184,7 @@ resource "yandex_compute_instance" "another-net-vm" {
 }
 
 resource "yandex_dns_zone" "dns-zone" {
-  count = local.create_zone
+  count            = local.create_zone
   name             = "demo-private-zone"
   description      = "ClickHouse DNS zone"
   zone             = "mdb.yandexcloud.net."
