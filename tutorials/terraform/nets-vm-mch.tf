@@ -33,16 +33,16 @@ resource "yandex_vpc_subnet" "mch-subnet-a" {
   v4_cidr_blocks = ["10.1.0.0/16"]
 }
 
-resource "yandex_vpc_network" "vm-net" {
+resource "yandex_vpc_network" "another-net" {
   description = "Network for the Virtual Machine"
-  name        = "vm-net"
+  name        = "another-net"
 }
 
-resource "yandex_vpc_subnet" "vm-subnet-a" {
-  description    = "Subnet of the vm-net in the ru-central1-a availability zone"
-  name           = "vm-subnet-a"
+resource "yandex_vpc_subnet" "another-subnet-a" {
+  description    = "Subnet of the another-net in the ru-central1-a availability zone"
+  name           = "another-subnet-a"
   zone           = "ru-central1-a"
-  network_id     = yandex_vpc_network.vm-net.id
+  network_id     = yandex_vpc_network.another-net.id
   v4_cidr_blocks = ["10.2.0.0/16"]
 }
 
@@ -73,9 +73,9 @@ resource "yandex_vpc_security_group" "mch-security-group" {
   }
 }
 
-resource "yandex_vpc_security_group" "vm-security-group" {
-  description = "Security group for the Managed Service for ClickHouse cluster"
-  network_id  = yandex_vpc_network.vm-net.id
+resource "yandex_vpc_security_group" "another-security-group" {
+  description = "Security group for VM"
+  network_id  = yandex_vpc_network.another-net.id
 
   ingress {
     description    = "The rule allows SSH connections to VMs"
@@ -156,7 +156,7 @@ resource "yandex_compute_instance" "mch-net-vm" {
   }
 }
 
-# VM in Yandex Compute Cloud located in vm-net
+# VM in Yandex Compute Cloud located in another-net
 resource "yandex_compute_instance" "another-net-vm" {
 
   name        = "linux-vm-external"
@@ -174,7 +174,7 @@ resource "yandex_compute_instance" "another-net-vm" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.vm-subnet-a.id
+    subnet_id = yandex_vpc_subnet.another-subnet-a.id
     nat       = true # Required for connection from the Internet
   }
 
@@ -189,5 +189,5 @@ resource "yandex_dns_zone" "dns-zone" {
   description      = "ClickHouse DNS zone"
   zone             = "mdb.yandexcloud.net."
   public           = false
-  private_networks = [yandex_vpc_network.mch-net.id, yandex_vpc_network.vm-net.id]
+  private_networks = [yandex_vpc_network.mch-net.id, yandex_vpc_network.another-net.id]
 }
