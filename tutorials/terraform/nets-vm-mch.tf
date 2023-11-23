@@ -6,18 +6,31 @@
 # Specify the following settings.
 locals {
   # Cluster settings:
-  ch_dbname   = "" # Set the ClickHouse cluster database name.
-  ch_user     = "" # Set the username for ClickHouse database.
+  ch_dbname   = ""      # Set the ClickHouse cluster database name.
+  ch_user     = ""    # Set the username for ClickHouse database.
   ch_password = "" # Set the user password for ClickHouse database.
 
   # VM settings
   image_id           = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list.
-  vm_username        = "" # Set the username to connect to the routing VM via SSH. For Ubuntu images `ubuntu` username is used by default.
+  vm_username        = ""             # Set the username to connect to the routing VM via SSH. For Ubuntu images `ubuntu` username is used by default.
   vm_ssh_key_path    = "" # Set the path to the public SSH public key for the routing VM. Example: "~/.ssh/key.pub".
-  create_optional_vm = 0  # Set to 1 to create optional VM.
+  create_optional_vm = 0                      # Set to 1 to create optional VM.
 
   # DNS zone settings:
   create_zone = 0 # Set to 1 to create DNS zone.
+}
+
+resource "yandex_vpc_network" "vm-net" {
+  description = "Network for the Virtual Machine"
+  name        = "vm-net"
+}
+
+resource "yandex_vpc_subnet" "vm-subnet-a" {
+  description    = "Subnet of the vm-net in the ru-central1-a availability zone"
+  name           = "vm-subnet-a"
+  zone           = "ru-central1-a"
+  network_id     = yandex_vpc_network.vm-net.id
+  v4_cidr_blocks = ["10.2.0.0/16"]
 }
 
 resource "yandex_vpc_network" "mch-net" {
@@ -33,29 +46,9 @@ resource "yandex_vpc_subnet" "mch-subnet-a" {
   v4_cidr_blocks = ["10.1.0.0/16"]
 }
 
-resource "yandex_vpc_network" "another-net" {
-  description = "Network for the Virtual Machine"
-  name        = "another-net"
-}
-
-resource "yandex_vpc_subnet" "another-subnet-a" {
-  description    = "Subnet of the another-net in the ru-central1-a availability zone"
-  name           = "another-subnet-a"
-  zone           = "ru-central1-a"
-  network_id     = yandex_vpc_network.another-net.id
-  v4_cidr_blocks = ["10.2.0.0/16"]
-}
-
-resource "yandex_vpc_security_group" "mch-security-group" {
-  description = "Security group for the Managed Service for ClickHouse cluster"
-  network_id  = yandex_vpc_network.mch-net.id
-
-  ingress {
-    description    = "The rule allows connections with a ClickHouse client to the Managed Service for ClickHouse cluster from Compute Cloud VMs"
-    protocol       = "TCP"
-    port           = 8123
-    v4_cidr_blocks = ["0.0.0.0/0"]
-  }
+resource "yandex_vpc_security_group" "vm-security-group" {
+  description = "Security group for VM"
+  network_id  = yandex_vpc_network.vm-net.id
 
   ingress {
     description    = "The rule allows SSH connections to VMs"
@@ -73,9 +66,23 @@ resource "yandex_vpc_security_group" "mch-security-group" {
   }
 }
 
-resource "yandex_vpc_security_group" "another-security-group" {
-  description = "Security group for VM"
-  network_id  = yandex_vpc_network.another-net.id
+resource "yandex_vpc_security_group" "mch-security-group" {
+  description = "Security group for the Managed Service for ClickHouse cluster"
+  network_id  = yandex_vpc_network.mch-net.id
+
+  ingress {
+    description       = "The rule allows connections with a ClickHouse client to the Managed Service for ClickHouse cluster from VM in the same security group"
+    protocol          = "TCP"
+    port              = 9000
+    predefined_target = "self_security_group"
+  }
+
+  ingress {
+    description    = "The rule allows connections with a ClickHouse client to the Managed Service for ClickHouse cluster from VMs in another networks"
+    protocol       = "TCP"
+    port           = 9000
+    v4_cidr_blocks = ["0.0.0.0/0"]
+  }
 
   ingress {
     description    = "The rule allows SSH connections to VMs"
@@ -147,8 +154,9 @@ resource "yandex_compute_instance" "mch-net-vm" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.mch-subnet-a.id
-    nat       = true # Required for connection from the Internet
+    subnet_id          = yandex_vpc_subnet.mch-subnet-a.id
+    nat                = true # Required for connection from the Internet
+    security_group_ids = [yandex_vpc_security_group.mch-security-group.id]
   }
 
   metadata = {
@@ -156,7 +164,7 @@ resource "yandex_compute_instance" "mch-net-vm" {
   }
 }
 
-# VM in Yandex Compute Cloud located in another-net
+# VM in Yandex Compute Cloud located in vm-net
 resource "yandex_compute_instance" "another-net-vm" {
 
   name        = "linux-vm-external"
@@ -174,8 +182,9 @@ resource "yandex_compute_instance" "another-net-vm" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.another-subnet-a.id
-    nat       = true # Required for connection from the Internet
+    subnet_id          = yandex_vpc_subnet.vm-subnet-a.id
+    nat                = true # Required for connection from the Internet
+    security_group_ids = [yandex_vpc_security_group.vm-security-group.id]
   }
 
   metadata = {
@@ -189,5 +198,5 @@ resource "yandex_dns_zone" "dns-zone" {
   description      = "ClickHouse DNS zone"
   zone             = "mdb.yandexcloud.net."
   public           = false
-  private_networks = [yandex_vpc_network.mch-net.id, yandex_vpc_network.another-net.id]
+  private_networks = [yandex_vpc_network.mch-net.id, yandex_vpc_network.vm-net.id]
 }
