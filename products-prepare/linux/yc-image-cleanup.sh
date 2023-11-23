@@ -482,6 +482,16 @@ function changeSSHRootLoginToDefault {
   fi
 
 }
+
+
+function changeSSHPasswordAuthenticationToNo {
+  #taken from https://superuser.com/a/1486297
+  sed -E -i 's|^#?(PasswordAuthentication)\s.*|\1 no|' /etc/ssh/sshd_config
+  if ! grep -q '^PasswordAuthentication\s' /etc/ssh/sshd_config; then echo 'PasswordAuthentication no' >> /etc/ssh/sshd_config; fi
+  echo "DONE"
+}
+
+
 function cleanRootPassword {
   OS_TYPE=$(getOS)
   if [ "$OS_TYPE" == "FreeBSD" ]; then
@@ -742,6 +752,8 @@ function cleanupImage {
     cleanLogFiles
     echo -n "Changing ssh PermitRootLogin parameter to the default value... "
     changeSSHRootLoginToDefault
+    echo -n "Changing ssh PasswordAuthentication parameter to the 'no' value... "
+    changeSSHPasswordAuthenticationToNo
     echo -n "Starting to clean up root password... "
     cleanRootPassword
     echo -n "Removing system user... "
