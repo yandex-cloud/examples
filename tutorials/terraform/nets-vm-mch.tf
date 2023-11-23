@@ -6,15 +6,15 @@
 # Specify the following settings.
 locals {
   # Cluster settings:
-  ch_dbname   = ""      # Set the ClickHouse cluster database name.
-  ch_user     = ""    # Set the username for ClickHouse database.
+  ch_dbname   = "" # Set the ClickHouse cluster database name.
+  ch_user     = "" # Set the username for ClickHouse database.
   ch_password = "" # Set the user password for ClickHouse database.
 
   # VM settings
   image_id           = "" # Set a public image ID from https://cloud.yandex.com/en/docs/compute/operations/images-with-pre-installed-software/get-list.
-  vm_username        = ""             # Set the username to connect to the routing VM via SSH. For Ubuntu images `ubuntu` username is used by default.
+  vm_username        = "" # Set the username to connect to the routing VM via SSH. For Ubuntu images `ubuntu` username is used by default.
   vm_ssh_key_path    = "" # Set the path to the public SSH public key for the routing VM. Example: "~/.ssh/key.pub".
-  create_optional_vm = 0                      # Set to 1 to create optional VM.
+  create_optional_vm = 0 # Set to 1 to create optional VM.
 
   # DNS zone settings:
   create_zone = 0 # Set to 1 to create DNS zone.
