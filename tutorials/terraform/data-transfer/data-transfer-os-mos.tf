@@ -1,37 +1,32 @@
-# Infrastructure for the Managed Service for ElasticSearch, Managed Service for OpenSearch, and Data Transfer
+# Infrastructure for the Managed Service for OpenSearch and Data Transfer
 #
-# RU: https://cloud.yandex.ru/docs/data-transfer/tutorials/mes-to-mos
-# EN: https://cloud.yandex.com/en/docs/data-transfer/tutorials/mes-to-mos
+# RU: https://cloud.yandex.ru/docs/data-transfer/tutorials/os-to-mos
+# EN: https://cloud.yandex.com/en/docs/data-transfer/tutorials/os-to-mos
 #
 # Specify the following settings:
 locals {
-  # Managed Service for ElasticSearch cluster settings:
-  create_mes        = 1 # Set to 0 to disable cluster creation if you use standalone ElasticSearch.
-  es_admin_password = "" # Set password for ElasticSearch admin user.
-
-  # Managed Service for OpenSearch cluster settings:
+  # Source Managed Service for OpenSearch cluster settings:
   os_admin_password = "" # Set password for OpenSearch admin user.
 
   # Specify these settings ONLY AFTER the clusters are created. Then run "terraform apply" command again.
   # You should set up endpoints using the GUI to obtain their IDs.
   source_endpoint_id = "" # Set the source endpoint ID.
   target_endpoint_id = "" # Set the target endpoint ID.
-  transfer_enabled   = 0                      # Set to 1 to enable Transfer.
+  transfer_enabled   = 0  # Set to 1 to enable Transfer.
 
   # The following settings are predefined. Change them only if necessary.
-  network_name          = "mes-mos-network"        # Name of the network
-  subnet_name           = "mes-mos-subnet-a"       # Name of the subnet
+  network_name          = "mos-network"        # Name of the network
+  subnet_name           = "mos-subnet-a"       # Name of the subnet
   zone_a_v4_cidr_blocks = "10.1.0.0/16"            # CIDR block for the subnet in the ru-central1-a availability zone
-  security_group_name   = "mes-mos-security-group" # Name of the security group
-  mes_cluster_name      = "mes-cluster"            # Name of the ElasticSearch cluster
+  security_group_name   = "mos-security-group" # Name of the security group
   mos_cluster_name      = "mos-cluster"            # Name of the ElasticSearch cluster
-  source_endpoint_name  = "mes-source"             # Name of the source endpoint for ElasticSearch cluster
-  target_endpoint_name  = "mos-target"             # Name of the target endpoint for OpenSearch cluster
-  transfer_name         = "mes-mos-transfer"       # Name of the transfer from the Managed Service for ElasticSearch to the Managed Service for OpenSearch
+  source_endpoint_name  = "os-source"             # Name of the source endpoint for OpenSearch cluster
+  target_endpoint_name  = "mos-target"             # Name of the target endpoint for Managed Service for OpenSearch cluster
+  transfer_name         = "os-mos-transfer"       # Name of the transfer from a standalone OpenSearch cluster to the Managed Service for OpenSearch
 }
 
 resource "yandex_vpc_network" "network" {
-  description = "Network for the Managed Service for ElasticSearch and OpenSearch clusters"
+  description = "Network for the Managed Service for OpenSearch clusters"
   name        = local.network_name
 }
 
@@ -44,19 +39,19 @@ resource "yandex_vpc_subnet" "subnet-a" {
 }
 
 resource "yandex_vpc_security_group" "security-group" {
-  description = "Security group for the Managed Service for ElasticSearch and the Managed Service for OpenSearch clusters"
+  description = "Security group for the Managed Service for OpenSearch clusters"
   name        = local.security_group_name
   network_id  = yandex_vpc_network.network.id
 
   ingress {
-    description    = "The rule allows connections to the Managed Service for ElasticSearch and the Managed Service for OpenSearch clusters from the Internet"
+    description    = "The rule allows connections to the Managed Service for OpenSearch clusters from the Internet"
     protocol       = "TCP"
     port           = 9200
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
-    description    = "The rule allows connections to the Managed Service for ElasticSearch and the Managed Service for OpenSearch clusters from the Internet"
+    description    = "The rule allows connections to the Managed Service for OpenSearch clusters from the Internet"
     protocol       = "TCP"
     port           = 443
     v4_cidr_blocks = ["0.0.0.0/0"]
@@ -68,40 +63,6 @@ resource "yandex_vpc_security_group" "security-group" {
     v4_cidr_blocks = ["0.0.0.0/0"]
     from_port      = 0
     to_port        = 65535
-  }
-}
-
-resource "yandex_mdb_elasticsearch_cluster" "elasticsearch" {
-  count              = local.create_mes
-  name               = local.mes_cluster_name
-  environment        = "PRODUCTION"
-  network_id         = yandex_vpc_network.network.id
-  security_group_ids = [yandex_vpc_security_group.security-group.id]
-
-  config {
-
-    admin_password = local.es_admin_password
-
-    data_node {
-      resources {
-        resource_preset_id = "s2.micro"
-        disk_type_id       = "network-ssd"
-        disk_size          = 10 # GB
-      }
-    }
-
-  }
-
-  host {
-    name             = "node"
-    zone             = "ru-central1-a"
-    type             = "DATA_NODE"
-    assign_public_ip = true
-    subnet_id        = yandex_vpc_subnet.subnet-a.id
-  }
-
-  maintenance_window {
-    type = "ANYTIME"
   }
 }
 
@@ -151,9 +112,9 @@ resource "yandex_mdb_opensearch_cluster" "opensearch" {
   }
 }
 
-resource "yandex_datatransfer_transfer" "mes-mos-transfer" {
+resource "yandex_datatransfer_transfer" "os-mos-transfer" {
   count       = local.transfer_enabled
-  description = "Transfer from the Managed Service for ElasticSearch to the Managed Service for OpenSearch cluster"
+  description = "Transfer from a standalone OpenSearch cluster to the Managed Service for OpenSearch cluster"
   name        = local.transfer_name
   source_id   = local.source_endpoint_id
   target_id   = local.target_endpoint_id
