@@ -24,7 +24,7 @@ locals {
   zone_a_v4_cidr_blocks = "10.1.0.0/16"            # CIDR block for the subnet in the ru-central1-a availability zone
   security_group_name   = "mes-mos-security-group" # Name of the security group
   mes_cluster_name      = "mes-cluster"            # Name of the ElasticSearch cluster
-  mos_cluster_name      = "mos-cluster"            # Name of the ElasticSearch cluster
+  mos_cluster_name      = "mos-cluster"            # Name of the OpenSearch cluster
   source_endpoint_name  = "mes-source"             # Name of the source endpoint for ElasticSearch cluster
   target_endpoint_name  = "mos-target"             # Name of the target endpoint for OpenSearch cluster
   transfer_name         = "mes-mos-transfer"       # Name of the transfer from the Managed Service for ElasticSearch to the Managed Service for OpenSearch
