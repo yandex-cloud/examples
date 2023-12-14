@@ -1,4 +1,4 @@
-# Infrastructure for the Managed Service for OpenSearch and Data Transfer
+# Infrastructure for the Managed Service for OpenSearch cluster and Data Transfer
 #
 # RU: https://cloud.yandex.ru/docs/data-transfer/tutorials/os-to-mos
 # EN: https://cloud.yandex.com/en/docs/data-transfer/tutorials/os-to-mos
@@ -6,23 +6,23 @@
 # Specify the following settings:
 locals {
   # Source Managed Service for OpenSearch cluster settings:
-  os_admin_password = "" # Set password for OpenSearch admin user.
+  os_admin_password = "" # Set a password for the OpenSearch admin user.
 
-  # Specify these settings ONLY AFTER the clusters are created. Then run "terraform apply" command again.
+  # Specify these settings ONLY AFTER the clusters are created. Then run the "terraform apply" command again.
   # You should set up endpoints using the GUI to obtain their IDs.
   source_endpoint_id = "" # Set the source endpoint ID.
   target_endpoint_id = "" # Set the target endpoint ID.
-  transfer_enabled   = 0  # Set to 1 to enable Transfer.
+  transfer_enabled   = 0  # Set to 1 to enable the transfer.
 
   # The following settings are predefined. Change them only if necessary.
   network_name          = "mos-network"        # Name of the network
   subnet_name           = "mos-subnet-a"       # Name of the subnet
-  zone_a_v4_cidr_blocks = "10.1.0.0/16"            # CIDR block for the subnet in the ru-central1-a availability zone
+  zone_a_v4_cidr_blocks = "10.1.0.0/16"        # CIDR block for the subnet in the ru-central1-a availability zone
   security_group_name   = "mos-security-group" # Name of the security group
-  mos_cluster_name      = "mos-cluster"            # Name of the OpenSearch cluster
-  source_endpoint_name  = "os-source"             # Name of the source endpoint for OpenSearch cluster
-  target_endpoint_name  = "mos-target"             # Name of the target endpoint for Managed Service for OpenSearch cluster
-  transfer_name         = "os-mos-transfer"       # Name of the transfer from a standalone OpenSearch cluster to the Managed Service for OpenSearch
+  mos_cluster_name      = "mos-cluster"        # Name of the OpenSearch cluster
+  source_endpoint_name  = "os-source"          # Name of the source endpoint for the OpenSearch cluster
+  target_endpoint_name  = "mos-target"         # Name of the target endpoint for the Managed Service for OpenSearch cluster
+  transfer_name         = "os-mos-transfer"    # Name of the transfer from a standalone OpenSearch cluster to the Managed Service for OpenSearch
 }
 
 resource "yandex_vpc_network" "network" {
