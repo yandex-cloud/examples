@@ -79,7 +79,6 @@ resource "yandex_mdb_elasticsearch_cluster" "elasticsearch" {
   security_group_ids = [yandex_vpc_security_group.security-group.id]
 
   config {
-
     admin_password = local.es_admin_password
 
     data_node {
@@ -89,7 +88,6 @@ resource "yandex_mdb_elasticsearch_cluster" "elasticsearch" {
         disk_size          = 10 # GB
       }
     }
-
   }
 
   host {
@@ -112,7 +110,6 @@ resource "yandex_mdb_opensearch_cluster" "opensearch" {
   security_group_ids = [yandex_vpc_security_group.security-group.id]
 
   config {
-
     admin_password = local.os_admin_password
 
     opensearch {

@@ -44,14 +44,14 @@ resource "yandex_vpc_security_group" "security-group" {
   network_id  = yandex_vpc_network.network.id
 
   ingress {
-    description    = "The rule allows connections to the Managed Service for OpenSearch clusters from the Internet"
+    description    = "The rule allows connections to the Managed Service for OpenSearch clusters from the internet"
     protocol       = "TCP"
     port           = 9200
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
-    description    = "The rule allows connections to the Managed Service for OpenSearch clusters from the Internet"
+    description    = "The rule allows connections to the Managed Service for OpenSearch clusters from the internet"
     protocol       = "TCP"
     port           = 443
     v4_cidr_blocks = ["0.0.0.0/0"]
@@ -73,7 +73,6 @@ resource "yandex_mdb_opensearch_cluster" "opensearch" {
   security_group_ids = [yandex_vpc_security_group.security-group.id]
 
   config {
-
     admin_password = local.os_admin_password
 
     opensearch {
