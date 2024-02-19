@@ -79,6 +79,16 @@ function preCheck {
                     ;;
             esac
             ;;
+        "ALT SP Server")
+            case "$2" in
+                10*)
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
+                    ;;
+            esac
+            ;;
 
         "ALT Workstation")
             case "$2" in
@@ -137,7 +147,7 @@ function preCheck {
 
         "Fedora"|"Fedora Linux")
             case "$2" in
-                "28"|"29"|"30"|"31"|"32"|"33"|"34"|"35")
+                "28"|"29"|"30"|"31"|"32"|"33"|"34"|"35"|"37")
                     echo "OK"
                     ;;
                 *)
@@ -148,7 +158,7 @@ function preCheck {
 
         "FreeBSD")
             case "$2" in
-                12.*|13.*)
+                12.*|13.*|14.*)
                     echo "OK"
                     ;;
                 *)
@@ -160,6 +170,17 @@ function preCheck {
         "openSUSE Leap")
             case "$2" in
                 "15.1"|"15.2"|"15.3"|"15.4"|"42.3")
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
+                    ;;
+            esac
+            ;;
+
+        "openScaler")
+            case "$2" in
+                "22.03")
                     echo "OK"
                     ;;
                 *)
@@ -308,7 +329,7 @@ function definePMSType {
 
         "Fedora"|"Fedora Linux")
             case "$2" in
-                "28"|"29"|"30"|"31"|"32"|"33"|"34"|"35")
+                "28"|"29"|"30"|"31"|"32"|"33"|"34"|"35"|"37")
                     echo "dnf"
                     ;;
             esac
@@ -318,6 +339,18 @@ function definePMSType {
             case "$2" in
                 "15.1"|"15.2"|"15.3"|"42.3")
                     echo "rpm"
+                    ;;
+            esac
+            ;;
+
+
+        "openScaler")
+            case "$2" in
+                "22.03")
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
                     ;;
             esac
             ;;
@@ -427,8 +460,8 @@ function cleanTmp {
 
 
 function cleanPackageCache {
-    OS_TYPE="$1"
-    OS_VERSION="$2"
+    OS_TYPE=$(getOS)
+    OS_VERSION=$(getOSVersion)
     PMS_TYPE=$(definePMSType $OS_TYPE $OS_VERSION)
     case "$PMS_TYPE" in
         "deb")
@@ -480,8 +513,15 @@ function changeSSHRootLoginToDefault {
       sed -i 's/.*PermitRootLogin.*/#PermitRootLogin No/g' /etc/ssh/sshd_config
       echo "DONE"
   fi
-
 }
+
+function changeSSHPasswordLoginToNo {
+	sed -i '/.*PasswordAuthentication.*/d' /etc/ssh/sshd_config
+	echo "PasswordAuthentication no" >> /etc/ssh/sshd_config
+	echo "DONE"
+}
+
+
 function cleanRootPassword {
   OS_TYPE=$(getOS)
   if [ "$OS_TYPE" == "FreeBSD" ]; then
@@ -535,7 +575,7 @@ function getNonLockedUsers {
         USERPW=$(cat "$PASSWD_FILE" | grep -v -e "^#" | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($2)}')
         if [ "$USERPW" == "" ]; then
             OS_TYPE=$(getOS)
-            if [ "$OS_TYPE" == "ALT Server" ] || [ "$OS_TYPE" == "ALT SPServer" ] || [ "$OS_TYPE" == "ALT Workstation" ]; then
+            if [ "$OS_TYPE" == "ALT Server" ] || [ "$OS_TYPE" == "ALT SPServer" ] || [ "$OS_TYPE" == "ALT SP Server" ] || [ "$OS_TYPE" == "ALT Workstation" ]; then
                 USERPW=$(cat /etc/tcb/"$USER"/shadow | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($2)}')
             fi
         fi
@@ -666,16 +706,34 @@ function noOneUserHaveMoreThanOneAuthKeys {
     fi
 }
 
+function checkSshKey {
+  file=$1
+  if ssh-keygen -y -e -f "$file" > /dev/null 2>&1; then
+    echo "$file is a private SSH key."
+  elif ssh-keygen -l -f "$file" > /dev/null 2>&1; then
+    echo "$file is a public SSH key."
+  else
+    echo "$file is not a valid SSH key."
+  fi
+}
+
+function checkAllFilesInSshDirectory {
+  USERDIR=$1
+  directory="$USERDIR/.ssh"
+  for file in $(ls -a "$directory" | grep -v '^\.$\|^\.\.$\|^authorized_keys$'); do
+    result=$(checkSshKey "$directory/$file")
+    if [[ $result == *"is a private SSH key"* ]] || [[ $result == *"is a public SSH key"* ]]; then
+      echo "$USERDIR"
+    fi
+  done
+}
 
 function getUsersWithKeyPairs {
     SYSDB_DELIMITER=":"
     for USER in $(cat /etc/passwd | grep -v -e "^#" | getColumn "$SYSDB_DELIMITER" 1); do
         USERDIR=$(cat /etc/passwd | grep -v -e "^#" | getRowByColumnValue "$SYSDB_DELIMITER" 1 "$USER" | awk -F "$SYSDB_DELIMITER" '{print($6)}')
         if [ -d "${USERDIR}/.ssh/" ]; then
-            FILES_COUNT=$(ls -a "${USERDIR}/.ssh/" | grep -v '^\.$\|^\.\.$\|^authorized_keys$' | wc -l)
-            if [ "$FILES_COUNT" -gt "0" ]; then
-                echo "$USER"
-            fi
+            checkAllFilesInSshDirectory "$USERDIR"
         fi
     done
 }
@@ -716,7 +774,7 @@ function noPasswordAuthSSH {
 function summarize {
     INPUT=$(cat)
     echo "$INPUT"
-    FAILSNUM=$(echo -n "$INPUT" | awk '/\ FAIL;/' | wc -l)
+    FAILSNUM=$(echo -n "$INPUT" | awk '/FAIL;/' | wc -l)
     if [ "$FAILSNUM" -gt 0 ]; then
         return 1
     fi
@@ -742,6 +800,8 @@ function cleanupImage {
     cleanLogFiles
     echo -n "Changing ssh PermitRootLogin parameter to the default value... "
     changeSSHRootLoginToDefault
+    echo -n "changing ssh PasswordAuthentication parameter to 'no'"
+    changeSSHPasswordLoginToNo
     echo -n "Starting to clean up root password... "
     cleanRootPassword
     echo -n "Removing system user... "
