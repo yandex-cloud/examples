@@ -131,7 +131,7 @@ resource "yandex_kubernetes_cluster" "k8s-cluster" {
 
   master {
     version = local.k8s_version
-    zonal {
+    master_location {
       zone      = yandex_vpc_subnet.subnet-a.zone
       subnet_id = yandex_vpc_subnet.subnet-a.id
     }
