@@ -158,7 +158,7 @@ function preCheck {
 
         "FreeBSD")
             case "$2" in
-                12.*|13.*|14.*)
+                12.*|13.*)
                     echo "OK"
                     ;;
                 *)
