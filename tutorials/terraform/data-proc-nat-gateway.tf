@@ -68,6 +68,13 @@ resource "yandex_vpc_security_group" "data-proc-security-group" {
     to_port           = 65535
     predefined_target = "self_security_group"
   }
+
+  ingress {
+    description    = "Allow encrypted traffic from the internet"
+    protocol       = "TCP"
+    port           = 22
+    v4_cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 # Create a service account
