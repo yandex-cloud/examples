@@ -73,7 +73,7 @@ resource "yandex_kubernetes_cluster" "k8s-cluster" {
   network_id = yandex_vpc_network.my-net-for-gitlab.id
   master {
     version = local.k8s_version
-    zonal {
+    master_location {
       zone      = yandex_vpc_subnet.my-subnet-for-gitlab.zone
       subnet_id = yandex_vpc_subnet.my-subnet-for-gitlab.id
     }
