@@ -92,7 +92,7 @@ resource "yandex_resourcemanager_folder_iam_member" "sa-editor" {
 
 resource "yandex_resourcemanager_folder_iam_member" "dataproc-sa-role-dataproc-agent" {
   folder_id = local.folder_id
-  role      = "mdb.dataproc.agent"
+  role      = "dataproc.agent"
   member    = "serviceAccount:${yandex_iam_service_account.dataproc-sa.id}"
 }
 
