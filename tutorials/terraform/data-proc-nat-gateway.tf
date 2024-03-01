@@ -69,10 +69,10 @@ resource "yandex_vpc_security_group" "data-proc-security-group" {
     predefined_target = "self_security_group"
   }
 
-  ingress {
-    description    = "Allow encrypted traffic from the internet"
-    protocol       = "TCP"
-    port           = 22
+  egress {
+    description    = "Allow outgoing traffic to NTP servers for time synchronization"
+    protocol       = "UDP"
+    port           = 123
     v4_cidr_blocks = ["0.0.0.0/0"]
   }
 }
