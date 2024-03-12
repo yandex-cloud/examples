@@ -68,6 +68,13 @@ resource "yandex_vpc_security_group" "data-proc-security-group" {
     to_port           = 65535
     predefined_target = "self_security_group"
   }
+
+  egress {
+    description    = "Allow outgoing traffic to NTP servers for time synchronization"
+    protocol       = "UDP"
+    port           = 123
+    v4_cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 # Create a service account
@@ -85,7 +92,7 @@ resource "yandex_resourcemanager_folder_iam_member" "sa-editor" {
 
 resource "yandex_resourcemanager_folder_iam_member" "dataproc-sa-role-dataproc-agent" {
   folder_id = local.folder_id
-  role      = "mdb.dataproc.agent"
+  role      = "dataproc.agent"
   member    = "serviceAccount:${yandex_iam_service_account.dataproc-sa.id}"
 }
 
