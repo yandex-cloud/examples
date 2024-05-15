@@ -158,7 +158,7 @@ function preCheck {
 
         "FreeBSD")
             case "$2" in
-                12.*|13.*)
+                12.*|13.*|14.*)
                     echo "OK"
                     ;;
                 *)
@@ -188,7 +188,16 @@ function preCheck {
                     ;;
             esac
             ;;
-
+        "Oracle Linux Server")
+            case "$2" in
+                "9.3")
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
+                    ;;
+            esac
+            ;;
         "Red Hat Enterprise Linux Server")
             case "$2" in
                 "7.8")
@@ -354,7 +363,16 @@ function definePMSType {
                     ;;
             esac
             ;;
-
+        "Oracle Linux Server")
+            case "$2" in
+                "9.3")
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
+                    ;;
+            esac
+            ;;
         "Red Hat Enterprise Linux Server")
             case "$2" in
                 "7.8")
