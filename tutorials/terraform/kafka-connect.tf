@@ -51,7 +51,7 @@ resource "yandex_compute_instance" "vm-ubuntu-20-04" {
   metadata = {
     # Set username and path for SSH public key
     # For Ubuntu images used `ubuntu` username by default
-    ssh-keys = "local.vm_username:${file(local.vm_ssh_key_path)}"
+    ssh-keys = "${local.vm_username}:${file(local.vm_ssh_key_path)}"
   }
 }
 
