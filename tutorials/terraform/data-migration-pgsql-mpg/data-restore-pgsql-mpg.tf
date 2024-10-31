@@ -157,6 +157,6 @@ resource "yandex_mdb_postgresql_user" "user" {
 #  }
 #
 #  metadata = {
-#    ssh-keys = "local.vm_username:${file(local.vm_public_key)}" # Username and SSH public key full path.
+#    ssh-keys = "${local.vm_username}:${file(local.vm_public_key)}" # Username and SSH public key full path.
 #  }
 #}
