@@ -112,6 +112,14 @@ function preCheck {
             esac
             ;;
 
+        "Calculate")
+            case "$2" in
+                *)
+                    echo "OK"
+                    ;;
+            esac
+            ;;
+
         "CentOS Linux")
             case "$2" in
                 "6"|"7"|"8")
@@ -125,7 +133,7 @@ function preCheck {
 
         "CentOS Stream")
             case "$2" in
-                "8")
+                "8"|"9")
                     echo "OK"
                     ;;
                 *)
@@ -265,7 +273,7 @@ function preCheck {
 
         "Ubuntu")
             case "$2" in
-                "14.04"|"16.04"|"18.04"|"20.04"|"22.04")
+                "14.04"|"16.04"|"18.04"|"20.04"|"22.04"|"24.04")
                     echo "OK"
                     ;;
                 *)
@@ -309,6 +317,14 @@ function definePMSType {
             esac
             ;;
 
+        "Calculate")
+            case "$2" in
+                *)
+                    echo "OK"
+                    ;;
+            esac
+            ;;
+
         "CentOS Linux")
             case "$2" in
                 "6"|"7")
@@ -322,7 +338,7 @@ function definePMSType {
 
         "CentOS Stream")
             case "$2" in
-                "8")
+                "8"|"9")
                     echo "dnf"
                     ;;
             esac
@@ -407,7 +423,7 @@ function definePMSType {
 
         "Ubuntu")
             case "$2" in
-                "14.04"|"16.04"|"18.04"|"20.04")
+                "14.04"|"16.04"|"18.04"|"20.04"|"22.04"|"24.04")
                     echo "deb"
                     ;;
             esac
