@@ -7,7 +7,7 @@ paths:
   /login:
     get:
       operationId: page_login
-      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account: "${GATEWAY_SA_ID}" }
+      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account_id: "${GATEWAY_SA_ID}" }
       responses:
         302:
           description: 'Login redirect page'
@@ -18,7 +18,7 @@ paths:
   /receive-token:
     get:
       operationId: page_receive_token
-      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account: "${GATEWAY_SA_ID}" }
+      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account_id: "${GATEWAY_SA_ID}" }
       responses:
         302:
           description: 'Login redirect page'
@@ -38,7 +38,7 @@ paths:
   /api/todo-lists:
     get:
       operationId: list_lists
-      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account: "${GATEWAY_SA_ID}" }
+      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account_id: "${GATEWAY_SA_ID}" }
       responses:
         default: { $ref: '#/components/responses/Error' }
         200:
@@ -51,7 +51,7 @@ paths:
                   $ref: '#/components/schemas/ListShort'
     post:
       operationId: create_list
-      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account: "${GATEWAY_SA_ID}" }
+      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account_id: "${GATEWAY_SA_ID}" }
       requestBody:
         required: true
         content:
@@ -75,7 +75,7 @@ paths:
   /api/todo-lists/{list_id}/wa:
     delete:
       operationId: delete_list
-      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account: "${GATEWAY_SA_ID}" }
+      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account_id: "${GATEWAY_SA_ID}" }
       parameters:
         - name:     list_id
           in:       path
@@ -88,7 +88,7 @@ paths:
           description: 'OK'
     get:
       operationId: get_list
-      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account: "${GATEWAY_SA_ID}" }
+      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account_id: "${GATEWAY_SA_ID}" }
       parameters:
         - name:     list_id
           in:       path
@@ -106,7 +106,7 @@ paths:
   /api/todo-lists/{list_id}/users:
     get:
       operationId: get_list_users
-      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account: "${GATEWAY_SA_ID}" }
+      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account_id: "${GATEWAY_SA_ID}" }
       parameters:
         - name:     list_id
           in:       path
@@ -126,7 +126,7 @@ paths:
   /api/todo-lists/{list_id}/users/{user_id}/wa:
     delete:
       operationId: revoke_invitation
-      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account: "${GATEWAY_SA_ID}" }
+      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account_id: "${GATEWAY_SA_ID}" }
       parameters:
         - name:     list_id
           in:       path
@@ -145,7 +145,7 @@ paths:
   /api/todo-lists/{list_id}/inviteUser:
     post:
       operationId: invite_user
-      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account: "${GATEWAY_SA_ID}" }
+      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account_id: "${GATEWAY_SA_ID}" }
       requestBody:
         required: true
         content:
@@ -169,7 +169,7 @@ paths:
   /api/todo-lists/{list_id}/accept_invitation:
     post:
       operationId: accept_invitation
-      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account: "${GATEWAY_SA_ID}" }
+      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account_id: "${GATEWAY_SA_ID}" }
       requestBody:
         required: true
         content:
@@ -192,7 +192,7 @@ paths:
   /api/todo-lists/{list_id}/items:
     post:
       operationId: add_item
-      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account: "${GATEWAY_SA_ID}" }
+      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account_id: "${GATEWAY_SA_ID}" }
       requestBody:
         required: true
         content:
@@ -215,7 +215,7 @@ paths:
   /api/todo-lists/{list_id}/items/{item_id}/wa:
     delete:
       operationId: delete_item
-      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account: "${GATEWAY_SA_ID}" }
+      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account_id: "${GATEWAY_SA_ID}" }
       parameters:
         - name:     list_id
           in:       path
@@ -234,7 +234,7 @@ paths:
   /api/me:
     get:
       operationId: user_info
-      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account: "${GATEWAY_SA_ID}" }
+      x-yc-apigateway-integration: { type: cloud_functions, function_id: "${WEB_FUNCTION_ID}", tag: $latest, service_account_id: "${GATEWAY_SA_ID}" }
       responses:
         default: { $ref: '#/components/responses/Error' }
         200:
