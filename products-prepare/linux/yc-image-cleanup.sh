@@ -1,3 +1,4 @@
+
 #!/usr/bin/env bash
 # Common functions
 
@@ -93,6 +94,16 @@ function preCheck {
         "ALT Workstation")
             case "$2" in
                 10*)
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
+                    ;;
+            esac
+            ;;
+        "Amazon Linux")
+            case "$2" in
+                "2023")
                     echo "OK"
                     ;;
                 *)
@@ -308,7 +319,13 @@ function definePMSType {
                     ;;
             esac
             ;;
-
+        "Amazon Linux")
+            case "$2" in
+                "2023")
+                    echo "dnf"
+                    ;;
+            esac
+            ;;
         "CentOS Linux")
             case "$2" in
                 "6"|"7")
