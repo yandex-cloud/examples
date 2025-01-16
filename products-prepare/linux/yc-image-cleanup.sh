@@ -101,6 +101,17 @@ function preCheck {
             esac
             ;;
 
+        "Amazon Linux")
+            case "$2" in
+                "2023")
+                    echo "OK"
+                    ;;
+                *)
+                    echo "FAIL"
+                    ;;
+            esac
+            ;;
+
         "Astra Linux")
             case "$2" in
                 1.*)
@@ -332,6 +343,14 @@ function definePMSType {
             case "$2" in
                 *)
                     echo "OK"
+                    ;;
+            esac
+            ;;
+
+        "Amazon Linux")
+            case "$2" in
+                "2023")
+                    echo "dnf"
                     ;;
             esac
             ;;
