@@ -19,9 +19,11 @@ public class ListTasksServlet extends HttpServlet {
         var tasks = taskDao.findAll();
         var tasksJsonString = JsonStream.serialize(tasks);
 
-        var out = resp.getWriter();
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
+        
+        var out = resp.getWriter();
+        
         out.print(tasksJsonString);
         out.flush();
     }
