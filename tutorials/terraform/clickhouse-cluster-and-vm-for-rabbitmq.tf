@@ -119,6 +119,6 @@ resource "yandex_compute_instance" "vm-1" {
   }
 
   metadata = {
-    ssh-keys = "local.vm_username:${file(local.vm_ssh_key_path)}"
+    ssh-keys = "${local.vm_username}:${file(local.vm_ssh_key_path)}"
   }
 }
