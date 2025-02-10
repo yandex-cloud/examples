@@ -830,7 +830,7 @@ function noOneUserHasKeyPairs {
 
 function noPasswordAuthSSH {
     V="$1"
-    CONF_VAULE=$(sshd -T 2>/dev/null | sed -n 's/^passwordauthentication \(.*\)/\1/p')
+    CONF_VAULE=$(cat /etc/ssh/sshd_config 2>/dev/null | sed -n 's/^PasswordAuthentication \(.*\)/\1/p')
     if [ "$V" == "normal" ]; then
         DETAILS=" Details: passwordauthentication ${CONF_VAULE}"
     fi
