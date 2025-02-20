@@ -13,7 +13,7 @@ resource "yandex_function" "web-api" {
   entrypoint         = "main.WebHandler"
   memory             = 128
   name               = "todolist-web"
-  runtime            = "golang114"
+  runtime            = "golang116"
   user_hash          = data.archive_file.app-code.output_base64sha256
   content {
     zip_filename = data.archive_file.app-code.output_path
@@ -27,7 +27,7 @@ resource "yandex_function" "alice-api" {
   entrypoint         = "main.AliceHandler"
   memory             = 128
   name               = "todolist-alice"
-  runtime            = "golang114"
+  runtime            = "golang116"
   user_hash          = data.archive_file.app-code.output_base64sha256
   content {
     zip_filename = data.archive_file.app-code.output_path

@@ -1,6 +1,6 @@
 module github.com/yandex-cloud/examples/serverless/alice-shareable-todolist/app
 
-go 1.15
+go 1.16
 
 require (
 	github.com/go-openapi/errors v0.20.0
