@@ -1,7 +1,4 @@
-# Examples of code and configuration files for Yandex Cloud
+# This repositiry was archived and will be removed soon!
 
-Available examples:
-
-* PowerShell scripts for [deploying Active Directory using Terraform](/active-directory/). 
-* [Packer configurations](/jenkins-packer/).
-
+## For Examples of using Yandex Cloud please go to
+https://github.com/yandex-cloud-examples
