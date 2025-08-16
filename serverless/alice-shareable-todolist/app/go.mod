@@ -12,7 +12,6 @@ require (
 	github.com/go-openapi/validate v0.20.2
 	github.com/golang/protobuf v1.4.3 // indirect
 	github.com/google/go-cmp v0.5.4 // indirect
-	github.com/gorilla/securecookie v1.1.1
 	github.com/gorilla/sessions v1.2.1
 	github.com/jessevdk/go-flags v1.4.0
 	github.com/stretchr/testify v1.7.0
@@ -21,6 +20,6 @@ require (
 	github.com/yandex-cloud/go-sdk v0.0.0-20210211095836-1e646debd48a
 	github.com/yandex-cloud/ydb-go-sdk v0.0.0-20210203152813-253585cf1c0d
 	go.uber.org/zap v1.16.0
-	golang.org/x/net v0.0.0-20210119194325-5f4716e94777
+	golang.org/x/net v0.7.0
 	google.golang.org/grpc v1.35.0 // indirect
 )
