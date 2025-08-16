@@ -220,7 +220,7 @@ function preCheck {
             ;;
         "Oracle Linux Server")
             case "$2" in
-                "9.3")
+                9.*)
                     echo "OK"
                     ;;
                 *)
