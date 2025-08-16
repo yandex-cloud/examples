@@ -1,0 +1,98 @@
+{
+    "events": [
+        {
+            "type": "word",
+            "reference": ["да"],
+            "time": 0.327
+        },
+        {
+            "type": "eou",
+            "time": 0.327
+        },
+
+        {
+            "type": "word",
+            "reference": ["нет"],
+            "time": 2.552
+        },
+        {
+            "type": "eou",
+            "time": 2.552
+        },
+
+        {
+            "type": "word",
+            "reference": ["не"],
+            "time": 5.027
+        },
+        {
+            "type": "word",
+            "reference": ["знаю"],
+            "time": 5.492
+        },
+        {
+            "type": "eou",
+            "time": 5.492
+        },
+
+        {
+            "type": "word",
+            "reference": ["раз", "1"],
+            "time": 8.766
+        },
+        {
+            "type": "word",
+            "reference": ["два", "2"],
+            "time": 9.172
+        },
+        {
+            "type": "word",
+            "reference": ["три", "3"],
+            "time": 9.578
+        },
+        {
+            "type": "word",
+            "reference": ["четыре", "4"],
+            "time": 10.019
+        },
+        {
+            "type": "word",
+            "reference": ["пять", "5"],
+            "time": 10.321
+        },
+        {
+            "type": "word",
+            "reference": ["вышел"],
+            "time": 10.821
+        },
+        {
+            "type": "word",
+            "reference": ["зайчик"],
+            "time": 11.180
+        },
+        {
+            "type": "word",
+            "reference": ["погулять"],
+            "time": 11.796
+        },
+        {
+            "type": "eou",
+            "time": 11.796
+        },
+
+        {
+            "type": "word",
+            "reference": ["конец"],
+            "time": 16.320
+        },
+        {
+            "type": "word",
+            "reference": ["потока"],
+            "time": 16.800
+        },
+        {
+            "type": "eou",
+            "time": 16.800
+        }
+    ]
+}
